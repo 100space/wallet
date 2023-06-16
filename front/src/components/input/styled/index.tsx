@@ -1,0 +1,30 @@
+import { InputWrapProps } from "@utils/interFace/index"
+import styled from "styled-components"
+
+export const InputWrap = styled.div<InputWrapProps>`
+    ${(props) => (props.type === "password" ? "width: calc(100% - 4rem)" : `width:${props.width}%`)};
+    ${(props) => props.height && `height:  ${props.height}rem;`}
+    ${(props) => (props.focusmode === "on" ? "border: 0.2rem solid #FFC964" : "border: 0.1rem solid #cccccc")};
+    ${(props) => (props.type === "search" ? "border-radius: 2rem;" : "")};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1.4rem;
+    margin: 0 auto;
+    & > img {
+        width: 3rem;
+        height: 3rem;
+    }
+    background-color: #333;
+`
+
+export const InputElement = styled.input<InputWrapProps>`
+    width: 85%;
+    ${(props) => props.height && `font-size:  ${props.height * 0.6}rem;`}
+    border: none;
+    &:focus {
+        outline: none;
+    }
+    background-color: #333;
+    color: #fff;
+`

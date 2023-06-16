@@ -19,7 +19,7 @@ export const theme = {
         buttonHover: "linear-gradient(135deg, #e97a4e, #f0a781)",
         buttonActive: "linear-gradient(135deg, #d54121, #e3582c)",
     },
-    rightMode: {
+    lightMode: {
         basicBg: "#f2f2f2",
         bg200: "#bfbfbf",
         bg100: "#e8e8e8",
