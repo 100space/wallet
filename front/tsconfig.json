@@ -22,7 +22,8 @@
             "@common/*": ["common/*"],
             "@img/*": ["img/*"],
             "@styled/*": ["styled/*"],
-            "@interFace/*": ["interFace/*"]
+            "@utils/*": ["utils/*"],
+            "@hooks/*": ["hooks/*"]
         }
     },
     "include": ["src"]

@@ -1,3 +1,3 @@
 export const InitPage = () => {
-    return <></>
+    return <div>asdfasdfasdfasdfasdf</div>
 }

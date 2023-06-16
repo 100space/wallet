@@ -17,7 +17,9 @@ html {
 }
 #root {
     width: 100vw;
+    width: 36rem;
     height: 100vh;
+    height: 74rem;
 }
 ul,
 li {
