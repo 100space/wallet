@@ -5,6 +5,7 @@ import { useLocation } from "react-router"
 import { InitRouter } from "routes"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
+import { Mnemonic } from "@components/Mnemonic/Mnemonic"
 
 const App = () => {
     const [pathname, setPathname] = useState("")
@@ -18,6 +19,7 @@ const App = () => {
             <Header />
             <MainRouter />
             <Controller />
+            <Mnemonic></Mnemonic>
         </>
     )
 }
