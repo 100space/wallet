@@ -63,3 +63,79 @@ export class AppService {
   }
 }
 ```
+
+<br />
+
+<br />
+
+**Multer**
+
+<br />
+
+- Multer는 Module에서 장착 Controller, Service에서 처리
+
+*module.ts*
+```ts
+import { MulterModule } from "@nestjs/platform-express";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { multerOptionsFactory, multerOptionsFactoryS3 } from "src/config/multer.options.ts";
+
+@Module({
+  imports: [
+    MulterModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: multerOptionsFactory,
+      inject: [ConfigService],
+    }),
+  ],
+})
+```
+
+*controller.ts*
+```ts
+import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from "@nestjs/platform-express";
+import { FileService } from "./file.service";
+
+@Controller('file')
+export class FileController {
+    constructor(private readonly fileService: FileService){}
+
+    @Post('uploadforserver')
+    @UseInterceptors(FileInterceptor('file_test'))
+    uploadFile(@UploadedFile() file: Express.Multer.File){
+        console.log(file)
+        return this.fileService.uploadFile(file);
+    }
+
+    @Post('uploadforS3')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFileforS3(@UploadedFile() file: Express.MulterS3.File){
+        console.log(file)
+        return this.fileService.uploadFileForS3(file);
+    }
+}
+```
+
+*service.ts*
+```ts
+import { BadRequestException, Injectable } from '@nestjs/common';
+
+@Injectable()
+export class FileService {
+    uploadFile(file: Express.Multer.File) {
+        console.log(file)
+        if(!file) throw new BadRequestException('파일이 존재하지 않습니다.')
+        
+        return { filePath: file.path }
+    }
+
+    uploadFileForS3(file: Express.MulterS3.File) {
+        console.log(file)
+        if(!file) throw new BadRequestException('파일이 존재하지 않습니다.')
+        
+        return { filePath: file.location }
+    }
+}
+
+```
