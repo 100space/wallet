@@ -1,10 +1,10 @@
-import { IinputComp } from "@utils/interFace/index"
 import { useState } from "react"
 import hide from "@img/hideIcon.png"
 import search from "@img/search.png"
 import { InputElement, InputWrap } from "./styled"
+import { IPlaceTypeSize } from "@utils/interFace/styled.interface"
 
-export const InputComp: React.FC<IinputComp> = ({ type, placeholder, height, width }) => {
+export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width }) => {
     const [focusmode, setFocus] = useState("off")
     return (
         <>

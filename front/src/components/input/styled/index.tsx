@@ -1,7 +1,7 @@
-import { InputWrapProps } from "@utils/interFace/index"
+import { IFocusTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
-export const InputWrap = styled.div<InputWrapProps>`
+export const InputWrap = styled.div<IFocusTypeSize>`
     ${(props) => (props.type === "password" ? "width: calc(100% - 4rem)" : `width:${props.width}%`)};
     ${(props) => props.height && `height:  ${props.height}rem;`}
     ${(props) => (props.focusmode === "on" ? "border: 0.2rem solid #FFC964" : "border: 0.1rem solid #cccccc")};
@@ -18,9 +18,9 @@ export const InputWrap = styled.div<InputWrapProps>`
     background-color: #333;
 `
 
-export const InputElement = styled.input<InputWrapProps>`
+export const InputElement = styled.input<ISizeProps>`
     width: 85%;
-    ${(props) => props.height && `font-size:  ${props.height * 0.6}rem;`}
+    ${(props) => props.height && `font-size:  ${(props.height as number) * 0.6}rem;`}
     border: none;
     &:focus {
         outline: none;
