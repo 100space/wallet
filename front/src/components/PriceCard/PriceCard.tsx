@@ -1,9 +1,5 @@
 import { PriceCardCurreny, PriceCardValue, PriceCardWrap } from "./styled/PriceCard.styled"
-
-export interface IPriceCard {
-    currency: string
-    price: number
-}
+import { IPriceCard } from "@utils/interFace/core"
 
 export const PriceCard = ({ currency, price}: IPriceCard) => {
     return (
@@ -12,7 +8,7 @@ export const PriceCard = ({ currency, price}: IPriceCard) => {
                 {currency}
             </PriceCardCurreny>
             <PriceCardValue>
-                {price}
+                {price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
             </PriceCardValue>
         </PriceCardWrap>
     )
