@@ -1,73 +1,141 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+># BackEnd - Nest
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<br />
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 사용방법
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
+```sh
+# 패키지 설치
 $ npm install
-```
 
-## Running the app
-
-```bash
-# development
+# 서버 시작
 $ npm run start
 
-# watch mode
+# 개발모드 서버 시작
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+<br />
 
-```bash
-# unit tests
-$ npm run test
+## 기본설정
 
-# e2e tests
-$ npm run test:e2e
+<br />
 
-# test coverage
-$ npm run test:cov
+**env 파일**
+
+<br />
+
+```env
+MODE=developement | production
+PROTOCOL=
+HOST=
+PORT=
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+AWS_BUCKET_REGION=
+AWS_BUCKET_NAME=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
 ```
 
-## Support
+<br />
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+*env 파일 사용방법*
 
-## Stay in touch
+- 다음의 세가지 방법으로 사용
+  - process.env
+  - configService.get(설정파일에서 가져오기)
+  - configService.get(env파일에서 가져오기)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```ts
+import { ConfigService } from '@nestjs/config';
 
-## License
+export class AppService {
+  constructor(private configService: ConfigService){}
+  getHello(): string {
+    console.log(process.env)
+    console.log(this.configService.get<string>('configuration 파일 속성'))
+    console.log(this.configService.get('환경변수', { infer: true }))
+    return '환경변수 예시';
+  }
+}
+```
 
-Nest is [MIT licensed](LICENSE).
+<br />
+
+<br />
+
+**Multer**
+
+<br />
+
+- Multer는 Module에서 장착 Controller, Service에서 처리
+
+*module.ts*
+```ts
+import { MulterModule } from "@nestjs/platform-express";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { multerOptionsFactory, multerOptionsFactoryS3 } from "src/config/multer.options.ts";
+
+@Module({
+  imports: [
+    MulterModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: multerOptionsFactory,
+      inject: [ConfigService],
+    }),
+  ],
+})
+```
+
+*controller.ts*
+```ts
+import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from "@nestjs/platform-express";
+import { FileService } from "./file.service";
+
+@Controller('file')
+export class FileController {
+    constructor(private readonly fileService: FileService){}
+
+    @Post('uploadforserver')
+    @UseInterceptors(FileInterceptor('file_test'))
+    uploadFile(@UploadedFile() file: Express.Multer.File){
+        console.log(file)
+        return this.fileService.uploadFile(file);
+    }
+
+    @Post('uploadforS3')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFileforS3(@UploadedFile() file: Express.MulterS3.File){
+        console.log(file)
+        return this.fileService.uploadFileForS3(file);
+    }
+}
+```
+
+*service.ts*
+```ts
+import { BadRequestException, Injectable } from '@nestjs/common';
+
+@Injectable()
+export class FileService {
+    uploadFile(file: Express.Multer.File) {
+        console.log(file)
+        if(!file) throw new BadRequestException('파일이 존재하지 않습니다.')
+        
+        return { filePath: file.path }
+    }
+
+    uploadFileForS3(file: Express.MulterS3.File) {
+        console.log(file)
+        if(!file) throw new BadRequestException('파일이 존재하지 않습니다.')
+        
+        return { filePath: file.location }
+    }
+}
+
+```
