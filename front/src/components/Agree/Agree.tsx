@@ -1,5 +1,5 @@
 import { AgreeWrap, AgreeCheckBoxWrap, AgreeCheckBox, AgreeContentWrap, AgreeContent } from "./styled/Agree.styled";
-import { useState } from "react"
+import { ChangeEvent, MouseEvent, useState } from "react"
 
 const data = {
     content: "복구 문구(니모닉)을 잃어버리면 지갑에 있는 모든 암호화폐를 잃어버리는 것을 이해했습니다."
@@ -8,8 +8,8 @@ const data = {
 export const Agree = () => {
     const [isChecked, setIsChecked] = useState(false);
 
-    const handleCheckboxChange = () => {
-      setIsChecked(!isChecked);
+    const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setIsChecked(!isChecked);
     };
 
     return(

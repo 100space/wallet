@@ -54,6 +54,7 @@
         ]
     },
     "devDependencies": {
-        "@iconify/react": "^4.1.0"
+        "@iconify/react": "^4.1.0",
+        "@types/react-copy-to-clipboard": "^5.0.4"
     }
 }
