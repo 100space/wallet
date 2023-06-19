@@ -5,6 +5,8 @@ export const theme = {
         bg200: "#777777",
         bg100: "#8d8d8d",
 
+        mnimonicColor: "#888",
+
         //point 색상
         point300: "#E4562A",
         point200: "#FF8756",
@@ -23,6 +25,8 @@ export const theme = {
         basicBg: "#f2f2f2",
         bg200: "#bfbfbf",
         bg100: "#e8e8e8",
+
+        mnimonicColor: "#888",
 
         point300: "#E4562A",
         point200: "#FF8756",
