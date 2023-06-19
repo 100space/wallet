@@ -24,3 +24,8 @@ export interface IBtn {
     backgroundColor: string,
     content?: string,
 }
+
+interface Idescription {
+    subject: string
+    content: string
+} 
