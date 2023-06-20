@@ -11,7 +11,7 @@ export const MnemonicBoxWrap = styled.div<ISizeProps>`
 
 export const MnemonicBox = styled.div<IMnemonicBox>`
     position: relative;
-    padding: 1rem 2rem ;
+    padding: 1rem 2rem;
     width: ${(props) => props.width || "100%"};
     min-height: 9rem;
     height: ${(props) => props.height || "100%"};
@@ -22,7 +22,7 @@ export const MnemonicBox = styled.div<IMnemonicBox>`
 export const MnemonicContent = styled.div<IMenmonicContent>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
-    color: ${(props) => props.color || "#888888"};
+    color: ${(props) => props.color || "#bbbbbb"};
     font-size: 1.6rem;
     font-weight: 400;
     filter: blur(${(props) => props.blur || "0.4rem"});

@@ -1,4 +1,4 @@
-import { FullScreen } from "@styled/index"
+import { FlexCenter, FullScreen } from "@styled/index"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
@@ -32,6 +32,7 @@ export const LoginWrap = styled.div<ISizeProps>`
         width: 90%;
         height: 5.6rem;
     }
+
     & > .modeChange {
         cursor: pointer;
         position: absolute;
@@ -41,22 +42,12 @@ export const LoginWrap = styled.div<ISizeProps>`
         height: 3rem;
         color: red;
     }
-    & > div > button {
-        width: 90%;
-        height: 5.6rem;
-        border: none;
-        border-radius: 5rem;
-        margin: 3rem auto 0rem;
-        display: inline-block;
-        background: ${({ theme, mode }) => mode && theme[mode].bg200};
-        transition: all 0.2s ease-out;
-
-        &:hover {
-            transition: all 0.2s ease-in-out;
-            background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
-        }
-        &:active {
-            background: ${({ theme, mode }) => mode && theme[mode].buttonActive};
-        }
-    }
+`
+export const StepPageWrap = styled.div<ISizeProps>`
+    ${FlexCenter}
+    justify-content: space-between;
+    width: 100%;
+    height: calc(100% - 7rem);
+    margin-top: 7rem;
+    background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `

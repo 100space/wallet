@@ -22,20 +22,26 @@ export interface ICoin extends ITypeSize {
     rate?: number
 }
 
+export interface ICoinData {
+    coinData: ICoinRow
+}
+
 export interface walletInfo {
     imgPath: string
     content: string
 }
 
 export interface IBtn {
-    width: string,
-    height: string,
-    margin?: string,
-    backgroundColor: string,
-    content?: string,
+    width: string
+    height: string
+    margin?: string
+    backgroundColor?: string
+    content?: string
+    mode: string
+    onClick?: (e) => void
 }
 
 interface Idescription {
     subject: string
     content: string
-} 
+}
