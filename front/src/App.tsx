@@ -19,7 +19,7 @@ const App = () => {
             <RootWrap mode={modeState.mode}>
                 <Header />
                 <MainRouter />
-                {location.indexOf("/login") >= 0 ? <></> : <Controller />}
+                {location.indexOf("/login") >= 0 ? <></> : <Controller />}/
             </RootWrap>
 
             {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (
