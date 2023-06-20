@@ -7,7 +7,7 @@ export const Footer = () => {
             <FooterWrapper>
                 <FooterWrap>
                     <li>Assets</li>
-                    <li>Market</li>
+                    <li>Market</li> 
                     <li>Trends</li>
                     <li>Setting</li>
                 </FooterWrap>
