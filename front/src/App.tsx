@@ -1,16 +1,11 @@
 import { Controller } from "@common/footer"
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
-<<<<<<< HEAD
-import { CloseBtn } from "@components/CloseBtn"
-import { SubList } from "@components/SettingBtn"
-=======
-import { recoilPersist } from "recoil-persist"
-import { InitMode, ModeState } from "@utils/localStorage"
+
+import { Footer } from "@components/Footer"
+import { ModeState, InitMode } from "@utils/localStorage"
 import { useRecoilState, useResetRecoilState } from "recoil"
->>>>>>> baek
 
 const App = () => {
     const initState = useRecoilState(ModeState)
@@ -30,6 +25,7 @@ const App = () => {
             <Header />
             <MainRouter />
             <Controller />
+            <Footer/>
         </>
     )
 }
