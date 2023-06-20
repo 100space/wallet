@@ -3,7 +3,7 @@ name: Deploy to Back Test Server
 on:
   push:
     branches:
-      - dev
+      - cloudcoke
     paths:
       - "back/**"
 
@@ -35,7 +35,7 @@ jobs:
 
       - name: Make Dot ENV
         run: |
-          echo -e $ENV > dist/.env
+          echo -e $ENV > .env
         env:
           ENV: ${{ secrets.BACK_ENV }}
 
@@ -45,7 +45,7 @@ jobs:
           host: ${{secrets.BACK_TEST_SERVER}}
           username: ${{secrets.USERNAME}}
           key: ${{secrets.BACK_TEST_SERVER_PRIVATE_KEY}}
-          source: "back/dist/*,back/package.json"
+          source: "back/dist/*,back/package.json,back/.env"
           target: "www"
           strip_components: 1
       - name: Run Server
@@ -60,6 +60,6 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd /home/ubuntu/www
             pm2 delete all
-            mv dist/* . && rmdir dist
+            mv dist/* . && rm -rf dist
             npm install
             pm2 start main.js
