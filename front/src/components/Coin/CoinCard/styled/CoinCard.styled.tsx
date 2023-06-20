@@ -7,7 +7,7 @@ export const CoinCardWrap = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "13.2rem"};
     background-color: ${(props) => props.theme[mode].bgCoin};
-    border-radius: 1.25rem;
+    border-radius: 1rem;
 `
 
 export const CoinCardContentWrap = styled.div<ISizeProps>`

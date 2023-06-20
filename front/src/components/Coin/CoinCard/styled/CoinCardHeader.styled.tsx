@@ -29,8 +29,8 @@ export const CoinCardHeaderImgWrap = styled.div<ISizeProps>`
 
 export const CoinCardHeaderImg = styled.img<ISizeProps>`
     border-radius: 50%;
-    width: ${(props) => props.width || "28px"};
-    height: ${(props) => props.height || "28px"};
+    width: ${(props) => props.width || "2.8rem"};
+    height: ${(props) => props.height || "2.8rem"};
 `
 
 export const CoinCardHeaderContentWrap = styled.div<ISizeProps>`
@@ -61,8 +61,8 @@ export const CoinCardHeaderName = styled.div<ISizeProps>`
 
 export const CoinCardHeader = ({image, symbol, name}: ICoinCardHeader) => {
     return (
-        <CoinCardHeaderWrap height="35%">
-            <CoinCardHead width="90%" height="60%">
+        <CoinCardHeaderWrap width={"12rem"} height="35%">
+            <CoinCardHead width="85%" height="60%">
                 <CoinCardHeaderImgWrap>
                     <CoinCardHeaderImg src={image} />
                 </CoinCardHeaderImgWrap>
