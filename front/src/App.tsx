@@ -4,6 +4,7 @@ import { Header } from "./common"
 import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
 import { useLocation } from "react-router"
+import { Body } from "@common/body"
 
 const App = () => {
     const screenWidth = window.innerWidth
@@ -18,8 +19,8 @@ const App = () => {
         <>
             <RootWrap mode={modeState.mode}>
                 <Header />
-                <MainRouter />
-                {location.indexOf("/login") >= 0 ? <></> : <Controller />}/
+                <Body />
+                {location.indexOf("/login") >= 0 ? <></> : <Controller />}
             </RootWrap>
 
             {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (

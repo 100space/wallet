@@ -18,7 +18,7 @@ export const RootWrap = styled.div<ISizeProps>`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 3rem;
+
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 export const SizePropsStyled = css<ISizeProps>`
