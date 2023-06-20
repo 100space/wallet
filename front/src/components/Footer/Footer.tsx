@@ -1,23 +1,17 @@
+import { FooterWrapper, FooterWrap } from "./styled/Footer.styled"
+
 export const Footer = () => {
 
     return(
         <>
-            <div>
-                <ol>
-                    <span>
-                        <li>Assets</li>
-                    </span>
-                    <span>
-                        <li>Market</li>
-                    </span>
-                    <span>
-                        <li>Trends</li>
-                    </span>
-                    <span>
-                        <li>Setting</li>
-                    </span>
-                </ol>
-            </div>
+            <FooterWrapper>
+                <FooterWrap>
+                    <li>Assets</li>
+                    <li>Market</li> 
+                    <li>Trends</li>
+                    <li>Setting</li>
+                </FooterWrap>
+            </FooterWrapper>
         </>
     )
 }
