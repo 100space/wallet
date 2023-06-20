@@ -1,23 +1,31 @@
 import { Controller } from "@common/footer"
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router"
-
-import { InitRouter } from "routes"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
 
+import { Footer } from "@components/Footer"
+import { ModeState, InitMode } from "@utils/localStorage"
+import { useRecoilState, useResetRecoilState } from "recoil"
+
 const App = () => {
-    const [pathname, setPathname] = useState("")
-    const pathName = useLocation().pathname as string
+    const initState = useRecoilState(ModeState)
+    const manageMode = useRecoilState(InitMode)
+    const modeStateReset = useResetRecoilState(ModeState)
+    const InitStepReset = useResetRecoilState(InitMode)
+
     useEffect(() => {
-        setPathname(pathName)
-    }, [pathName])
+        if (initState === undefined || manageMode === undefined) {
+            modeStateReset()
+            InitStepReset()
+        }
+    }, [initState, manageMode])
 
     return (
         <>
             <Header />
             <MainRouter />
             <Controller />
+            <Footer />
         </>
     )
 }
