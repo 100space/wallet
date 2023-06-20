@@ -4,7 +4,6 @@ node_modules
 .DS_Store
 
 *.env
-back/src/config/configuration.ts
 dist
 
 # Local .terraform directories
