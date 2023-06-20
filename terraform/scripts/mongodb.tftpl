@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# 패키지 설치
+sudo apt-get install gnupg
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
+   --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+sudo apt-get update -y
+sudo apt-get install -y mongodb-org
+
+# 외부 접속 허용
+sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
+sudo sed -i 's/#security:/security:\n  authorization: enabled/' /etc/mongod.conf
+
+# 시작 및 부팅 시 실행 적용
+sudo systemctl start mongod && sudo systemctl enable mongod
+
+# admin user 생성
+cat > /home/ubuntu/create_user.js <<USERS
+use admin
+db.createUser({
+        user: "${user_name}",
+        pwd: "${passwd}",
+        roles: [{ role: "root", db: "admin" }]
+})
+USERS
+
+sleep 10
+
+# admin user 적용
+mongosh < /home/ubuntu/create_user.js
