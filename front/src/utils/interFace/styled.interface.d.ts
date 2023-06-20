@@ -1,6 +1,7 @@
 export interface ISizeProps {
     width?: string | number
     height?: string | number
+    mode?: string
 }
 export interface ITypeSize extends ISizeProps {
     type?: string

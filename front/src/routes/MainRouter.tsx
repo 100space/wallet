@@ -15,7 +15,6 @@ export const MainRouter = () => {
                 <Route path="/market/*" element={<MarketRouter />}></Route>
                 <Route path="/trends/*" element={<TrandsRouter />}></Route>
             </Routes>
-            /
         </>
     )
 }
