@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: dist
+    destination: /home/ubuntu/www
+  - source: package.json
+    destination: /home/ubuntu/www
+file_exists_behavior: OVERWRITE
+
+permissions:
+  - object: /home/ubuntu
+    pattern: '**'
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  AfterInstall:
+    - location: scripts/start_process.sh
+      timeout: 180
+      runas: ubuntu

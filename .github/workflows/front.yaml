@@ -1,0 +1,55 @@
+name: Deploy to Front
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "front/**"
+
+env:
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_KEY}}
+  AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+  AWS_S3_NAME: ${{secrets.AWS_S3_NAME}}
+
+jobs:
+  front_deploy:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: front
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install node lts
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm install --lts
+
+      - name: Install Dependencies & Test
+        run: |
+          npm install
+          npm run test
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: ZIP
+        run: |
+          zip -r front.zip appspec.yml build/ scripts/
+
+      - name: Upload Build File
+        run: |
+          aws s3 cp front.zip s3://$AWS_S3_NAME/front.zip
+
+      - name: Code Deploy
+        env:
+          FRONT_DEPLOY_NAME: ${{secrets.FRONT_DEPLOY_NAME}}
+          FRONT_DEPLOY_GROUP_NAME: ${{secrets.FRONT_DEPLOY_GROUP_NAME}}
+        run: |
+          aws deploy create-deployment --application-name $FRONT_DEPLOY_NAME --deployment-group-name $FRONT_DEPLOY_GROUP_NAME  --s3-location bucket=$AWS_S3_NAME,bundleType=zip,key=front.zip
