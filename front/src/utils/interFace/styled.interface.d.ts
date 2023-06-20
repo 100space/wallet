@@ -11,3 +11,21 @@ export interface IPlaceTypeSize extends ITypeSize {
 export interface IFocusTypeSize extends ITypeSize {
     focusmode?: string
 }
+
+export interface walletInfo {
+    imgPath: string
+    content: string
+}
+
+export interface IBtn {
+    width: string,
+    height: string,
+    margin?: string,
+    backgroundColor: string,
+    content?: string,
+}
+
+interface Idescription {
+    subject: string
+    content: string
+} 

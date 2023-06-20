@@ -5,6 +5,8 @@ import { useLocation } from "react-router"
 import { InitRouter } from "routes"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
+import { CloseBtn } from "@components/CloseBtn"
+import { SubList } from "@components/SettingBtn"
 
 const App = () => {
     const [pathname, setPathname] = useState("")
