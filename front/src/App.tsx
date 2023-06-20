@@ -7,6 +7,7 @@ import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
 import { CloseBtn } from "@components/CloseBtn"
 import { SubList } from "@components/SettingBtn"
+import { Footer } from "@components/Footer"
 
 const App = () => {
     const [pathname, setPathname] = useState("")
@@ -20,6 +21,7 @@ const App = () => {
             <Header />
             <MainRouter />
             <Controller />
+            <Footer/>
         </>
     )
 }
