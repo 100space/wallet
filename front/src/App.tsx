@@ -25,7 +25,7 @@ const App = () => {
             <Header />
             <MainRouter />
             <Controller />
-            <Footer/>
+            <Footer />
         </>
     )
 }
