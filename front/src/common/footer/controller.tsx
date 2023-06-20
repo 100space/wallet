@@ -1,13 +1,9 @@
-
 import { Footer } from "@components/Footer"
 
 export const Controller = () => {
-    return(
+    return (
         <>
             <Footer />
         </>
     )
 }
-
-export * from "./controller"
-

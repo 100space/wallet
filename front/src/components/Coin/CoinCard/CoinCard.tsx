@@ -1,10 +1,10 @@
+import { PriceCard } from "../PriceCard"
 import { CoinCardWrap, CoinCardContentWrap, CoinCardContentPriceWrap, CoinCardContentPercentWrap, CoinCardContentPercent, CoinCardHeader } from "./styled"
 import { ICoinCard } from "@utils/interFace/core"
-import { PriceCard } from "@components/PriceCard"
 
 export const CoinCard = ({ props }: ICoinCard) => {
     return(
-        <CoinCardWrap width="33%">
+        <CoinCardWrap width="12rem">
             <CoinCardHeader image={props.image} symbol={props.symbol} name={props.name}/>
             <CoinCardContentWrap height="65%">
                 <CoinCardContentPriceWrap width="85%" height="50%">

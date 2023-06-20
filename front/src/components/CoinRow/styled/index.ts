@@ -1,5 +1,0 @@
-export * from "./CoinRowPrice.styled"
-export * from "./CoinRow.styled"
-export * from "./CoinRowName.styled"
-export * from "./CoinRowRank.styled"
-export * from "./CoinRowRate.styled"

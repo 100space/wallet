@@ -1,26 +1,24 @@
+import { SizePropsStyled } from "@styled/index"
 import { ITypeSize, ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const AgreeWrap = styled.div<ISizeProps>`
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "100%"};
+    ${SizePropsStyled}
     display: flex;
     align-items: center;
+    margin: 0 auto;
 `
 
 export const AgreeCheckBoxWrap = styled.div<ISizeProps>`
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "100%"};
+    ${SizePropsStyled}
 `
 
 export const AgreeCheckBox = styled.input<ITypeSize>`
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "100%"};
+    ${SizePropsStyled}
 `
 
 export const AgreeContentWrap = styled.div<ISizeProps>`
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "100%"};
+    ${SizePropsStyled}
 `
 
 export const AgreeContent = styled.p<ISizeProps>`
