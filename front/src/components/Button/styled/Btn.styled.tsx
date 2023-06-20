@@ -3,17 +3,21 @@ import { IBtn } from "@utils/interFace/styled.interface"
 
 export const Btn = styled.button<IBtn>`
     cursor: pointer;
-    width: ${props => props.width  || "30%"};
-    height: ${props => props.height || ""};
-    margin: ${props => props.margin || ""};
-    border-radius: 35px;
+    display: block;
+    width: ${(props) => props.width || "30%"};
+    height: ${(props) => props.height || ""};
+    margin: ${(props) => props.margin || ""};
+    border-radius: 5rem;
     border: none;
-    box-shadow: 3.5px 3.5px 3.5px 3.5px #3a3939;
+    box-shadow: 0 0 0.2rem 0.1rem #3a3939;
     font-size: 1.2rem;
-    color: ${props => props.theme.btnTheme.btnColor };
-    background-color: ${ props => props.theme.btnTheme.primaryColor };
-    &:hover{
-        background-color: ${ props => props.theme.btnTheme.btnHover };
+    color: ${({ theme, mode }) => mode && theme[mode].text};
+    background: ${({ theme, mode }) => mode && theme[mode].bg200};
+    &:hover {
+        background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
     }
-    transition: all 0.2s ease-out; 
+    &:active {
+        background: ${({ theme, mode }) => mode && theme[mode].buttonActive};
+    }
+    transition: all 0.2s ease-out;
 `
