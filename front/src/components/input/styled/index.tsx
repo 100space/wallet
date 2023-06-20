@@ -1,4 +1,6 @@
+import { FlexCenter } from "@styled/index"
 import { IFocusTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
+
 import styled from "styled-components"
 
 export const InputWrap = styled.div<IFocusTypeSize>`
@@ -27,4 +29,13 @@ export const InputElement = styled.input<ISizeProps>`
     }
     background-color: #333;
     color: #fff;
+`
+export const HideIcon = styled.div<ISizeProps>`
+    ${FlexCenter}
+    cursor: pointer;
+    right: 1.5rem;
+    bottom: 0rem;
+    width: ${(props) => props.width || "100%"};
+    font-size: 3rem;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
 `

@@ -1,30 +1,41 @@
 import { InputComp } from "@components/input"
 import { LogoComp } from "@components/Logo"
-import { NavLink } from "react-router-dom"
+import { useGetMode } from "@hooks/useMode"
+import { InitMode, ModeState } from "@utils/localStorage"
+import React, { MouseEvent, useEffect } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useRecoilState, useResetRecoilState } from "recoil"
-import { InitState } from "utils/localStorage"
 import { LoginWrap } from "./styled"
 
 export const LoginPage = () => {
-    const [initState, setInitState] = useRecoilState(InitState)
-    const reset = useResetRecoilState(InitState)
-
-    const handleClick = () => {
+    const [initState, setInitState] = useRecoilState(ModeState)
+    const [manageMode, setManageMode] = useRecoilState(InitMode)
+    const [modeState, setChange] = useGetMode()
+    const navigate = useNavigate()
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
         if (initState.isLogin !== false) return
-        setInitState({ ...initState, isLogin: !initState.isLogin })
+        if (e.currentTarget.innerHTML === "create") {
+            setManageMode({ ...manageMode, initMode: "create" })
+        } else {
+            setManageMode({ ...manageMode, initMode: "manage" })
+        }
+        navigate("/login/init")
     }
-    const handleClear = () => {
-        reset()
+
+    const changeMode = () => {
+        setChange(modeState.mode)
     }
 
     return (
-        <LoginWrap>
+        <LoginWrap mode={modeState.mode}>
             <LogoComp></LogoComp>
             <div>
-                {initState.isLogin && <InputComp height={5.6} width={90} type={"password"} />}
-                <NavLink to="/login/init">123</NavLink>
-                <button onClick={handleClick}>123</button>
-                <button onClick={handleClear}>reset</button>
+                {initState.isLogin && <InputComp height={5.6} width={90} type="password" />}
+                <button onClick={handleClick}>create</button>
+                <button onClick={handleClick}>already</button>
+            </div>
+            <div className="modeChange" onClick={changeMode}>
+                모드 변환
             </div>
         </LoginWrap>
     )
