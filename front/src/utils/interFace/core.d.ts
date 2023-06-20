@@ -11,7 +11,7 @@ export interface Account {
 
 export interface IPriceCard {
     currency: string
-    price: number
+    price?: number
 }
 
 export interface ICoinCardHeader {

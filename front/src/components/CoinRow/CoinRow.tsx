@@ -1,13 +1,15 @@
-import { ICoinData } from "@utils/interFace/styled.interface"
-import { CoinRowWrap, CoinRowRank, CoinRowName, CoinRowPrice, CoinRowRate } from "./styled"
+import { ICoin } from "@utils/interFace/styled.interface"
+import { CoinWrap, CoinRank, CoinNameForm, CoinPrice, CoinRate } from "./styled"
 
-export const CoinRow = ({ coinData }: ICoinData) => {
+const type = "row"
+
+export const CoinRow = (props: { coinData: ICoin }) => {
     return(
-        <CoinRowWrap>
-            <CoinRowRank width="10%" rank={coinData.rank}/>
-            <CoinRowName width="30%" coinImg={coinData.coinImg} name={coinData.name} symbol={coinData.symbol}/>
-            <CoinRowPrice width="45%" price={coinData.price}/>
-            <CoinRowRate width="15%" rate={coinData.rate}/>
-        </CoinRowWrap>
+        <CoinWrap>
+            <CoinRank width={type ==="row" ? "12.5%" : ""} rank={props.coinData.rank}/>
+            <CoinNameForm type={type} coinImg={props.coinData.coinImg} name={props.coinData.name} symbol={props.coinData.symbol}/>
+            <CoinPrice width={type ==="row" ? "45%" : ""} price={props.coinData.price}/>
+            <CoinRate width={type ==="row" ? "15%" : ""} rate={props.coinData.rate}/>
+        </CoinWrap>
     )
 }

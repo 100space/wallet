@@ -8,7 +8,7 @@ export const PriceCard = ({ currency, price}: IPriceCard) => {
                 {currency}
             </PriceCardCurreny>
             <PriceCardValue>
-                {price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                {price ? price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") : 0}
             </PriceCardValue>
         </PriceCardWrap>
     )

@@ -13,7 +13,7 @@ export interface IFocusTypeSize extends ITypeSize {
     focusmode?: string
 }
 
-export interface ICoinRow extends ISizeProps {
+export interface ICoin extends ITypeSize {
     rank?: number
     coinImg?: string
     name?: string
@@ -21,10 +21,7 @@ export interface ICoinRow extends ISizeProps {
     price?: number
     rate?: number
 }
-    
-export interface ICoinData {
-    coinData: ICoinRow
-}
+
 export interface walletInfo {
     imgPath: string
     content: string

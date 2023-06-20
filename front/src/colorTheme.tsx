@@ -1,4 +1,5 @@
 export const theme = {
+    textCoinPrice: "#FFBD62",
     darkMode: {
         // 배경색
         basicBg: "#3e3e3e",
@@ -17,7 +18,7 @@ export const theme = {
         pointText: "#ffeeb5",
         text: "#ffffff",
         textCoinSymbol: "#ffffff",
-        textCoinName: "#2f2f2f",
+        textCoinName: "#888",
 
         // 버튼관련 색상
         buttonBg: "linear-gradient(135deg, #5779eb, #ff8756)",
