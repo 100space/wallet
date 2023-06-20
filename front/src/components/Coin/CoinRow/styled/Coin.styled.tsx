@@ -9,6 +9,11 @@ export const CoinWrap = styled.div<ISizeProps>`
     height: ${({height}) => height || "4.8rem"};
     color: ${({ theme }) => theme[mode].text || ""};
     background-color: ${({ theme }) => theme[mode].basicBg || ""};
+    border-bottom: 1px solid #00000075;
+
+    &:nth-last-child(1) {
+        border: none;
+    }
 `
 
 export const CoinContent = styled.div<ITypeSize>`
