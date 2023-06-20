@@ -2,8 +2,6 @@ import { Controller } from "@common/footer"
 import { useEffect, useState } from "react"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
-
-import { Footer } from "@components/Footer"
 import { ModeState, InitMode } from "@utils/localStorage"
 import { useRecoilState, useResetRecoilState } from "recoil"
 
@@ -25,7 +23,6 @@ const App = () => {
             <Header />
             <MainRouter />
             <Controller />
-            <Footer />
         </>
     )
 }
