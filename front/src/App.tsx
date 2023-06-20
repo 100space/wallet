@@ -1,31 +1,35 @@
 import { Controller } from "@common/footer"
-import { useEffect, useState } from "react"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
 
-import { Footer } from "@components/Footer"
-import { ModeState, InitMode } from "@utils/localStorage"
-import { useRecoilState, useResetRecoilState } from "recoil"
+import { useGetMode } from "@hooks/useMode"
+import { RootWrap } from "./styled"
+import { useLocation } from "react-router"
 
 const App = () => {
-    const initState = useRecoilState(ModeState)
-    const manageMode = useRecoilState(InitMode)
-    const modeStateReset = useResetRecoilState(ModeState)
-    const InitStepReset = useResetRecoilState(InitMode)
-
-    useEffect(() => {
-        if (initState === undefined || manageMode === undefined) {
-            modeStateReset()
-            InitStepReset()
-        }
-    }, [initState, manageMode])
-
+    const screenWidth = window.innerWidth
+    const screenHeight = window.innerHeight
+    const [modeState, setChange] = useGetMode()
+    const location = useLocation().pathname
+    console.log()
+    const changeMode = () => {
+        setChange(modeState.mode)
+    }
     return (
         <>
-            <Header />
-            <MainRouter />
-            <Controller />
-            <Footer />
+            <RootWrap mode={modeState.mode}>
+                <Header />
+                <MainRouter />
+                {location.indexOf("/login") >= 0 ? <></> : <Controller />}
+            </RootWrap>
+
+            {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (
+                <div className="modeChange" onClick={changeMode}>
+                    모드 변환
+                </div>
+            ) : (
+                <></>
+            )}
         </>
     )
 }

@@ -1,3 +1,1 @@
-export const Header = () => {
-    return <></>
-}
+export * from "./header"

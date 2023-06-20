@@ -1,3 +1,1 @@
-export const Controller = () => {
-    return <></>
-}
+export * from "./controller"
