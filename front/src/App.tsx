@@ -1,10 +1,12 @@
 import { Controller } from "@common/footer"
 import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
-
+import { ModeState, InitMode } from "@utils/localStorage"
+import { useRecoilState, useResetRecoilState } from "recoil"
 import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
 import { useLocation } from "react-router"
+
 
 const App = () => {
     const screenWidth = window.innerWidth
