@@ -1,4 +1,3 @@
-import { PriceCard } from "@components/PriceCard"
 import { ICoin, ITypeSize } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
