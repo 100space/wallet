@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { ISizeProps } from "@utils/interFace/styled.interface"
+import { NavLink } from "react-router-dom"
 
 export const FooterWrapper = styled.div`
     width: 100%;
@@ -8,7 +9,6 @@ export const FooterWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
 `
 export const FooterWrap = styled.ul`
     width: 100%;
@@ -19,16 +19,18 @@ export const FooterWrap = styled.ul`
 `
 
 export const IconWrapper = styled.li<ISizeProps>`
-    width: ${props => props.width || "25%"};
-    height: 100%;
-    color: ${props => props.color || "#f9f9f9"};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 1.2rem;
-
     & > svg {
         font-size: 2.4rem;
+    }
+
+    &, & > a {
+        width: ${props => props.width || "25%"};
+        height: 100%;
+        color: ${props => props.color || "#f9f9f9"};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 1.2rem;
     }
 `
