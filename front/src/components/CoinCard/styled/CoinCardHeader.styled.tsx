@@ -1,10 +1,10 @@
-import { ITrendCardHeader } from "@utils/interFace/core"
+import { ICoinCardHeader } from "@utils/interFace/core"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 const mode = "darkMode"
 
-export const TrendCardHeaderWrap = styled.div<ISizeProps>`
+export const CoinCardHeaderWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@ export const TrendCardHeaderWrap = styled.div<ISizeProps>`
     height: ${(props) => props.height || "100%"};
     `
 
-export const TrendCardHead = styled.header<ISizeProps>`
+export const CoinCardHead = styled.header<ISizeProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,20 +20,20 @@ export const TrendCardHead = styled.header<ISizeProps>`
     height: ${(props) => props.height || "100%"};
 `
 
-export const TrendCardHeaderImgWrap = styled.div<ISizeProps>`
+export const CoinCardHeaderImgWrap = styled.div<ISizeProps>`
     display: flex;
     align-items: center;
     width: ${(props) => props.width || "32.5%"};
     height: ${(props) => props.height || "100%"};
 `
 
-export const TrendCardHeaderImg = styled.img<ISizeProps>`
+export const CoinCardHeaderImg = styled.img<ISizeProps>`
     border-radius: 50%;
     width: ${(props) => props.width || "28px"};
     height: ${(props) => props.height || "28px"};
 `
 
-export const TrendCardHeaderContentWrap = styled.div<ISizeProps>`
+export const CoinCardHeaderContentWrap = styled.div<ISizeProps>`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,40 +41,40 @@ export const TrendCardHeaderContentWrap = styled.div<ISizeProps>`
     height: ${(props) => props.height || "100%"};
 `
 
-export const TrendCardHeaderSymbol = styled.div<ISizeProps>`
+export const CoinCardHeaderSymbol = styled.div<ISizeProps>`
     margin-bottom: 0.25rem;
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "1.6rem"};
-    color: ${(props) => props.theme[mode].textTrendSymbol};
+    color: ${(props) => props.theme[mode].textCoinSymbol};
     font-size: 1.6rem;
     font-style: italic;
     font-weight: 700;
 `
 
-export const TrendCardHeaderName = styled.div<ISizeProps>`
+export const CoinCardHeaderName = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "1rem"};
-    color: ${(props) => props.theme[mode].textTrendName};
+    color: ${(props) => props.theme[mode].textCoinName};
     font-size: 1rem;
     font-weight: 500;
 `
 
-export const TrendCardHeader = ({image, symbol, name}: ITrendCardHeader) => {
+export const CoinCardHeader = ({image, symbol, name}: ICoinCardHeader) => {
     return (
-        <TrendCardHeaderWrap height="35%">
-            <TrendCardHead width="90%" height="60%">
-                <TrendCardHeaderImgWrap>
-                    <TrendCardHeaderImg src={image} />
-                </TrendCardHeaderImgWrap>
-                <TrendCardHeaderContentWrap>
-                    <TrendCardHeaderSymbol>
+        <CoinCardHeaderWrap height="35%">
+            <CoinCardHead width="90%" height="60%">
+                <CoinCardHeaderImgWrap>
+                    <CoinCardHeaderImg src={image} />
+                </CoinCardHeaderImgWrap>
+                <CoinCardHeaderContentWrap>
+                    <CoinCardHeaderSymbol>
                         {symbol}
-                    </TrendCardHeaderSymbol>
-                    <TrendCardHeaderName>
+                    </CoinCardHeaderSymbol>
+                    <CoinCardHeaderName>
                         {name}
-                    </TrendCardHeaderName>
-                </TrendCardHeaderContentWrap>
-            </TrendCardHead>
-        </TrendCardHeaderWrap>
+                    </CoinCardHeaderName>
+                </CoinCardHeaderContentWrap>
+            </CoinCardHead>
+        </CoinCardHeaderWrap>
     )
 }

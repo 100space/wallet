@@ -4,7 +4,7 @@ export const theme = {
         basicBg: "#3e3e3e",
         bg200: "#777777",
         bg100: "#8d8d8d",
-        bgTrend: "#4f4f4f",
+        bgCoin: "#4f4f4f",
 
         mnimonicColor: "#888",
 
@@ -16,8 +16,8 @@ export const theme = {
         //text 색상
         pointText: "#ffeeb5",
         text: "#ffffff",
-        textTrendSymbol: "#ffffff",
-        textTrendName: "#2f2f2f",
+        textCoinSymbol: "#ffffff",
+        textCoinName: "#2f2f2f",
 
         // 버튼관련 색상
         buttonBg: "linear-gradient(135deg, #5779eb, #ff8756)",
@@ -29,7 +29,7 @@ export const theme = {
         basicBg: "#f2f2f2",
         bg200: "#bfbfbf",
         bg100: "#e8e8e8",
-        bgTrend: "#4F4F4F",
+        bgCoin: "#4F4F4F",
 
         mnimonicColor: "#888",
 
@@ -39,8 +39,8 @@ export const theme = {
 
         pointText: "#ffeeb5",
         text: "#333333",
-        textTrendSymbol: "#ffffff",
-        textTrendName: "#2f2f2f",
+        textCoinSymbol: "#ffffff",
+        textCoinName: "#2f2f2f",
 
         buttonBg: "linear-gradient(135deg, #e3582c, #ff8756)",
         buttonHover: "linear-gradient(135deg, #e97a4e, #f0a781)",

@@ -13,18 +13,18 @@ export interface IPriceCard {
     price: number
 }
 
-export interface ITrendCardHeader {
+export interface ICoinCardHeader {
     symbol: string
     name: string
     image: string
 }
 
-export interface ITrendCardData extends ITrendCardHeader {
+export interface ICoinCardData extends ICoinCardHeader {
     usdPrice: number
     krwPrice: number
     changePercent: number
 }
 
-export interface ITrendCard {
-    props: ITrendCardData
+export interface ICoinCard {
+    props: ICoinCardData
 }

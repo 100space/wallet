@@ -11,3 +11,16 @@ export interface IPlaceTypeSize extends ITypeSize {
 export interface IFocusTypeSize extends ITypeSize {
     focusmode?: string
 }
+
+export interface ICoinRow extends ISizeProps {
+    rank?: number
+    coinImg?: string
+    name?: string
+    symbol?: string
+    price?: number
+    rate?: number
+}
+    
+export interface ICoinData {
+    coinData: ICoinRow
+}

@@ -3,19 +3,19 @@ import { styled } from "styled-components"
 
 const mode = "darkMode"
 
-export const TrendCardWrap = styled.div<ISizeProps>`
+export const CoinCardWrap = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "13.2rem"};
-    background-color: ${(props) => props.theme[mode].bgTrend};
+    background-color: ${(props) => props.theme[mode].bgCoin};
     border-radius: 1.25rem;
 `
 
-export const TrendCardContentWrap = styled.div<ISizeProps>`
+export const CoinCardContentWrap = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
 `
 
-export const TrendCardContentPriceWrap = styled.div<ISizeProps>`
+export const CoinCardContentPriceWrap = styled.div<ISizeProps>`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@ export const TrendCardContentPriceWrap = styled.div<ISizeProps>`
     height: ${(props) => props.height || "100%"};
 `
 
-export const TrendCardContentPercentWrap = styled.div<ISizeProps>`
+export const CoinCardContentPercentWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +32,7 @@ export const TrendCardContentPercentWrap = styled.div<ISizeProps>`
     height: ${(props) => props.height || "100%"};
 `
 
-export const TrendCardContentPercent = styled.div`
+export const CoinCardContentPercent = styled.div`
     font-size: 1.6rem;
     font-weight: 700;
     color: ${(props) => props.color || "#000000"};
