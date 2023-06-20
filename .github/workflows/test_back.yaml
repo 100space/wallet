@@ -29,15 +29,15 @@ jobs:
           npm install
           npm run test
 
+      - name: Build
+        run: |
+          npm run build
+
       - name: Make Dot ENV
         run: |
           echo -e $ENV > dist/.env
         env:
           ENV: ${{ secrets.BACK_ENV }}
-
-      - name: Build
-        run: |
-          npm run build
 
       - name: SCP
         uses: appleboy/scp-action@master
@@ -45,7 +45,7 @@ jobs:
           host: ${{secrets.BACK_TEST_SERVER}}
           username: ${{secrets.USERNAME}}
           key: ${{secrets.BACK_TEST_SERVER_PRIVATE_KEY}}
-          source: "back/dist/*,back/package.json,back/.env"
+          source: "back/dist/*,back/package.json"
           target: "www"
           strip_components: 1
       - name: Run Server
