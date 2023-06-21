@@ -5,6 +5,8 @@ files:
     destination: /home/ubuntu/www
   - source: package.json
     destination: /home/ubuntu/www
+  - source: .env
+    destination: /home/ubuntu/www
 file_exists_behavior: OVERWRITE
 
 permissions:

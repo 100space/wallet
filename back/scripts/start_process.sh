@@ -8,5 +8,5 @@ export NVM_DIR="$HOME/.nvm"
 
 npm install
 
-pm2 delete all
+pm2 delete all || true
 pm2 start main.js
