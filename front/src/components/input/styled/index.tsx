@@ -8,6 +8,7 @@ export const InputWrap = styled.div<IFocusTypeSize>`
     ${(props) => props.height && `height:  ${props.height}rem;`}
     ${(props) => (props.focusmode === "on" ? "border: 0.2rem solid #FFC964" : "border: 0.1rem solid #cccccc")};
     ${(props) => (props.type === "search" ? "border-radius: 2rem;" : "")};
+    ${(props) => (props.type === "mnemonic" ? "border-radius: 0.5rem;" : "")};
     display: flex;
     justify-content: space-between;
     align-items: center;

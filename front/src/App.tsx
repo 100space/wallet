@@ -3,7 +3,6 @@ import { MainRouter } from "routes/MainRouter"
 import { Header } from "./common"
 import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
-import { useLocation } from "react-router"
 import { Body } from "@common/body"
 
 const App = () => {

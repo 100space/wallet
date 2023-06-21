@@ -1,4 +1,4 @@
-import { Toast } from "@components/Alert/alert"
+import { Alert } from "@components/Alert/alert"
 import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { NavLink, useLocation } from "react-router-dom"
@@ -23,10 +23,10 @@ export const Footer = () => {
     const [modeState, setChange] = useGetMode()
     const renderFooter = (footerArray: IfooterList[]) => {
         const handleClick = (v: string) => {
-            Toast.fire({ icon: "info", title: v })
+            Alert.fire({ icon: "info", title: v })
         }
         return footerArray.map((v, index, array) => (
-            <IconWrapper onClick={() => handleClick(v.content)} mode={modeState.mode}>
+            <IconWrapper onClick={() => handleClick(v.content)} mode={modeState.mode} key={index}>
                 <NavLink to={v.path}>
                     <Icon icon={v.iconPath} />
                     {v.content}

@@ -5,23 +5,28 @@ import { IPlaceTypeSize } from "@utils/interFace/styled.interface"
 import { Icon } from "@iconify/react"
 import { useGetMode } from "@hooks/useMode"
 
-export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width }) => {
+export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width, name }) => {
     const [focusmode, setFocus] = useState("off")
     const [isVisible, setVisible] = useState(false)
+    const [isvalue, setIsValue] = useState("")
     const [mode, setChange] = useGetMode()
     const handleVisible = (e: MouseEvent<HTMLDivElement>) => {
         setVisible(!isVisible)
     }
     return (
         <>
-            <InputWrap focusmode={focusmode} height={height} width={width}>
+            <InputWrap focusmode={focusmode} height={height} width={width} type={type}>
                 <InputElement
-                    type={isVisible ? "text" : "password"}
+                    type={type === "mnemonic" ? "text" : isVisible ? "text" : "password"}
                     height={height}
                     width={width}
+                    name={name}
                     placeholder={placeholder}
                     onFocus={() => setFocus("on")}
-                    onBlur={() => setFocus("off")}
+                    onBlur={(e) => {
+                        setFocus("off")
+                        setIsValue(e.target.value)
+                    }}
                 />
                 {type === "password" && (
                     <HideIcon width="3rem" onClick={handleVisible} mode={mode}>
