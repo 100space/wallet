@@ -17,9 +17,9 @@ html {
 }
 #root {
     width: 36rem;
-    /* width: 100vw; */
+    width: 100vw;
     height: 74rem;
-    /* height: 100vh; */
+    height: 100vh;
 }
 ul,
 li {
@@ -28,4 +28,5 @@ li {
 a {
     text-decoration: none;
     cursor: pointer;
+    color: #fff;
 }

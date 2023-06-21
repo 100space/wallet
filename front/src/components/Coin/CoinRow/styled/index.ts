@@ -1,0 +1,5 @@
+export * from "./CoinPrice.styled"
+export * from "./CoinName.styled"
+export * from "./CoinRank.styled"
+export * from "./CoinRate.styled"
+export * from "./Coin.styled"

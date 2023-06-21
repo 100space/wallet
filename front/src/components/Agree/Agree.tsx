@@ -13,7 +13,7 @@ export const Agree = () => {
     }
 
     return (
-        <AgreeWrap width="80%" height={"5%"}>
+        <AgreeWrap width="100%" height={"5%"}>
             <AgreeCheckBoxWrap width="10%">
                 <AgreeCheckBox width="60%" height="auto" type="checkbox" onChange={handleCheckboxChange} />
             </AgreeCheckBoxWrap>
