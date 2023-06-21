@@ -3,7 +3,9 @@ name: Deploy to Back Test Server
 on:
   push:
     branches:
-      - cloudcoke
+      - dev
+    paths:
+      - "back/**"
 
 jobs:
   Back_Test_Deploy:
