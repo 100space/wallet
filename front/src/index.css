@@ -30,3 +30,7 @@ a {
     cursor: pointer;
     color: #fff;
 }
+
+.active {
+    color: #3268fb
+}
