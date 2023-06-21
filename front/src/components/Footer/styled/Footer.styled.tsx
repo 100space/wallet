@@ -19,17 +19,21 @@ export const FooterWrap = styled.ul`
     align-items: center;
 `
 
+
+
 export const IconWrapper = styled.li<ISizeProps>`
+    
+
     & > a > svg {
         font-size: 2.2rem;
-        color: ${({ theme, mode }) => mode && theme[mode].text};
+        color: ${({ theme, mode, color }) => (color === "true") && (mode && theme[mode].footerColor)};
     }
 
     &,
     & > a {
         width: ${(props) => props.width || "25%"};
         height: 100%;
-        color: ${({ theme, mode }) => mode && theme[mode].text};
+        color: ${({ theme, mode, color }) => (color === "true") && (mode && theme[mode].footerColor)};
         display: flex;
         align-items: center;
         justify-content: center;
