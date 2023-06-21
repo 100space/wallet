@@ -1,11 +1,11 @@
-import { ICoinRow } from "@utils/interFace/coin.interface"
+import { ICoin } from "@utils/interFace/coin.interface"
 import { CoinChartHeader } from "./CoinChartHeader"
 import { CoinChartWrap } from "./styled"
 import { CoinRow } from "@components/Coin"
 
-export const CoinChart = ( props : { coinDatas: ICoinRow[]}) => {
+export const CoinChart = ( props : { coinDatas: ICoin[]}) => {
 
-    const coinList = (coinsData: ICoinRow[]) => {
+    const coinList = (coinsData: ICoin[]) => {
         return coinsData.map((v) => {
             return (
                 <CoinRow coinData={v}></CoinRow>

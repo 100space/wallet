@@ -11,6 +11,11 @@ export const FullScreen = css`
     width: 100%;
     height: 100%;
 `
+
+export const BorderBottom = css`
+    border-bottom: 1px solid #00000075;
+`
+
 export const RootWrap = styled.div<ISizeProps>`
     width: 100%;
     height: 100%;
