@@ -12,7 +12,7 @@ export const CopyButton = ({ copyContent }: ICopyButton) => {
 
     return (
         <CopyToClipboard text={copyContent} onCopy={() => alert("클립보드에 복사되었습니다.")}>
-            <CopyFunctionWrap width="85%" color="white" mode={modeState.mode}>
+            <CopyFunctionWrap width="85%" color="white" mode={modeState.mode} height="10%">
                 <CopyFunctionIcon width="7.5%">
                     <Icon icon="mingcute:copy-fill"></Icon>
                 </CopyFunctionIcon>

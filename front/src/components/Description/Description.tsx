@@ -1,5 +1,6 @@
-import { SubInfo, ConInfo } from "./styled/Description.styled"
+import { SubInfo, ConInfo, DescriptWrap } from "./styled"
 import { IDescripList } from "@utils/interFace/core"
+import { useGetMode } from "@hooks/useMode"
 
 export const DescripList: IDescripList = {
     step1: {
@@ -22,11 +23,11 @@ export const DescripList: IDescripList = {
 }
 
 export const Description = ({ step }: { step: string }) => {
-    console.log(DescripList.step1)
+    const [modeState, setChange] = useGetMode()
     return (
-        <>
+        <DescriptWrap mode={modeState.mode}>
             <SubInfo>{DescripList[step].subject}</SubInfo>
             <ConInfo>{DescripList[step].content}</ConInfo>
-        </>
+        </DescriptWrap>
     )
 }
