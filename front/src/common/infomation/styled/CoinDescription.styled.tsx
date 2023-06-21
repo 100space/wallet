@@ -17,7 +17,7 @@ export const CoinDescriptionSubject = styled.header<ISizeProps>`
 
 export const CoinDescriptionContent = styled.div<ISizeProps>`
     ${SizePropsStyled};
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 5rem;
     background-color: ${({ mode, theme}) => mode && theme[mode].bgDescription};
     font-size: 1.4rem;
     color: ${({mode, theme}) => mode && theme[mode].text};
