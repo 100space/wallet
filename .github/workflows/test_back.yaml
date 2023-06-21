@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - cloudcoke
-    paths:
-      - "back/**"
 
 jobs:
   Back_Test_Deploy:

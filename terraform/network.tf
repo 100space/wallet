@@ -99,3 +99,15 @@ resource "aws_eip" "nat_gateway_eip" {
   instance = aws_instance.nat_gateway.id
   domain   = "vpc"
 }
+
+# test server Elastic IP 지정
+
+resource "aws_eip" "test_front_server" {
+  instance = aws_instance.test_front.id
+  domain   = "vpc"
+}
+
+resource "aws_eip" "test_back_server" {
+  instance = aws_instance.test_back.id
+  domain   = "vpc"
+}

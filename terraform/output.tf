@@ -18,3 +18,11 @@ output "back_code_deploy_name" {
 output "back_code_deploy_group_name" {
   value = aws_codedeploy_deployment_group.back_code_deploy.deployment_group_name
 }
+
+output "test_front_server_ip" {
+  value = aws_instance.test_front.public_ip
+}
+
+output "test_back_server_ip" {
+  value = aws_instance.test_back.public_ip
+}
