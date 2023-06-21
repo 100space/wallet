@@ -58,11 +58,11 @@ resource "aws_instance" "test_front" {
 }
 
 resource "aws_instance" "test_back" {
-  ami = data.aws_ami.ubuntu.id
-  instance_type = var.my_ec2_type
-  subnet_id = aws_subnet.public_subnet[2].id
-  key_name = var.my_key_pair
-  vpc_security_group_ids = [aws_security_group.ec2.id]
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.my_ec2_type
+  subnet_id                   = aws_subnet.public_subnet[2].id
+  key_name                    = var.my_key_pair
+  vpc_security_group_ids      = [aws_security_group.ec2.id]
   associate_public_ip_address = true
 
   tags = {

@@ -35,9 +35,20 @@ jobs:
 
       - name: Make Dot ENV
         run: |
-          echo -e $ENV > dist/.env
+          echo "${ENV}" > .env
         env:
           ENV: ${{ secrets.BACK_ENV }}
+
+      - name: Remove Directory
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{secrets.BACK_TEST_SERVER}}
+          username: ${{secrets.USERNAME}}
+          key: ${{secrets.BACK_TEST_SERVER_PRIVATE_KEY}}
+          port: ${{secrets.PORT}}
+          script_stop: true
+          script: |
+            rm -rf /home/ubuntu/www/*
 
       - name: SCP
         uses: appleboy/scp-action@master
@@ -45,7 +56,7 @@ jobs:
           host: ${{secrets.BACK_TEST_SERVER}}
           username: ${{secrets.USERNAME}}
           key: ${{secrets.BACK_TEST_SERVER_PRIVATE_KEY}}
-          source: "back/dist/*,back/package.json"
+          source: "back/dist/*,back/package.json,back/.env"
           target: "www"
           strip_components: 1
       - name: Run Server
@@ -55,11 +66,12 @@ jobs:
           username: ${{secrets.USERNAME}}
           key: ${{secrets.BACK_TEST_SERVER_PRIVATE_KEY}}
           port: ${{secrets.PORT}}
+          script_stop: true
           script: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd /home/ubuntu/www
-            pm2 delete all
-            mv dist/* . && rmdir dist
+            pm2 delete all || true
+            mv dist/** . && rm -rf dist
             npm install
             pm2 start main.js
