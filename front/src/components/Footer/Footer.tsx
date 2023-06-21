@@ -8,6 +8,7 @@ export interface IfooterList {
     path: string
     iconPath: string
     content: string
+    path: string
 }
 
 export const footerProduce = [
@@ -33,6 +34,7 @@ export const Footer = () => {
                 </NavLink>
             </IconWrapper>
         ))
+
     }
 
     return (
