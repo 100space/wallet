@@ -69,7 +69,7 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd /home/ubuntu/www
-            pm2 delete all 2> /dev/null
+            pm2 delete all || true
             mv dist/** . && rm -rf dist
             npm install
             pm2 start main.js
