@@ -42,7 +42,7 @@ export const LoginPage = () => {
         <LoginWrap mode={modeState.mode}>
             <LogoComp></LogoComp>
             <div>
-                {initState.isLogin && <InputComp height={5.6} width={90} type="password" />}
+                {!initState.isLogin && <InputComp width={90} type="password" />}
                 {Buttons()}
             </div>
         </LoginWrap>

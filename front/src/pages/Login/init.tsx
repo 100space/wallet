@@ -46,14 +46,16 @@ export const InitPage = () => {
             initStep: manageMode.initMode === "create" ? "step1" : "step2",
         })
     }, [])
+
     return (
         <StepPageWrap mode={modeState.mode} ref={currentRef}>
             <InitStepPage />
             <Button
                 width={"100%"}
                 height={"5.6rem"}
-                margin={"3rem auto 1rem"}
-                content={"Next Step"}
+                margin={"5rem auto 0"}
+                fontSize={"1.4rem"}
+                content={manageMode.initStep === "step4" ? "Let's Start" : "Next Step"}
                 mode={modeState.mode}
                 onClick={() => handleClick(manageMode.initStep)}
             />

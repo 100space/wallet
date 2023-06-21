@@ -10,7 +10,7 @@ export const Btn = styled.button<IBtn>`
     border-radius: 5rem;
     border: none;
     box-shadow: 0 0 0.2rem 0.1rem #3a3939;
-    font-size: 1.2rem;
+    font-size: ${(props) => props.fontSize || "1.2rem"};
     color: ${({ theme, mode }) => mode && theme[mode].text};
     background: ${({ theme, mode }) => mode && theme[mode].bg200};
     &:hover {

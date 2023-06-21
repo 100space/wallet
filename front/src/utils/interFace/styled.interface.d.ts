@@ -26,6 +26,7 @@ export interface IBtn {
     margin?: string
     backgroundColor?: string
     content?: string
+    fontSize?: string
     mode: string
     onClick?: (e) => void
 }

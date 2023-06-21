@@ -10,11 +10,12 @@ export const Step2 = () => {
     const [modeState, setChange] = useGetMode()
     const [inputValues, setInputValues] = useState<string[]>(Array(12).fill(""))
     const time = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
     const inputMnemonic: () => ReactNode = () => {
-        return time.map((v) => {
+        return inputValues.map((v, i) => {
             return (
-                <MnemonicItem>
-                    <MnemonicNum>{v}.</MnemonicNum> <InputComp width={60} type="mnemonic" name={v} />
+                <MnemonicItem key={i}>
+                    <MnemonicNum>{i + 1}.</MnemonicNum> <InputComp width={60} type="text" />
                 </MnemonicItem>
             )
         })
@@ -23,19 +24,17 @@ export const Step2 = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const length = e.currentTarget.elements.length - 1
-
-        const value = (e.currentTarget[0] as HTMLInputElement).value
-
-        const a = []
+        const mnemonicArray = []
         for (let i = 0; i < length; i++) {
-            a.push((e.currentTarget[i] as HTMLInputElement).value)
+            mnemonicArray.push((e.currentTarget[i] as HTMLInputElement).value)
         }
-        console.log(a)
+        console.log(mnemonicArray)
     }
+
     return (
         <StepWrap>
             <Description step="step2" />
-            <MnemonicWrap mode={modeState.mode} onSubmit={handleSubmit} name="aaa">
+            <MnemonicWrap mode={modeState.mode} onSubmit={handleSubmit}>
                 {inputMnemonic()}
                 <button> 중복 확인하기 </button>
             </MnemonicWrap>
