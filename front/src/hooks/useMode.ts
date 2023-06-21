@@ -1,12 +1,9 @@
-import { InitMode, ModeState } from "@utils/localStorage"
-import { useEffect } from "react"
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
+import { ModeState } from "@utils/localStorage"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 
 export const useGetMode = () => {
     const modeState = useRecoilValue(ModeState)
     const setMode = useSetRecoilState(ModeState)
-
-    console.log(InitMode)
     const setChange = () => {
         setMode((prevMode: { isLogin: boolean; mode: string }) => ({
             ...prevMode,

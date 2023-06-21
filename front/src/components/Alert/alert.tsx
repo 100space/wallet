@@ -1,6 +1,6 @@
 import Swal from "sweetalert2"
 
-export const Toast = Swal.mixin({
+export const Alert = Swal.mixin({
     toast: true,
     position: "top-end",
     width: "70%",

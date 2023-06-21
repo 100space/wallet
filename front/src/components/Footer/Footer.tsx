@@ -1,4 +1,4 @@
-import { Toast } from "@components/Alert/alert"
+import { Alert } from "@components/Alert/alert"
 import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { NavLink, useLocation } from "react-router-dom"
@@ -25,15 +25,16 @@ export const Footer = () => {
     const [isSelected, setIsSelected] = useState([true, false, false, false])
 
     const renderFooter = (footerArray: IfooterList[]) => {
+
         const handleClick = (e: MouseEvent, select: number, v: string) => {
-            Toast.fire({ icon: "info", title: v })
+            Alert.fire({ icon: "info", title: v })
             const updatedSelected = isSelected.map((value, index) => index === select)
             setIsSelected(updatedSelected)
-            console.log(updatedSelected)
         }
         return footerArray.map((v, index, array) => {
             return(
             <IconWrapper onClick={(e) => handleClick(e, index, v.content)} mode={modeState.mode} color={isSelected[index] ? 'true' : 'false'}>
+
                 <NavLink to={v.path}>
                     <Icon icon={v.iconPath} />
                     {v.content}
