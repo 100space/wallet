@@ -11,6 +11,11 @@ export const FullScreen = css`
     width: 100%;
     height: 100%;
 `
+
+export const BorderBottom = css`
+    border-bottom: 1px solid #00000075;
+`
+
 export const RootWrap = styled.div<ISizeProps>`
     display: flex;
     align-items: center;
@@ -18,7 +23,7 @@ export const RootWrap = styled.div<ISizeProps>`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 3rem;
+
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 export const SizePropsStyled = css<ISizeProps>`

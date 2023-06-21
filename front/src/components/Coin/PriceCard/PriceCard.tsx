@@ -1,7 +1,7 @@
 import { PriceCardCurreny, PriceCardValue, PriceCardWrap } from "./styled/PriceCard.styled"
-import { IPriceCard } from "@utils/interFace/core"
+import { ICoinPrice } from "@utils/interFace/coin.interface"
 
-export const PriceCard = ({ currency, price}: IPriceCard) => {
+export const PriceCard = ({ currency, price }: ICoinPrice) => {
     return (
         <PriceCardWrap>
             <PriceCardCurreny>

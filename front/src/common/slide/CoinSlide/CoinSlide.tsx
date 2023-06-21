@@ -1,12 +1,12 @@
 import { CoinSlideWrap, CoinSlideSubject, CoinSlider } from "./styled"
-import { ICoinCardData } from "@utils/interFace/core"
+import { ICoin } from "@utils/interFace/coin.interface"
 import { CoinCard } from "@components/Coin"
 
-export const CoinSlide = (props: { coinDatas : ICoinCardData[] }) => {
+export const CoinSlide = (props: { coinDatas : ICoin[] }) => {
 
-    const coinCards = (coinsData: ICoinCardData[]) => {
+    const coinCards = (coinsData: ICoin[]) => {
         return coinsData.map((v) => {
-            return <CoinCard props={v} />
+            return <CoinCard coinData={v} />
         })
     }
 

@@ -1,10 +1,10 @@
+import { ICoinRate } from "@utils/interFace/coin.interface"
 import { CoinContent } from "./Coin.styled"
-import { ICoin } from "@utils/interFace/styled.interface"
 
-export const CoinRate = ({ width, rate }: ICoin) => {
+export const CoinRate = ({ width, changePercent }: ICoinRate) => {
     return(
-        <CoinContent width={width} color={(rate && rate >= 0) ? '#00d17f' : '#e84562'}>
-            {(rate && rate >= 0) ? '+' : ''} {rate} %
+        <CoinContent width={width} color={(changePercent && changePercent >= 0) ? '#00d17f' : '#e84562'}>
+            {(changePercent && changePercent >= 0) ? '+' : ''} {changePercent} %
         </CoinContent>
     )
 }

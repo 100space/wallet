@@ -6,6 +6,7 @@ export const theme = {
         bg200: "#777777",
         bg100: "#8d8d8d",
         bgCoin: "#4f4f4f",
+        bgInfo: "#4f4f4f",
 
         mnimonicColor: "#888",
 
@@ -24,12 +25,15 @@ export const theme = {
         buttonBg: "linear-gradient(135deg, #5779eb, #ff8756)",
         buttonHover: "linear-gradient(135deg, #e64ee9, #8192f0, #c3e3fe)",
         buttonActive: "linear-gradient(135deg, #d54121, #e3582c)",
+
+        footerColor: "#74cffc"
     },
     lightMode: {
         basicBg: "#f2f2f2",
         bg200: "#bfbfbf",
         bg100: "#e8e8e8",
         bgCoin: "#4F4F4F",
+        bgInfo: "#4f4f4f",
 
         mnimonicColor: "#888",
 
@@ -46,5 +50,7 @@ export const theme = {
         buttonHover: "linear-gradient(135deg, #e64ee9, #8192f0, #c3e3fe)",
         // buttonHover: "linear-gradient(135deg, #e97a4e, #f0a781)",
         buttonActive: "linear-gradient(135deg, #d54121, #e3582c)",
+
+        footerColor: "#5493ff"
     },
 }

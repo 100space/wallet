@@ -1,7 +1,4 @@
-export interface ISizeProps {
-    width?: string
-    height?: string
-}
+import { ISizeProps } from "@utils/interFace/styled.interface"
 
 export interface IMnemonicBox extends ISizeProps {
     bgColor?: string
