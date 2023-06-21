@@ -19,10 +19,10 @@ export const CoinChartHeaderWrap = styled.header<ISizeProps>`
 
 export const CoinChartHedaerContent = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
-    min-height: ${({ height }) => height || "4.8rem" };
-    color: ${({ theme, mode}) => (mode && theme[mode].text) || "#fff"};
+    min-height: ${({ height }) => height || "4.8rem"};
+    color: ${({ theme, mode }) => mode && theme[mode].text};
     font-weight: 600;
     font-size: 1.2rem;
     text-align: center;
-    line-height: ${({ height }) => height || "4.8rem" };
+    line-height: ${({ height }) => height || "4.8rem"};
 `

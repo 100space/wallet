@@ -10,7 +10,7 @@ export const ModeState = atom({
 })
 
 export const InitMode = atom({
-    key: "initMode",
+    key: "loginMode",
     default: { initMode: "", initStep: "" },
     effects_UNSTABLE: [persistAtom],
 })

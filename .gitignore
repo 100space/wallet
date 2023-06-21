@@ -4,5 +4,22 @@ node_modules
 .DS_Store
 
 *.env
-back/src/config/configuration.ts
 dist
+
+# Local .terraform directories
+**/.terraform/*
+
+# tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+*.tfvars.json
+
+# no creds
+*.pem
+
+# terraformrc file
+terraform.rc
+.terraformrc

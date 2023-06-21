@@ -1,3 +1,3 @@
 export const TrendsPage = () => {
-    return <></>
+    return <>trends</>
 }
