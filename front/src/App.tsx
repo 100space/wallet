@@ -6,6 +6,7 @@ import { useRecoilState, useResetRecoilState } from "recoil"
 import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
 import { useLocation } from "react-router"
+import { CoinInfo } from "@common/infomation"
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <>
             <RootWrap mode={modeState.mode}>
                 <Header />
+                    <CoinInfo />
                 <MainRouter />
                 {location.indexOf("/login") >= 0 ? <></> : <Controller />}
             </RootWrap>

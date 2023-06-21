@@ -6,6 +6,7 @@ export const theme = {
         bg200: "#777777",
         bg100: "#8d8d8d",
         bgCoin: "#4f4f4f",
+        bgInfo: "#4f4f4f",
 
         mnimonicColor: "#888",
 
@@ -30,6 +31,7 @@ export const theme = {
         bg200: "#bfbfbf",
         bg100: "#e8e8e8",
         bgCoin: "#4F4F4F",
+        bgInfo: "#4f4f4f",
 
         mnimonicColor: "#888",
 

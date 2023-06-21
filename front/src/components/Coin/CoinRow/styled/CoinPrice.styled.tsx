@@ -1,4 +1,5 @@
-import { ICoin, ITypeSize } from "@utils/interFace/styled.interface"
+import { ICoinPrice } from "@utils/interFace/coin.interface"
+import { ITypeSize } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const CoinPriceContentWrap = styled.div<ITypeSize>`
@@ -26,7 +27,7 @@ export const CoinPriceContent = styled.div<ITypeSize>`
     color: ${({color, theme}) => color || theme.textCoinPrice};
 `
 
-export const CoinPrice = ({width, price}: ICoin) => {
+export const CoinPrice = ({width, price, currency}: ICoinPrice) => {
     return(
         <>
             <CoinPriceContentWrap width={width}>
@@ -34,7 +35,7 @@ export const CoinPrice = ({width, price}: ICoin) => {
                     {price ? price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") : 0}
                 </CoinPriceContent>
                 <CoinPriceCurrency>
-                    KRW
+                    {currency}
                 </CoinPriceCurrency>
             </CoinPriceContentWrap>
             

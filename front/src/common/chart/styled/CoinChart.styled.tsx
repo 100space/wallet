@@ -6,7 +6,7 @@ export const CoinChartWrap = styled.div<ISizeProps>`
     width: 100%;
     background-color: ${({ theme, mode }) => (mode && theme[mode].basicBg) || "#3d3d3d"};
     border-radius: 1rem;
-    box-shadow: 0 0.5rem 0.5rem 1px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0.5rem 0rem 0px rgba(0, 0, 0, 0.85);
 `
 
 export const CoinChartHeaderWrap = styled.header<ISizeProps>`

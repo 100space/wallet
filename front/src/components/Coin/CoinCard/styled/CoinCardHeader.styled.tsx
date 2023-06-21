@@ -1,4 +1,4 @@
-import { ICoinCardHeader } from "@utils/interFace/core"
+import { ICoinName } from "@utils/interFace/coin.interface"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
@@ -59,7 +59,9 @@ export const CoinCardHeaderName = styled.div<ISizeProps>`
     font-weight: 500;
 `
 
-export const CoinCardHeader = ({image, symbol, name}: ICoinCardHeader) => {
+
+
+export const CoinCardHeader = ({image, symbol, name}: ICoinName) => {
     return (
         <CoinCardHeaderWrap width={"12rem"} height="35%">
             <CoinCardHead width="85%" height="60%">
