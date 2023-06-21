@@ -10,8 +10,7 @@ const App = () => {
     const screenWidth = window.innerWidth
     const screenHeight = window.innerHeight
     const [modeState, setChange] = useGetMode()
-    const location = useLocation().pathname
-    console.log()
+
     const changeMode = () => {
         setChange(modeState.mode)
     }
@@ -20,7 +19,7 @@ const App = () => {
             <RootWrap mode={modeState.mode}>
                 <Header />
                 <Body />
-                {location.indexOf("/login") >= 0 ? <></> : <Controller />}
+                <Controller />
             </RootWrap>
 
             {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (

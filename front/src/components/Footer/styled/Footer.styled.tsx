@@ -1,11 +1,12 @@
 import styled from "styled-components"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import { NavLink } from "react-router-dom"
+import { theme } from "colorTheme"
 
-export const FooterWrapper = styled.div`
+export const FooterWrapper = styled.div<ISizeProps>`
     width: 100%;
     height: 8rem;
-    background-color: #2d2d2d;
+    background: ${({ theme, mode }) => mode && theme[mode].basicBg};
     display: flex;
     justify-content: center;
     align-items: center;

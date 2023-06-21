@@ -3,10 +3,8 @@ import { BodyWrap } from "./styled"
 
 export const Body = () => {
     return (
-        <>
-            <BodyWrap>
-                <MainRouter />
-            </BodyWrap>
-        </>
+        <BodyWrap>
+            <MainRouter />
+        </BodyWrap>
     )
 }

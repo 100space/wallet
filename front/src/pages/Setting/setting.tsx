@@ -1,3 +1,3 @@
 export const SettingPage = () => {
-    return <></>
+    return <>setting</>
 }

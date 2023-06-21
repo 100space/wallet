@@ -1,30 +1,31 @@
+import { SizePropsStyled } from "@styled/index"
+import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
-import { ISizeProps, IMnemonicBox, IMenmonicContent } from "./interface"
+import { IMnemonicBox, IMenmonicContent } from "./interface"
 
 export const MnemonicBoxWrap = styled.div<ISizeProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "100%"};
+    ${SizePropsStyled}
 `
 
 export const MnemonicBox = styled.div<IMnemonicBox>`
+    ${SizePropsStyled}
     position: relative;
     padding: 1rem 2rem;
-    width: ${(props) => props.width || "100%"};
     min-height: 9rem;
-    height: ${(props) => props.height || "100%"};
     background-color: ${(props) => props.bgColor || "#555555"};
     box-sizing: border-box;
 `
 
 export const MnemonicContent = styled.div<IMenmonicContent>`
-    width: ${(props) => props.width || "100%"};
-    height: ${(props) => props.height || "100%"};
+    ${SizePropsStyled}
     color: ${(props) => props.color || "#bbbbbb"};
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
     font-weight: 400;
+    word-break: keep-all;
     filter: blur(${(props) => props.blur || "0.4rem"});
 `
 
