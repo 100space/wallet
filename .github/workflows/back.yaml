@@ -39,9 +39,15 @@ jobs:
         run: |
           npm run build
 
+      - name: Make Dot ENV
+        run: |
+          echo "${ENV}" > .env
+        env:
+          ENV: ${{ secrets.BACK_ENV }}
+
       - name: ZIP
         run: |
-          zip -r back.zip appspec.yml package.json dist/ scripts/
+          zip -r back.zip appspec.yml package.json dist/ scripts/ .env
 
       - name: Upload Build File
         run: |
