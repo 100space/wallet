@@ -33,7 +33,7 @@ jobs:
 
       - name: Make Dot ENV
         run: |
-          echo -e $ENV > .env
+          echo "${ENV}" > .env
         env:
           ENV: ${{ secrets.BACK_ENV }}
 
