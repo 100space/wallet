@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose'
+import { HealthController } from './health/health.controller';
 import configuration from "./config/configuration";
 
 @Module({
@@ -10,7 +11,7 @@ import configuration from "./config/configuration";
     isGlobal: true,
     load: [configuration]
   }), MongooseModule.forRoot(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`)],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}
