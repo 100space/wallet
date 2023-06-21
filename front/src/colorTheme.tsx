@@ -24,6 +24,8 @@ export const theme = {
         buttonBg: "linear-gradient(135deg, #5779eb, #ff8756)",
         buttonHover: "linear-gradient(135deg, #e64ee9, #8192f0, #c3e3fe)",
         buttonActive: "linear-gradient(135deg, #d54121, #e3582c)",
+
+        footerColor: "#74cffc"
     },
     lightMode: {
         basicBg: "#f2f2f2",
@@ -46,5 +48,7 @@ export const theme = {
         buttonHover: "linear-gradient(135deg, #e64ee9, #8192f0, #c3e3fe)",
         // buttonHover: "linear-gradient(135deg, #e97a4e, #f0a781)",
         buttonActive: "linear-gradient(135deg, #d54121, #e3582c)",
+
+        footerColor: "#5493ff"
     },
 }

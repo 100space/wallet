@@ -8,7 +8,7 @@ on:
       - "front/**"
 
 jobs:
-  Front_Test_Deploy:
+  front_deploy:
     runs-on: ubuntu-20.04
     defaults:
       run:

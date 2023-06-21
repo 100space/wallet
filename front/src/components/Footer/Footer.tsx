@@ -3,6 +3,7 @@ import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { NavLink, useLocation } from "react-router-dom"
 import { FooterWrap, FooterWrapper, IconWrapper } from "./styled"
+import { MouseEvent, useState } from "react"
 
 export interface IfooterList {
     path: string
@@ -12,27 +13,33 @@ export interface IfooterList {
 
 export const footerProduce = [
     { path: "/", iconPath: "clarity:coin-bag-line", content: "Assets" },
-    { path: "/market", iconPath: "mdi:marketplace-outline", content: "Market" },
-    { path: "/trends", iconPath: "fluent-mdl2:market", content: "Trends" },
-    { path: "/setting", iconPath: "uil:setting", content: "Settings" },
+    { path: "/market/*", iconPath: "mdi:marketplace-outline", content: "Market" },
+    { path: "/trends/*", iconPath: "fluent-mdl2:market", content: "Trends" },
+    { path: "/setting/*", iconPath: "uil:setting", content: "Settings" },
 ]
 
 interface IEvent {}
 export const Footer = () => {
     const location = useLocation().pathname
     const [modeState, setChange] = useGetMode()
+    const [isSelected, setIsSelected] = useState([true, false, false, false])
+
     const renderFooter = (footerArray: IfooterList[]) => {
-        const handleClick = (v: string) => {
+        const handleClick = (e: MouseEvent, select: number, v: string) => {
             Toast.fire({ icon: "info", title: v })
+            const updatedSelected = isSelected.map((value, index) => index === select)
+            setIsSelected(updatedSelected)
+            console.log(updatedSelected)
         }
-        return footerArray.map((v, index, array) => (
-            <IconWrapper onClick={() => handleClick(v.content)} mode={modeState.mode}>
+        return footerArray.map((v, index, array) => {
+            return(
+            <IconWrapper onClick={(e) => handleClick(e, index, v.content)} mode={modeState.mode} color={isSelected[index] ? 'true' : 'false'}>
                 <NavLink to={v.path}>
                     <Icon icon={v.iconPath} />
                     {v.content}
                 </NavLink>
             </IconWrapper>
-        ))
+        )})
     }
 
     return (
@@ -41,3 +48,4 @@ export const Footer = () => {
         </FooterWrapper>
     )
 }
+ 

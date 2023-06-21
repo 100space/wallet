@@ -14,7 +14,7 @@ env:
   AWS_S3_NAME: ${{secrets.AWS_S3_NAME}}
 
 jobs:
-  Back_Deploy:
+  back_deploy:
     runs-on: ubuntu-20.04
     defaults:
       run:
