@@ -1,4 +1,5 @@
-import { ICoin, ITypeSize } from "@utils/interFace/styled.interface"
+import { ICoinName } from "@utils/interFace/coin.interface"
+import { ITypeSize } from "@utils/interFace/styled.interface"
 import { styled } from "styled-components"
 
 export const CoinNameFormWrap = styled.div<ITypeSize>`
@@ -37,11 +38,11 @@ export const CoinName = styled.div<ITypeSize>`
     color: ${({theme, mode}) => (mode && theme[mode].textCoinName) || "#888"};
 `
 
-export const CoinNameForm = ({ coinImg ,name, symbol, width, type }: ICoin) => {
+export const CoinNameForm = ({ image ,name, symbol, width, type }: ICoinName) => {
     return(
         <CoinNameFormWrap type={type}>
             <CoinNameImgWrap>
-                <CoinNameImg src={coinImg}/>
+                <CoinNameImg src={image}/>
             </CoinNameImgWrap>
             <CoinNameWrap>
                 <CoinSymbol>

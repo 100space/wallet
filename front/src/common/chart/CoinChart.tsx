@@ -1,4 +1,4 @@
-import { ICoin } from "@utils/interFace/styled.interface"
+import { ICoin } from "@utils/interFace/coin.interface"
 import { CoinChartHeader } from "./CoinChartHeader"
 import { CoinChartWrap } from "./styled"
 import { CoinRow } from "@components/Coin"

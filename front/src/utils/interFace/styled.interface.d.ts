@@ -15,19 +15,6 @@ export interface IFocusTypeSize extends ITypeSize {
     focusmode?: string
 }
 
-export interface ICoin extends ITypeSize {
-    rank?: number
-    coinImg?: string
-    name?: string
-    symbol?: string
-    price?: number
-    rate?: number
-}
-
-export interface ICoinData {
-    coinData: ICoinRow
-}
-
 export interface walletInfo {
     imgPath: string
     content: string
