@@ -1,10 +1,8 @@
 import { InputComp } from "@components/input"
 import { Description } from "@components/Description"
-import { MnemonicItem, MnemonicNum, MnemonicWrap, StepWrap } from "./styled"
+import { MnemonicItem, MnemonicWrap, StepWrap, TextComp } from "./styled"
 import React, { ReactNode, useState } from "react"
-import { InitMode, ModeState } from "@utils/localStorage"
 import { useGetMode } from "@hooks/useMode"
-import { constants } from "buffer"
 
 export const Step2 = () => {
     const [modeState, setChange] = useGetMode()
@@ -15,7 +13,10 @@ export const Step2 = () => {
         return inputValues.map((v, i) => {
             return (
                 <MnemonicItem key={i}>
-                    <MnemonicNum>{i + 1}.</MnemonicNum> <InputComp width={60} type="text" />
+                    <TextComp fontSize="1.8rem" width="2.5rem">
+                        {i + 1}.
+                    </TextComp>{" "}
+                    <InputComp width={60} type="" />
                 </MnemonicItem>
             )
         })

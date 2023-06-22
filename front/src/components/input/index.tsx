@@ -17,7 +17,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height,
         <>
             <InputWrap focusmode={focusmode} height={height} width={width} type={type}>
                 <InputElement
-                    type={type === "text" ? "text" : isVisible ? "text" : "password"}
+                    type={type === "text" || type === "" ? "text" : isVisible ? "text" : "password"}
                     height={height}
                     width={width}
                     placeholder={placeholder}
@@ -36,7 +36,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height,
                         )}
                     </HideIcon>
                 )}
-                {(type === "" || type === "text") && (
+                {type === "text" && (
                     <HideIcon width="3rem" mode={modeState.mode}>
                         <Icon icon="codicon:blank" />
                     </HideIcon>

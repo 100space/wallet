@@ -23,3 +23,7 @@ export interface IfooterList {
     iconPath: string
     content: string
 }
+
+export interface IStepProps {
+    [key: string]: number
+}

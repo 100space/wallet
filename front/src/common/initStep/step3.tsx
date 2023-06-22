@@ -7,22 +7,17 @@ export const Step3 = () => {
     const info = ["닉네임을 입력해주세요", "비밀번호를 입력해주세요", "비밀번호를 확인해주세요"]
     const [modeState, setChange] = useGetMode()
     const InfoComp = info.map((v, i) => {
-        return i === 0 ? (
+        return (
             <InputWrap mode={modeState.mode} key={i}>
                 <span>{v}</span>
-                <InputComp type="text" placeholder={v} mode={modeState.mode} />
-            </InputWrap>
-        ) : (
-            <InputWrap mode={modeState.mode} key={i}>
-                <span>{v}</span>
-                <InputComp type="password" placeholder={v} mode={modeState.mode} />
+                <InputComp type={i === 0 ? "text" : "password"} placeholder={v} mode={modeState.mode} />
             </InputWrap>
         )
     })
     return (
         <StepWrap>
             <Description step="step3" />
-            {InfoComp}
+            <div className="step3">{InfoComp}</div>
         </StepWrap>
     )
 }

@@ -30,3 +30,9 @@ a {
     cursor: pointer;
     color: #fff;
 }
+
+@media (max-height: 700px), (max-width: 350px) {
+    html {
+        font-size: 50%;
+    }
+}

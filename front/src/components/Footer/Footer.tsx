@@ -30,6 +30,7 @@ export const Footer = () => {
                     onClick={(e) => handleClick(e, index, v.content)}
                     mode={modeState.mode}
                     color={isSelected[index] ? "true" : "false"}
+                    key={index}
                 >
                     <NavLink to={v.path}>
                         <Icon icon={v.iconPath} />

@@ -15,11 +15,6 @@ export interface IFocusTypeSize extends ITypeSize {
     focusmode?: string
 }
 
-export interface walletInfo {
-    imgPath: string
-    content: string
-}
-
 export interface IBtn {
     width: string
     height: string
@@ -34,4 +29,9 @@ export interface IBtn {
 interface Idescription {
     subject: string
     content: string
+}
+
+export interface TextProps extends ISizeProps {
+    fontSize: string
+    step?: string
 }

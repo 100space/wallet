@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import { ISizeProps } from "@utils/interFace/styled.interface"
-import { NavLink } from "react-router-dom"
-import { theme } from "colorTheme"
 
 export const FooterWrapper = styled.div<ISizeProps>`
     width: 100%;

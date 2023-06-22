@@ -1,28 +1,35 @@
-import { styled } from "styled-components";
+import { FlexCenter } from "@styled/index"
+import { ISizeProps } from "@utils/interFace/styled.interface"
+import { styled } from "styled-components"
 
-export const LoginWrapper = styled.div`
+export const LoginWrapper = styled.div<ISizeProps>`
     width: 100%;
-    height: 4rem;
-    background-color: #2b2b2b;
+    height: 5rem;
     list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: ${({ theme, mode }) => mode && theme[mode].basicDeepBg};
+    color: ${({ theme, mode }) => mode && theme[mode].text};
 `
 
 export const Backspace = styled.img`
-    width:10%;
+    width: 10%;
 `
 
-export const IconWrap = styled.div`
-    width: 90%;
+export const IconWrap = styled.div<ISizeProps>`
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
-    color: #f2f2f2;
-    font-size: 0.5rem;
+    justify-content: space-around;
+    padding: 1rem;
+    & > .headerItem {
+        ${FlexCenter}
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+    }
 `
 
 export const Icons = styled.img`
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
 `
