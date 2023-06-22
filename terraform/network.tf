@@ -111,3 +111,15 @@ resource "aws_eip" "test_back_server" {
   instance = aws_instance.test_back.id
   domain   = "vpc"
 }
+
+# db IP 지정
+
+resource "aws_network_interface" "db" {
+  subnet_id       = aws_subnet.private_subnet[0].id
+  private_ips     = ["10.10.10.153"]
+  security_groups = [aws_security_group.mongo_db_sg.id]
+
+  tags = {
+    Name = "${var.project}-db-network"
+  }
+}
