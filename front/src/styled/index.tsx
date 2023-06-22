@@ -30,3 +30,7 @@ export const SizePropsStyled = css<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
 `
+
+export const Shadow = css`
+    box-shadow: 0 0.5rem 0rem 0px rgba(0, 0, 0, 0.85);
+`
