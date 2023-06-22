@@ -1,7 +1,8 @@
-import { INFTCard } from "@utils/interFace/nft.interface"
-import { NftCardImg } from "./NftCardImg"
-import { NftContents } from "./NftContents"
-import { NftCardWrap } from "./styled"
+import { INFTCard } from "@utils/interFace/nft.interface";
+import { NftCardImg } from "./NftCardImg";
+import { NftContents } from "./NftContents";
+import { NftCardWrap } from "./styled";
+
 
 export const NftCard = (props : {nftInfo: INFTCard}) => {
 
@@ -17,7 +18,7 @@ export const NftCard = (props : {nftInfo: INFTCard}) => {
 
     return (
         <NftCardWrap color={getRandomColor()} width={"17.5rem"} height={"24.4rem"}>
-            <NftCardImg image={props.nftInfo.image} />
+            <NftCardImg width={"16rem"} height={"16rem"} image={props.nftInfo.image} />
             <NftContents name={props.nftInfo.name} owner={props.nftInfo.owner} prices={props.nftInfo.prices} />
         </NftCardWrap>
     )
