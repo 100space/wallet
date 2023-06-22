@@ -4,7 +4,7 @@ import { Popup } from "@components/popup"
 export const Controller = () => {
     return (
         <>
-            <Popup/>
+            {/* <Popup/> */}
             <Footer />
         </>
     )
