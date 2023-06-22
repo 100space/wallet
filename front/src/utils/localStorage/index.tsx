@@ -14,3 +14,14 @@ export const InitMode = atom({
     default: { initMode: "", initStep: "" },
     effects_UNSTABLE: [persistAtom],
 })
+
+export const IsCheck = atom({
+    key: "isCheck",
+    default: { step1: false, step2: false },
+    effects_UNSTABLE: [persistAtom],
+})
+export const MyAccount = atom({
+    key: "myAccount",
+    default: { myMnemonic: "", password: "" },
+    effects_UNSTABLE: [persistAtom],
+})

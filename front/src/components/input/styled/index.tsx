@@ -4,11 +4,10 @@ import { IFocusTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const InputWrap = styled.div<IFocusTypeSize>`
-    ${(props) => (props.type === "password" ? "width: calc(100% - 4rem)" : `width:${props.width}%`)};
+    ${(props) => (props.width ? `width:${props.width}%` : "width: calc(100% - 4rem)")};
     ${(props) => props.height && `height:  ${props.height}rem;`}
     ${(props) => (props.focusmode === "on" ? "border: 0.2rem solid #FFC964" : "border: 0.1rem solid #cccccc")};
-    ${(props) => (props.type === "search" ? "border-radius: 2rem;" : "")};
-    ${(props) => (props.type === "mnemonic" ? "border-radius: 0.5rem;" : "")};
+    border-radius: ${(props) => (props.type === "search" ? " 2rem" : typeof props.width === "number" ? " 0.5rem" : "")};
     display: flex;
     justify-content: space-between;
     align-items: center;
