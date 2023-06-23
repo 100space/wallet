@@ -39,3 +39,7 @@ export interface TextProps extends ISizeProps {
     fontSize: string
     step?: string
 }
+
+export interface IHeader extends ISizeProps {
+    header?: boolean
+}
