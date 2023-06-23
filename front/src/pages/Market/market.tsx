@@ -5,12 +5,14 @@ import { TransactionRow } from "@components/Transaction"
 import { INFTRow, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 
-
 const data = {
     name: "NONGDAMGOM",
     image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
     owner: "Char1ey",
-    prices: [{currency: "KRW", price: 4500}, {currency: "ETH", price: 0.0005}]
+    prices: [
+        { currency: "KRW", price: 4500 },
+        { currency: "ETH", price: 0.0005 },
+    ],
 }
 
 const data2: INFTRow = {
@@ -18,7 +20,10 @@ const data2: INFTRow = {
     name: "NONGDAMGOM",
     image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
     owner: "Char1ey",
-    prices: [{currency: "KRW", price: 4500}, {currency: "ETH", price: 0.0005}]
+    prices: [
+        { currency: "KRW", price: 4500 },
+        { currency: "ETH", price: 0.0005 },
+    ],
 }
 
 const data3: ITransaction = {

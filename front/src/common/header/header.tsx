@@ -1,4 +1,5 @@
 import { LoginHeader } from "@components/LoginHeader/LoginHeader"
+import { HeaderWrap } from "@components/MainHeader"
 import { useLocation, useNavigate } from "react-router"
 import styled from "styled-components"
 
@@ -18,7 +19,7 @@ export const Header: React.FC<{}> = () => {
         } else if (location.indexOf("/market") > 0) {
             return <Div />
         }
-        return null
+        return <HeaderWrap />
     }
 
     return check(location)

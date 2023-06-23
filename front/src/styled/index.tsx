@@ -7,6 +7,11 @@ export const FlexCenter = css`
     justify-content: center;
     flex-direction: column;
 `
+export const FlexSpaceBetween = css`
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+`
 export const FullScreen = css`
     width: 100%;
     height: 100%;

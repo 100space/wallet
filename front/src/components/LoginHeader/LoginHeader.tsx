@@ -13,7 +13,6 @@ export const LoginImg = {
     afterLine: require("@img/afterLine.png"),
     backSpace: require("@img/backSpace.png"),
 }
-
 export const StepObj: IStepProps = {
     step1: 0,
     step2: 1,
@@ -32,23 +31,25 @@ export const LoadAccount = [{ content: "니모닉 입력" }, { content: "정보 
 
 export const LoginHeader = () => {
     const [modeState, setChange] = useGetMode()
-    const step = useRecoilValue(InitMode)
+    const { initMode, initStep: step } = useRecoilValue(InitMode)
     const renderWalletHeader = (walletArray: { content: string }[]) => {
         return walletArray.map((v, i, array) => {
-            const match: boolean = StepObj[step] === i
+            const check = walletArray.length === 4 ? StepObj[step] === i : StepObj[step] - 1 === i
+            console.log(StepObj[step], 11111)
+
             return (
                 <div className="headerItem" key={i}>
-                    <TextComp fontSize="2rem" color={match ? "#74cffc" : undefined}>
-                        <Icon icon={`iconamoon:number-${i + 1}-circle-light`} className={step.initStep} />
+                    <TextComp fontSize="2rem" color={check ? "#74cffc" : ""}>
+                        <Icon icon={`iconamoon:number-${i + 1}-circle-light`} className={step} />
                     </TextComp>
-                    <TextComp fontSize="1.2rem" color={match ? "#74cffc" : undefined}>
+                    <TextComp fontSize="1.2rem" color={check ? "#74cffc" : ""}>
                         {v.content}
                     </TextComp>
                 </div>
             )
         })
     }
-    const headerObj = step.initMode === "create" ? AccountProduce : LoadAccount
+    const headerObj = initMode === "create" ? AccountProduce : LoadAccount
     return (
         <>
             <LoginWrapper mode={modeState.mode}>

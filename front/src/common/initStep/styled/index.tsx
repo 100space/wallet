@@ -1,5 +1,5 @@
 import { FlexCenter } from "@styled/index"
-import { ISizeProps, TextProps } from "@utils/interFace/styled.interface"
+import { IBtn, ISizeProps, TextProps } from "@utils/interFace/styled.interface"
 import { theme } from "colorTheme"
 import { ReactNode } from "react"
 import styled from "styled-components"
@@ -23,13 +23,20 @@ export const MnemonicWrap = styled.form<ISizeProps>`
     display: flex;
     flex-wrap: wrap;
     color: ${({ theme, mode }) => mode && theme[mode].text};
-    & > button {
-        ${FlexCenter}
-        background: none;
-        border: none;
-        margin: 2rem auto 0;
-        cursor: pointer;
-        color: ${({ theme, mode }) => mode && theme[mode].mnimonicColor};
+`
+export const FormBtn = styled.button<ISizeProps>`
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    background: none;
+    margin-top: 2rem;
+    margin-left: 70%;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
+    &:active {
+        color: ${({ theme, mode }) => mode && theme[mode].footerColor};
     }
 `
 export const MnemonicItem = styled.div<ISizeProps>`

@@ -3,8 +3,8 @@ export const theme = {
     darkMode: {
         // 배경색
         basicDeepBg: "#2e2e2e",
-        basicBg: "#3e3e3e",
-        bg200: "#777777",
+        basicBg: "#2e2e2e",
+        bg200: "#555555",
         bg100: "#8d8d8d",
         bgCoin: "#4f4f4f",
         bgInfo: "#4f4f4f",

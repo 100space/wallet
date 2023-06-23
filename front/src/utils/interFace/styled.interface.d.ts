@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface ISizeProps {
     width?: string | number
     height?: string | number
@@ -9,6 +11,7 @@ export interface ITypeSize extends ISizeProps {
 }
 export interface IPlaceTypeSize extends ITypeSize {
     placeholder?: string
+    value?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 export interface IFocusTypeSize extends ITypeSize {
@@ -23,6 +26,7 @@ export interface IBtn {
     content?: string
     fontSize?: string
     mode: string
+    children?: string | ReactNode
     onClick?: (e) => void
 }
 
