@@ -30,5 +30,11 @@ a {
     cursor: pointer;
     color: #fff;
 }
-
-
+.swal2-popup {
+    font-size: 1.2rem !important;
+}
+@media (max-height: 700px), (max-width: 350px) {
+    html {
+        font-size: 50%;
+    }
+}

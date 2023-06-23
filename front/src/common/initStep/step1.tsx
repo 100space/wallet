@@ -21,12 +21,24 @@ export const Step1 = () => {
                     "vocal",
                     "grace",
                     "tone",
-                    "couple",
-                    "upgrade",
-                    "mad",
                 ]}
             />
-            <Agree />
+            <Agree
+                mnemonic={[
+                    "sound",
+                    "school",
+                    "demise",
+                    "unique",
+                    "kit",
+                    "library",
+                    "lady",
+                    "tool",
+                    "panel",
+                    "vocal",
+                    "grace",
+                    "tone",
+                ]}
+            />
         </StepWrap>
     )
 }

@@ -25,11 +25,7 @@ export const Mnemonic = ({ mnemonic }: IMnemonic) => {
             <MnemonicBox width="100%" height="80%">
                 <MnemonicContent blur={blur}>{mnemonicString}</MnemonicContent>
                 <MnemonicVisible width="2.5rem" onClick={handleVisible}>
-                    {isVisible ? (
-                        <Icon icon="mdi:eye-off" hFlip={true} />
-                    ) : (
-                        <Icon icon="heroicons:eye-solid" hFlip={true} />
-                    )}
+                    {<Icon icon={isVisible ? "mdi:eye-off" : "heroicons:eye-solid"} hFlip={true} />}
                 </MnemonicVisible>
             </MnemonicBox>
             <CopyButton copyContent={mnemonicString} />

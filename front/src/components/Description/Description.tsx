@@ -2,7 +2,7 @@ import { SubInfo, ConInfo, DescriptWrap } from "./styled"
 import { IDescripList } from "@utils/interFace/core"
 import { useGetMode } from "@hooks/useMode"
 
-export const DescripList: IDescripList = {
+const DescripList: IDescripList = {
     step1: {
         subject: "니모닉을 기억해주세요",
         content:
@@ -14,11 +14,11 @@ export const DescripList: IDescripList = {
     },
     step3: {
         subject: "비밀번호를 입력해주세요",
-        content: "사용할 계정의 비밀번호를 입력해주세요. 단, 비밀번호의 경우 계정을 복구할 경우 초기화됩니다.",
+        content: "사용할 계정의 비밀번호를 입력해주세요. 단, 비밀번호를 잊은 경우 복구가 불가능하고 초기화됩니다.",
     },
     step4: {
         subject: "지갑 생성을 완료했습니다!",
-        content: "",
+        content: "NFTin으로 암호화폐와 NFT를 관리해보세요!",
     },
 }
 

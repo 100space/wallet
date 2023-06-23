@@ -4,7 +4,7 @@ import { CopyFunctionWrap, CopyFunctionIcon, CopyFunctionContent } from "./style
 import { useGetMode } from "@hooks/useMode"
 import { Alert } from "@components/Alert/alert"
 
-interface ICopyButton {
+export interface ICopyButton {
     copyContent: string
 }
 

@@ -10,14 +10,14 @@ export const Btn = styled.button<IBtn>`
     border-radius: 5rem;
     border: none;
     box-shadow: 0 0 0.2rem 0.1rem #3a3939;
-    font-size: 1.2rem;
-    color: ${({ theme, mode }) => mode && theme[mode].text};
-    background: ${({ theme, mode }) => mode && theme[mode].bg200};
+    font-size: ${(props) => props.fontSize || "1.2rem"};
+    color: ${({ backgroundColor, theme, mode }) => (backgroundColor && "#333") || (mode && theme[mode].text)};
+    background: ${({ backgroundColor, theme, mode }) => backgroundColor || (mode && theme[mode].bg200)};
     &:hover {
-        background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
+        /* background: ${({ theme, mode }) => mode && theme[mode].buttonHover}; */
     }
     &:active {
-        background: ${({ theme, mode }) => mode && theme[mode].buttonActive};
+        background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
     }
     transition: all 0.2s ease-out;
 `

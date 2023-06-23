@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import { ISizeProps } from "@utils/interFace/styled.interface"
-import { NavLink } from "react-router-dom"
-import { theme } from "colorTheme"
 
 export const FooterWrapper = styled.div<ISizeProps>`
     width: 100%;
@@ -19,21 +17,17 @@ export const FooterWrap = styled.ul`
     align-items: center;
 `
 
-
-
 export const IconWrapper = styled.li<ISizeProps>`
-    
-
     & > a > svg {
         font-size: 2.2rem;
-        color: ${({ theme, mode, color }) => (color === "true") && (mode && theme[mode].footerColor)};
+        color: ${({ theme, mode, color }) => color === "true" && mode && theme[mode].footerColor};
     }
 
     &,
     & > a {
         width: ${(props) => props.width || "25%"};
         height: 100%;
-        color: ${({ theme, mode, color }) => (color === "true") && (mode && theme[mode].footerColor)};
+        color: ${({ theme, mode, color }) => color === "true" && mode && theme[mode].footerColor};
         display: flex;
         align-items: center;
         justify-content: center;

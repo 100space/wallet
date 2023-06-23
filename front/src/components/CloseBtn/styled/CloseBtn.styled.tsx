@@ -11,10 +11,11 @@ export const BtnWrap = styled.div`
     text-align: center;
     color: ${(props) => props.theme[mode].text};  
     border-radius: 8px;
-    border: 1px solid #1b1b1b;
-    font-size: 1.3rem;
+    border: 2px solid #ffffff;
+    font-size: 1.4rem;
 
     &>svg {
         color: ${(props) => props.theme[mode].text};  
+        font-size: 1.7rem;
     }
 `

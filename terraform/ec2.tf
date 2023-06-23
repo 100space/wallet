@@ -28,11 +28,14 @@ resource "aws_instance" "nat_gateway" {
 
 # db 인스턴스 생성
 resource "aws_instance" "db" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = var.my_ec2_type
-  subnet_id              = aws_subnet.private_subnet[0].id
-  key_name               = var.my_key_pair
-  vpc_security_group_ids = [aws_security_group.mongo_db_sg.id]
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.my_ec2_type
+  key_name      = var.my_key_pair
+
+  network_interface {
+    network_interface_id = aws_network_interface.db.id
+    device_index         = 0
+  }
 
   tags = {
     Name = "${var.project}-db-server"

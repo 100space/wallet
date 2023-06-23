@@ -12,9 +12,12 @@ export const Welcome = () => {
             // emojiSize: 50,
         })
     useEffect(() => {
-        setTimeout(welcomeComp, 500)
-        setTimeout(welcomeComp, 3000)
+        const a = setTimeout(welcomeComp, 500)
+        const b = setTimeout(welcomeComp, 3000)
         return () => {
+            clearTimeout(a)
+            clearTimeout(b)
+            jsConfetti.clearCanvas()
             jsConfetti.clearCanvas()
         }
     }, [])

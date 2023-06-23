@@ -4,10 +4,11 @@ import { useRecoilValue, useSetRecoilState } from "recoil"
 export const useGetMode = () => {
     const modeState = useRecoilValue(ModeState)
     const setMode = useSetRecoilState(ModeState)
-    const setChange = () => {
+    const setChange = ({ isLoginState, isModeState }: { isLoginState?: boolean; isModeState?: string }) => {
         setMode((prevMode: { isLogin: boolean; mode: string }) => ({
             ...prevMode,
-            mode: prevMode.mode === "lightMode" ? "darkMode" : "lightMode",
+            isLogin: isLoginState !== undefined ? isLoginState : prevMode.isLogin,
+            mode: isModeState !== undefined ? isModeState : prevMode.mode,
         }))
     }
 
