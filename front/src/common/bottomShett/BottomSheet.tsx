@@ -1,6 +1,8 @@
 import { CloseBtn } from "@components/CloseBtn"
-import { Wrap, Btn, BottomSheetWrap, BtnWrap } from "@common/popup/styled/index"
+import { Wrap, Btn, BottomSheetWrap, BtnWrap, MyAccountWrapper } from "@common/bottomShett/styled/index"
 import { useState } from "react"
+import QRCodeGenerator from "@components/QR/QrCode"
+import { CopyButton } from '@components/CopyButton';
 
 const Wrapper = () => {
     return(
@@ -24,6 +26,11 @@ export const BottomSheet = () => {
                 {isOpen ?    
                     <BottomSheetWrap>
                         <Wrapper/>
+                        <QRCodeGenerator/>
+                        <MyAccountWrapper>
+                            0x4922349j3j4k5jo35m
+                        <CopyButton copyContent={""}/>
+                        </MyAccountWrapper>
                     </BottomSheetWrap> : <></>}
             </Wrap>
         </>
