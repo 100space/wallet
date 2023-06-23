@@ -1,16 +1,27 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose'
+import { MongooseModule } from '@nestjs/mongoose';
 import { HealthController } from './health/health.controller';
-import configuration from "./config/configuration";
+import { TrendsModule } from './trends/trends.module';
+import { TransactionModule } from './transaction/transaction.module';
+import { TokenModule } from './token/token.module';
+import configuration from './config/configuration';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-    load: [configuration]
-  }), MongooseModule.forRoot(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`)],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    MongooseModule.forRoot(
+      `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,
+    ),
+    TrendsModule,
+    TransactionModule,
+    TokenModule,
+  ],
   controllers: [AppController, HealthController],
   providers: [AppService],
 })
