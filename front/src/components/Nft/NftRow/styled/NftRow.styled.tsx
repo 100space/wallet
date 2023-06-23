@@ -2,7 +2,8 @@ import { SizePropsStyled } from "@styled/index"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
-export const NftRowWrap = styled.div<ISizeProps>`
+export const RowWrap = styled.div<ISizeProps>`
+    margin: 0 auto;
     padding: 0rem 0.75rem;
     ${SizePropsStyled};
     display: flex;
@@ -11,8 +12,8 @@ export const NftRowWrap = styled.div<ISizeProps>`
     background-color: ${({theme, mode}) => mode && theme[mode].bg200};
 `
 
-export const NftRowContentsWrap = styled.div<ISizeProps>`
-    ${SizePropsStyled};
+export const RowContentsWrap = styled.div<ISizeProps>`
+    ${SizePropsStyled}; 
     padding: 0.5rem;
     box-sizing: border-box;
 
@@ -21,7 +22,7 @@ export const NftRowContentsWrap = styled.div<ISizeProps>`
     }
 `
 
-export const NftRowContentWrap = styled.div<ISizeProps>`
+export const RowContentWrap = styled.div<ISizeProps>`
     ${SizePropsStyled};
     padding-left: 0.5rem;
     display: flex;
@@ -36,6 +37,6 @@ export const NftRowContentWrap = styled.div<ISizeProps>`
     }
 `
 
-export const NftRowContent = styled.div<ISizeProps>`
+export const RowContent = styled.div<ISizeProps>`
     ${SizePropsStyled};
 `

@@ -7,8 +7,11 @@ export interface IAmount {
     amount: number
 }
 
-export interface ITransaction {
-    status: receiver | sender
+export interface ITransactionState {
+    state: receiver | sender
+}
+
+export interface ITransaction extends ITransactionState {
     opponent: address
     timestamp: string
     network?: string

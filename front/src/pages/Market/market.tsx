@@ -1,5 +1,7 @@
 import { NftCard, NftRow } from "@components/Nft"
+import { TransactionRow } from "@components/Transaction"
 import { INFTRow } from "@utils/interFace/nft.interface"
+import { ITransaction } from "@utils/interFace/transaction.interface"
 
 
 const data = {
@@ -17,11 +19,19 @@ const data2: INFTRow = {
     prices: [{currency: "KRW", price: 4500}, {currency: "ETH", price: 0.0005}]
 }
 
+const data3: ITransaction = {
+    state: "sender",
+    opponent: "0x00000000000000000000000000000000000000000000000000000",
+    timestamp: "7월21일",
+    amounts: [{currency: "KRW", amount: 4500}, {currency: "ETH", amount: 0.0005}]
+}
+
 export const MarketPage = () => {
     return (
         <>
-            {/* <NftCard nftInfo={data}/> */}
+            <NftCard nftInfo={data}/>
             <NftRow nftInfo={data2}/>
+            <TransactionRow txInfo={data3} />
         </>
     )
 }
