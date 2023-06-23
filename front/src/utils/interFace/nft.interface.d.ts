@@ -28,3 +28,18 @@ export interface INFTRank {
 }
 
 export interface INFTRow extends INFTCard, INFTRank {}
+
+export interface INFTStauts {
+    blockchain: (string | string[])[]
+    supply: (string | number) []
+    isTrade: (string | number) []
+    isSell: (string | number) []
+}
+
+export interface INftInfomation {
+    owner: string[]
+    blockchain: (string | string[])[]
+    ca: string[]
+    tokenId: (number | string) []
+    tokenStandard: string[]
+}

@@ -6,7 +6,7 @@ export const NftContents = ({ name, owner , prices }: INFTContents) => {
     const [modeState, setChange] = useGetMode()
     
     return (
-        <NftCardContentsWrap width={"16rem"} height={"6.5rem"}>
+        <NftCardContentsWrap height={"6.5rem"}>
             <NftCardContentWrap>
                 <NftCardContent mode={modeState.mode} height={"1.2rem"}>
                     { name }
