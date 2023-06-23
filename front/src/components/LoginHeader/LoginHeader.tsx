@@ -34,8 +34,8 @@ export const LoginHeader = () => {
     const { initMode, initStep: step } = useRecoilValue(InitMode)
     const renderWalletHeader = (walletArray: { content: string }[]) => {
         return walletArray.map((v, i, array) => {
-            const check = walletArray.length === 4 ? StepObj[step] === i : StepObj[step] + 1 === i
-            console.log(StepObj[step])
+            const check = walletArray.length === 4 ? StepObj[step] === i : StepObj[step] - 1 === i
+            console.log(StepObj[step], 11111)
 
             return (
                 <div className="headerItem" key={i}>

@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface ISizeProps {
     width?: string | number
     height?: string | number
@@ -24,6 +26,7 @@ export interface IBtn {
     content?: string
     fontSize?: string
     mode: string
+    children?: string | ReactNode
     onClick?: (e) => void
 }
 

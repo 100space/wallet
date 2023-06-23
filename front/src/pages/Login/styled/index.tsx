@@ -47,7 +47,10 @@ export const StepPageWrap = styled.div<ISizeProps>`
     ${FlexCenter}
     justify-content: space-between;
     width: 100%;
-    height: calc(100% - 7rem);
     margin-top: 7rem;
+    height: calc(100% - 7rem);
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
+    & > .btnWrap {
+        display: flex;
+    }
 `

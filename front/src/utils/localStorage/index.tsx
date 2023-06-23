@@ -17,11 +17,11 @@ export const InitMode = atom({
 
 export const IsCheck = atom({
     key: "isCheck",
-    default: { step1: false, step2: false },
+    default: { step1: false, step2: false, step3: false },
     effects_UNSTABLE: [persistAtom],
 })
 export const MyAccount = atom({
     key: "myAccount",
-    default: { myMnemonic: "", password: "" },
+    default: { myMnemonic: "", password: "", nickName: "" },
     effects_UNSTABLE: [persistAtom],
 })

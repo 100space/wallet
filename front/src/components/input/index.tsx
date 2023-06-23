@@ -4,8 +4,10 @@ import { HideIcon, InputElement, InputWrap } from "./styled"
 import { IPlaceTypeSize } from "@utils/interFace/styled.interface"
 import { Icon } from "@iconify/react"
 import { useGetMode } from "@hooks/useMode"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { InitMode, MyAccount } from "@utils/localStorage"
 
-export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width, value }) => {
+export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width, value, onChange }) => {
     const [focusmode, setFocus] = useState("off")
     const [isVisible, setVisible] = useState(false)
     const [isvalue, setIsValue] = useState("")
@@ -27,6 +29,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height,
                         setFocus("off")
                         setIsValue(e.target.value)
                     }}
+                    onChange={onChange}
                 />
                 {type === "password" && (
                     <HideIcon width="3rem" onClick={handleVisible} mode={modeState.mode}>
