@@ -20,7 +20,6 @@ export const Footer = () => {
 
     const renderFooter = (footerArray: IfooterList[]) => {
         const handleClick = (e: MouseEvent, select: number, v: string) => {
-            Alert.fire({ icon: "info", title: v })
             const updatedSelected = isSelected.map((value, index) => index === select)
             setIsSelected(updatedSelected)
         }
@@ -31,6 +30,7 @@ export const Footer = () => {
                     mode={modeState.mode}
                     color={isSelected[index] ? "true" : "false"}
                     key={index}
+                    width={"100%"}
                 >
                     <NavLink to={v.path}>
                         <Icon icon={v.iconPath} />
