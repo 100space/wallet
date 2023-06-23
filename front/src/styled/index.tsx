@@ -16,6 +16,10 @@ export const BorderBottom = css`
     border-bottom: 1px solid #00000075;
 `
 
+export const BorderBottomWhite = css`
+    border-bottom: 1px solid #aaaaaa;
+`
+
 export const RootWrap = styled.div<ISizeProps>`
     display: flex;
     align-items: center;
@@ -26,6 +30,16 @@ export const RootWrap = styled.div<ISizeProps>`
 
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
+
+export const Wrapper = styled.div<ISizeProps>`
+    width: ${(props) => props.width || "100%"};
+    height: ${(props) => props.height || "100%"};
+`
+
+export const ImageForm = styled.img<ISizeProps>`
+    height: ${(props) => props.height || "100%"};
+`
+
 export const SizePropsStyled = css<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
