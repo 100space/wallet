@@ -1,5 +1,5 @@
 import { AgreeWrap, AgreeCheckBoxWrap, AgreeCheckBox, AgreeContentWrap, AgreeContent } from "./styled/Agree.styled"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { useGetMode } from "@hooks/useMode"
 import { useRecoilState } from "recoil"
 import { IsCheck, MyAccount } from "@utils/localStorage"
@@ -16,11 +16,12 @@ export const Agree = ({ mnemonic }: IMnemonic) => {
     const [isCheck, setIsCheck] = useRecoilState(IsCheck)
     const [myAccounts, setMyAccounts] = useRecoilState(MyAccount)
     const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const crypto = CryptoMnemonic(mnemonic)
-        setMyAccounts({ ...myAccounts, myMnemonic: crypto })
-        setIsCheck({ ...isCheck, step1: !isCheck.step1 })
+        setMyAccounts({ ...myAccounts, myMnemonic: mnemonic })
+        setIsCheck({ ...isCheck, step1: e.currentTarget.checked })
     }
-
+    useEffect(() => {
+        setIsCheck({ ...isCheck, step1: false })
+    }, [])
     return (
         <AgreeWrap width="100%" height={"5%"} mode={modeState.mode}>
             <AgreeCheckBoxWrap width="10%">

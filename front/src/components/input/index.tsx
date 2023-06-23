@@ -5,7 +5,7 @@ import { IPlaceTypeSize } from "@utils/interFace/styled.interface"
 import { Icon } from "@iconify/react"
 import { useGetMode } from "@hooks/useMode"
 
-export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width }) => {
+export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width, value }) => {
     const [focusmode, setFocus] = useState("off")
     const [isVisible, setVisible] = useState(false)
     const [isvalue, setIsValue] = useState("")
@@ -20,6 +20,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height,
                     type={type === "text" || type === "" ? "text" : isVisible ? "text" : "password"}
                     height={height}
                     width={width}
+                    defaultValue={value}
                     placeholder={placeholder}
                     onFocus={() => setFocus("on")}
                     onBlur={(e) => {

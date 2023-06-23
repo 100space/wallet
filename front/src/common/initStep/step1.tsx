@@ -21,9 +21,6 @@ export const Step1 = () => {
                     "vocal",
                     "grace",
                     "tone",
-                    "couple",
-                    "upgrade",
-                    "mad",
                 ]}
             />
             <Agree
@@ -40,9 +37,6 @@ export const Step1 = () => {
                     "vocal",
                     "grace",
                     "tone",
-                    "couple",
-                    "upgrade",
-                    "mad",
                 ]}
             />
         </StepWrap>

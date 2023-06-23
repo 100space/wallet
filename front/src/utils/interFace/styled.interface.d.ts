@@ -9,6 +9,7 @@ export interface ITypeSize extends ISizeProps {
 }
 export interface IPlaceTypeSize extends ITypeSize {
     placeholder?: string
+    value?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 export interface IFocusTypeSize extends ITypeSize {

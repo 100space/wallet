@@ -3,7 +3,7 @@ import { InputComp } from "@components/input"
 import { LogoComp } from "@components/Logo"
 import { useGetMode } from "@hooks/useMode"
 import { InitMode, IsCheck, ModeState } from "@utils/localStorage"
-import React from "react"
+import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useRecoilState, useResetRecoilState } from "recoil"
 import { LoginWrap } from "./styled"
@@ -32,6 +32,7 @@ export const LoginPage = () => {
     }
 
     const content = isCheck.step2.password ? ["enter", "forget"] : ["create", "manage"]
+
     const Buttons = () =>
         content.map((v) => (
             <Button
@@ -44,6 +45,7 @@ export const LoginPage = () => {
                 key={v}
             />
         ))
+    useEffect(() => {}, [])
 
     return (
         <LoginWrap mode={modeState.mode}>
