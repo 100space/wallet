@@ -1,15 +1,16 @@
 import { useGetMode } from "@hooks/useMode"
 import { CollectionOwnerWrap, CollectionSubject } from "./styled/NftStandardInformation.styled"
+import { INFTStandardOwner } from "@utils/interFace/nft.interface"
 
-export const NftStandardInformationOwner = ({ image, owner }) => {
+export const NftStandardInformationOwner = ({ ownerImage, owner }: INFTStandardOwner) => {
     const [modeState, setModeState] = useGetMode()
     return (
         <CollectionOwnerWrap mode={modeState.mode}>
             <CollectionSubject>
-                {"이미지"}
+                <img src={ownerImage}/>
             </CollectionSubject>
             <CollectionSubject>
-                by {"소유자"}
+                by {owner}
             </CollectionSubject>
         </CollectionOwnerWrap>
     )

@@ -3,7 +3,7 @@ import { NftStandardInformation } from "@common/NftStandardInformation/NftStanda
 import { NftStatus } from "@common/NftStatus"
 import { NftCard, NftRow } from "@components/Nft"
 import { TransactionRow } from "@components/Transaction"
-import { INFTRow, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTRow, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 
 const data = {
@@ -49,6 +49,15 @@ const data5: INftInfomation = {
     tokenStandard: ["토큰 표준", "ERC 1155"]
 }
 
+const data6: INFTStandard = {
+    nftName: "Gdori",
+    nftId: 1234,
+    like: 1234,
+    ownerImage: "chrome-extension://mefhakmgclhhfbdadeojlkbllmecialg/public/extension-assets/frame.png",
+    owner: "asdf1387",
+    collectionName: "asdfasdf"
+}
+
 export const MarketPage = () => {
     return (
         <>
@@ -57,7 +66,7 @@ export const MarketPage = () => {
             <TransactionRow txInfo={data3} /> */}
             {/* <NftStatus nftStatus={data4}/> */}
             {/* <NftInfomation nftInfo={data5} /> */}
-            <NftStandardInformation />
+            <NftStandardInformation nftStandardInfo={data6} />
         </>
     )
 }
