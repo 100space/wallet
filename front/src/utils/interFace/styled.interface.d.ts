@@ -5,6 +5,15 @@ export interface ISizeProps {
     height?: string | number
     mode?: string
 }
+
+/**
+ * 팝업을 위한 Interfacce
+ * @type state :  팝업을 컨트롤할 때 boolean 값으로 컨트롤 한다.
+ */
+export interface IStateProps extends ISizeProps {
+    popUpState?: boolean
+    sideBarState?: boolean
+}
 export interface ITypeSize extends ISizeProps {
     type?: string
     name?: string

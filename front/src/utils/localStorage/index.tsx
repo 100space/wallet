@@ -12,13 +12,11 @@ export const ModeState = atom({
 export const InitMode = atom({
     key: "loginMode",
     default: { initMode: "", initStep: "" },
-    effects_UNSTABLE: [persistAtom],
 })
 
 export const IsCheck = atom({
     key: "isCheck",
     default: { step1: false, step2: false, step3: false },
-    effects_UNSTABLE: [persistAtom],
 })
 export const MyAccount = atom({
     key: "myAccount",
