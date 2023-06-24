@@ -1,4 +1,5 @@
-import { NftInfo } from "@common/NftInfo"
+import { NftInfomation } from "@common/NftInfomation"
+import { NftStandardInformation } from "@common/NftStandardInformation/NftStandardInformation"
 import { NftStatus } from "@common/NftStatus"
 import { NftCard, NftRow } from "@components/Nft"
 import { TransactionRow } from "@components/Transaction"
@@ -44,7 +45,7 @@ const data5: INftInfomation = {
     owner: ["소유자", "0xasdgasdgasdgasdgasdgasdgasdgasdg"],
     blockchain :["블록체인", ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"]],
     ca: ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
-    tokenId: ["토큰 ID", 50],
+    tokenId: ["토큰 ID", '50'],
     tokenStandard: ["토큰 표준", "ERC 1155"]
 }
 
@@ -55,7 +56,8 @@ export const MarketPage = () => {
             <NftRow nftInfo={data2}/>
             <TransactionRow txInfo={data3} /> */}
             {/* <NftStatus nftStatus={data4}/> */}
-            <NftInfo nftInfo={data5} />
+            {/* <NftInfomation nftInfo={data5} /> */}
+            <NftStandardInformation />
         </>
     )
 }
