@@ -1,4 +1,5 @@
 import { Filter } from "@common/Filter"
+import { NFTList } from "@common/List"
 import { NftInfomation } from "@common/NftInfomation"
 import { NftMarketList } from "@common/NftMarketList"
 import { NftStandardInformation } from "@common/NftStandardInformation/NftStandardInformation"
@@ -68,9 +69,9 @@ const data6: INFTStandard = {
 export const MarketPage = () => {
     return (
         <>
-            {/* <NftCard nftInfo={data}/>
-            <NftRow nftInfo={data2}/>
-            <TransactionRow txInfo={data3} /> */}
+            {/* <NftCard nftInfo={data}/> */}
+            {/* <NftRow nftInfo={data2}/> */}
+            {/* <TransactionRow txInfo={data3} /> */}
             {/* <NftStatus nftStatus={data4}/> */}
             {/* <NftInfomation nftInfo={data5} /> */}
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}
@@ -79,7 +80,8 @@ export const MarketPage = () => {
             <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} /> */}
             {/* <Category category={"인기 NFT"} /> */}
             {/* <NFTSearch /> */}
-            <NFTSlide nftCards={[data, data, data, data, data, data, data]} />
+            {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
+            <NFTList nftRows={[data2, data2, data2, data2, data2, data2]} />
         </>
     )
 }

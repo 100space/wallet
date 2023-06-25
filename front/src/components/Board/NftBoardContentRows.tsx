@@ -7,9 +7,9 @@ export const NftBoardContentRows = (props: { info: INFTStauts | INftInfomation }
 
     const rowList = (infomation: INFTStauts | INftInfomation) => {
         const infoArr = Object.values(infomation)
-        return infoArr.map(v => {
+        return infoArr.map((v, index) => {
             return (
-                <NftBoardContentRow text={[v[0], v[1]]} isImage={ typeof v[1] === "string" ? false : true } />
+                <NftBoardContentRow key={index} text={[v[0], v[1]]} isImage={ typeof v[1] === "string" ? false : true } />
             )
         })
     }
