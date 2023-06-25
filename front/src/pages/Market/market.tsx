@@ -53,9 +53,11 @@ const data6: INFTStandard = {
     nftName: "Gdori",
     nftId: 1234,
     like: 1234,
-    ownerImage: "chrome-extension://mefhakmgclhhfbdadeojlkbllmecialg/public/extension-assets/frame.png",
+    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
     owner: "asdf1387",
-    collectionName: "asdfasdf"
+    collectionName: "asdfasdf",
+    sellPrice: {currency: "ETH", price: 0.013},
+    chargePrice: {currency: "ETH", price: 0.0000013}
 }
 
 export const MarketPage = () => {

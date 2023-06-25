@@ -23,8 +23,13 @@ export const CollectionSubjectWrap = styled.div<ISizeProps>`
 `
 
 export const CollectionOwnerWrap = styled.div<ISizeProps>`
-padding: 0 1rem;
+    padding: 0 1rem;
     display: flex;
+    align-items: center;
+
+    & > div + div {
+        margin-left: 1rem;
+    }
 
     & > div:nth-child(1) {
         color: ${({ theme, mode}) => mode && theme[mode].text};
@@ -34,4 +39,8 @@ padding: 0 1rem;
         color: ${({ theme, mode}) => mode && theme[mode].textCoinName};
     }
 `
-export const CollectionSubject = styled.div<ISizeProps>``
+export const CollectionSubject = styled.div<ISizeProps>`
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+`

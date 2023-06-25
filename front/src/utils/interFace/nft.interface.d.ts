@@ -59,4 +59,7 @@ export interface INFTStandardCollection  {
     collectionName: string
 }
 
-export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, INFTStandardCollection {}
+export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, INFTStandardCollection {
+    sellPrice: INFTPrice
+    chargePrice: INFTPrice
+}
