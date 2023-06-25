@@ -35,7 +35,7 @@ export const HamburgerWrap = styled.div<IStateProps>`
 export const HamburgerStick = styled.span`
     display: block;
     margin: 0.8rem;
-    width: 3rem;
+    width: 3.4rem;
     height: 0.25rem;
     border-radius: 0.125rem;
     background-color: #453a33;
