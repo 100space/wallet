@@ -39,3 +39,8 @@ export interface IAccountAmount {
     amount: number
     currency: string
 }
+
+export interface ITokenRow {
+    tokenImg: string
+    assets: IAccountAmount[]
+}

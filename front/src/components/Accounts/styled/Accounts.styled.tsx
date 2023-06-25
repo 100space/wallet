@@ -3,6 +3,8 @@ import { ISizeProps } from "@utils/interFace/styled.interface"
 import { BorderBottom, BorderBottomWhite } from "@styled/index"
 
 export const AccountRowWrap = styled.div<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "4.8rem"};
     padding: 0.5rem 0;
     display: flex;
     justify-content: space-between;
@@ -17,6 +19,7 @@ export const AccountRowWrap = styled.div<ISizeProps>`
     }
 
     & > svg {
+        cursor: pointer;
         font-size: 3rem;
     }
 `
@@ -24,6 +27,9 @@ export const AccountRowWrap = styled.div<ISizeProps>`
 export const AccountRowImgWrap = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const AccountRowImg = styled.img`
