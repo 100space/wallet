@@ -1,5 +1,6 @@
 import { Filter } from "@common/Filter"
-import { NFTList } from "@common/List"
+import { NFTRowList } from "@common/List"
+import { NFTCardList } from "@common/List/NFTCardList"
 import { NftInfomation } from "@common/NftInfomation"
 import { NftMarketList } from "@common/NftMarketList"
 import { NftStandardInformation } from "@common/NftStandardInformation/NftStandardInformation"
@@ -81,7 +82,8 @@ export const MarketPage = () => {
             {/* <Category category={"인기 NFT"} /> */}
             {/* <NFTSearch /> */}
             {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
-            <NFTList nftRows={[data2, data2, data2, data2, data2, data2]} />
+            {/* <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} /> */}
+            <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} />
         </>
     )
 }
