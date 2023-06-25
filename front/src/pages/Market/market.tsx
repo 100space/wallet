@@ -3,6 +3,7 @@ import { NftInfomation } from "@common/NftInfomation"
 import { NftMarketList } from "@common/NftMarketList"
 import { NftStandardInformation } from "@common/NftStandardInformation/NftStandardInformation"
 import { NftStatus } from "@common/NftStatus"
+import { Category } from "@components/Category"
 import { NftCard, NftRow } from "@components/Nft"
 import { TransactionRow } from "@components/Transaction"
 import { INFTRow, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
@@ -72,8 +73,9 @@ export const MarketPage = () => {
             {/* <NftInfomation nftInfo={data5} /> */}
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}
             {/* <NftMarketList txList={[data3, data3, data3, data3, data3]} /> */}
-            <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
-            <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} />
+            {/* <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
+            <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} /> */}
+            <Category category={"인기 NFT"} />
         </>
     )
 }
