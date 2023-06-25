@@ -1,4 +1,5 @@
 import { NftInfomation } from "@common/NftInfomation"
+import { NftMarketList } from "@common/NftMarketList"
 import { NftStandardInformation } from "@common/NftStandardInformation/NftStandardInformation"
 import { NftStatus } from "@common/NftStatus"
 import { NftCard, NftRow } from "@components/Nft"
@@ -68,7 +69,8 @@ export const MarketPage = () => {
             <TransactionRow txInfo={data3} /> */}
             {/* <NftStatus nftStatus={data4}/> */}
             {/* <NftInfomation nftInfo={data5} /> */}
-            <NftStandardInformation nftStandardInfo={data6} />
+            {/* <NftStandardInformation nftStandardInfo={data6} /> */}
+            <NftMarketList txList={[data3, data3, data3, data3, data3]} />
         </>
     )
 }
