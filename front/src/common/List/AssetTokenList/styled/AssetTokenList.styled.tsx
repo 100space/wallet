@@ -7,4 +7,8 @@ export const AssetTokenListWrap = styled.div<ISizeProps>`
     & > div {
         ${BorderBottomWhite};
     }
+
+    & > div:nth-last-child(1) {
+        border-bottom: none;
+    }
 `

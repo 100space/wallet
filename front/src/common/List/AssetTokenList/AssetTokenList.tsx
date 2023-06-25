@@ -1,6 +1,7 @@
 import { TokenRow } from "@components/Tokens"
 import { ITokenRow } from "@utils/interFace/core"
 import { AssetTokenListWrap } from "./styled/AssetTokenList.styled"
+import { TokenListBtn } from "@components/Button/TokenListBtn"
 
 export const AssetTokenList = (props: {tokens: ITokenRow[]}) => {
 
@@ -11,6 +12,9 @@ export const AssetTokenList = (props: {tokens: ITokenRow[]}) => {
     return(
         <AssetTokenListWrap>
             {assetTokenList(props.tokens)}
+            <TokenListBtn>
+                토큰 가져오기
+            </TokenListBtn>
         </AssetTokenListWrap>
     )
 }

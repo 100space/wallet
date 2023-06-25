@@ -13,10 +13,10 @@ import { useRecoilState } from "recoil"
 //     asset: {currency: "MATIC", amount: 100}
 // }
 
-// const TokenRowData: ITokenRow = {
-//     tokenImg: "https://assets.coingecko.com/coins/images/4463/thumb/WeChat_Image_20220118095654.png?1642471050",
-//     assets: [{currency: "MATIC", amount: 100}, {currency: "KRW", amount: 1206040}]
-// }
+const TokenRowData: ITokenRow = {
+    tokenImg: "https://assets.coingecko.com/coins/images/4463/thumb/WeChat_Image_20220118095654.png?1642471050",
+    assets: [{currency: "MATIC", amount: 100}, {currency: "KRW", amount: 1206040}]
+}
 
 export const MainPage = () => {
     const navigator = useNavigate()
@@ -33,7 +33,7 @@ export const MainPage = () => {
     return (
         <>
             {/* <AccountList accounts={[AccountRowData, AccountRowData, AccountRowData, AccountRowData, AccountRowData]} /> */}
-            {/* <AssetTokenList tokens={[TokenRowData, TokenRowData, TokenRowData, TokenRowData]}/> */}
+            <AssetTokenList tokens={[TokenRowData, TokenRowData, TokenRowData, TokenRowData]}/>
         </>
     )
 }
