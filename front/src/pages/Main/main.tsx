@@ -1,7 +1,8 @@
 import { AccountList } from "@common/List/AccountList"
-import { AssetTokenList } from "@common/List/AssetTokenList"
+import { AssetsList } from "@common/List/AssetsList"
 import { TokenRow } from "@components/Tokens"
 import { IAccountRow, ITokenRow } from "@utils/interFace/core"
+import { INFTCard } from "@utils/interFace/nft.interface"
 import { ModeState, InitMode, IsCheck, MyAccount } from "@utils/localStorage"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
@@ -13,9 +14,19 @@ import { useRecoilState } from "recoil"
 //     asset: {currency: "MATIC", amount: 100}
 // }
 
-const TokenRowData: ITokenRow = {
+const tokenRowData: ITokenRow = {
     tokenImg: "https://assets.coingecko.com/coins/images/4463/thumb/WeChat_Image_20220118095654.png?1642471050",
     assets: [{currency: "MATIC", amount: 100}, {currency: "KRW", amount: 1206040}]
+}
+
+const nftCardData: INFTCard = {
+    name: "NONGDAMGOM",
+    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
+    owner: "Char1ey",
+    prices: [
+        { currency: "KRW", price: 4500 },
+        { currency: "ETH", price: 0.0005 },
+    ],
 }
 
 export const MainPage = () => {
@@ -33,7 +44,8 @@ export const MainPage = () => {
     return (
         <>
             {/* <AccountList accounts={[AccountRowData, AccountRowData, AccountRowData, AccountRowData, AccountRowData]} /> */}
-            <AssetTokenList tokens={[TokenRowData, TokenRowData, TokenRowData, TokenRowData]}/>
+            <AssetsList list={[tokenRowData, tokenRowData, tokenRowData, tokenRowData]}/>
+            {/* <AssetsList list={[nftCardData, nftCardData, nftCardData, nftCardData]}/> */}
         </>
     )
 }
