@@ -3,8 +3,6 @@ import { IAccountRow } from "@utils/interFace/core"
 import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 
-
-
 export const AccountRow = (props: { account: IAccountRow }) => {
     const [modeState, setModeState] = useGetMode()
 

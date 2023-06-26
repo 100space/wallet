@@ -11,7 +11,7 @@ export const BtnWrap = styled.div`
     text-align: center;
     color: ${(props) => props.theme[mode].text};  
     border-radius: 8px;
-    border: 2px solid #ffffff;
+    border: 0.2rem solid #ffffff;
     font-size: 1.4rem;
 
     &>svg {

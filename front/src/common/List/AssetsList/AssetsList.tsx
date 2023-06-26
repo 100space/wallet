@@ -1,31 +1,12 @@
 import { TokenRow } from "@components/Tokens"
-import { IAccountAmount, ITokenRow } from "@utils/interFace/core"
-import { AssetsListWrap } from "./styled/AssetTokenList.styled"
+import { ITokenRow } from "@utils/interFace/core"
+import { AssetsListWrap, AssetsNFTCardsWrap, AssetsNFTHeader } from "./styled/AssetTokenList.styled"
 import { TokenListBtn } from "@components/Button/TokenListBtn"
 import { INFTCard } from "@utils/interFace/nft.interface"
-import { styled } from "styled-components"
-import { ISizeProps } from "@utils/interFace/styled.interface"
 import { AssetsListHeader } from "@common/header/AssetsHeader"
 import { MouseEvent, useState } from "react"
 import { NftCard } from "@components/Nft"
 import { useGetMode } from "@hooks/useMode"
-
-export const AssetsNFTHeader = styled.div<ISizeProps>`
-    padding: 1.5rem 0;
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    color: ${({theme, mode}) => mode && theme[mode].text} ;
-    background-color: ${({ theme, mode}) => mode && theme[mode].bgBtn};
-`
-
-export const AssetsNFTCardsWrap = styled.div`
-    padding: 1rem 0;
-    margin: 0 auto;
-    display: grid;
-    grid-gap: 2rem;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-`
 
 export const AssetsList = (props: { tokenList?: ITokenRow[], nftList?: INFTCard[] }) => {
     const [selected, setSelected] = useState([true, false])

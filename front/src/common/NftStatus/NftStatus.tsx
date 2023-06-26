@@ -2,8 +2,6 @@ import { Board, NftBoardContentRows } from "@components/Board"
 import { NftBoardHeader } from "@components/Board/NftBoardHeader"
 import { INFTStauts } from "@utils/interFace/nft.interface"
 
-
-
 export const NftStatus = (props: { nftStatus: INFTStauts }) => {
     return (
         <Board>
