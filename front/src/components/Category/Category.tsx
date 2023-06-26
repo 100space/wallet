@@ -2,8 +2,6 @@ import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { CategoryWrap, CategorySubject, CategoryArrow } from "./styled/Category.styled"
 
-
-
 export const Category = (props: { category: string }) => {
     const [modeState, setModeState] = useGetMode()
     return (

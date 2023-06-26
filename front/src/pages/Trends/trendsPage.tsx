@@ -1,4 +1,4 @@
-import { CoinInfo } from "@common/infomation"
+import { CoinInfo } from "@common/Infomation"
 import { ICoinInfo } from "@utils/interFace/coin.interface"
 
 const data: ICoinInfo = {

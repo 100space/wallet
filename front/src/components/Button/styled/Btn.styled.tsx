@@ -26,14 +26,17 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem 0rem;
-    width: ${({ width }) => width || "100%"};
-    height: ${({ height }) => height || "100%"};
+    margin: 1rem auto;
+    width: ${({ width }) => width || "100%" };
+    height: ${({ height }) => height || "100%" };
 `
 
 export const TokenListButton = styled.button<ISizeProps>`
+    cursor: pointer;
+    width: ${({ width }) => width || '100%'};
+    height: ${({ height }) => height || '100%'};
     padding: 1rem 2rem;
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 700;
     border: none;
     border-radius: 4rem;
