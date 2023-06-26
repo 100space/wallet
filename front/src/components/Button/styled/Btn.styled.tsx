@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { IBtn } from "@utils/interFace/styled.interface"
+import { IBtn, ISizeProps } from "@utils/interFace/styled.interface"
 
 export const Btn = styled.button<IBtn>`
     cursor: pointer;
@@ -20,4 +20,23 @@ export const Btn = styled.button<IBtn>`
         background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
     }
     transition: all 0.2s ease-out;
+`
+
+export const TokenListBtnWrap = styled.div<ISizeProps>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0rem;
+    width: ${({ width }) => width || "100%" };
+    height: ${({ height }) => height || "100%" };
+`
+
+export const TokenListButton = styled.button<ISizeProps>`
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 4rem;
+    color: ${({ mode, theme }) => mode && theme[mode].bgBtn};
+    background-color: ${({ mode, theme }) => mode && theme[mode].buttonBg};
 `
