@@ -55,7 +55,16 @@ export const MarketPage = () => {
             <NftRow nftInfo={data2}/>
             <TransactionRow txInfo={data3} /> */}
             {/* <NftStatus nftStatus={data4}/> */}
-            <NftInfo nftInfo={data5} />
+            {/* <NftInfomation nftInfo={data5} /> */}
+            {/* <NftStandardInformation nftStandardInfo={data6} /> */}
+            {/* <NftMarketList txList={[data3, data3, data3, data3, data3]} /> */}
+            {/* <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
+            <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} /> */}
+            {/* <Category category={"인기 NFT"} /> */}
+            {/* <NFTSearch /> */}
+            {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
+            {/* <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} /> */}
+            <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} />
         </>
     )
 }
