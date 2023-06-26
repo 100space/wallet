@@ -3,6 +3,13 @@ import { Wrap, Btn, BottomSheetWrap, BtnWrap, MyAccountWrapper } from "@componen
 import { useState } from "react"
 import QRCodeGenerator from "@components/QR/QrCode"
 import { CopyButton } from "@components/CopyButton"
+import { SendComp } from "@components/PopupItem"
+import { MainInput } from "@components/PopupItem/mainInput"
+export const bringList = [
+    {subject: "계약주소(CA)", content:"토큰 계약주소"},
+    {subject: "토큰 기호(Symbol)", content:"토큰 기호"},
+    {subject: "토큰 소수점(Decimal)", content:"토큰 소수점"},
+]
 
 export const PopupComp = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -22,6 +29,7 @@ export const PopupComp = () => {
                     <BtnWrap>
                         <CloseBtn onClick={handleClick} />
                     </BtnWrap>
+                    <MainInput inputArray={bringList}/>
                 </BottomSheetWrap>
             ) : (
                 <></>
