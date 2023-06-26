@@ -10,6 +10,7 @@ import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 import { BlockList } from "@common/List/TxList/BlockList"
 import { IBlockRow } from "@utils/interFace/block.interface"
+import { NFTInfomationImg } from "@components/Nft/NftInfoImg"
 
 const tokenData: ITokenRow[] = [{ tokenImg: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579", assets: [{ amount: 10, currency: "BTC" }, { amount: 3000000000, currency: "KRW" }] }, { tokenImg: "https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880", assets: [{ amount: 54, currency: "ETH" }, { amount: 35650000, currency: "KRW" }] }, { tokenImg: "https://assets.coingecko.com/coins/images/325/thumb/Tether.png?1668148663", assets: [{ amount: 12.4, currency: "USDT" }, { amount: 124000, currency: "KRW" }] }, { tokenImg: "https://assets.coingecko.com/coins/images/825/thumb/bnb-icon2_2x.png?1644979850", assets: [{ amount: 124, currency: "MATIC" }, { amount: 1240000, currency: "KRW" }] }, { tokenImg: "https://assets.coingecko.com/coins/images/6319/thumb/USD_Coin_icon.png?1547042389", assets: [{ amount: 9.4, currency: "USDC" }, { amount: 19000, currency: "KRW" }] }]
 const nftData: INFTCard[] = [{
@@ -68,8 +69,8 @@ export const MainPage = () => {
             {/* <PopupWrapper>123123</PopupWrapper> */}
             {/* <PopupComp></PopupComp> */}
             {/* <AssetsList tokenList={tokenData} nftList={nftData} /> */}
-
-            <BlockList blocks={blockData} />
+            {/* <BlockList blocks={blockData} /> */}
+            <NFTInfomationImg />
         </>
     )
 }
