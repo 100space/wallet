@@ -53,7 +53,3 @@ export interface TextProps extends ISizeProps {
 export interface IHeader extends ISizeProps {
     header?: boolean
 }
-
-export interface ISelectedBtn extends ISizeProps {
-    selected: boolean
-}

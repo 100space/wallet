@@ -1,4 +1,4 @@
-import { BorderBottom, SizePropsStyled } from "@styled/index";
+import { SizePropsStyled } from "@styled/index";
 import { ISizeProps } from "@utils/interFace/styled.interface";
 import styled from "styled-components";
 
@@ -7,8 +7,7 @@ export const TransactionRowContent = styled.div<ISizeProps>`
 `
 
 export const RowContentsWraps = styled.div<ISizeProps>`
-    ${SizePropsStyled};
-    ${BorderBottom};
+    ${SizePropsStyled}; 
     display: flex;
     justify-content: space-between;
     align-items: center;
