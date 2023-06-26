@@ -1,5 +1,5 @@
 import { FlexSpaceBetween } from "@styled/index"
-import { ISizeProps } from "@utils/interFace/styled.interface"
+import { ISizeProps, TextProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const HeaderWrapper = styled.div`
@@ -17,4 +17,13 @@ export const FunctionWrap = styled.div<ISizeProps>`
         margin: 0.3rem;
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
+`
+export const HeaderSubJect = styled.div<TextProps>`
+    width: 30rem;
+    position: absolute;
+    left: calc(50% - 15rem);
+    font-size: ${(props) => props.fontSize || "inherit"};
+    color: ${({ theme, mode }) => mode && theme[mode].text};
+    font-weight: 800;
+    text-align: center;
 `

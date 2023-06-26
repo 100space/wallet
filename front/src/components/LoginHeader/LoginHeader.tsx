@@ -35,8 +35,6 @@ export const LoginHeader = () => {
     const renderWalletHeader = (walletArray: { content: string }[]) => {
         return walletArray.map((v, i, array) => {
             const check = walletArray.length === 4 ? StepObj[step] === i : StepObj[step] - 1 === i
-            console.log(StepObj[step], 11111)
-
             return (
                 <div className="headerItem" key={i}>
                     <TextComp fontSize="2rem" color={check ? "#74cffc" : ""}>

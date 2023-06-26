@@ -47,4 +47,5 @@ interface Idescription {
 export interface TextProps extends ISizeProps {
     fontSize: string
     step?: string
+    position?: boolean
 }
