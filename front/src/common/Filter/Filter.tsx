@@ -14,7 +14,7 @@ export const Filter = (props: { filterList: string[] }) => {
     const handleSelectedBtn = (e: MouseEvent, index: number) => {
         e.preventDefault();
 
-        const updatedSelected = selected.map((value, idx) => (idx === index ? !value : false));
+        const updatedSelected = selected.map((v, idx) => (idx === index ? !v : false));
 
         setSelected(updatedSelected);
     }

@@ -57,3 +57,7 @@ export interface IHeader extends ISizeProps {
 export interface ISelectedBtn extends ISizeProps {
     selected: boolean
 }
+
+export interface ISelectedBtns extends ISizeProps {
+    selected: boolean[]
+}

@@ -3,7 +3,6 @@ import { styled } from "styled-components"
 import { BorderBottomWhite } from "@styled/index"
 
 export const AssetsListWrap = styled.div<ISizeProps>`
-    
     & > div {
         ${BorderBottomWhite};
     }
