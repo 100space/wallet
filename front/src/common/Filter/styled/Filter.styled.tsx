@@ -16,9 +16,10 @@ export const FilterBtn = styled.button<ISelectedBtn>`
     padding: 1rem 1.5rem;
     border: none;
     border-radius: 1rem;
-    background-color: ${({ mode, theme, selected }) => (selected && (mode && theme[mode].text)) || (mode && theme[mode].bgBtn)};
+    background-color: ${({ mode, theme, selected }) =>
+        (selected && mode && theme[mode].text) || (mode && theme[mode].bgBtn)};
     font-weight: 600;
     font-size: 1.2rem;
-    color: ${({ mode, theme, selected }) => (selected && (mode && theme[mode].bgBtn)) || mode && theme[mode].text};
+    color: ${({ mode, theme, selected }) => (selected && mode && theme[mode].bgBtn) || (mode && theme[mode].text)};
     box-sizing: border-box;
 `

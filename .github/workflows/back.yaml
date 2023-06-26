@@ -1,61 +1,61 @@
 name: Deploy to Back
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "back/**"
+    push:
+        branches:
+            - main10
+        paths:
+            - "back/**"
 
 env:
-  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY}}
-  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_KEY}}
-  AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
-  AWS_S3_NAME: ${{secrets.AWS_S3_NAME}}
+    AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY}}
+    AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_KEY}}
+    AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+    AWS_S3_NAME: ${{secrets.AWS_S3_NAME}}
 
 jobs:
-  back_deploy:
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: back
+    back_deploy:
+        runs-on: ubuntu-20.04
+        defaults:
+            run:
+                working-directory: back
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
 
-      - name: Install node lts
-        run: |
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm install --lts
+            - name: Install node lts
+              run: |
+                  export NVM_DIR="$HOME/.nvm"
+                  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                  nvm install --lts
 
-      - name: Install Dependencies & Test
-        run: |
-          npm install
-          npm run test
+            - name: Install Dependencies & Test
+              run: |
+                  npm install
+                  npm run test
 
-      - name: Build
-        run: |
-          npm run build
+            - name: Build
+              run: |
+                  npm run build
 
-      - name: Make Dot ENV
-        run: |
-          echo "${ENV}" > .env
-        env:
-          ENV: ${{ secrets.BACK_ENV }}
+            - name: Make Dot ENV
+              run: |
+                  echo "${ENV}" > .env
+              env:
+                  ENV: ${{ secrets.BACK_ENV }}
 
-      - name: ZIP
-        run: |
-          zip -r back.zip appspec.yml package.json dist/ scripts/ .env
+            - name: ZIP
+              run: |
+                  zip -r back.zip appspec.yml package.json dist/ scripts/ .env
 
-      - name: Upload Build File
-        run: |
-          aws s3 cp back.zip s3://$AWS_S3_NAME/back.zip
+            - name: Upload Build File
+              run: |
+                  aws s3 cp back.zip s3://$AWS_S3_NAME/back.zip
 
-      - name: Code Deploy
-        env:
-          BACK_DEPLOY_NAME: ${{secrets.BACK_DEPLOY_NAME}}
-          BACK_DEPLOY_GROUP_NAME: ${{secrets.BACK_DEPLOY_GROUP_NAME}}
-        run: |
-          aws deploy create-deployment --application-name $BACK_DEPLOY_NAME --deployment-group-name $BACK_DEPLOY_GROUP_NAME  --s3-location bucket=$AWS_S3_NAME,bundleType=zip,key=back.zip
+            - name: Code Deploy
+              env:
+                  BACK_DEPLOY_NAME: ${{secrets.BACK_DEPLOY_NAME}}
+                  BACK_DEPLOY_GROUP_NAME: ${{secrets.BACK_DEPLOY_GROUP_NAME}}
+              run: |
+                  aws deploy create-deployment --application-name $BACK_DEPLOY_NAME --deployment-group-name $BACK_DEPLOY_GROUP_NAME  --s3-location bucket=$AWS_S3_NAME,bundleType=zip,key=back.zip

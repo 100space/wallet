@@ -1,16 +1,19 @@
-import { AccountRowWrap, AccountRowImgWrap, AccountRowImg, AccountRowAddress, AccountAssets } from "./styled/Accounts.styled"
+import {
+    AccountRowWrap,
+    AccountRowImgWrap,
+    AccountRowImg,
+    AccountRowAddress,
+    AccountAssets,
+} from "./styled/Accounts.styled"
 import { IAccountRow } from "@utils/interFace/core"
 import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
-
-
 
 export const AccountRow = (props: { account: IAccountRow }) => {
     const [modeState, setModeState] = useGetMode()
 
     return (
         <AccountRowWrap mode={modeState.mode} width={"100%"}>
-
             <AccountRowImgWrap width={"15%"} height={"2.4rem"}>
                 <AccountRowImg src={props.account.accountImg} />
             </AccountRowImgWrap>

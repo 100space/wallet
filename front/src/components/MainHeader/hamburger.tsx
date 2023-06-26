@@ -11,7 +11,7 @@ export const HamburgerBtn = () => {
         setSidebar(!sidebar)
     }
     return (
-        <HamburgerWrap mode={modeState.mode} sideBarState={sidebar} onClick={handleClick}>
+        <HamburgerWrap mode={modeState.mode} sidebarstate={sidebar.toString()} onClick={handleClick}>
             <HamburgerStick></HamburgerStick>
             <HamburgerStick></HamburgerStick>
             <HamburgerStick></HamburgerStick>

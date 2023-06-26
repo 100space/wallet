@@ -18,11 +18,11 @@ export const FullScreen = css`
 `
 
 export const BorderBottom = css`
-    border-bottom: 1px solid #00000075;
+    border-bottom: 0.1rem solid #00000075;
 `
 
 export const BorderBottomWhite = css`
-    border-bottom: 1px solid #aaaaaa;
+    border-bottom: 0.1rem solid #aaaaaa;
 `
 
 export const RootWrap = styled.div<ISizeProps>`
@@ -51,5 +51,5 @@ export const SizePropsStyled = css<ISizeProps>`
 `
 
 export const Shadow = css`
-    box-shadow: 0 0.5rem 0rem 0px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0.5rem 0rem 0rem rgba(0, 0, 0, 0.85);
 `

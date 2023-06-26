@@ -1,3 +1,6 @@
+import { PopupComp } from "@components/bottomSheet"
+import QRCodeGenerator from "@components/QR/QrCode"
+import { Popup } from "@components/popup/Popup"
 import { ModeState, InitMode, IsCheck, MyAccount } from "@utils/localStorage"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
@@ -12,5 +15,10 @@ export const MainPage = () => {
     useEffect(() => {
         if (!myAccount.myMnemonic && !myAccount.nickName && !myAccount.password) navigator("/login")
     }, [])
-    return <>main</>
+    return (
+        <>
+            {/* <PopupWrapper>123123</PopupWrapper> */}
+            <PopupComp></PopupComp>
+        </>
+    )
 }

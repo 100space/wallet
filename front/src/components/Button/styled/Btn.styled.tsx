@@ -11,8 +11,8 @@ export const Btn = styled.button<IBtn>`
     border: none;
     box-shadow: 0 0 0.2rem 0.1rem #3a3939;
     font-size: ${(props) => props.fontSize || "1.2rem"};
-    color: ${({ backgroundColor, theme, mode }) => (backgroundColor && "#333") || (mode && theme[mode].text)};
-    background: ${({ backgroundColor, theme, mode }) => backgroundColor || (mode && theme[mode].bg200)};
+    color: ${({ backgroundcolor, theme, mode }) => (backgroundcolor && "#333") || (mode && theme[mode].text)};
+    background: ${({ backgroundcolor, theme, mode }) => backgroundcolor || (mode && theme[mode].bg200)};
     &:hover {
         /* background: ${({ theme, mode }) => mode && theme[mode].buttonHover}; */
     }
@@ -27,8 +27,8 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     justify-content: center;
     align-items: center;
     margin: 1rem 0rem;
-    width: ${({ width }) => width || "100%" };
-    height: ${({ height }) => height || "100%" };
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
 `
 
 export const TokenListButton = styled.button<ISizeProps>`

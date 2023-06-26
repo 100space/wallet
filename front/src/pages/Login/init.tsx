@@ -74,7 +74,7 @@ export const InitPage = () => {
                     margin={"0 auto"}
                     fontSize={"1.4rem"}
                     content={"홈으로"}
-                    backgroundColor={"#e3e3e3"}
+                    backgroundcolor={"#e3e3e3"}
                     mode={modeState.mode}
                     onClick={() => navigate("/")}
                 />

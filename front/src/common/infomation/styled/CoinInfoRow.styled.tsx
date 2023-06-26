@@ -18,7 +18,7 @@ export const CoinInfoRowWrap = styled.div<ISizeProps>`
         font-weight: 500;
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
-// 44rem
+    // 44rem
     & > div:nth-child(1) {
         width: 27%;
     }
@@ -53,24 +53,20 @@ export const CoinInfoRow = (props: ICoinInfoRow) => {
     const coinInfoRowList = (coindata: TCoinInfoRow) => {
         return coindata.map((v, index, array) => {
             // if (array.length === 2)
-            const dataCheck = index === 3 && (typeof v === "number")
+            const dataCheck = index === 3 && typeof v === "number"
             const plusCheck = dataCheck && v >= 0
             const minusCheck = dataCheck && v < 0
             const colorCheck = dataCheck && v >= 0 ? "#00d17f" : "#e84562"
             return (
-                <CoinInfoRowContent mode={modeState.mode} color={colorCheck}>
+                <CoinInfoRowContent mode={modeState.mode} color={colorCheck} key={index}>
                     {plusCheck ? <Icon icon={"mingcute:arrow-up-line"} color={colorCheck}></Icon> : <></>}
                     {minusCheck ? <Icon icon={"mingcute:arrow-up-line"} vFlip={true} color={colorCheck}></Icon> : <></>}
                     {v.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                    {dataCheck ? '%' : "" }
+                    {dataCheck ? "%" : ""}
                 </CoinInfoRowContent>
             )
         })
     }
 
-    return (
-        <CoinInfoRowWrap mode={modeState.mode}>
-            {coinInfoRowList(props.content)}
-        </CoinInfoRowWrap>
-    )
+    return <CoinInfoRowWrap mode={modeState.mode}>{coinInfoRowList(props.content)}</CoinInfoRowWrap>
 }

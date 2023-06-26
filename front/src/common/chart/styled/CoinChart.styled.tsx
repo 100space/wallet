@@ -15,7 +15,7 @@ export const CoinChartHeaderWrap = styled.header<ISizeProps>`
     align-items: center;
     width: 100%;
     min-height: 4.8rem;
-    border-bottom: 1px solid #00000075;
+    border-bottom: 0.1rem solid #00000075;
 `
 
 export const CoinChartHedaerContent = styled.div<ISizeProps>`
