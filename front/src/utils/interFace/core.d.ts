@@ -2,6 +2,7 @@ export type address = string
 export type hash = string
 export type Wallet = Account[]
 export type ModeState = [string, React.Dispatch<React.SetStateAction<string>>]
+
 export interface IDescripList {
     [key: string]: {
         subject: string
@@ -26,4 +27,20 @@ export interface IfooterList {
 
 export interface IStepProps {
     [key: string]: number
+}
+
+export interface IAccountRow {
+    accountImg: string
+    address: string
+    asset: IAccountAmount
+}
+
+export interface IAccountAmount {
+    amount: number
+    currency: string
+}
+
+export interface ITokenRow {
+    tokenImg: string
+    assets: IAccountAmount[]
 }
