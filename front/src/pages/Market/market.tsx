@@ -84,6 +84,7 @@ export const MarketPage = () => {
             {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
             {/* <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} /> */}
             <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} />
+            
         </>
     )
 }
