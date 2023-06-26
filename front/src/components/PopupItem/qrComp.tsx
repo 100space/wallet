@@ -2,7 +2,7 @@ import { CopyButton } from "@components/CopyButton"
 import QRCodeGenerator from "@components/QR/QrCode"
 import { MyAccountWrapper } from "@components/bottomSheet/styled"
 
-const Qrcomp = () => {
+export const QrComp = () => {
     return (
         <>
             <QRCodeGenerator />
