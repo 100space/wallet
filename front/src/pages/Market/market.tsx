@@ -1,3 +1,4 @@
+import { NFTCardList } from "@common/List/NFTCardList"
 import { NftInfo } from "@common/NftInfo"
 import { NftStatus } from "@common/NftStatus"
 import { NftCard, NftRow } from "@components/Nft"
