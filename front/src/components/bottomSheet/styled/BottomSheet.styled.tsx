@@ -8,7 +8,8 @@ export const Wrap = styled.div`
 `
 
 export const BtnWrap = styled.div`
-    width: 97%;
+    width: 95%;
+    margin-top: 1rem;
     height: 4rem;
     display: flex;
     justify-content: flex-end;
@@ -16,8 +17,8 @@ export const BtnWrap = styled.div`
 `
 
 export const Btn = styled.button`
-    width: 20px;
-    height: 20px;
+    width: 2rem;
+    height: 2rem;
 `
 
 export const BottomSheetWrap = styled.div`
@@ -36,7 +37,6 @@ export const BottomSheetWrap = styled.div`
 export const MyAccountWrapper = styled.div`
     width: 100%;
     height: 30%;
-    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;

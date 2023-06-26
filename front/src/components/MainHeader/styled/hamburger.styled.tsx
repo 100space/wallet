@@ -5,6 +5,8 @@ import styled, { css } from "styled-components"
 export const HamburgerWrap = styled.div<IStateProps>`
     cursor: pointer;
     transition: all 0.5s;
+    height: 80%;
+    ${FlexCenter}
     &:active > span {
         background-color: ${({ theme, mode }) => mode && theme[mode].text};
         transform: translateY(0.3rem);
@@ -14,8 +16,8 @@ export const HamburgerWrap = styled.div<IStateProps>`
         transition: all 0.5s;
         background-color: ${({ theme, mode }) => mode && theme[mode].text};
     }
-    ${({ sideBarState }) =>
-        sideBarState === true &&
+    ${({ sidebarstate }) =>
+        sidebarstate === "true" &&
         css`
             & > span:nth-child(1) {
                 width: 2rem;
@@ -34,9 +36,8 @@ export const HamburgerWrap = styled.div<IStateProps>`
 
 export const HamburgerStick = styled.span`
     display: block;
-    margin: 0.8rem;
-    width: 3.4rem;
+    margin: 0.4rem;
+    width: 3rem;
     height: 0.25rem;
     border-radius: 0.125rem;
-    background-color: #453a33;
 `

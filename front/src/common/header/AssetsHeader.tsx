@@ -17,15 +17,16 @@ export const AssetsListHeaderTabs = styled.div<ISizeProps>`
     justify-content: space-between;
     align-items: center;
 
-    & > div, svg {
+    & > div,
+    svg {
         font-weight: 700;
         font-size: 1.6rem;
-        color: ${({theme, mode}) => mode && theme[mode].text};
+        color: ${({ theme, mode }) => mode && theme[mode].text};
     }
 
     & > div {
         margin-right: 1rem;
-        border-bottom: 2px solid #3fba3f;
+        border-bottom: 0.2rem solid #3fba3f;
     }
 
     & > svg {
@@ -44,18 +45,12 @@ export const AssetsListHeader = ({ onClick, selected }: IAssetsListHeader) => {
     return (
         <AssetsListHeaderWrap onClick={onClick}>
             <AssetsListHeaderTabs mode={modeState.mode}>
-                <div>
-                    Assets
-                </div>
-                <div>
-                    NFTs
-                </div>
+                <div>Assets</div>
+                <div>NFTs</div>
             </AssetsListHeaderTabs>
             <AssetsListHeaderTabs mode={modeState.mode}>
-                <div>
-                    컬렉션 목록
-                </div>
-                <Icon icon={"ep:arrow-up-bold"} rotate={1}/>
+                <div>컬렉션 목록</div>
+                <Icon icon={"ep:arrow-up-bold"} rotate={1} />
             </AssetsListHeaderTabs>
         </AssetsListHeaderWrap>
     )

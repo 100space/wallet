@@ -1,4 +1,4 @@
-import { PopupWrapper, PopupWrap } from "./styled"
+import { PopupWrap, PopupWrappers } from "./styled"
 
 export interface IPopList {
     content: string
@@ -11,17 +11,13 @@ export const checkTransactonList = [{ content: "송금하기" }, { content: "받
 export const Popup = () => {
     const renderMainPopupBtn = (popArray: IPopList[]) => {
         return popArray.map((v, index, array) => {
-            return (
-                <>
-                    <PopupWrap>{v.content}</PopupWrap>
-                </>
-            )
+            return <PopupWrap key={index}>{v.content}</PopupWrap>
         })
     }
 
     return (
         <>
-            <PopupWrapper>{renderMainPopupBtn(sendBringList)}</PopupWrapper>
+            <PopupWrappers>{renderMainPopupBtn(sendBringList)}</PopupWrappers>
         </>
     )
 }

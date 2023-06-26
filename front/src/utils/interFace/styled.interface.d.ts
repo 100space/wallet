@@ -12,7 +12,7 @@ export interface ISizeProps {
  */
 export interface IStateProps extends ISizeProps {
     popUpState?: boolean
-    sideBarState?: boolean
+    sidebarstate?: string
 }
 export interface ITypeSize extends ISizeProps {
     type?: string
@@ -31,7 +31,7 @@ export interface IBtn {
     width: string
     height: string
     margin?: string
-    backgroundColor?: string
+    backgroundcolor?: string
     content?: string
     fontSize?: string
     mode: string

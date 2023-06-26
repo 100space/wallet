@@ -3,7 +3,7 @@ import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { NavLink, useLocation } from "react-router-dom"
 import { FooterWrap, FooterWrapper, IconWrapper } from "./styled"
-import { MouseEvent, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import { IfooterList } from "@utils/interFace/core"
 
 export const footerProduce = [
@@ -18,15 +18,19 @@ export const Footer = () => {
     const [modeState, setChange] = useGetMode()
     const [isSelected, setIsSelected] = useState([true, false, false, false])
 
+    const nav =
+        location.indexOf("/market") >= 0
+            ? [false, true, false, false]
+            : location.indexOf("/trends") >= 0
+            ? [false, false, true, false]
+            : location.indexOf("/setting") >= 0
+            ? [false, false, false, true]
+            : [true, false, false, false]
+
     const renderFooter = (footerArray: IfooterList[]) => {
-        const handleClick = (e: MouseEvent, select: number, v: string) => {
-            const updatedSelected = isSelected.map((value, index) => index === select)
-            setIsSelected(updatedSelected)
-        }
         return footerArray.map((v, index) => {
             return (
                 <IconWrapper
-                    onClick={(e) => handleClick(e, index, v.content)}
                     mode={modeState.mode}
                     color={isSelected[index] ? "true" : "false"}
                     key={index}
@@ -40,7 +44,9 @@ export const Footer = () => {
             )
         })
     }
-
+    useEffect(() => {
+        setIsSelected(nav)
+    }, [location])
     return (
         <FooterWrapper mode={modeState.mode}>
             {location.indexOf("/login") >= 0 ? <></> : <FooterWrap>{renderFooter(footerProduce)}</FooterWrap>}

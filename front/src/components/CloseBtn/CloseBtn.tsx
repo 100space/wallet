@@ -1,12 +1,14 @@
+import { ModeState } from "@utils/localStorage"
+import { useRecoilValue } from "recoil"
 import { BtnWrap } from "./styled/CloseBtn.styled"
-import { Icon } from '@iconify/react';
+import { Icon } from "@iconify/react"
 
-export const CloseBtn = () => {
-
-    return(
+export const CloseBtn = ({ onClick }: { onClick?: () => void }) => {
+    const { mode } = useRecoilValue(ModeState)
+    return (
         <>
-            <BtnWrap>
-                <Icon icon="mi:close" />
+            <BtnWrap mode={mode} onClick={onClick}>
+                <Icon icon="mi:close" mode={mode} />
                 닫기
             </BtnWrap>
         </>
