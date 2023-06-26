@@ -1,1 +1,0 @@
-export * from "./NftStandardInformation.styled"

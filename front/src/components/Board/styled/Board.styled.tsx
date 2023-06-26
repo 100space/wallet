@@ -4,8 +4,7 @@ import { styled } from "styled-components";
 
 export const BoardForm = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
-    /* background-color: ${({ mode, theme}) => mode && theme[mode].basicDeepBg}; */
-    background-color: #805353;
+    background-color: ${({ mode, theme}) => mode && theme[mode].basicDeepBg};
     border-radius: 1rem;
     box-sizing: border-box;
 `
