@@ -10,8 +10,7 @@ export const MainPage = () => {
     const [isCheck, setIsCheck] = useRecoilState(IsCheck)
     const [myAccount, setMyAccount] = useRecoilState(MyAccount)
     useEffect(() => {
-        console.log(myAccount.myMnemonic)
-        if (!myAccount.myMnemonic) navigator("/login")
+        if (!myAccount.myMnemonic && !myAccount.nickName && !myAccount.password) navigator("/login")
     }, [])
     return <>main</>
 }

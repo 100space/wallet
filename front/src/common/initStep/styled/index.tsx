@@ -2,7 +2,7 @@ import { FlexCenter } from "@styled/index"
 import { IBtn, ISizeProps, TextProps } from "@utils/interFace/styled.interface"
 import { theme } from "colorTheme"
 import { ReactNode } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 interface StepWrapProps {
     children: ReactNode
