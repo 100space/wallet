@@ -2,13 +2,10 @@ import { Module } from '@nestjs/common';
 import { TokenService } from './token.service';
 import { TokenController } from './token.controller';
 import { HttpModule } from '@nestjs/axios';
+import { Web3Module } from 'src/web3/web3.module';
 
 @Module({
-  imports: [
-    HttpModule.register({
-      baseURL: 'https://api.coingecko.com/api/v3/',
-    }),
-  ],
+  imports: [HttpModule, Web3Module],
   controllers: [TokenController],
   providers: [TokenService],
 })

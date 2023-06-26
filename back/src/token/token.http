@@ -1,0 +1,18 @@
+@server = http://localhost:3000
+
+### 토큰 가져오기
+PUT {{server}}/token  HTTP/1.1
+Content-Type: application/json
+
+{
+    "contractAddress" : "0xdac17f958d2ee523a2206206994597c13d831ec7"
+}
+
+### 토큰 잔액 조회
+POST {{server}}/token HTTP/1.1
+Content-Type: application/json
+
+{
+    "assets": [{"type":"coin", "ca":"0x3DA2c62bf7410171f1C16dd39feb4CcaB9C9874d"}, {"type": "token", "ca": "0x7AAAddb5BBF5Accbf6A54A3bcdB13F9d9eC3E429"}, {"type": "token", "ca": "0xc432Ff548EFa59Ca2B7F5c8c34247225Bd653E84"}], 
+    "account": "0x3DA2c62bf7410171f1C16dd39feb4CcaB9C9874d"
+}
