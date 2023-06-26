@@ -9,7 +9,6 @@ export const theme = {
         bgCoin: "#4f4f4f",
         bgInfo: "#4f4f4f",
         bgDescription: "#222222",
-        bgBtn: "#000",
 
         mnimonicColor: "#888",
 
@@ -39,7 +38,6 @@ export const theme = {
         bgCoin: "#4F4F4F",
         bgInfo: "#4f4f4f",
         bgDescription: "#222222",
-        bgBtn: "#fff",
 
         mnimonicColor: "#888",
 

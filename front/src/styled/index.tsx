@@ -9,7 +9,7 @@ export const FlexCenter = css`
 `
 export const FlexSpaceBetween = css`
     display: flex;
-    align-self: center;
+    align-items: center;
     justify-content: space-between;
 `
 export const FullScreen = css`

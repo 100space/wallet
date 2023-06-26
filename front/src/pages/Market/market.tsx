@@ -1,19 +1,11 @@
-import { Filter } from "@common/Filter"
-import { NFTRowList } from "@common/List"
-import { NFTCardList } from "@common/List/NFTCardList"
-import { NftInfomation } from "@common/NftInfomation"
-import { NftMarketList } from "@common/NftMarketList"
-import { NftStandardInformation } from "@common/NftStandardInformation/NftStandardInformation"
+import { NftInfo } from "@common/NftInfo"
 import { NftStatus } from "@common/NftStatus"
-import { NFTSlide } from "@common/slide/NFTSlide"
-import { Category } from "@components/Category"
 import { NftCard, NftRow } from "@components/Nft"
-import { NFTSearch } from "@components/Search"
 import { TransactionRow } from "@components/Transaction"
-import { INFTCard, INFTRow, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTRow, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 
-const data: INFTCard = {
+const data = {
     name: "NONGDAMGOM",
     image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
     owner: "Char1ey",
@@ -52,27 +44,16 @@ const data5: INftInfomation = {
     owner: ["소유자", "0xasdgasdgasdgasdgasdgasdgasdgasdg"],
     blockchain :["블록체인", ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"]],
     ca: ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
-    tokenId: ["토큰 ID", '50'],
+    tokenId: ["토큰 ID", 50],
     tokenStandard: ["토큰 표준", "ERC 1155"]
-}
-
-const data6: INFTStandard = {
-    nftName: "Gdori",
-    nftId: 1234,
-    like: 1234,
-    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-    owner: "asdf1387",
-    collectionName: "asdfasdf",
-    sellPrice: {currency: "ETH", price: 0.013},
-    chargePrice: {currency: "ETH", price: 0.0000013}
 }
 
 export const MarketPage = () => {
     return (
         <>
-            {/* <NftCard nftInfo={data}/> */}
-            {/* <NftRow nftInfo={data2}/> */}
-            {/* <TransactionRow txInfo={data3} /> */}
+            {/* <NftCard nftInfo={data}/>
+            <NftRow nftInfo={data2}/>
+            <TransactionRow txInfo={data3} /> */}
             {/* <NftStatus nftStatus={data4}/> */}
             {/* <NftInfomation nftInfo={data5} /> */}
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}

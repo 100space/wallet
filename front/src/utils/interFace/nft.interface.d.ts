@@ -43,23 +43,3 @@ export interface INftInfomation {
     tokenId: (number | string) []
     tokenStandard: string[]
 }
-
-export interface INFTStandardSubject {
-    nftName: string
-    nftId: number
-    like: number
-}
-
-export interface INFTStandardOwner {
-    ownerImage: string
-    owner: string
-}
-
-export interface INFTStandardCollection  {
-    collectionName: string
-}
-
-export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, INFTStandardCollection {
-    sellPrice: INFTPrice
-    chargePrice: INFTPrice
-}
