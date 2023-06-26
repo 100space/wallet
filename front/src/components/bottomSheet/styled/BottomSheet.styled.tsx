@@ -33,6 +33,13 @@ export const BottomSheetWrap = styled.div`
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 `
+export const PopUpItemWrap = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 5rem 11rem;
+    margin: 0 auto;
+`
 
 export const MyAccountWrapper = styled.div`
     width: 100%;
@@ -43,4 +50,8 @@ export const MyAccountWrapper = styled.div`
     flex-direction: column;
     color: #fff;
     font-size: 1.5rem;
+    & > div {
+        display: flex;
+        justify-content: flex-end;
+    }
 `

@@ -11,9 +11,9 @@ export const AccountRowWrap = styled.div<ISizeProps>`
     align-items: center;
     background-color: ${({ mode, theme }) => mode && theme[mode].bgBasic};
     box-sizing: border-box;
-    
 
-    & > div, svg {
+    & > div,
+    svg {
         font-size: 1.2rem;
         color: ${({ mode, theme }) => mode && theme[mode].text};
     }
@@ -33,7 +33,7 @@ export const AccountRowImgWrap = styled.div<ISizeProps>`
 `
 
 export const AccountRowImg = styled.img`
-    height: 100%;
+    height: 70%;
     border-radius: 50%;
 `
 

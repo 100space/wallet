@@ -22,6 +22,7 @@ export const theme = {
         text: "#ffffff",
         textCoinSymbol: "#ffffff",
         textCoinName: "#888",
+        texthide: "#aaa",
         textCoinPrice: "#FFBD62",
 
         // 버튼관련 색상
@@ -39,8 +40,8 @@ export const theme = {
         bgInfo: "#4f4f4f",
         bgDescription: "#222222",
         bgBtn: "#fff",
-
         mnimonicColor: "#888",
+        texthide: "#aaa",
 
         point300: "#E4562A",
         point200: "#FF8756",
