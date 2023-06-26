@@ -28,7 +28,6 @@ export const NftBoardButton = styled.button<ISizeProps>`
     border: none;
     border-radius: 0.4rem;
     background-color: ${({ theme, mode}) => mode && theme[mode].bg200};
-    color: ${({ theme, mode}) => mode && theme[mode].text};
 
     /* &:hover {
         background-color: ${({ theme, mode }) => mode && theme[mode].buttonHover};
