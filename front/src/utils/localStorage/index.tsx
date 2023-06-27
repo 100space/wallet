@@ -12,6 +12,14 @@ export const IsCheck = atom({
     key: "isCheck",
     default: { step1: false, step2: false, step3: false },
 })
+export const IsSideBar = atom({
+    key: "isSideBar",
+    default: false,
+})
+export const IsPopUp = atom({
+    key: "isPopUp",
+    default: false,
+})
 export const ModeState = atom({
     key: "initState",
     default: { isLogin: false, mode: "darkMode" },

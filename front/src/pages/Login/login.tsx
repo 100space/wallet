@@ -7,7 +7,7 @@ import { CryptoPassword } from "@utils/crypto/crypto"
 import { InitMode, IsCheck, ModeState, MyAccount } from "@utils/localStorage"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useResetRecoilState } from "recoil"
 import { LoginWrap } from "./styled"
 
 export const LoginPage = () => {
@@ -16,6 +16,12 @@ export const LoginPage = () => {
     const [{ myMnemonic, password, nickName }, setMyAccounts] = useRecoilState(MyAccount)
     const [modeState, setChange] = useGetMode()
     const navigate = useNavigate()
+    const resetIsCheck = useResetRecoilState(ModeState)
+    const resetMyAccount = useResetRecoilState(MyAccount)
+    const reset = () => {
+        resetIsCheck()
+        resetMyAccount()
+    }
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (modeState.isLogin !== false) return
@@ -27,9 +33,6 @@ export const LoginPage = () => {
             return navigate("/login/init")
         } else if (e.currentTarget.innerHTML === "enter") {
             const inputPw = CryptoPassword(pw)
-            console.log(modeState)
-            console.log(password)
-            console.log(inputPw)
             if (password !== inputPw) return Alert.fire({ icon: "error", title: "비밀번호가 틀렸습니다." })
             Alert.fire({ icon: "success", title: "성공적으로 로그인했습니다" })
             return navigate("/")
@@ -58,7 +61,7 @@ export const LoginPage = () => {
             />
         ))
     useEffect(() => {
-        console.log(modeState)
+        reset()
     }, [])
 
     return (

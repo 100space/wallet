@@ -1,5 +1,4 @@
 import { PopupComp } from "@components/bottomSheet"
-import QRCodeGenerator from "@components/QR/QrCode"
 import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
 import { ITokenRow } from "@utils/interFace/core"
@@ -8,6 +7,7 @@ import { ModeState, InitMode, IsCheck, MyAccount } from "@utils/localStorage"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
+import { TotalSupply } from "@components/TotalSupply"
 
 const tokenData: ITokenRow[] = [
     {
@@ -48,7 +48,7 @@ const tokenData: ITokenRow[] = [
 ]
 const nftData: INFTCard[] = [
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://assets.coingecko.com/nft_contracts/images/2627/small/a-kid-called-beast.png?1673882949",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -57,7 +57,7 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://assets.coingecko.com/nft_contracts/images/2627/small/a-kid-called-beast.png?1673882949",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -66,7 +66,7 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://assets.coingecko.com/nft_contracts/images/2627/small/a-kid-called-beast.png?1673882949",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -75,7 +75,7 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://assets.coingecko.com/nft_contracts/images/2627/small/a-kid-called-beast.png?1673882949",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -95,9 +95,10 @@ export const MainPage = () => {
     }, [])
     return (
         <>
+            <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
-            <PopupComp></PopupComp>
             <AssetsList tokenList={tokenData} nftList={nftData} />
+            <PopupComp></PopupComp>
         </>
     )
 }

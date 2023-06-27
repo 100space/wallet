@@ -6,9 +6,12 @@ export const CategoryWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+    border-radius: 1rem;
 
-    &:hover, &:hover > div {
+    &:hover,
+    &:hover > div {
         color: ${({ mode, theme }) => mode && theme[mode].bgBtn};
         background-color: ${({ mode, theme }) => mode && theme[mode].text};
     }
@@ -22,8 +25,7 @@ export const CategoryWrap = styled.div<ISizeProps>`
     }
 `
 
-export const CategorySubject = styled.div<ISizeProps>`
-`
+export const CategorySubject = styled.div<ISizeProps>``
 
 export const CategoryArrow = styled.div<ISizeProps>`
     cursor: pointer;
