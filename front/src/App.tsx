@@ -1,7 +1,9 @@
-import { Header, Controller } from "./common"
+
 import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
 import { Body } from "@common/body"
+import { Header } from "@common/header"
+import { Controller } from "@common/footer"
 
 const App = () => {
     const screenWidth = window.innerWidth

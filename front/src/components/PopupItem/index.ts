@@ -1,2 +1,2 @@
-export * from "./QrComp"
+export * from "./qrComp"
 export * from "./sendComp/SendComp"

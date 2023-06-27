@@ -9,7 +9,6 @@ import { RecoilRoot } from "recoil"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { BrowserRouter } from "react-router-dom"
-import { PopupComp } from "@components/bottomSheet"
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
@@ -21,8 +20,7 @@ root.render(
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider theme={theme}>
-                    {/* <App /> */}
-                    <PopupComp/>
+                    <App />
                     {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (
                         <ReactQueryDevtools initialIsOpen={true} />
                     ) : (
