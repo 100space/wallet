@@ -1,10 +1,12 @@
 import { Filter } from "@common/Filter/Filter"
+import { NFTRowList } from "@common/List"
 import { NFTCardList } from "@common/List/NFTCardList"
 import { NftTxList } from "@common/List/NftTxList"
 import { NftInfo } from "@common/NftInfo"
 import { NftStatus } from "@common/NftStatus"
 import { Category } from "@components/Category"
 import { NftCard, NftRow } from "@components/Nft"
+import { NFTSearch } from "@components/Search"
 import { TransactionRow } from "@components/Transaction"
 import { INFTCard, INFTRow, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
@@ -64,19 +66,20 @@ const data5: INftInfomation = {
 export const MarketPage = () => {
     return (
         <>
-            {/* <NftCard nftInfo={data}/>
-            <NftRow nftInfo={data2}/>
-            <TransactionRow txInfo={data3} /> */}
-            {/* <NftStatus nftStatus={data4}/> */}
+            <NFTSearch />
+            <Category category={"인기 NFT"} />
+            <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} />
+            {/* <NftRow nftInfo={data2} /> */}
+            {/* <NftCard nftInfo={data} /> */}
+            {/* <TransactionRow txInfo={data3} /> */}
+            {/* <NftStatus nftStatus={data4} /> */}
             {/* <NftInfomation nftInfo={data5} /> */}
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}
-            <NftTxList txList={[data3, data3, data3, data3, data3]} />
+            {/* <NftTxList txList={[data3, data3, data3, data3, data3]} /> */}
             {/* <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
             <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} /> */}
-            {/* <Category category={"인기 NFT"} /> */}
-            {/* <NFTSearch /> */}
+            <Category category={"최근 등록된 NFT"} />
             {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
-            {/* <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} /> */}
             {/* <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} /> */}
         </>
     )

@@ -1,18 +1,16 @@
-import QRCode from 'qrcode.react';
-import { QrWrapper, QrWrap } from '@components/QR/styled/index';
-
+import QRCode from "qrcode.react"
+import { QrWrapper, QrWrap } from "@components/QR/styled/index"
 
 const QRCodeGenerator = () => {
-const path = 'http://localhost:3001/'; 
+    const path = "http://localhost:3001/"
 
     return (
-    <QrWrapper>
-        <QrWrap>
-            <QRCode value={path} size={180}  />
-        </QrWrap>
-        
-    </QrWrapper> 
-    );
-};
+        <QrWrapper>
+            <QrWrap>
+                <QRCode value={path} size={180} />
+            </QrWrap>
+        </QrWrapper>
+    )
+}
 
-export default QRCodeGenerator;
+export default QRCodeGenerator

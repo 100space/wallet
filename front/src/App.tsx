@@ -1,6 +1,4 @@
-import { Controller } from "@common/footer"
-import { MainRouter } from "routes/MainRouter"
-import { Header } from "./common"
+import { Header, Controller } from "./common"
 import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
 import { Body } from "@common/body"

@@ -8,10 +8,11 @@ export interface ISizeProps {
 
 /**
  * 팝업을 위한 Interfacce
- * @type state :  팝업을 컨트롤할 때 boolean 값으로 컨트롤 한다.
+ * @type popUpState :  팝업을 컨트롤할 때 boolean 값으로 컨트롤 한다.
+ * @type sidebarstate :  사이드바를 컨트롤할 때 boolean 값으로 컨트롤 한다.
  */
 export interface IStateProps extends ISizeProps {
-    popUpState?: boolean
+    popupstate?: string
     sidebarstate?: string
 }
 export interface ITypeSize extends ISizeProps {
@@ -47,7 +48,7 @@ interface Idescription {
 export interface TextProps extends ISizeProps {
     fontSize: string
     step?: string
-    position?: boolean
+    position?: string
 }
 
 export interface IHeader extends ISizeProps {

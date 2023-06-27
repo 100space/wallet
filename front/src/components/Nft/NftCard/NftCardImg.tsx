@@ -1,12 +1,20 @@
+import { useLocation } from "react-router"
 import { NftCardImgWrap, NftCardImage } from "./styled"
 import { INFTImg } from "@utils/interFace/nft.interface"
 
 export const NftCardImg = ({ width, height, image }: INFTImg) => {
-    return(
+    const { pathname } = useLocation()
+    return (
         <>
-            <NftCardImgWrap width={width} height={height}>
-                <NftCardImage src={image} />
-            </NftCardImgWrap>
+            {pathname.indexOf("/market") >= 0 ? (
+                <NftCardImgWrap width={width} height={height}>
+                    <NftCardImage src={image} />
+                </NftCardImgWrap>
+            ) : (
+                <NftCardImgWrap height={height}>
+                    <NftCardImage src={image} width={width} />
+                </NftCardImgWrap>
+            )}
         </>
     )
 }

@@ -1,5 +1,5 @@
 import { CloseBtn } from "@components/CloseBtn"
-import { Wrap, Btn, BottomSheetWrap, BtnWrap, MyAccountWrapper } from "@components/bottomSheet/styled/index"
+import { Btn, BottomSheetWrap, BtnWrap, MyAccountWrapper, PopUpItemWrap } from "@components/bottomSheet/styled/index"
 import { useState } from "react"
 import QRCodeGenerator from "@components/QR/QrCode"
 import { CopyButton } from "@components/CopyButton"
@@ -10,9 +10,15 @@ export const bringList = [
     {subject: "토큰 기호(Symbol)", content:"토큰 기호"},
     {subject: "토큰 소수점(Decimal)", content:"토큰 소수점"},
 ]
+import { PopUpItem } from "./popupItem"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { IsPopUp } from "@utils/localStorage"
+
 
 export const PopupComp = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    // const [isOpen, setIsOpen] = useRecoilState(IsPopUp)
+    const isOpen = useRecoilValue(IsPopUp)
+    const setIsOpen = useSetRecoilState(IsPopUp)
 
     const toggleSheet = () => {
         setIsOpen(!isOpen)
@@ -24,7 +30,7 @@ export const PopupComp = () => {
     return (
         <>
             <Btn onClick={toggleSheet}>Toggle Sheet</Btn>
-            {isOpen ? (
+<!--             {isOpen ? (
                 <BottomSheetWrap>
                     <BtnWrap>
                         <CloseBtn onClick={handleClick} />
@@ -33,7 +39,15 @@ export const PopupComp = () => {
                 </BottomSheetWrap>
             ) : (
                 <></>
-            )}
+            )} -->
+            <BottomSheetWrap popupstate={isOpen.toString()}>
+                <BtnWrap>
+                    <CloseBtn onClick={handleClick} />
+                </BtnWrap>
+                <PopUpItemWrap>
+                    <PopUpItem />
+                </PopUpItemWrap>
+            </BottomSheetWrap>
         </>
     )
 }

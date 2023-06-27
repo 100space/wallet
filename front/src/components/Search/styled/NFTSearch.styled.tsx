@@ -8,22 +8,26 @@ export const NFTSearchWrap = styled.div<ISizeProps>`
     align-items: center;
 
     & > input {
-        width: 80%;
+        width: 100%;
     }
 
     & > svg {
         cursor: pointer;
         position: absolute;
-        right: 12.5%;
+        right: 5%;
         color: ${({ mode, theme }) => mode && theme[mode].text};
         font-size: 4rem;
     }
+    & > .ms-editor-squiggles-container {
+        display: none;
+    }
 `
 export const NFTSearchInput = styled.input<ISizeProps>`
-    padding: 1.5rem 3rem;
+    padding: 1rem 2rem;
     border: 0.1rem solid ${({ mode, theme }) => mode && theme[mode].text};
     color: ${({ mode, theme }) => mode && theme[mode].text};
     border-radius: 2.5rem;
     background-color: ${({ theme, mode }) => mode && theme[mode].basicBg};
     text-align: center;
+    font-size: 1.4rem;
 `

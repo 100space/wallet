@@ -1,3 +1,4 @@
+import { Shadow } from "@styled/index"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import { styled } from "styled-components"
 
@@ -8,5 +9,5 @@ export const CoinInfoWrap = styled.div<ISizeProps>`
     min-height: 15rem;
     background-color: ${({ theme, mode }) => mode && theme[mode].bgInfo};
     border-radius: 1rem;
-    box-shadow: 0 0.5rem 0rem 0rem rgba(0, 0, 0, 0.85);
+    ${Shadow}
 `
