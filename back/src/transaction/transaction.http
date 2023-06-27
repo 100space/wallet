@@ -1,0 +1,11 @@
+@server = http://localhost:3000
+
+### 트랜잭션 실행
+POST {{server}}/transaction HTTP/1.1
+Content-Type: application/json
+
+{
+    "privateKey": "{{$dotenv PRIVATE_KEY}}",
+    "receiver": "0xceCD415ceC15Fd08140f215c48116C42B8618f43",
+    "amount": "0.01"
+}

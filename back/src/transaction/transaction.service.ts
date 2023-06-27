@@ -13,7 +13,7 @@ export class TransactionService {
     return this.web3.getAccounts();
   }
 
-  sendTransaction({ sender, receiver, amount }) {
-    return this.web3.sendTransaction({ sender, receiver, amount });
+  sendTransaction({ privateKey, receiver, amount }) {
+    return this.web3.sendTransaction({ privateKey, receiver, amount });
   }
 }

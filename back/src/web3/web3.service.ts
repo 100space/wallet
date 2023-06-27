@@ -1,15 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import Web3 from 'web3'; // 타입 지정을 위해 사용
-
-interface ContractMethods {
-  methods: {
-    decimals(): { call(): Promise<string> };
-    symbol(): { call(): Promise<string> };
-    balanceOf(address: string): {
-      call(): Promise<string>;
-    };
-  };
-}
+import { IContractMethods } from 'src/interface/web3.interface';
 
 @Injectable()
 export class Web3Service {
@@ -50,7 +41,7 @@ export class Web3Service {
     const contract = new this.web3.eth.Contract(
       tokenAbi,
       contractAddress,
-    ) as unknown as ContractMethods;
+    ) as unknown as IContractMethods;
     const decimal = Number(await contract.methods.decimals().call());
     const symbol = await contract.methods.symbol().call();
     const balance =
@@ -67,17 +58,30 @@ export class Web3Service {
     return this.web3.utils.fromWei(balance, 'ether');
   }
 
-  async sendTransaction({ sender, receiver, amount }) {
+  async sendTransaction({ privateKey, receiver, amount }) {
+    const signer = this.web3.eth.accounts.privateKeyToAccount(privateKey);
+
     const bill = this.web3.utils.toWei(amount, 'ether');
 
-    const message = await this.web3.eth.sendTransaction({
-      from: sender,
+    const tx = {
+      from: signer.address,
       to: receiver,
       value: bill,
-    });
+      gas: await this.web3.eth.estimateGas({
+        from: signer.address,
+        to: receiver,
+      }),
+    };
 
-    return JSON.stringify(message, (key, value) =>
-      typeof value === 'bigint' ? value.toString() : value,
-    );
+    this.web3.eth.accounts.wallet.add(signer);
+
+    const receipt = await this.web3.eth
+      .sendTransaction(tx)
+      .on('error', (error) => console.log('error : ', error));
+
+    return {
+      message: 'success to send transaction',
+      transactionHash: `${receipt.transactionHash}`,
+    };
   }
 }
