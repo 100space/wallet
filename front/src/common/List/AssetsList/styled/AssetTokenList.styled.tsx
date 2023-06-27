@@ -20,7 +20,6 @@ export const AssetsNFTHeader = styled.div<ISizeProps>`
     font-weight: 700;
     text-align: center;
     color: ${({ theme, mode }) => mode && theme[mode].text};
-    background-color: ${({ theme, mode }) => mode && theme[mode].bgBtn};
 `
 
 export const AssetsNFTCardsWrap = styled.div`

@@ -16,7 +16,7 @@ export const NFTSearchWrap = styled.div<ISizeProps>`
         position: absolute;
         right: 5%;
         color: ${({ mode, theme }) => mode && theme[mode].text};
-        font-size: 4rem;
+        font-size: 3rem;
     }
     & > .ms-editor-squiggles-container {
         display: none;

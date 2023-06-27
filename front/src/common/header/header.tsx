@@ -16,8 +16,6 @@ export const Header: React.FC<{}> = () => {
             return <LoginHeader />
         } else if (location.indexOf("/login") >= 0) {
             return null
-        } else if (location.indexOf("/market") > 0) {
-            return <Div />
         }
         return <HeaderWrap />
     }

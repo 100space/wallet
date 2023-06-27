@@ -5,6 +5,13 @@ export interface ISizeProps {
     height?: string | number
     mode?: string
 }
+export interface IonClickProps extends ISizeProps {
+    onClick?: (e) => void
+    open?: string
+}
+export interface INFTContent extends ISizeProps {
+    types?: string
+}
 
 /**
  * 팝업을 위한 Interfacce
@@ -28,7 +35,7 @@ export interface IFocusTypeSize extends ITypeSize {
     focusmode?: string
 }
 
-export interface IBtn {
+export interface IBtn extends IonClickProps {
     width: string
     height: string
     margin?: string
@@ -37,7 +44,6 @@ export interface IBtn {
     fontSize?: string
     mode: string
     children?: string | ReactNode
-    onClick?: (e) => void
 }
 
 interface Idescription {
@@ -52,7 +58,7 @@ export interface TextProps extends ISizeProps {
 }
 
 export interface IHeader extends ISizeProps {
-    header?: boolean
+    header?: string
 }
 
 export interface ISelectedBtn extends ISizeProps {

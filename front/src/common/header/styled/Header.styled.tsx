@@ -6,7 +6,8 @@ export const ListHeaderWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: ${({ theme, mode }) => mode && theme[mode].bgInfo};
+    border-radius: 1rem 1rem 0 0;
+    background: ${({ mode, theme }) => mode && theme[mode].bg200};
     border-bottom: 0.1rem solid ${({ theme, mode }) => mode && theme[mode].text};
 
     & > div:nth-child(1) {

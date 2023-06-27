@@ -3,13 +3,17 @@ import { NftBoardContentRow } from "./NftBoardContentRow"
 import { NftBoardWrap } from "./styled/NftBoard.styled"
 import { INftInfomation, INFTStauts } from "@utils/interFace/nft.interface"
 
-export const NftBoardContentRows = (props: { info: INFTStauts | INftInfomation }) => {
-
+export const NftBoardContentRows = (props: { info: INFTStauts | INftInfomation; open: string }) => {
     const rowList = (infomation: INFTStauts | INftInfomation) => {
         const infoArr = Object.values(infomation)
-        return infoArr.map(v => {
+        return infoArr.map((v, i) => {
             return (
-                <NftBoardContentRow text={[v[0], v[1]]} isImage={ typeof v[1] === "string" ? false : true } />
+                <NftBoardContentRow
+                    text={[v[0], v[1]]}
+                    isImage={typeof v[1] === "string" ? false : true}
+                    open={props.open}
+                    key={i}
+                />
             )
         })
     }

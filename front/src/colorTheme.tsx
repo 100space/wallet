@@ -4,6 +4,7 @@ export const theme = {
         // 배경색
         basicDeepBg: "#2e2e2e",
         basicBg: "#2e2e2e",
+        bg300: "#494646",
         bg200: "#555555",
         bg100: "#8d8d8d",
         bgCoin: "#4f4f4f",
@@ -34,6 +35,7 @@ export const theme = {
     },
     lightMode: {
         basicBg: "#f2f2f2",
+        bg300: "#aaaaaa",
         bg200: "#bfbfbf",
         bg100: "#e8e8e8",
         bgCoin: "#4F4F4F",

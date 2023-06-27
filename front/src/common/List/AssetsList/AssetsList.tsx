@@ -17,7 +17,7 @@ export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCard[
     }
 
     const nftCardsList = (nftCards: INFTCard[]) => {
-        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} />)
+        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" />)
     }
 
     const handleClick = (e: MouseEvent, index: number) => {

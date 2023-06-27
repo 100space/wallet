@@ -32,7 +32,6 @@ export const RootWrap = styled.div<ISizeProps>`
     flex-direction: column;
     width: 100%;
     height: 100%;
-
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 
@@ -51,5 +50,15 @@ export const SizePropsStyled = css<ISizeProps>`
 `
 
 export const Shadow = css`
-    box-shadow: 0 0.2rem 0rem 0rem rgba(0, 0, 0, 0.584);
+    box-shadow: 0 0.4rem 0 0 rgba(0, 0, 0, 0.429);
+`
+export const PlatWrap = styled.div<ISizeProps>`
+    height: fit-content;
+    background: ${({ theme, mode }) => mode && theme[mode].bg300};
+    border: 0.2rem solid #333;
+    ${Shadow}
+    padding: 2rem;
+    margin: 0 0 2rem 0;
+    border-radius: 2rem;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
 `
