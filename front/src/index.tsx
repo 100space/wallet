@@ -21,7 +21,7 @@ root.render(
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider theme={theme}>
-                    {/* <App /> */}
+                    <App />
                     <PopupComp/>
                     {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (
                         <ReactQueryDevtools initialIsOpen={true} />
