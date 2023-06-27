@@ -42,6 +42,7 @@ export const Wrapper = styled.div<ISizeProps>`
 
 export const ImageForm = styled.img<ISizeProps>`
     height: ${(props) => props.height || "100%"};
+    border: 0.2rem solid #fff;
 `
 
 export const SizePropsStyled = css<ISizeProps>`
@@ -50,7 +51,7 @@ export const SizePropsStyled = css<ISizeProps>`
 `
 
 export const Shadow = css`
-    box-shadow: 0 0.4rem 0 0 rgba(0, 0, 0, 0.429);
+    box-shadow: 0.1rem 0.2rem 0 0 rgba(0, 0, 0, 0.429);
 `
 export const PlatWrap = styled.div<ISizeProps>`
     height: fit-content;

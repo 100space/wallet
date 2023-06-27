@@ -10,5 +10,5 @@ export const CoinSlideSubject = styled.header<ISizeProps>`
     font-weight: 700;
     line-height: 3.6rem;
     box-sizing: border-box;
-    border-bottom: 0.1rem solid #00000075;
+    border-bottom: 0.1rem solid ${({ theme, mode }) => mode && theme[mode].text};
 `

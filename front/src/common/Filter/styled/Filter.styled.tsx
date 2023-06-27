@@ -2,7 +2,7 @@ import { ISizeProps, ISelectedBtn } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const FilterWrap = styled.div<ISizeProps>`
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 3rem;
     display: flex;
     margin-bottom: 1rem;
     justify-content: space-between;
@@ -14,7 +14,7 @@ export const FilterBtnWrap = styled.div<ISizeProps>`
 `
 
 export const FilterBtn = styled.button<ISelectedBtn>`
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
     border: none;
     border-radius: 1rem;
     background-color: ${({ mode, theme, selected }) =>

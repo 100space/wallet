@@ -2,6 +2,7 @@ import { ModeState } from "@utils/localStorage"
 import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 import { HeaderSubJect } from "./styled"
+import { Icon } from "@iconify/react"
 
 export const PathHeader = () => {
     const pathName = useLocation().pathname
@@ -37,6 +38,7 @@ export const PathHeader = () => {
             return (
                 <HeaderSubJect fontSize="2rem" mode={mode}>
                     Account 1
+                    <Icon icon={"ep:arrow-up-bold"} rotate={2} width={"2.4rem"} height={"100%"} />
                 </HeaderSubJect>
             )
     }

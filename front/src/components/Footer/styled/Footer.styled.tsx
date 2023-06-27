@@ -8,6 +8,7 @@ export const FooterWrapper = styled.div<ISizeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
 `
 export const FooterWrap = styled.ul`
     position: absolute;

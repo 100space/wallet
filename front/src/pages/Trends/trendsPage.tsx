@@ -1,6 +1,9 @@
+import { Filter } from "@common/Filter"
 import { CoinInfo } from "@common/Infomation"
+import { CoinChart } from "@common/chart"
 import { CoinSlide } from "@common/slide"
-import { ICoinInfo } from "@utils/interFace/coin.interface"
+import { PlatWrap } from "@styled/index"
+import { ICoin, ICoinInfo } from "@utils/interFace/coin.interface"
 
 const data: ICoinInfo = {
     marketCap: 5,
@@ -18,10 +21,23 @@ const data: ICoinInfo = {
     price: 1.0,
 }
 
+const icoin: ICoin = {
+    coinPrice: [
+        { currency: "KRW", price: 13000 },
+        { currency: "USD", price: 10 },
+    ],
+    name: "Tether",
+    symbol: "USDT",
+    image: "https://assets.coingecko.com/coins/images/325/small/Tether.png?1668148663",
+    changePercent: 0,
+    rank: 1,
+}
 export const TrendsPage = () => {
     return (
         <>
-            {/* <CoinSlide coinDatas={data} /> */}
+            <CoinSlide coinDatas={[icoin, icoin, icoin, icoin, icoin, icoin]} />
+            <Filter filterList={["이름순", "가격순", "등락순"]} />
+            <CoinChart coinDatas={[icoin, icoin, icoin, icoin, icoin, icoin]}></CoinChart>
             {/* <CoinInfo coinInfo={data} /> */}
         </>
     )

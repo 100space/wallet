@@ -1,4 +1,4 @@
-import { FlexSpaceBetween } from "@styled/index"
+import { FlexCenter, FlexSpaceBetween } from "@styled/index"
 import { ISizeProps, TextProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
@@ -26,4 +26,9 @@ export const HeaderSubJect = styled.div<TextProps>`
     color: ${({ theme, mode }) => mode && theme[mode].text};
     font-weight: 800;
     text-align: center;
+    ${FlexCenter}
+    flex-direction: row;
+    & > svg {
+        color: ${({ theme, mode }) => mode && theme[mode].point200};
+    }
 `

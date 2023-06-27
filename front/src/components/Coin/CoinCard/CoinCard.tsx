@@ -8,10 +8,13 @@ import {
 } from "./styled"
 import { ICoin } from "@utils/interFace/coin.interface"
 import { PriceCard } from "../PriceCard"
+import { useRecoilValue } from "recoil"
+import { ModeState } from "@utils/localStorage"
 
 export const CoinCard = (props: { coinData: ICoin }) => {
+    const { mode } = useRecoilValue(ModeState)
     return (
-        <CoinCardWrap width="12rem">
+        <CoinCardWrap width="12rem" mode={mode}>
             <CoinCardHeader image={props.coinData.image} symbol={props.coinData.symbol} name={props.coinData.name} />
             <CoinCardContentWrap height="65%">
                 <CoinCardContentPriceWrap width="85%" height="50%">

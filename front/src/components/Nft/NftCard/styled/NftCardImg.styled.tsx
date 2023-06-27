@@ -15,4 +15,5 @@ export const NftCardImage = styled.img<ISizeProps>`
     display: block;
     height: ${(props) => props.height};
     margin: 0 auto;
+    border: 0.2rem solid #fff;
 `
