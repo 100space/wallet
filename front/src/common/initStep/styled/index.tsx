@@ -1,4 +1,4 @@
-import { FlexCenter } from "@styled/index"
+import { FlexCenter, FlexSpaceBetween } from "@styled/index"
 import { IBtn, ISizeProps, TextProps } from "@utils/interFace/styled.interface"
 import { theme } from "colorTheme"
 import { ReactNode } from "react"
@@ -49,11 +49,19 @@ export const MnemonicItem = styled.div<ISizeProps>`
 `
 export const TextComp = styled.div<TextProps>`
     font-size: ${(props) => props.fontSize || "inherit"};
-    ${FlexCenter}
+    ${({ position }) => (position === "between" ? `${FlexSpaceBetween}` : `${FlexCenter}`)}
     font-weight: 800;
     text-align: center;
     width: ${(props) => props.width || "fit-content"};
-    color: ${(props) => props.color || "inherit"};
+    color: ${({ color, theme, mode }) => color || (mode && theme[mode].text) || "inherit"};
+    & > .account {
+        display: block;
+        width: fit-content;
+        padding: 0.7rem 1.4rem;
+        border-radius: 1rem;
+        font-size: 1.2rem !important;
+        background-color: #33333365;
+    }
 `
 export const InputWrap = styled.div<ISizeProps>`
     width: 100%;

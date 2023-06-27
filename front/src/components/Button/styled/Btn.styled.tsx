@@ -27,19 +27,21 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     justify-content: center;
     align-items: center;
     margin: 1rem auto;
-    width: ${({ width }) => width || "100%" };
-    height: ${({ height }) => height || "100%" };
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
 `
 
 export const TokenListButton = styled.button<ISizeProps>`
     cursor: pointer;
-    width: ${({ width }) => width || '100%'};
-    height: ${({ height }) => height || '100%'};
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
     padding: 1rem 2rem;
     font-size: 1.4rem;
     font-weight: 700;
     border: none;
     border-radius: 4rem;
     color: ${({ mode, theme }) => mode && theme[mode].bgBtn};
-    background-color: ${({ mode, theme }) => mode && theme[mode].buttonBg};
+    &:active {
+        background: ${({ mode, theme }) => mode && theme[mode].buttonBg};
+    }
 `

@@ -51,5 +51,5 @@ export const SizePropsStyled = css<ISizeProps>`
 `
 
 export const Shadow = css`
-    box-shadow: 0 0.5rem 0rem 0rem rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0.2rem 0rem 0rem rgba(0, 0, 0, 0.584);
 `

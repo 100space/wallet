@@ -3,15 +3,12 @@ import { theme } from "colorTheme"
 import { styled } from "styled-components"
 
 export const PopupWrappers = styled.div<ISizeProps>`
-    width: 100%;
-    height: 40rem;
+    width: 90%;
+    height: fit-content;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    margin: 0 auto;
     background: ${({ theme, mode }) => mode && theme[mode].bg200};
-    position: absolute;
-    bottom: 0;
-    left: 0;
     border-radius: 2rem 2rem 0 0;
     justify-content: space-between;
     align-items: center;
