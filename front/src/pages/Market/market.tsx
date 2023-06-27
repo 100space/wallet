@@ -1,12 +1,13 @@
 import { Filter } from "@common/Filter/Filter"
 import { NFTCardList } from "@common/List/NFTCardList"
 import { NftTxList } from "@common/List/NftTxList"
-import { NftInfo } from "@common/NftInfo"
 import { NftStatus } from "@common/NftStatus"
+import { NftInfomation, NftStandardInformation } from "@common/index"
 import { Category } from "@components/Category"
 import { NftCard, NftRow } from "@components/Nft"
+import { NFTSearch } from "@components/Search"
 import { TransactionRow } from "@components/Transaction"
-import { INFTCard, INFTRow, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTCard, INFTRow, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 
 const data: INFTCard = {
@@ -61,6 +62,17 @@ const data5: INftInfomation = {
     tokenStandard: ["토큰 표준", "ERC 1155"],
 }
 
+const data6: INFTStandard = {
+    nftName: "Gdori",
+    nftId: 1234,
+    like: 1234,
+    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+    owner: "asdf1387",
+    collectionName: "asdfasdf",
+    sellPrice: {currency: "ETH", price: 0.013},
+    chargePrice: {currency: "ETH", price: 0.0000013}
+}
+
 export const MarketPage = () => {
     return (
         <>
@@ -70,7 +82,7 @@ export const MarketPage = () => {
             {/* <NftStatus nftStatus={data4}/> */}
             {/* <NftInfomation nftInfo={data5} /> */}
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}
-            <NftTxList txList={[data3, data3, data3, data3, data3]} />
+            {/* <NftTxList txList={[data3, data3, data3, data3, data3]} /> */}
             {/* <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
             <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} /> */}
             {/* <Category category={"인기 NFT"} /> */}
