@@ -23,8 +23,8 @@ export class TransactionController {
   }
 
   @ApiOperation({
-    summary: 'Address로 트랜잭션을 발동 시킵니다.',
-    description: 'Address로 트랜잭션을 발동 시킵니다.',
+    summary: 'Address로 트랜잭션을 발생 시킵니다.',
+    description: 'Address로 트랜잭션을 발생 시킵니다.',
   })
   @Post()
   sendTransaction(@Body() { sender, receiver, amount }: sendTransactionDto) {
