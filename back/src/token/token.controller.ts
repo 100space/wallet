@@ -1,15 +1,19 @@
 import { Body, Controller, Post, Put } from '@nestjs/common';
 import { TokenService } from './token.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { getTokenDTO } from './dto/token.dto';
+import { getTokenBalanceDTO, getTokenDTO } from './dto/token.dto';
 
 @Controller('token')
 @ApiTags('Token')
 export class TokenController {
   constructor(private readonly tokenService: TokenService) {}
 
+  @ApiOperation({
+    summary: '잔액을 조회합니다.',
+    description: '잔액을 조회합니다.',
+  })
   @Post()
-  getTokenBalance(@Body() { assets, account }) {
+  getTokenBalance(@Body() { assets, account }: getTokenBalanceDTO) {
     return this.tokenService.getTokenBalance({ assets, account });
   }
 

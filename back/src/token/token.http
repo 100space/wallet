@@ -5,7 +5,7 @@ PUT {{server}}/token  HTTP/1.1
 Content-Type: application/json
 
 {
-    "contractAddress" : "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    "contractAddress" : "0xb8c77482e45f1f44de1745f52c74426c631bdd52"
 }
 
 ### 토큰 잔액 조회
@@ -13,6 +13,6 @@ POST {{server}}/token HTTP/1.1
 Content-Type: application/json
 
 {
-    "assets": [{"type":"coin", "ca":"0x3DA2c62bf7410171f1C16dd39feb4CcaB9C9874d"}, {"type": "token", "ca": "0x7AAAddb5BBF5Accbf6A54A3bcdB13F9d9eC3E429"}, {"type": "token", "ca": "0xc432Ff548EFa59Ca2B7F5c8c34247225Bd653E84"}], 
-    "account": "0x3DA2c62bf7410171f1C16dd39feb4CcaB9C9874d"
+    "assets": [{"type":"coin", "ca":"0xfAD153d059F9dA994F1688b3333f2Fb415682a14"},{"type": "token", "ca": "0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1"}], 
+    "account": "0xfAD153d059F9dA994F1688b3333f2Fb415682a14"
 }

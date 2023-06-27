@@ -27,9 +27,11 @@ export class TransactionController {
     description: 'Address로 트랜잭션을 발생 시킵니다.',
   })
   @Post()
-  sendTransaction(@Body() { sender, receiver, amount }: sendTransactionDto) {
+  sendTransaction(
+    @Body() { privateKey, receiver, amount }: sendTransactionDto,
+  ) {
     return this.transactionService.sendTransaction({
-      sender,
+      privateKey,
       receiver,
       amount,
     });
