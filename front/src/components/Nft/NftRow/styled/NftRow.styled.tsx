@@ -10,7 +10,7 @@ export const RowWrap = styled.div<ISizeProps>`
     align-items: center;
     box-sizing: border-box;
     &:nth-child(2n) {
-        background: ${({ mode, theme }) => mode && theme[mode].bg100};
+        background: ${({ mode, theme }) => mode && theme[mode].basicBg};
     }
 `
 

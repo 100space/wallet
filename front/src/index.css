@@ -37,6 +37,6 @@ a {
 }
 @media (max-height: 700px), (max-width: 350px) {
     html {
-        font-size: 60%;
+        font-size: 50%;
     }
 }

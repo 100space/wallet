@@ -60,8 +60,14 @@ export const Footer = () => {
         setIsSelected(nav)
     }, [location])
     return (
-        <FooterWrapper mode={modeState.mode}>
-            {location.indexOf("/login") >= 0 ? <></> : <FooterWrap>{renderFooter(footerProduce)}</FooterWrap>}
-        </FooterWrapper>
+        <>
+            {location.indexOf("/login") >= 0 ? (
+                <></>
+            ) : (
+                <FooterWrapper mode={modeState.mode}>
+                    <FooterWrap>{renderFooter(footerProduce)}</FooterWrap>
+                </FooterWrapper>
+            )}
+        </>
     )
 }

@@ -67,7 +67,7 @@ export const LoginPage = () => {
     return (
         <LoginWrap mode={modeState.mode}>
             <LogoComp></LogoComp>
-            <div>
+            <div className="loginPw">
                 {!modeState.isLogin && password && myMnemonic && (
                     <InputComp width={90} type="password" onChange={handlerChange} />
                 )}

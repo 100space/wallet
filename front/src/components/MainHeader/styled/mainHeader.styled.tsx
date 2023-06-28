@@ -29,6 +29,8 @@ export const HeaderSubJect = styled.div<TextProps>`
     ${FlexCenter}
     flex-direction: row;
     & > svg {
+        cursor: pointer;
+        margin-left: 1rem;
         color: ${({ theme, mode }) => mode && theme[mode].point200};
     }
 `

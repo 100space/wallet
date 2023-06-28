@@ -1,7 +1,10 @@
 import { atom } from "recoil"
 import { recoilPersist } from "recoil-persist"
 
-const { persistAtom } = recoilPersist()
+const { persistAtom } = recoilPersist({
+    key: "NFTin",
+    storage: localStorage,
+})
 
 export const InitMode = atom({
     key: "loginMode",

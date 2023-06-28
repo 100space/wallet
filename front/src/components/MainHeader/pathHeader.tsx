@@ -1,12 +1,17 @@
-import { ModeState } from "@utils/localStorage"
+import { IsPopUp, ModeState } from "@utils/localStorage"
 import { useLocation } from "react-router"
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { HeaderSubJect } from "./styled"
 import { Icon } from "@iconify/react"
 
 export const PathHeader = () => {
     const pathName = useLocation().pathname
     const { mode } = useRecoilValue(ModeState)
+    const [isPopUp, setIsPopUp] = useRecoilState(IsPopUp)
+
+    const handleClick = () => {
+        setIsPopUp(!isPopUp)
+    }
     const checkPathName =
         pathName.indexOf("/setting") >= 0
             ? "setting"
@@ -38,7 +43,7 @@ export const PathHeader = () => {
             return (
                 <HeaderSubJect fontSize="2rem" mode={mode}>
                     Account 1
-                    <Icon icon={"ep:arrow-up-bold"} rotate={2} width={"2.4rem"} height={"100%"} />
+                    <Icon icon={"ep:arrow-up-bold"} rotate={2} width={"2.4rem"} height={"100%"} onClick={handleClick} />
                 </HeaderSubJect>
             )
     }

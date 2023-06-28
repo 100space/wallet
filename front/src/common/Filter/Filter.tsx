@@ -1,16 +1,17 @@
 import { FilterBtnWrap, FilterBtn, FilterWrap } from "./styled"
 import { MouseEvent, useState } from "react"
 import { useGetMode } from "@hooks/useMode"
+import { ModeState } from "@utils/localStorage"
+import { useRecoilValue } from "recoil"
 
 export const Filter = (props: { filterList: string[] }) => {
+    const { mode } = useRecoilValue(ModeState)
     const [selected, setSelected] = useState<boolean[]>(
         props.filterList.map((v, index) => {
             if (index === 0) return true
             return false
         })
     )
-
-    const [modeState, setModeState] = useGetMode()
 
     const handleSelectedBtn = (e: MouseEvent, index: number) => {
         e.preventDefault()
@@ -24,7 +25,7 @@ export const Filter = (props: { filterList: string[] }) => {
                 <FilterBtnWrap key={index}>
                     <FilterBtn
                         selected={selected[index] === true}
-                        mode={modeState.mode}
+                        mode={mode}
                         onClick={(e: MouseEvent) => handleSelectedBtn(e, index)}
                     >
                         {v}
