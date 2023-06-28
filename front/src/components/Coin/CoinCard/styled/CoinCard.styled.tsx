@@ -1,12 +1,10 @@
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import { styled } from "styled-components"
 
-const mode = "darkMode"
-
 export const CoinCardWrap = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "13.2rem"};
-    background-color: ${(props) => props.theme[mode].bgCoin};
+    background-color: ${({ theme, mode }) => mode && theme[mode].bgCoin};
     border-radius: 1rem;
 `
 

@@ -4,12 +4,14 @@ import { NFTCardList } from "@common/List/NFTCardList"
 import { NftTxList } from "@common/List/NftTxList"
 import { NftStatus } from "@common/NftStatus"
 import { NftInfomation, NftStandardInformation } from "@common/index"
+import { NFTSlide } from "@common/slide/NFTSlide"
 import { Category } from "@components/Category"
 import { NftCard, NftRow } from "@components/Nft"
 import { NFTSearch } from "@components/Search"
 import { TransactionRow } from "@components/Transaction"
 import { INFTCard, INFTRow, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
+import { useNavigate } from "react-router"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -59,7 +61,7 @@ const data5: INftInfomation = {
         ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
     ],
     ca: ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
-    tokenId: ["토큰 ID", 50],
+    tokenId: ["토큰 ID", "50"],
     tokenStandard: ["토큰 표준", "ERC 1155"],
 }
 
@@ -70,27 +72,35 @@ const data6: INFTStandard = {
     ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
     owner: "asdf1387",
     collectionName: "asdfasdf",
-    sellPrice: {currency: "ETH", price: 0.013},
-    chargePrice: {currency: "ETH", price: 0.0000013}
+    sellPrice: { currency: "ETH", price: 0.013 },
+    chargePrice: { currency: "ETH", price: 0.0000013 },
 }
 
 export const MarketPage = () => {
+    const navigator = useNavigate()
     return (
         <>
             <NFTSearch />
-            <Category category={"인기 NFT"} />
+            <Category
+                category={"인기 NFT"}
+                onClick={() => {
+                    navigator("/market/hot")
+                }}
+            />
             <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} />
             {/* <NftRow nftInfo={data2} /> */}
             {/* <NftCard nftInfo={data} /> */}
             {/* <TransactionRow txInfo={data3} /> */}
-            {/* <NftStatus nftStatus={data4} /> */}
-            {/* <NftInfomation nftInfo={data5} /> */}
+
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}
-            {/* <NftTxList txList={[data3, data3, data3, data3, data3]} /> */}
-            {/* <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
-            <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} /> */}
-            <Category category={"최근 등록된 NFT"} />
-            {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
+
+            <Category
+                category={"최근 등록된 NFT"}
+                onClick={() => {
+                    navigator("/market/new")
+                }}
+            />
+            <NFTSlide nftCards={[data, data, data, data, data, data, data]} />
             {/* <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} /> */}
         </>
     )

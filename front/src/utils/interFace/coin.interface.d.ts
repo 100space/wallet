@@ -23,9 +23,11 @@ export interface ICoinPrice extends ISizeProps {
     price: price
 }
 
+/**
+ *  @type [0] = krw
+ *  @type [1] = usd
+ */
 
-// [0] = krw
-// [1] = usd
 export type TCoinPrice = ICoinPrice[]
 
 export interface ICoinRate extends ISizeProps {
@@ -61,4 +63,3 @@ export interface ICoinInfo extends ICoinName, ICoinRank, ICoinRate, ICoinPrice {
     circulatingSupply: number
     description: string
 }
-

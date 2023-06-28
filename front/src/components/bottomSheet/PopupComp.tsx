@@ -44,14 +44,14 @@ export const PopupComp = () => {
             ) : (
                 <></>
             )} */}
-            {/* <BottomSheetWrap popupstate={isOpen.toString()}>
+            <BottomSheetWrap popupstate={isOpen.toString()}>
                 <BtnWrap>
                     <CloseBtn onClick={handleClick} />
                 </BtnWrap>
                 <PopUpItemWrap>
                     <PopUpItem />
                 </PopUpItemWrap>
-            </BottomSheetWrap> */}
+            </BottomSheetWrap>
         </>
     )
 }

@@ -12,7 +12,6 @@ interface IAssetsListHeader {
 
 export const AssetsListHeader = ({ onClick, selected }: IAssetsListHeader) => {
     const [modeState, setModeState] = useGetMode()
-
     const assetsListHeaderTabs = (tabSubject: string[]) => {
         return tabSubject.map((v, index) => {
             return (

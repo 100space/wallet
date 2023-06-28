@@ -3,11 +3,12 @@ import { ISizeProps } from "@utils/interFace/styled.interface"
 
 export const FooterWrapper = styled.div<ISizeProps>`
     width: 100%;
-    height: 8rem;
+    height: 7rem;
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
 `
 export const FooterWrap = styled.ul`
     position: absolute;

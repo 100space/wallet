@@ -1,7 +1,7 @@
-import { BorderBottom } from "@styled/index";
-import { ICoinName } from "@utils/interFace/coin.interface";
-import { ISizeProps } from "@utils/interFace/styled.interface";
-import { styled } from "styled-components";
+import { BorderBottom } from "@styled/index"
+import { ICoinName } from "@utils/interFace/coin.interface"
+import { ISizeProps } from "@utils/interFace/styled.interface"
+import { styled } from "styled-components"
 
 export const CoinInfoHeaderWrap = styled.header<ISizeProps>`
     ${BorderBottom}
@@ -24,6 +24,7 @@ export const CoinInfoHeaderImgWrap = styled.div<ISizeProps>`
 
 export const CoinInfoHeaderImg = styled.img<ISizeProps>`
     height: ${({ height }) => height || "100%"};
+    border: 0.2rem solid #fff;
 `
 
 export const CoinInfoHeaderName = styled.div<ISizeProps>`
@@ -42,19 +43,14 @@ export const CoinInfoHedaerSymbol = styled.div<ISizeProps>`
     font-weight: 500;
 `
 
-
 export const CoinInforHeader = ({ image, name, symbol }: ICoinName) => {
-    return(
+    return (
         <CoinInfoHeaderWrap>
             <CoinInfoHeaderImgWrap>
-                <CoinInfoHeaderImg src={image}/>
+                <CoinInfoHeaderImg src={image} />
             </CoinInfoHeaderImgWrap>
-            <CoinInfoHeaderName width={'3.2rem'}>
-                {name}
-            </CoinInfoHeaderName>
-            <CoinInfoHedaerSymbol width={'4.8rem'}>
-                {symbol}
-            </CoinInfoHedaerSymbol>
+            <CoinInfoHeaderName width={"3.2rem"}>{name}</CoinInfoHeaderName>
+            <CoinInfoHedaerSymbol width={"4.8rem"}>{symbol}</CoinInfoHedaerSymbol>
         </CoinInfoHeaderWrap>
     )
 }

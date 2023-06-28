@@ -8,9 +8,10 @@ export const CoinWrap = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "4.8rem"};
     color: ${({ theme }) => theme[mode].text || ""};
-    background-color: ${({ theme }) => theme[mode].basicBg || ""};
     border-bottom: 0.1rem solid #00000075;
-
+    &:nth-child(2n) {
+        background-color: ${({ theme, mode }) => (mode && theme[mode].basicBg) || ""};
+    }
     &:nth-last-child(1) {
         border: none;
     }

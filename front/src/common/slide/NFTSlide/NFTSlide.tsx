@@ -7,12 +7,8 @@ export const NFTSlide = (props: { nftCards: INFTCard[] }) => {
     const [modeState, setModeState] = useGetMode()
 
     const nftCardList = (nftCards: INFTCard[]) => {
-        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} />)
+        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" />)
     }
 
-    return (
-        <NFTSlideWrap mode={modeState.mode}>
-            {nftCardList(props.nftCards)}
-        </NFTSlideWrap>
-    )
+    return <NFTSlideWrap mode={modeState.mode}>{nftCardList(props.nftCards)}</NFTSlideWrap>
 }

@@ -32,7 +32,6 @@ export const RootWrap = styled.div<ISizeProps>`
     flex-direction: column;
     width: 100%;
     height: 100%;
-
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 
@@ -43,6 +42,7 @@ export const Wrapper = styled.div<ISizeProps>`
 
 export const ImageForm = styled.img<ISizeProps>`
     height: ${(props) => props.height || "100%"};
+    border: 0.2rem solid #fff;
 `
 
 export const SizePropsStyled = css<ISizeProps>`
@@ -51,5 +51,15 @@ export const SizePropsStyled = css<ISizeProps>`
 `
 
 export const Shadow = css`
-    box-shadow: 0 0.2rem 0rem 0rem rgba(0, 0, 0, 0.584);
+    box-shadow: 0.1rem 0.2rem 0 0 rgba(0, 0, 0, 0.429);
+`
+export const PlatWrap = styled.div<ISizeProps>`
+    height: fit-content;
+    background: ${({ theme, mode }) => mode && theme[mode].bg300};
+    border: 0.2rem solid #333;
+    ${Shadow}
+    padding: 2rem;
+    margin: 0 0 2rem 0;
+    border-radius: 2rem;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
 `

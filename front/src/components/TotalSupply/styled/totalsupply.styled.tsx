@@ -5,7 +5,6 @@ import { styled } from "styled-components"
 export const TotalWrap = styled.div<ISizeProps>`
     height: fit-content;
     background: ${({ theme, mode }) => mode && theme[mode].bg200};
-    border: 0.2rem solid #333;
     ${Shadow}
     padding: 2rem;
     margin: 0 0 2rem 0;

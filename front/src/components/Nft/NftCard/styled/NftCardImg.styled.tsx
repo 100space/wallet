@@ -1,4 +1,4 @@
-import { SizePropsStyled, Wrapper } from "@styled/index"
+import { ImageForm, SizePropsStyled, Wrapper } from "@styled/index"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
@@ -13,6 +13,7 @@ export const NftCardImgWrap = styled.div<ISizeProps>`
 
 export const NftCardImage = styled.img<ISizeProps>`
     display: block;
-    ${Wrapper}
+    height: ${(props) => props.height};
     margin: 0 auto;
+    border: 0.2rem solid #fff;
 `

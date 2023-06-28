@@ -7,7 +7,7 @@ export const CategoryWrap = styled.div<ISizeProps>`
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    margin-top: 1rem;
+    margin: 1rem 0;
     border-radius: 1rem;
 
     &:hover,

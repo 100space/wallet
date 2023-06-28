@@ -23,5 +23,5 @@ export const PopupWrap = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
-    font-weight: 800;
+    font-weight: 600;
 `
