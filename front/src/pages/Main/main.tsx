@@ -64,10 +64,10 @@ export const MainPage = () => {
     }, [])
     return (
         <>
-            <TotalSupply></TotalSupply>
+            {/* <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
             <AssetsList tokenList={tokenData} nftList={nftData} />
-            <PopupComp></PopupComp>
+            <PopupComp></PopupComp> */}
             {/* <PopupWrapper>123123</PopupWrapper> */}
             {/* <PopupComp></PopupComp> */}
             {/* <AssetsList tokenList={tokenData} nftList={nftData} /> */}

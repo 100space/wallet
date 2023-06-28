@@ -1,5 +1,5 @@
 import { InputComp } from "@components/input"
-import { SubCon } from "@components/PopupItem/sendComp/index"
+import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
 
 export const sendList = [
     {subject: "보낼 계좌", content:"보낼 계좌를 입력해주세요"},
@@ -27,9 +27,12 @@ export const SendComp = (props:{inputArray: InputList[]}) => {
         return inputArray.map((v, index) => {
             return(
                 <>
-                    {/* <SubCon/> */}
-                    {v.subject}
-                    <InputComp placeholder={v.content}/>
+                    <SendCompWrapper key={index}>
+                        <SendCompWrap>                        
+                            {v.subject}
+                        </SendCompWrap>
+                        <InputComp placeholder={v.content}/>
+                    </SendCompWrapper>
                 </>
             )
         })

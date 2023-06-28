@@ -14,6 +14,11 @@ export const bringList = [
     { subject: "토큰 소수점(Decimal)", content: "토큰 소수점" },
 ]
 
+export const sendList = [
+    {subject: "보낼 계좌", content:"보낼 계좌를 입력해주세요"},
+    {subject: "금액", content:"금액을 입력해주세요"},
+]
+
 export const PopupComp = () => {
     // const [isOpen, setIsOpen] = useRecoilState(IsPopUp)
     const isOpen = useRecoilValue(IsPopUp)
@@ -34,7 +39,7 @@ export const PopupComp = () => {
                     <BtnWrap>
                         <CloseBtn onClick={handleClick} />
                     </BtnWrap>
-                    <MainInput inputArray={bringList}/>
+                    <SendComp inputArray={sendList}/>
                 </BottomSheetWrap>
             ) : (
                 <></>
