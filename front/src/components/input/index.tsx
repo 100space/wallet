@@ -7,7 +7,15 @@ import { useGetMode } from "@hooks/useMode"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { InitMode, MyAccount } from "@utils/localStorage"
 
-export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height, width, value, onChange }) => {
+export const InputComp: React.FC<IPlaceTypeSize> = ({
+    type,
+    placeholder,
+    height,
+    width,
+    value,
+    onChange,
+    fontsize,
+}) => {
     const [focusmode, setFocus] = useState("off")
     const [isVisible, setVisible] = useState(false)
     const [isvalue, setIsValue] = useState("")
@@ -21,6 +29,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({ type, placeholder, height,
                 <InputElement
                     type={type === "text" || type === "" ? "text" : isVisible ? "text" : "password"}
                     height={height}
+                    fontsize={fontsize}
                     width={width}
                     defaultValue={value}
                     placeholder={placeholder}

@@ -1,12 +1,17 @@
-import { ConInfo } from "@components/Description"
+
+import { Button } from "@components/Button"
 import { InputComp } from "@components/input"
+import { ModeState } from "@utils/localStorage"
+import { useRecoilValue } from "recoil"
+import { ConInfo } from "@components/Description"
 import { SendCompWrapper, SendCompWrap, TitleWrapper, TitleWrap } from "@components/PopupItem/sendComp/styled/index"
 import { Wrapper } from "@styled/index"
-import { Button } from "@components/Button"
+
+
 
 export const sendList = [
-    {subject: "보낼 계좌", content:"보낼 계좌를 입력해주세요"},
-    {subject: "금액", content:"금액을 입력해주세요"},
+    { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요" },
+    { subject: "금액", content: "금액을 입력해주세요" },
 ]
 
 export const tokenBringList = [
@@ -26,33 +31,25 @@ export interface InputList{
     nftTitle?: string
 }
 
-export const SendComp = (props:{inputArray: InputList[]}) => {
-    
+export const SendComp = (props: { inputArray: InputList[] }) => {
+    const { mode } = useRecoilValue(ModeState)
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => {
-            console.log(v.tokenTitle)
-            return(
+            return (
                 <>
                     <SendCompWrapper key={index}>
-                        <SendCompWrap>                        
-                            {v.subject}
-                        </SendCompWrap>
-                        <InputComp placeholder={v.content}/>
+                        <SendCompWrap>{v.subject}</SendCompWrap>
+                        <InputComp placeholder={v.content} height={4} type="" fontsize={1.4} />
                     </SendCompWrapper>
                 </>
             )
         })
     }
 
-    return(
+    return (
         <>
-            <Wrapper>
-                <TitleWrapper>
-                    <TitleWrap> </TitleWrap>
-                    <ConInfo> 토큰의 계약주소와 토큰의 아이디를 입력하여 토큰을 가져올 수 있습니다.</ConInfo>
-                </TitleWrapper>
-                {inputList(props.inputArray)}
-            </Wrapper>
+            {inputList(props.inputArray)}
+            <Button width={"70%"} height={"5rem"} mode={mode} margin="3rem auto 0 "></Button>
         </>
     )
 }

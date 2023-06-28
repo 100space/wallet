@@ -6,7 +6,7 @@ export interface ISizeProps {
     mode?: string
 }
 export interface IonClickProps extends ISizeProps {
-    onClick?: (e) => void
+    onClick?: MouseEventHandler<HTMLButtonElement>
     open?: string
 }
 export interface INFTContent extends ISizeProps {
@@ -28,6 +28,7 @@ export interface ITypeSize extends ISizeProps {
 }
 export interface IPlaceTypeSize extends ITypeSize {
     placeholder?: string
+    fontsize?: number
     value?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

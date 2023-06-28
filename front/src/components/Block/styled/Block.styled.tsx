@@ -14,6 +14,9 @@ export const BlockRowWrap = styled.div<ISizeProps>`
         font-size: 2.5rem;
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
+    &:nth-last-child(1) {
+        border-bottom: 0rem;
+    }
 `
 
 export const BlockImgWrap = styled.div<ISizeProps>`

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { IBtn, ISizeProps } from "@utils/interFace/styled.interface"
+import { IBtn, ISizeProps, IonClickProps } from "@utils/interFace/styled.interface"
 
 export const Btn = styled.button<IBtn>`
     cursor: pointer;
@@ -31,7 +31,7 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     height: ${({ height }) => height || "100%"};
 `
 
-export const TokenListButton = styled.button<ISizeProps>`
+export const TokenListButton = styled.button<IonClickProps>`
     cursor: pointer;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};

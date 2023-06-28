@@ -14,7 +14,6 @@ export const SettingPage = () => {
     }
     return (
         <>
-            <SendComp inputArray={bringList}/>
             <button onClick={localStorageClear}>Clear</button>
         </>
     )

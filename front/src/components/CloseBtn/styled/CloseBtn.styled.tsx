@@ -2,7 +2,7 @@ import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const BtnWrap = styled.div<ISizeProps>`
-    width: 5.6rem;
+    width: 2.4rem;
     height: 2.4rem;
     display: flex;
     justify-content: center;

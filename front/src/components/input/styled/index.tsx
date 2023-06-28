@@ -1,5 +1,5 @@
 import { FlexCenter } from "@styled/index"
-import { IFocusTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
+import { IFocusTypeSize, IPlaceTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
 
 import styled from "styled-components"
 
@@ -20,9 +20,12 @@ export const InputWrap = styled.div<IFocusTypeSize>`
     background-color: #333;
 `
 
-export const InputElement = styled.input<ISizeProps>`
+export const InputElement = styled.input<IPlaceTypeSize>`
     width: 85%;
-    ${(props) => props.height && `font-size:  ${(props.height as number) * 0.6}rem;`}
+    ${(props) =>
+        props.fontsize && props.height
+            ? `font-size:  ${props.fontsize}rem;`
+            : `font-size:  ${(props.height as number) * 0.6}rem;`}
     border: none;
     &:focus {
         outline: none;
