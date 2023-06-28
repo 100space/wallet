@@ -1,7 +1,6 @@
 import { ModeState, MyAccount } from "@utils/localStorage"
 import { useNavigate } from "react-router"
 import { useResetRecoilState } from "recoil"
-import { SendComp, bringList } from "@components/PopupItem"
 
 export const SettingPage = () => {
     const navigator = useNavigate()

@@ -1,7 +1,8 @@
 import { BlockList } from "@common/List/TxList"
-import { QrComp, SendComp, bringList } from "@components/PopupItem"
+import { QrComp, SendComp } from "@components/PopupItem"
 import { usePopup } from "@hooks/usePopup"
 import { IBlockRow } from "@utils/interFace/block.interface"
+import { bringList } from "./PopupComp"
 
 const blockData: IBlockRow[] = [
     {

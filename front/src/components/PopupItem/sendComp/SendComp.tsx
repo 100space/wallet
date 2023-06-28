@@ -4,7 +4,7 @@ import { InputComp } from "@components/input"
 import { ModeState } from "@utils/localStorage"
 import { useRecoilValue } from "recoil"
 import { ConInfo } from "@components/Description"
-import { SendCompWrapper, SendCompWrap, TitleWrapper, TitleWrap } from "@components/PopupItem/sendComp/styled/index"
+import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
 import { Wrapper } from "@styled/index"
 
 
