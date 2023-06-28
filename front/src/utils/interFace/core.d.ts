@@ -17,13 +17,18 @@ export interface Account {
     publicKey: hash
     address: address
 }
-
 export interface IfooterList {
     path: string
     iconPath: string
     content: string
 }
 
+export interface IMatched {
+    [key?: string]: {
+        content?: string
+        text?: string
+    }
+}
 export interface IStepProps {
     [key: string]: number
 }

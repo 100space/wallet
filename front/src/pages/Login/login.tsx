@@ -51,7 +51,7 @@ export const LoginPage = () => {
     const Buttons = () =>
         content.map((v) => (
             <Button
-                onClick={handleClick}
+                onClick={() => handleClick}
                 width={"90%"}
                 height={"5.6rem"}
                 mode={modeState.mode}

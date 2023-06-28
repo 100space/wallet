@@ -1,5 +1,5 @@
 import { CopyButton } from "@components/CopyButton"
-import QRCodeGenerator from "@components/QR/QrCode"
+import QRCodeGenerator from "@components/PopupItem/QR/QrCode"
 import { MyAccountWrapper } from "@components/bottomSheet/styled"
 
 export const QrComp = () => {

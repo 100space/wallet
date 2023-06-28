@@ -9,6 +9,8 @@ import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
 import { IBlockRow } from "@utils/interFace/block.interface"
+import { PopupWrappers } from "@components/MainController"
+import { BlockList } from "@common/List/TxList"
 
 const tokenData: ITokenRow[] = [
     {
@@ -86,33 +88,6 @@ const nftData: INFTCard[] = [
     },
 ]
 
-const blockData: IBlockRow[] = [
-    {
-        blockNumber: 17562089,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562088,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562087,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562086,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562085,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562084,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-]
-
 export const MainPage = () => {
     const navigator = useNavigate()
     const [initState, setInitState] = useRecoilState(ModeState)
@@ -124,13 +99,11 @@ export const MainPage = () => {
     }, [])
     return (
         <>
-            {/* <TotalSupply></TotalSupply>
+            <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
             <AssetsList tokenList={tokenData} nftList={nftData} />
-            <PopupComp></PopupComp> */}
-            {/* <PopupWrapper>123123</PopupWrapper> */}
-            {/* <AssetsList tokenList={tokenData} nftList={nftData} /> */}
-            {/* <BlockList blocks={blockData} /> */}
+            <PopupComp></PopupComp>
+
             {/* <MyNftInformation /> */}
         </>
     )

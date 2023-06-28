@@ -7,10 +7,10 @@ import { Icon } from "@iconify/react"
 export const PathHeader = () => {
     const pathName = useLocation().pathname
     const { mode } = useRecoilValue(ModeState)
-    const [isPopUp, setIsPopUp] = useRecoilState(IsPopUp)
+    const [{ isOpen, contents }, setIsPopUp] = useRecoilState(IsPopUp)
 
     const handleClick = () => {
-        setIsPopUp(!isPopUp)
+        setIsPopUp({ isOpen: !isOpen, contents: "" })
     }
     const checkPathName =
         pathName.indexOf("/setting") >= 0

@@ -9,7 +9,6 @@ export const CloseBtn = ({ onClick }: { onClick?: () => void }) => {
         <>
             <BtnWrap mode={mode} onClick={onClick}>
                 <Icon icon="mi:close" mode={mode} />
-                닫기
             </BtnWrap>
         </>
     )

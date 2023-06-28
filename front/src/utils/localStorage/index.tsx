@@ -21,7 +21,7 @@ export const IsSideBar = atom({
 })
 export const IsPopUp = atom({
     key: "isPopUp",
-    default: false,
+    default: { isOpen: false, contents: "" },
 })
 export const ModeState = atom({
     key: "initState",
