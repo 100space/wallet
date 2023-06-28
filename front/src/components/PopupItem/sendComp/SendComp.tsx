@@ -1,5 +1,8 @@
+import { ConInfo } from "@components/Description"
 import { InputComp } from "@components/input"
-import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
+import { SendCompWrapper, SendCompWrap, TitleWrapper, TitleWrap } from "@components/PopupItem/sendComp/styled/index"
+import { Wrapper } from "@styled/index"
+import { Button } from "@components/Button"
 
 export const sendList = [
     {subject: "보낼 계좌", content:"보낼 계좌를 입력해주세요"},
@@ -16,17 +19,27 @@ export const subject = [
     {subject: "토큰 가져오기", content: ""}
 ]
 
+export const title = [
+    {tokenTitle: "토큰 가져오기", nftTitle: "NFT 가져오기"}
+]
+
 export interface InputList{
     subject: string
     content: string
+    tokenTitle?: string
+    nftTitle?: string
 }
 
 export const SendComp = (props:{inputArray: InputList[]}) => {
-
+    
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => {
+            console.log(v.tokenTitle)
             return(
                 <>
+                    {/* <TitleWrapper> 
+                        <TitleWrap>{title[index] ? title[index].tokenTitle:title[index].nftTitle}</TitleWrap>
+                    </TitleWrapper> */}
                     <SendCompWrapper key={index}>
                         <SendCompWrap>                        
                             {v.subject}
@@ -40,7 +53,14 @@ export const SendComp = (props:{inputArray: InputList[]}) => {
 
     return(
         <>
-            {inputList(props.inputArray)}
+            <Wrapper>
+                <TitleWrapper>
+                    <TitleWrap> 토큰 가져오기 </TitleWrap>
+                    <ConInfo> 토큰의 계약주소와 토큰의 아이디를 입력하여 토큰을 가져올 수 있습니다.</ConInfo>
+                </TitleWrapper>
+                {inputList(props.inputArray)}
+                {/* <Button width="" height="" margin="" mode="" onClick={handleButtonClick} fontSize="" backgroundcolor=""/> */}
+            </Wrapper>
         </>
     )
 }
