@@ -5,10 +5,11 @@ import { useResetRecoilState } from "recoil"
 export const SettingPage = () => {
     const navigator = useNavigate()
     const clearModeState = useResetRecoilState(ModeState)
-    const clearmyAccount = useResetRecoilState(MyAccount)
+    const clearMyAccount = useResetRecoilState(MyAccount)
+
     const localStorageClear = () => {
         clearModeState()
-        clearmyAccount()
+        clearMyAccount()
         navigator("/")
     }
     return (

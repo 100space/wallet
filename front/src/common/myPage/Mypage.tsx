@@ -1,7 +1,10 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { A, B, WR } from "./styled"
+import { A, B, WR, TotalSupplyWrap, NftCardWrap } from "./styled"
 import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
+import { Btn } from "@components/Button"
+import  profile  from "@img/profile.jpeg"
+import { useGetMode } from "@hooks/useMode"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -14,13 +17,19 @@ const data: INFTCard = {
 }
 
 export const Mypage = () => {
+    const [modeState, setChange] = useGetMode()
+    const handleButtonClick = (e: MouseEvent) => {
+    }
     return(
         <>
             <WR>
-                <A src="/img/profile.jpeg"/>
+                <A src={profile}/>
                 <B placeholder="NickName"/>
-                <TotalSupply/>
-                <NftCard nftInfo={data} className={""}/>
+                <TotalSupplyWrap>
+                    <TotalSupply/>
+                </TotalSupplyWrap>
+                <Btn backgroundcolor="" width="80%" height="6rem" margin="2rem" mode="" onClick={() => handleButtonClick} fontSize=""> 계정 잠금 </Btn>
+                <Btn backgroundcolor="" width="80%" height="6rem" margin="2rem" mode="" onClick={() => handleButtonClick} fontSize=""> 계정 삭제 </Btn>
             </WR>
         </>
     )
