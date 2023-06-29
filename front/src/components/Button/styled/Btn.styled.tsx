@@ -7,12 +7,13 @@ export const Btn = styled.button<IProfileBtn>`
     width: ${(props) => props.width || "30%"};
     height: ${(props) => props.height || ""};
     margin: ${(props) => props.margin || ""};
-    border-radius: ${({profile}) => "0.7rem" || "5rem"};
+    border-radius: ${({ profile }) => (profile && "0.7rem") || "5rem"};
     border: none;
-    box-shadow: ${({profile}) => "none" || "0 0 0.2rem 0.1rem #3a3939"};
+    box-shadow: ${({ profile }) => (profile && "none") || "0 0 0.2rem 0.1rem #3a3939"};
     font-size: ${(props) => props.fontSize || "1.2rem"};
     color: ${({ backgroundcolor, theme, mode, profile }) => (backgroundcolor && "#333") || (mode && theme[mode].text)};
-    background: ${({ backgroundcolor, theme, mode, profile }) => backgroundcolor || (mode && theme[mode].bg200) || (profile && "black")};
+    background: ${({ backgroundcolor, theme, mode, profile }) =>
+        backgroundcolor || (mode && theme[mode].bg200) || (profile && mode && theme[mode].bg200)};
     &:hover {
         /* background: ${({ theme, mode }) => mode && theme[mode].buttonHover}; */
     }

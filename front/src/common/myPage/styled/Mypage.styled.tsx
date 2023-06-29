@@ -3,7 +3,7 @@ import myPage from "@img/myPage.jpg"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 
 export const MypageWrapper = styled.div<ISizeProps>`
-    width: 100%; 
+    width: 100%;
     height: 100%;
     flex-direction: column;
     position: relative;
@@ -12,19 +12,12 @@ export const MypageWrapper = styled.div<ISizeProps>`
     align-items: center;
     overflow-y: scroll;
     background: ${({ theme, mode }) => mode && theme[mode].profileBg};
-    &::after{
-        width: 100%;
-        height: 100%;
-        background-color: #000000;
-        opacity: 0.3;
-        content: "";
-        overflow-y: scroll;
-        flex-direction: column;
-        position: absolute;
-        overflow: hidden;
-    }
-    &::-webkit-scrollbar{
+    padding: 0 1rem;
+    &::-webkit-scrollbar {
         display: none;
+    }
+    & > .btnWrap {
+        display: flex;
     }
 `
 
@@ -50,7 +43,7 @@ export const MyNickName = styled.input`
     color: #000000;
     position: relative;
     bottom: 5rem;
-    border: none; 
+    border: none;
     background-color: #ffffff2a;
     border: 0.1rem solid #cccccc6a;
 `
@@ -62,4 +55,3 @@ export const TotalSupplyWrap = styled.div`
     bottom: 3rem;
     position: relative;
 `
-

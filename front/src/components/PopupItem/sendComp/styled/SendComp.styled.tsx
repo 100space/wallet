@@ -15,6 +15,9 @@ export const SendCompWrapper = styled.div`
     flex-direction: column;
     font-size: 1.4rem;
     color: white;
+    & > div:nth-child(2) {
+        border-radius: 0.5rem;
+    }
 `
 
 export const SendCompWrap = styled.div`

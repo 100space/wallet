@@ -9,7 +9,6 @@ import { useRecoilState } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
 import { MyNftInformation } from "@common/Infomation/MyNftInformation"
 import { NFTInfoPage } from ".."
-// import useMyWallet from "@hooks/useWallet"
 
 const tokenData: ITokenRow[] = [
     {

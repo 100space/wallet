@@ -18,6 +18,7 @@ export const Body = () => {
     //         }
     //     }
     // }
+    console.log(sidebarstate)
 
     return (
         <>
@@ -27,7 +28,9 @@ export const Body = () => {
                 // bottomcheck={bottomCheck.toString()}
                 sidebarstate={sidebarstate.toString()}
             >
-                <SideBar  sidebarstate={sidebarstate.toString()}><Mypage/></SideBar>
+                <SideBar sidebarstate={sidebarstate.toString()}>
+                    <Mypage />
+                </SideBar>
                 <MainRouter />
             </BodyWrap>
         </>
