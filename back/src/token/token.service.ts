@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { Web3Service } from 'src/web3/web3.service';
+import { Web3Service } from '../web3/web3.service';
 
 @Injectable()
 export class TokenService {
@@ -19,7 +19,7 @@ export class TokenService {
         .filter((value) => value.type === 'coin')
         .map(async (value) => {
           const balance = await this.web3.getBalance(value.ca);
-          return { tpye: value.type, balance };
+          return { type: value.type, balance };
         }),
     );
 
@@ -46,17 +46,17 @@ export class TokenService {
           .pipe(
             catchError((error: AxiosError) => {
               this.logger.error(error.response.data);
-              throw error.response.data;
+              throw error.response?.data;
             }),
           ),
       );
 
       return { image: data.image.large };
     } catch (error) {
-      if (error.error === 'coin not found') {
+      if (error?.response?.data?.error === 'coin not found') {
         return { image: 'no image' };
       }
-      throw error;
+      throw new Error(error?.response?.data?.message || 'Unknown error');
     }
   }
 }
