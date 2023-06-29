@@ -13,8 +13,8 @@ interface ITotalSupply {
 export const TotalSupply = ({ profile }: ITotalSupply) => {
     const { mode } = useRecoilValue(ModeState)
     return (
-        <TotalWrap mode={mode} profile={profile}>
-            <TextComp fontSize={ profile ? "2.5rem": "3rem"} position="between" width="100%">
+        <TotalWrap mode={mode} profile={true}>
+            <TextComp fontSize={profile ? "2.5rem" : "3rem"} position="between" width="100%">
                 총 자산
                 <CopyToClipboard
                     text={"11231231223123"}

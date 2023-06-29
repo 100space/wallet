@@ -1,5 +1,5 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { MypageWrapper, MyProfile, MyNickName, TotalSupplyWrap} from "./styled"
+import { MypageWrapper, MyProfile, MyNickName, TotalSupplyWrap } from "./styled"
 import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
 import { Btn } from "@components/Button"
@@ -19,18 +19,41 @@ const data: INFTCard = {
 
 export const Mypage = () => {
     const [modeState, setChange] = useGetMode()
-    const handleButtonClick = (e: MouseEvent) => {
-    }
-    return(
+    const handleButtonClick = (e: MouseEvent) => {}
+    return (
         <>
-            <MypageWrapper mode={"lightMode"}>
-                <MyProfile src={pro}/>
-                <MyNickName placeholder="NickName"/>
+            <MypageWrapper mode={modeState.mode}>
+                <MyProfile src={pro} />
+                <MyNickName placeholder="NickName" />
                 <TotalSupplyWrap>
-                    <TotalSupply profile={true}/>
+                    <TotalSupply />
                 </TotalSupplyWrap>
-                <Btn backgroundcolor="" width="80%" height="5rem" margin="" mode="" onClick={() => handleButtonClick} fontSize="1.7rem"> 계정 잠금 </Btn>
-                <Btn backgroundcolor="" width="80%" height="5rem" margin="" mode="" onClick={() => handleButtonClick} fontSize="1.7rem"> 계정 삭제 </Btn>
+                {/* <div className="btnWrap"> */}
+                <Btn
+                    backgroundcolor=""
+                    width="80%"
+                    height="5rem"
+                    margin=""
+                    mode=""
+                    onClick={() => handleButtonClick}
+                    fontSize="1.7rem"
+                    profile={true}
+                >
+                    계정 잠금
+                </Btn>
+                <Btn
+                    backgroundcolor=""
+                    width="80%"
+                    height="5rem"
+                    margin=""
+                    mode=""
+                    onClick={() => handleButtonClick}
+                    fontSize="1.7rem"
+                    profile={true}
+                >
+                    계정 삭제
+                </Btn>
+                {/* </div> */}
             </MypageWrapper>
         </>
     )

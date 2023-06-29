@@ -77,4 +77,5 @@ export interface ISelectedBtns extends ISizeProps {
 
 export interface IProfileProps extends ISizeProps {
     profile?: boolean
+    profileState?: string
 }

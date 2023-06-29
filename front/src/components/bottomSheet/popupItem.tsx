@@ -1,11 +1,10 @@
 import { AccountList } from "@common/List"
 import { BlockList } from "@common/List/TxList"
-import { QrComp, SendComp, tokenBringList } from "@components/PopupItem"
+import { QrComp, SendComp, sendList, tokenBringList } from "@components/PopupItem"
 import { usePopup } from "@hooks/usePopup"
 import { IBlockRow } from "@utils/interFace/block.interface"
 import { IAccountRow } from "@utils/interFace/core"
 import { IAccountAmount } from "@utils/interFace/core"
-
 
 const blockData: IBlockRow[] = [
     {
@@ -50,6 +49,8 @@ export const PopUpItem = () => {
                 return <QrComp />
             case "토큰 가져오기":
                 return <SendComp inputArray={tokenBringList} />
+            case "송금하기":
+                return <SendComp inputArray={sendList} />
             case "My Account":
                 return <AccountList accounts={[data, data, data]} />
             default:

@@ -16,7 +16,7 @@ export const SideBar = styled.div<IStateProps>`
     position: absolute;
     top: 8.5%;
     left: ${({ sidebarstate }) => (sidebarstate === "true" ? "0%" : "-100%")};
-    background: white;
+    background: #ffffff;
     z-index: 30;
     transition: all 0.5s ease-in-out;
     display: flex;
@@ -24,14 +24,4 @@ export const SideBar = styled.div<IStateProps>`
     border-width: 1px 1px 0 0;
     border-color: #cfcfcf;
     overflow-y: scroll;
-    &::after {
-        content: "";
-        backdrop-filter: blur(5px);
-        width: 15%;
-        transition: all 0.5s ease-in-out;
-        right: ${({ sidebarstate }) => (sidebarstate === "true" ? "-15%" : "10%")};
-        height: 100%;
-        position: absolute;
-        z-index: 25;
-    }
 `
