@@ -32,6 +32,7 @@
     "@nestjs/websockets": "^10.0.3",
     "@types/web3": "^1.2.2",
     "axios": "^1.4.0",
+    "bip39": "^3.1.0",
     "mongoose": "^7.3.0",
     "multer-s3": "^3.0.1",
     "reflect-metadata": "^0.1.13",
