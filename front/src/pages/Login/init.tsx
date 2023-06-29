@@ -24,7 +24,6 @@ export const InitPage = () => {
     const handleClick = (step: string) => {
         switch (step) {
             case "step1":
-                console.log(isCheck)
                 if (!isCheck.step1) return Alert.fire({ icon: "error", title: "주의사항을 확인해주세요" })
                 return setManageMode({
                     ...manageMode,

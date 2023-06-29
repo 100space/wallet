@@ -18,7 +18,7 @@ export const Button: React.FC<IBtn> = ({
             height={height}
             margin={margin}
             mode={mode}
-            onClick={() => onClick}
+            onClick={onClick}
             fontSize={fontSize}
         >
             {content}

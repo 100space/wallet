@@ -1,6 +1,6 @@
 import { styled } from "styled-components"
-import { ISizeProps } from "@utils/interFace/styled.interface"
-import { BorderBottom, BorderBottomWhite } from "@styled/index"
+import { ISizeProps, IStateProps } from "@utils/interFace/styled.interface"
+import { BorderBottom, BorderBottomWhite, FlexCenter } from "@styled/index"
 
 export const AccountRowWrap = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
@@ -30,6 +30,9 @@ export const AccountRowImgWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
+    & > .AccountImg {
+        height: 100%;
+    }
 `
 
 export const AccountRowImg = styled.img`
@@ -37,12 +40,15 @@ export const AccountRowImg = styled.img`
     border-radius: 50%;
 `
 
-export const AccountRowAddress = styled.div<ISizeProps>`
+export const AccountRowAddress = styled.div<IStateProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
+    /* ${FlexCenter} */
+    /* text-align: end; */
 `
 
-export const AccountAssets = styled.div<ISizeProps>`
+export const AccountAssets = styled.div<IStateProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
+    ${FlexCenter}
 `
