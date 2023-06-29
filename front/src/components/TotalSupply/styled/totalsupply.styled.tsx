@@ -1,20 +1,23 @@
 import { Shadow } from "@styled/index"
-import { ISizeProps } from "@utils/interFace/styled.interface"
+import { ISizeProps, IProfileProps } from "@utils/interFace/styled.interface"
+import { profile } from "console"
 import { styled } from "styled-components"
 
-export const TotalWrap = styled.div<ISizeProps>`
+export const TotalWrap = styled.div<IProfileProps>`
+    ${( {profile} ) => !profile && Shadow};
     height: fit-content;
-    background: ${({ theme, mode }) => mode && theme[mode].bg200};
-    ${Shadow}
+    background: ${({ theme, mode, profile }) => (profile && "rgba(212, 212, 212, 0.3), 0.3)") || (mode && theme[mode].bg200)};
+    box-shadow: none;
     padding: 2rem;
     margin: 0 0 2rem 0;
-    border-radius: 2rem;
-    color: ${({ theme, mode }) => mode && theme[mode].text};
+    margin: ${({ profile}) => (profile && "0" ) || "0 0 2rem 0"};
+    border-radius: ${({ profile }) => (profile && "none") || "2rem"};
+    color: ${({ theme, mode, profile }) => (profile && "white") || (mode && theme[mode].text)};
     & > div {
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
     & .account {
-        font-size: 1.4rem !important;
+        font-size: ${({profile}) => (profile && "1rem") || "1.4rem !important"};
     }
     & > div + div {
         margin-top: 3rem;

@@ -3,6 +3,7 @@ import { BodyWrap, SideBar } from "./styled"
 import { useRef, useState } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { IsSideBar } from "@utils/localStorage"
+import { Mypage } from "@common/myPage"
 
 export const Body = () => {
     const sidebarstate = useRecoilValue(IsSideBar)
@@ -26,7 +27,7 @@ export const Body = () => {
                 // bottomcheck={bottomCheck.toString()}
                 sidebarstate={sidebarstate.toString()}
             >
-                <SideBar sidebarstate={sidebarstate.toString()}>123123123</SideBar>
+                <SideBar  sidebarstate={sidebarstate.toString()}><Mypage/></SideBar>
                 <MainRouter />
             </BodyWrap>
         </>

@@ -23,6 +23,7 @@ export const SideBar = styled.div<IStateProps>`
     box-shadow: 0 6px 20px -15px #000;
     border-width: 1px 1px 0 0;
     border-color: #cfcfcf;
+    overflow-y: scroll;
     &::after {
         content: "";
         backdrop-filter: blur(5px);

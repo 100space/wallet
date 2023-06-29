@@ -6,6 +6,7 @@ import { IBlockRow } from "@utils/interFace/block.interface"
 import { IAccountRow } from "@utils/interFace/core"
 import { IAccountAmount } from "@utils/interFace/core"
 
+
 const blockData: IBlockRow[] = [
     {
         blockNumber: 17562089,
