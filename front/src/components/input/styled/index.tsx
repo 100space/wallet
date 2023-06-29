@@ -23,8 +23,8 @@ export const InputWrap = styled.div<IFocusTypeSize>`
 export const InputElement = styled.input<IPlaceTypeSize>`
     width: 85%;
     ${(props) =>
-        props.fontsize && props.height
-            ? `font-size:  ${props.fontsize}rem;`
+        props.fontSize && props.height
+            ? `font-size:  ${props.fontSize}rem;`
             : `font-size:  ${(props.height as number) * 0.6}rem;`}
     border: none;
     &:focus {

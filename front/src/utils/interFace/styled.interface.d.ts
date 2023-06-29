@@ -28,7 +28,7 @@ export interface ITypeSize extends ISizeProps {
 }
 export interface IPlaceTypeSize extends ITypeSize {
     placeholder?: string
-    fontsize?: number
+    fontSize?: number
     value?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

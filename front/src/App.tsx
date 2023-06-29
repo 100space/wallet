@@ -2,7 +2,8 @@ import { useGetMode } from "@hooks/useMode"
 import { RootWrap } from "./styled"
 import { Body } from "@common/body"
 import { Header } from "@common/header"
-import { Controller } from "@common/footer/index"
+import { Controller } from "@common/Footer"
+import { PopupComp } from "@components/bottomSheet"
 
 const App = () => {
     const screenWidth = window.innerWidth
@@ -18,6 +19,7 @@ const App = () => {
                 <Header />
                 <Body />
                 <Controller />
+                <PopupComp />
             </RootWrap>
         </>
     )

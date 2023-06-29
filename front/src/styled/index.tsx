@@ -30,8 +30,9 @@ export const RootWrap = styled.div<ISizeProps>`
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 
@@ -56,10 +57,9 @@ export const Shadow = css`
 export const PlatWrap = styled.div<ISizeProps>`
     height: fit-content;
     background: ${({ theme, mode }) => mode && theme[mode].bg300};
-    border: 0.2rem solid #333;
     ${Shadow}
-    padding: 2rem;
-    margin: 0 0 2rem 0;
-    border-radius: 2rem;
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+    border-radius: 1rem;
     color: ${({ theme, mode }) => mode && theme[mode].text};
 `

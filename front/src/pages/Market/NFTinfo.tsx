@@ -1,9 +1,9 @@
-import { NftInfomation } from "@common/Infomation"
+import { NftInfomation, NftStandardInformation } from "@common/Infomation"
 import { NftTxList } from "@common/List"
 import { NftStatus } from "@common/NftStatus"
 import { TransactionRow } from "@components/Transaction"
 import { ImageForm, PlatWrap } from "@styled/index"
-import { INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
 import { useRecoilValue } from "recoil"
@@ -38,6 +38,17 @@ const data5: INftInfomation = {
     tokenId: ["토큰 ID", "50"],
     tokenStandard: ["토큰 표준", "ERC 1155"],
 }
+const data6: INFTStandard = {
+    nftName: "Gdori",
+    nftId: 1234,
+    like: 1234,
+    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+    owner: "내 계정",
+    collectionName: "asdfasdf",
+    sellPrice: { currency: "ETH", price: 0.013 },
+    chargePrice: { currency: "ETH", price: 0.0000013 },
+}
+
 export const NFTInfoPage = () => {
     const { mode } = useRecoilValue(ModeState)
     return (
@@ -47,6 +58,9 @@ export const NFTInfoPage = () => {
                     height={"75vw"}
                     src="https://assets.coingecko.com/nft_contracts/images/3145/small/degods.png?1680194340"
                 />
+            </PlatWrap>
+            <PlatWrap mode={mode}>
+                <NftStandardInformation nftStandardInfo={data6} />
             </PlatWrap>
             <PlatWrap mode={mode}>
                 <NftStatus nftStatus={data4} />

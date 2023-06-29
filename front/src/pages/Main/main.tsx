@@ -11,6 +11,8 @@ import { TotalSupply } from "@components/TotalSupply"
 import { IBlockRow } from "@utils/interFace/block.interface"
 import { PopupWrappers } from "@components/MainController"
 import { BlockList } from "@common/List/TxList"
+import { MyNftInformation } from "@common/Infomation/MyNftInformation"
+import { NFTInfoPage } from ".."
 
 const tokenData: ITokenRow[] = [
     {
@@ -51,7 +53,7 @@ const tokenData: ITokenRow[] = [
 ]
 const nftData: INFTCard[] = [
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9677.jpg",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -60,7 +62,7 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9679.jpg",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -69,7 +71,7 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9676.jpg",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -78,7 +80,7 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
     {
-        image: "https://assets.coingecko.com/nft_contracts/images/2736/small/redacted-remilio-babies.?1674465796",
+        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9678.jpg",
         prices: [
             { currency: "KRW", price: 360000 },
             { currency: "ETH", price: 0.1 },
@@ -102,9 +104,8 @@ export const MainPage = () => {
             <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
             <AssetsList tokenList={tokenData} nftList={nftData} />
-            <PopupComp></PopupComp>
-
-            {/* <MyNftInformation /> */}
+            <NFTInfoPage />
+            <MyNftInformation />
         </>
     )
 }
