@@ -10,10 +10,14 @@ export class TransactionService {
   }
 
   getAccounts() {
-    return this.web3.getAccounts();
+    return this.web3.getProvider();
   }
 
   sendTransaction({ privateKey, receiver, amount }) {
     return this.web3.sendTransaction({ privateKey, receiver, amount });
+  }
+
+  changeProvider({ providerName }) {
+    return this.web3.changeProvider({ providerName });
   }
 }

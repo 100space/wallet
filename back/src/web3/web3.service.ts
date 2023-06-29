@@ -1,11 +1,34 @@
 import { Inject, Injectable } from '@nestjs/common';
 import Web3 from 'web3'; // 타입 지정을 위해 사용
 import { IContractMethods } from 'src/interface/web3.interface';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class Web3Service {
   // module에 정의한 Web3 사용
-  constructor(@Inject('Web3') private readonly web3: Web3) {}
+  constructor(
+    @Inject('Web3') private readonly web3: Web3,
+    private readonly config: ConfigService,
+  ) {}
+
+  changeProvider({ providerName }) {
+    try {
+      const networks = {
+        ganache: 'http://localhost:8545',
+        goerli: this.config.get<string>('GOERLI_NETWORK'),
+        mumbai: this.config.get<string>('MUMBAI_NETWORK'),
+      };
+
+      this.web3.setProvider(networks[providerName]);
+      return 'change provider success';
+    } catch (error) {
+      return 'change provider failed';
+    }
+  }
+
+  getProvider() {
+    return this.web3.currentProvider;
+  }
 
   async getTokenBalance({ contractAddress, account }) {
     const tokenAbi = [
@@ -44,8 +67,9 @@ export class Web3Service {
     ) as unknown as IContractMethods;
     const decimal = Number(await contract.methods.decimals().call());
     const symbol = await contract.methods.symbol().call();
-    const balance =
-      Number(await contract.methods.balanceOf(account).call()) / 10 ** decimal;
+    const balance = String(
+      Number(await contract.methods.balanceOf(account).call()) / 10 ** decimal,
+    );
     return { symbol, balance };
   }
 

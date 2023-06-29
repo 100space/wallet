@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
   providers: [
     {
       provide: 'Web3',
-      useValue: new Web3(`${process.env.WEB3_NETWORK}`),
+      useValue: new Web3(`${process.env.MUMBAI_NETWORK}`),
     },
     Web3Service,
   ],
