@@ -1,12 +1,16 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { MnemonicService } from './mnemonic.service';
-import { CreateMnemonicDto } from './dto/create-mnemonic.dto';
-import { UpdateMnemonicDto } from './dto/update-mnemonic.dto';
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @Controller('mnemonic')
+@ApiTags('Mnemonic')
 export class MnemonicController {
   constructor(private readonly mnemonicService: MnemonicService) {}
   
+  @ApiOperation({
+    summary: '니모닉을 생성하여 가져옵니다.',
+    description: '12 단어로 구성된 니모닉을 생성하여 가져옵니다.'
+  })
   @Get()
   createMnemonic() {
     return this.mnemonicService.createMnemonic();
