@@ -10,7 +10,7 @@ export const PathHeader = () => {
     const [{ isOpen, contents }, setIsPopUp] = useRecoilState(IsPopUp)
 
     const handleClick = () => {
-        setIsPopUp({ isOpen: !isOpen, contents: "" })
+        setIsPopUp({ isOpen: !isOpen, contents: "My Account" })
     }
     const checkPathName =
         pathName.indexOf("/setting") >= 0

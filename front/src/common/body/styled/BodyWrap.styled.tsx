@@ -8,7 +8,6 @@ export const BodyWrap = styled.div<BottomCheck>`
     width: 100%;
     padding: 1rem 2rem;
     height: 100%;
-    /* position: relative; */
     overflow-y: ${({ sidebarstate }) => (sidebarstate === "true" ? "hidden" : "scroll")};
 `
 export const SideBar = styled.div<IStateProps>`

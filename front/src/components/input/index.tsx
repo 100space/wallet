@@ -14,7 +14,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({
     width,
     value,
     onChange,
-    fontsize,
+    fontSize,
 }) => {
     const [focusmode, setFocus] = useState("off")
     const [isVisible, setVisible] = useState(false)
@@ -29,7 +29,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({
                 <InputElement
                     type={type === "text" || type === "" ? "text" : isVisible ? "text" : "password"}
                     height={height}
-                    fontsize={fontsize}
+                    fontSize={fontSize}
                     width={width}
                     defaultValue={value}
                     placeholder={placeholder}

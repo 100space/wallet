@@ -1,6 +1,6 @@
 import { FlexCenter } from "@styled/index"
 import { queryByPlaceholderText } from "@testing-library/react"
-import { IStateProps } from "@utils/interFace/styled.interface"
+import { IStateProps, IonClickProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const Wrap = styled.div`
@@ -27,9 +27,9 @@ export const BottomSheetWrap = styled.div<IStateProps>`
     position: absolute;
     left: 0;
     width: 100%;
-    bottom: ${({ popupstate }) => (popupstate === "true" ? "0%" : "-100%")};
-    transition: all 0.3s cubic-bezier(0.1, 0.24, 0, 0.57);
-    min-height: 20rem;
+    bottom: ${({ popupstate }) => (popupstate === "true" ? "6rem" : "-100%")};
+    height: ${({ popupstate }) => (popupstate === "true" ? "fit-content" : "0rem")};
+    transition: all 0.5s cubic-bezier(0.15, 0.22, 0.12, 0.44);
     overflow: hidden;
     background-color: #5f5f5f;
     border-top-left-radius: 2rem;
@@ -48,12 +48,13 @@ export const PopupText = styled.div<IStateProps>`
     }
     & > div {
         font-size: 1.6rem;
+        padding: 0 6rem;
     }
 `
 export const PopUpItemWrap = styled.div`
     width: 100%;
     height: 100%;
-    padding: 0 2rem 11rem;
+    padding: 0 2rem 3rem;
     margin: 0 auto;
 `
 

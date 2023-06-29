@@ -15,6 +15,7 @@ export const PopupWrappers = styled.div<ISizeProps>`
 `
 
 export const PopupWrap = styled.div`
+    cursor: pointer;
     width: 30%;
     height: 4rem;
     background-color: #d9d9d9;
