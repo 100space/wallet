@@ -1,4 +1,3 @@
-import { PopupComp } from "@components/bottomSheet"
 import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
 import { ITokenRow } from "@utils/interFace/core"
@@ -8,11 +7,9 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
-import { IBlockRow } from "@utils/interFace/block.interface"
-import { PopupWrappers } from "@components/MainController"
-import { BlockList } from "@common/List/TxList"
 import { MyNftInformation } from "@common/Infomation/MyNftInformation"
 import { NFTInfoPage } from ".."
+// import useMyWallet from "@hooks/useWallet"
 
 const tokenData: ITokenRow[] = [
     {
@@ -96,16 +93,18 @@ export const MainPage = () => {
     const [manageMode, setManageMode] = useRecoilState(InitMode)
     const [isCheck, setIsCheck] = useRecoilState(IsCheck)
     const [myAccount, setMyAccount] = useRecoilState(MyAccount)
+    // const { myWallet, enable } = useMyWallet()
     useEffect(() => {
-        if (!myAccount.myMnemonic && !myAccount.nickName && !myAccount.password) navigator("/login")
+        if (!myAccount.password) navigator("/login")
     }, [])
+
     return (
         <>
             <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
             <AssetsList tokenList={tokenData} nftList={nftData} />
-            <NFTInfoPage />
-            <MyNftInformation />
+            {/* <NFTInfoPage /> */}
+            {/* <MyNftInformation /> */}
         </>
     )
 }

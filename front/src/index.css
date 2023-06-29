@@ -18,10 +18,10 @@ html {
     text-size-adjust: none;
 }
 #root {
-    width: 36rem;
     width: 100vw;
-    height: 74rem;
+    width: 36rem;
     height: 100vh;
+    height: 74rem;
 }
 ul,
 li {

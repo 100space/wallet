@@ -13,6 +13,7 @@ const App = () => {
     const changeMode = () => {
         setChange(modeState.mode)
     }
+    console.log(1)
     return (
         <>
             <RootWrap mode={modeState.mode}>

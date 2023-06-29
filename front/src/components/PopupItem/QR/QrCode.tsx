@@ -7,7 +7,7 @@ const QRCodeGenerator = () => {
     return (
         <QrWrapper>
             <QrWrap>
-                <QRCode value={path} />
+                <QRCode value={"0xdaeb6abd5f9e50b5a47c8af20fba7bf54667107b"} />
             </QrWrap>
         </QrWrapper>
     )
