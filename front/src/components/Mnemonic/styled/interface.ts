@@ -7,3 +7,8 @@ export interface IMnemonicBox extends ISizeProps {
 export interface IMenmonicContent extends ISizeProps {
     blur?: string
 }
+
+
+export interface IPrivateExport extends ISizeProps {
+    borderRadius: string
+}
