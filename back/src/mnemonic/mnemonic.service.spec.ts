@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MnemonicService } from './mnemonic.service';
 import * as bip39 from 'bip39';
+import { hdkey } from 'ethereumjs-wallet'
 
 describe('MnemonicService', () => {
   let service: MnemonicService;
@@ -29,6 +30,19 @@ describe('MnemonicService', () => {
         if (mnemonic.length !== 12) throw new Error("니모닉 단어 갯수가 올바르지 않습니다.")
       }
       expect(() => createMnemonic()).toThrowError("니모닉 단어 갯수가 올바르지 않습니다.")
+    })
+  })
+
+  describe('createAccount', () => {
+    it('니모닉으로 계정이 잘 생성되는가?', async () => {
+      const mnemonic = "buddy syrup enrich speed more laptop winter potato cabbage report history right"
+      const seed = bip39.mnemonicToSeedSync(mnemonic)
+      const rootkey = hdkey.fromMasterSeed(seed)
+      console.log(rootkey.privateExtendedKey().toString('binary'))
+      // console.log(rootkey.privateExtendedKey().toString('hex'))
+      // console.log(bip39.validateMnemonic(mnemonic))
+      // console.log(bip39.getDefaultWordlist())
+
     })
   })
 });

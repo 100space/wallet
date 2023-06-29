@@ -27,7 +27,7 @@ describe('MnemonicController', () => {
   });
 
   describe('createMnemonic', () => {
-    it('니모닉 단어를 서비스로 부터 잘 불러오는가?', () => {
+    it('니모닉 단어를 서비스로부터 가져오는가?', () => {
       const expectedResult = {mnemonic: ['donkey', 'convince','stable', 'dolphin','smile', 'build','wrist', 'vote','demise', 'unfair','witness', 'tissue']};
       jest.spyOn(service, 'createMnemonic').mockReturnValue(expectedResult);
       expect(controller.createMnemonic()).toBe(expectedResult);

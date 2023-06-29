@@ -12,7 +12,7 @@
   "name": "Tether",
   "symbol": "USDT",
   "rank": 4,
-  "marketCap": 5,
+  "marketCap": 83177035118,
   "totalSupply": 83177035118,
   "maxSupply": 83177035118,
   "circulatingSupply": 21000000,
