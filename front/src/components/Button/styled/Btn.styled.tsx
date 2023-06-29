@@ -1,18 +1,18 @@
 import styled from "styled-components"
-import { IBtn, ISizeProps, IonClickProps } from "@utils/interFace/styled.interface"
+import { IBtn, ISizeProps, IonClickProps, IProfileBtn } from "@utils/interFace/styled.interface"
 
-export const Btn = styled.button<IBtn>`
+export const Btn = styled.button<IProfileBtn>`
     cursor: pointer;
     display: block;
     width: ${(props) => props.width || "30%"};
     height: ${(props) => props.height || ""};
     margin: ${(props) => props.margin || ""};
-    border-radius: 5rem;
+    border-radius: ${({profile}) => "0.7rem" || "5rem"};
     border: none;
-    box-shadow: 0 0 0.2rem 0.1rem #3a3939;
+    box-shadow: ${({profile}) => "none" || "0 0 0.2rem 0.1rem #3a3939"};
     font-size: ${(props) => props.fontSize || "1.2rem"};
-    color: ${({ backgroundcolor, theme, mode }) => (backgroundcolor && "#333") || (mode && theme[mode].text)};
-    background: ${({ backgroundcolor, theme, mode }) => backgroundcolor || (mode && theme[mode].bg200)};
+    color: ${({ backgroundcolor, theme, mode, profile }) => (backgroundcolor && "#333") || (mode && theme[mode].text)};
+    background: ${({ backgroundcolor, theme, mode, profile }) => backgroundcolor || (mode && theme[mode].bg200) || (profile && "black")};
     &:hover {
         /* background: ${({ theme, mode }) => mode && theme[mode].buttonHover}; */
     }

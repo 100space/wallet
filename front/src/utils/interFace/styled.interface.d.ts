@@ -1,3 +1,4 @@
+import { color } from "framer-motion"
 import { ReactNode } from "react"
 
 export interface ISizeProps {
@@ -47,6 +48,10 @@ export interface IBtn extends IonClickProps {
     children?: string | ReactNode
 }
 
+export interface IProfileBtn extends IBtn {
+    profile?: boolean
+}
+
 interface Idescription {
     subject: string
     content: string
@@ -68,4 +73,8 @@ export interface ISelectedBtn extends ISizeProps {
 
 export interface ISelectedBtns extends ISizeProps {
     selected: boolean[]
+}
+
+export interface IProfileProps extends ISizeProps {
+    profile?: boolean
 }

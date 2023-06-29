@@ -12,6 +12,7 @@ export const theme = {
         bgDescription: "#222222",
         bgBtn: "#000000",
         mnimonicColor: "#888",
+        profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
 
         //point 색상
         point300: "#E4562A",
@@ -44,6 +45,8 @@ export const theme = {
         bgBtn: "#fff",
         mnimonicColor: "#888",
         texthide: "#aaa",
+        // profileBg: "#0e0e0e",
+        profileBg: "linear-gradient(15deg, #5fcaffa4, #9e92ff, #dbedff)",
 
         point300: "#E4562A",
         point200: "#FF8756",

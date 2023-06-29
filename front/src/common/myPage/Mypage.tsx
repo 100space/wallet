@@ -1,9 +1,10 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { A, B, WR, TotalSupplyWrap, NftCardWrap } from "./styled"
+import { MypageWrapper, MyProfile, MyNickName, TotalSupplyWrap} from "./styled"
 import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
 import { Btn } from "@components/Button"
-import  profile  from "@img/profile.jpeg"
+// import profile  from "@img/profile.png"
+import pro from "@img/pro.png"
 import { useGetMode } from "@hooks/useMode"
 
 const data: INFTCard = {
@@ -22,15 +23,15 @@ export const Mypage = () => {
     }
     return(
         <>
-            <WR>
-                <A src={profile}/>
-                <B placeholder="NickName"/>
+            <MypageWrapper mode={"lightMode"}>
+                <MyProfile src={pro}/>
+                <MyNickName placeholder="NickName"/>
                 <TotalSupplyWrap>
-                    <TotalSupply/>
+                    <TotalSupply profile={true}/>
                 </TotalSupplyWrap>
-                <Btn backgroundcolor="" width="80%" height="6rem" margin="2rem" mode="" onClick={() => handleButtonClick} fontSize=""> 계정 잠금 </Btn>
-                <Btn backgroundcolor="" width="80%" height="6rem" margin="2rem" mode="" onClick={() => handleButtonClick} fontSize=""> 계정 삭제 </Btn>
-            </WR>
+                <Btn backgroundcolor="" width="80%" height="5rem" margin="" mode="" onClick={() => handleButtonClick} fontSize="1.7rem"> 계정 잠금 </Btn>
+                <Btn backgroundcolor="" width="80%" height="5rem" margin="" mode="" onClick={() => handleButtonClick} fontSize="1.7rem"> 계정 삭제 </Btn>
+            </MypageWrapper>
         </>
     )
 }
