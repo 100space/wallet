@@ -7,6 +7,7 @@ import { HealthController } from './health/health.controller';
 import { TrendsModule } from './trends/trends.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { TokenModule } from './token/token.module';
+import { MnemonicModule } from './mnemonic/mnemonic.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -21,6 +22,7 @@ import configuration from './config/configuration';
     TrendsModule,
     TransactionModule,
     TokenModule,
+    MnemonicModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],
