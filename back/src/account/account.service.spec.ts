@@ -1,24 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MnemonicService } from './mnemonic.service';
-import { ethers } from "ethers";
-import * as bip39 from "bip39"
-import { type } from "os";
+import { AccountService } from './account.service';
+import * as bip39 from "bip39";
 
-describe('MnemonicService', () => {
-  let service: MnemonicService;
+describe('AccountService', () => {
+  let service: AccountService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MnemonicService],
+      providers: [AccountService],
     }).compile();
 
-    service = module.get<MnemonicService>(MnemonicService);
+    service = module.get<AccountService>(AccountService);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
   describe('createMnemonic', () => {
     it('니모닉 단어가 생성되었는가?', () => {
       const { mnemonic } = service.createMnemonic()
@@ -60,6 +57,12 @@ describe('MnemonicService', () => {
     })
 
     it('니모닉이 올바르지 않을 경우 에러를 발생시키는가?', () => {
+      const mnemonic = ["buddy", "syrup", "enrich", "speed", "more", "laptop", "winter", "potato", "cabbage", "report", "history", "asdf"]
+
+      expect(() => service.createAccount(mnemonic)).toThrowError()
+    })
+
+    it('니모닉의 갯수가 일치하지 않을 경우 에러를 발생시키는가?', () => {
       const mnemonic = ["buddy", "syrup", "enrich", "speed", "more", "laptop", "winter", "potato", "cabbage", "report", "history"]
 
       expect(() => service.createAccount(mnemonic)).toThrowError()
