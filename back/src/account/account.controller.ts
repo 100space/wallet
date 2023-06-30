@@ -19,7 +19,6 @@ export class AccountController {
   @Post()
   async createAccount(@Body() { address, nickname }: ICreateAccountDto): Promise<CreateAccountDto>{
     return this.accountService.findOrCreateAccount({ address, nickname });
-    return { success: true };
   }
 
   @ApiOperation({

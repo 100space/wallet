@@ -24,7 +24,7 @@ export class AccountService {
       
       return { success: true };
     } catch (error) {
-
+      throw error
     }
   }
 
@@ -36,14 +36,18 @@ export class AccountService {
   }
 
   createAccount(mnemonic: Mnemonic): PostMnemonicDTO {
-    if (mnemonic.length !== 12) throw new Error('니모닉 단어의 갯수가 올바르지 않습니다.')
-
-    const mnemonicWord = mnemonic.join(' ')
-    if (!bip39.validateMnemonic(mnemonicWord)) throw new Error('니모닉 단어가 올바르지 않습니다.')
-
-    const { privateKey, publicKey, address } = ethers.Wallet.fromPhrase(mnemonicWord)
-    if (!ethers.isAddress(address)) throw new Error('주소가 올바르지 않습니다.')
-
-    return { privateKey, publicKey, address }
+    try {
+      if (mnemonic.length !== 12) throw new Error('니모닉 단어의 갯수가 올바르지 않습니다.')
+  
+      const mnemonicWord = mnemonic.join(' ')
+      if (!bip39.validateMnemonic(mnemonicWord)) throw new Error('니모닉 단어가 올바르지 않습니다.')
+  
+      const { privateKey, publicKey, address } = ethers.Wallet.fromPhrase(mnemonicWord)
+      if (!ethers.isAddress(address)) throw new Error('주소가 올바르지 않습니다.')
+  
+      return { privateKey, publicKey, address }
+    } catch (error) {
+      throw error
+    }
   }
 }
