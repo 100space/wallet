@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDto, ICreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -6,6 +6,7 @@ import { IAccount, Mnemonic } from "src/interface/mnemonic.interface";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { GetMnemonicDTO } from "./dto/get-mnemonic.dto";
 import { PostMnemonicDTO } from "./dto/post-mnemonic.dto";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller('account')
 @ApiTags('Account')
@@ -19,6 +20,16 @@ export class AccountController {
   @Post()
   async createAccount(@Body() { address, nickname }: ICreateAccountDto): Promise<CreateAccountDto>{
     return this.accountService.findOrCreateAccount({ address, nickname });
+  }
+
+  @ApiOperation({
+    summary: '프로필 이미지를 추가합니다.',
+    description: '프로필 이미지를 추가하고, 저장된 프로필 이미지의 url을 가져옵니다.'
+  })
+  @Post('/profile')
+  @UseInterceptors(FileInterceptor('profileImg'))
+  async uploadProfileImg(@UploadedFile() file: Express.MulterS3.File, @Query('address') address: string){
+    return this.accountService.uploadProfileImg(file, address);
   }
 
   @ApiOperation({

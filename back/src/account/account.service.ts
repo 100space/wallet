@@ -1,4 +1,4 @@
-import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAccountDto, ICreateAccountDto } from './dto/create-account.dto';
 import * as bip39 from "bip39";
 import { ethers } from "ethers";
@@ -23,6 +23,37 @@ export class AccountService {
       else await this.accountModel.create({ address, nickname })
       
       return { success: true };
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async findOne({ address }) {
+    try {
+      const result = await this.accountModel.findOne({ address })
+      return { result }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async update({ address, nickname, image }) {
+    try {
+      const result = await this.accountModel.updateOne({ address },{ address, nickname, image })
+      return { result }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async uploadProfileImg(file: Express.MulterS3.File, address) {
+    try {
+      if (!file) throw new BadRequestException('파일이 존재하지 않습니다.', { cause: new Error(), description: "Nickname is not valid" });
+      const { result } = await this.findOne({ address })
+      if( result === null ) throw new NotFoundException('Address is not found', {cause: new Error(), description: "Address is not found"})
+      const createResult = await this.update({ address: result.address, nickname: result.nickname, image: file.location })
+      if(!createResult.result.acknowledged) throw new Error('업데이트에 실패했습니다.')
+      return { image: file.location }
     } catch (error) {
       throw error
     }
