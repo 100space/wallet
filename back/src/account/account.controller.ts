@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { CreateAccountDto } from './dto/create-account.dto';
+import { CreateAccountDto, ICreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { IAccount, Mnemonic } from "src/interface/mnemonic.interface";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
@@ -11,7 +11,17 @@ import { PostMnemonicDTO } from "./dto/post-mnemonic.dto";
 @ApiTags('Account')
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
-  
+
+  @ApiOperation({
+    summary: '닉네임을 입력, 변경합니다.',
+    description: '닉네임을 입력 또는 변경하여 성공했는지 true, false로 반환합니다.'
+  })
+  @Post()
+  async createAccount(@Body() { address, nickname }: ICreateAccountDto): Promise<CreateAccountDto>{
+    return this.accountService.findOrCreateAccount({ address, nickname });
+    return { success: true };
+  }
+
   @ApiOperation({
     summary: '니모닉 배열을 가져옵니다.',
     description: '12단어로 이루어진 니모닉 배열을 가져옵니다.',
