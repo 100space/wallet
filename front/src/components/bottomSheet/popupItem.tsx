@@ -40,7 +40,6 @@ const data: IAccountRow = {
 }
 export const PopUpItem = () => {
     const [{ isOpen, contents }, setPopup] = usePopup()
-    console.log(contents)
     const itemSwitch = () => {
         switch (contents) {
             case "트랜잭션":

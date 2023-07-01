@@ -23,3 +23,5 @@ dist
 # terraformrc file
 terraform.rc
 .terraformrc
+
+test.md

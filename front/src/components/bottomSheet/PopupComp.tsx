@@ -22,7 +22,6 @@ export const PopupComp = () => {
         "My Account": { text: "사용할 계정을 선택해주세요." },
     }
 
-    console.log(matchText[contents]?.content)
     return (
         <>
             <BottomSheetWrap popupstate={isOpen.toString()}>

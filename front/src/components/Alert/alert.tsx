@@ -4,7 +4,7 @@ export const Alert = Swal.mixin({
     toast: true,
     position: "top-end",
     width: "70%",
-    backdrop: true,
+    // backdrop: true,
     showConfirmButton: false,
     timer: 2000,
     color: "#e2e2e2",
