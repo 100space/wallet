@@ -1,3 +1,7 @@
+/*! MIT License. Copyright 2015-2022 Richard Moore <me@ricmoo.com>. See LICENSE.txt. */
+
+/*! noble-secp256k1 - MIT License (c) 2019 Paul Miller (paulmillr.com) */
+
 /**
  * @license React
  * react-dom.production.min.js

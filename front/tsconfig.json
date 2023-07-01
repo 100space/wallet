@@ -23,7 +23,8 @@
             "@img/*": ["img/*"],
             "@styled/*": ["styled/*"],
             "@utils/*": ["utils/*"],
-            "@hooks/*": ["hooks/*"]
+            "@hooks/*": ["hooks/*"],
+            "@core/*": ["core/*"]
         }
     },
     "include": ["src"]

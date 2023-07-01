@@ -53,6 +53,12 @@ module.exports = {
                         matches: ["<all_urls>"],
                     },
                 ],
+                content_scripts: [
+                    {
+                        js: ["event.js"],
+                        matches: ["<all_urls>"],
+                    },
+                ],
                 permissions: ["tabs", "activeTab", "storage", "scripting"],
             }
 

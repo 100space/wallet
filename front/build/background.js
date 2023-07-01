@@ -18,3 +18,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ success: true })
     }
 })
+
+chrome.runtime.onConnect.addListener(function (port) {
+    console.assert(port.name === "popup")
+    port.onMessage.addListener(function (msg) {
+        if (msg.content) console.log(msg.content)
+    })
+})

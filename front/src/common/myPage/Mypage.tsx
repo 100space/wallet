@@ -37,7 +37,7 @@ export const Mypage = () => {
                     mode=""
                     onClick={() => handleButtonClick}
                     fontSize="1.7rem"
-                    profile={true}
+                    profile={"true"}
                 >
                     계정 잠금
                 </Btn>
@@ -49,7 +49,7 @@ export const Mypage = () => {
                     mode=""
                     onClick={() => handleButtonClick}
                     fontSize="1.7rem"
-                    profile={true}
+                    profile={"true"}
                 >
                     계정 삭제
                 </Btn>

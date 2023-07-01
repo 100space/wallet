@@ -5,7 +5,10 @@ const { persistAtom } = recoilPersist({
     key: "NFTin",
     storage: localStorage,
 })
-
+const { persistAtom: web3Ins } = recoilPersist({
+    key: "Web3Ins",
+    storage: localStorage,
+})
 export const InitMode = atom({
     key: "loginMode",
     default: { initMode: "", initStep: "" },
@@ -34,4 +37,9 @@ export const MyAccount = atom({
     key: "myAccount",
     default: { myMnemonic: "", password: "", nickName: "" },
     effects_UNSTABLE: [persistAtom],
+})
+export const Web3Instance = atom({
+    key: "web3Instance",
+    default: "",
+    effects_UNSTABLE: [web3Ins],
 })
