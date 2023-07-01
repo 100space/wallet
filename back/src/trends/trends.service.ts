@@ -1,67 +1,93 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { ITrends } from '../interface/trends.interface';
+import { ICoinList, ICoinInfo } from '../interface/trends.interface';
 
 @Injectable()
 export class TrendsService {
   private readonly logger = new Logger(TrendsService.name);
   constructor(private readonly httpService: HttpService) {}
 
-  returnData = (data: ITrends[]) => {
-    return data.map((v, i) => ({
-      rank: i,
-      id: v.id,
-      name: v.name,
-      symbol: v.symbol,
-      image: v.image,
-      price: v.current_price,
-      changePercent: v.price_change_percentage_24h,
-    }));
-  };
+  async simplePrice({ id }) {
+    const { data } = await firstValueFrom(
+      this.httpService.get(`simple/price?ids=${id}&vs_currencies=usd%2Ckrw`),
+    );
+    const keys = Object.keys(data[id]);
+    return keys.map((v) => {
+      return { currency: v.toUpperCase(), price: data[id][v] };
+    });
+  }
 
-  async getTrendCoins(): Promise<ITrends[]> {
+  async getCoinList({ count }): Promise<ICoinList[]> {
     const { data } = await firstValueFrom(
       this.httpService
-        .get<ITrends[]>(
-          'coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en',
-        )
+        .get(`coins/markets?vs_currency=usd&per_page=${count}`)
         .pipe(
           catchError((error: AxiosError) => {
             this.logger.error(error.response.data);
-            throw 'Coin Gecko Error';
+            throw { type: 'coingecko error', message: 'coins/markets' };
           }),
         ),
     );
 
-    return this.returnData(data);
+    const response = await Promise.all(
+      data.map(async (v, i) => {
+        return {
+          rank: i + 1,
+          name: v.name,
+          symbol: v.symbol,
+          image: v.image,
+          changePercent: v.price_change_percentage_24h,
+          coinPrice: await this.simplePrice({ id: v.id }),
+        };
+      }),
+    );
+
+    return response;
   }
 
-  async getCoin(id: string) {
-    const { data } = await firstValueFrom(
-      this.httpService.get(`coins/${id}`).pipe(
+  async getTokenData({ symbol }): Promise<ICoinInfo> {
+    const {
+      data: { coins },
+    } = await firstValueFrom(
+      this.httpService.get(`search?query=${symbol}`).pipe(
         catchError((error: AxiosError) => {
           this.logger.error(error.response.data);
-          throw 'Coin Gecko Error';
+          throw new NotFoundException('search', {
+            cause: new Error(),
+            description: 'Coingecko Error',
+          });
         }),
       ),
     );
 
-    const description = data.description.ko.replace(/\r\n/g, '');
+    const id = coins[0].id;
 
-    const res = {
+    const { data } = await firstValueFrom(
+      this.httpService.get(`coins/${id}`).pipe(
+        catchError((error: AxiosError) => {
+          this.logger.error(error.response.data);
+          throw new NotFoundException('coins/{id}', {
+            cause: new Error(),
+            description: 'Coingecko Error',
+          });
+        }),
+      ),
+    );
+    return {
       name: data.name,
-      rank: data.coingecko_rank,
-      price: data.market_data.current_price.usd,
-      changePercent: data.market_data.price_change_percentage_24h,
-      marketCap: data.market_data.market_cap.usd,
+      symbol: data.symbol,
+      rank: data.market_cap_rank,
+      marketCap: data.market_data.market_cap.krw,
       totalSupply: data.market_data.total_supply,
       maxSupply: data.market_data.max_supply,
       circulatingSupply: data.market_data.circulating_supply,
-      description,
+      description: data.description.ko.replace(/\r\n/g, ''),
+      image: data.image.large,
+      changePercent: data.market_data.price_change_percentage_24h,
+      currency: 'KRW',
+      price: data.market_data.current_price.krw,
     };
-
-    return res;
   }
 }

@@ -1,62 +1,43 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { AxiosError } from 'axios';
+import { error } from 'console';
 import { catchError, firstValueFrom } from 'rxjs';
-import { Web3Service } from '../web3/web3.service';
 
 @Injectable()
 export class TokenService {
   private readonly logger = new Logger(TokenService.name);
   private readonly baseUrl = 'https://api.coingecko.com/api/v3';
-  constructor(
-    private readonly httpService: HttpService,
-    private readonly web3: Web3Service,
-  ) {}
+  constructor(private readonly httpService: HttpService) {}
 
-  async getTokenBalance({ assets, account }) {
-    const coin = await Promise.all(
-      assets
-        .filter((value) => value.type === 'coin')
-        .map(async (value) => {
-          const balance = await this.web3.getBalance(value.ca);
-          return { type: value.type, balance };
-        }),
-    );
-
-    const token = await Promise.all(
-      assets
-        .filter((value) => value.type === 'token')
-        .map(async (value) => {
-          const tokenBalance = await this.web3.getTokenBalance({
-            contractAddress: value.ca,
-            account,
-          });
-          return { type: value.type, ...tokenBalance };
-        }),
-    );
-
-    return { assets: [...coin, ...token] };
-  }
-
-  async getToken({ contractAddress }) {
-    try {
-      const { data } = await firstValueFrom(
+  async addToken({ networkInfo, ca, symbol, decimal }) {
+    if (networkInfo.chainId === 1) {
+      const {
+        data: {
+          image: { large: image },
+        },
+      } = await firstValueFrom(
         this.httpService
-          .get(`${this.baseUrl}/coins/ethereum/contract/${contractAddress}`)
+          .get(`${this.baseUrl}/coins/ethereum/contract/${ca}`)
           .pipe(
             catchError((error: AxiosError) => {
               this.logger.error(error.response.data);
-              throw error.response?.data;
+              throw new NotFoundException(
+                '/coins/{id}/contract/{contract_address}',
+                { cause: new Error(), description: 'Coingecko Error' },
+              );
             }),
           ),
       );
-
-      return { image: data.image.large };
-    } catch (error) {
-      if (error?.response?.data?.error === 'coin not found') {
-        return { image: 'no image' };
-      }
-      throw new Error(error?.response?.data?.message || 'Unknown error');
+      return { image };
     }
+
+    // const { data } = await firstValueFrom(
+    //   this.httpService.get(`coins/ethereum/contract/${ca}`),
+    // );
+
+    // console.log(data);
+
+    return { ca, symbol, decimal };
   }
 }

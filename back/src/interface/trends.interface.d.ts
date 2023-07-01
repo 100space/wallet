@@ -1,11 +1,24 @@
-export interface ITrends {
+export interface ICoinList {
   rank: number;
   id: string;
   name: string;
   symbol: string;
   image: string;
-  price: number;
   changePercent: number;
-  current_price?: number;
-  price_change_percentage_24h?: number;
+  coinPrice: object[];
+}
+
+export interface ICoinInfo {
+  name: string;
+  symbol: string;
+  rank: number;
+  marketCap: number;
+  totalSupply: number;
+  maxSupply: number;
+  circulatingSupply: number;
+  description: string;
+  image: string;
+  changePercent: number;
+  currency: string;
+  price: number;
 }
