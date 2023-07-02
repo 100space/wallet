@@ -1,6 +1,15 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
-export class PostMnemonicDTO {
+export class CreateWalletDto {
+    @ApiProperty({
+        example: ["chief","like","unveil","elite","void","mixed","ball","ribbon","pipe","disagree","where","wear"],
+        description: 'The mnemonic words used to create the wallet',
+        type: [String],
+    })
+    mnemonic: string[];
+}
+
+export class CreateWalletResponseDto {
     @ApiProperty({
         description: '니모닉 단어 12가지',
         default:{

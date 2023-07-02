@@ -1,4 +1,21 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateAccountDto } from './create-account.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateAccountDto extends PartialType(CreateAccountDto) {}
+export class UpdateAccountDto {
+  @ApiProperty({
+    example: '0x0000000000000000000000000000000000000000',
+    description: 'The address of the user',
+  })
+  address: string;
+
+  @ApiProperty({
+    example: 'nickname1',
+    description: 'The nickname of the user',
+  })
+  nickname: string;
+
+  @ApiProperty({
+    example: 'https://example.com/image.jpg',
+    description: 'The image URL of the user',
+  })
+  image: string;
+}

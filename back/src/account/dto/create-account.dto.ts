@@ -1,14 +1,26 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAccountDto {
-    @ApiProperty({
-        description: '주소와 닉네임을 받아 데이터베이스에 저장한다.',
-        default: { address: '0x0000000000000000000000000000000000000000', nickname: 'address1' }
-    })
-    success: boolean;
+  @ApiProperty({
+    example: '0x0000000000000000000000000000000000000000',
+    description: 'The address of the user',
+  })
+  address: string;
+
+  @ApiProperty({
+    example: 'nickname1',
+    description: 'The nickname of the user',
+  })
+  nickname: string;
+
+  @ApiProperty({
+    example: 'https://example.com/image.jpg',
+    description: 'The image URL of the user',
+  })
+  image?: string;
 }
 
-export interface ICreateAccountDto {
-    address: string
-    nickname: string
+export class CreateAccountResponseDto {
+  @ApiProperty({ example: true, description: 'Indicates if the account creation was successful' })
+  success: boolean;
 }

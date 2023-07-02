@@ -38,14 +38,14 @@ describe('AccountService', () => {
   describe('createAccount', () => {
     it('니모닉으로 계정이 잘 생성되는가?', () => {
       const mnemonic = ["buddy", "syrup", "enrich", "speed", "more", "laptop", "winter", "potato", "cabbage", "report", "history", "right"]
-      const wallet = service.createAccount(mnemonic)
+      const wallet = service.createWalletByMnemonic({mnemonic})
 
       expect(wallet).toBeTruthy()
     })
   
     it('니모닉으로 생성된 계정의 타입이 올바른가?', () => {
       const mnemonic = ["buddy", "syrup", "enrich", "speed", "more", "laptop", "winter", "potato", "cabbage", "report", "history", "right"]
-      const wallet = service.createAccount(mnemonic)
+      const wallet = service.createWalletByMnemonic({mnemonic})
 
       type Wallet = {
         privateKey: string
@@ -59,13 +59,13 @@ describe('AccountService', () => {
     it('니모닉이 올바르지 않을 경우 에러를 발생시키는가?', () => {
       const mnemonic = ["buddy", "syrup", "enrich", "speed", "more", "laptop", "winter", "potato", "cabbage", "report", "history", "asdf"]
 
-      expect(() => service.createAccount(mnemonic)).toThrowError()
+      expect(() => service.createWalletByMnemonic({mnemonic})).toThrowError()
     })
 
     it('니모닉의 갯수가 일치하지 않을 경우 에러를 발생시키는가?', () => {
       const mnemonic = ["buddy", "syrup", "enrich", "speed", "more", "laptop", "winter", "potato", "cabbage", "report", "history"]
 
-      expect(() => service.createAccount(mnemonic)).toThrowError()
+      expect(() => service.createWalletByMnemonic({mnemonic})).toThrowError()
     })
   })
 });

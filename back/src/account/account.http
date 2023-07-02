@@ -12,11 +12,19 @@ Content-Type: application/json
     "mnemonic":["chief","like","unveil","elite","void","mixed","ball","ribbon","pipe","disagree","where","wear"]
 }
 
-### 사용자 닉네임 저장
+### 사용자 닉네임 저장 || 회원가입
 POST {{server}}/account HTTP/1.1
 Content-Type: application/json
 
 {
     "address":"0x0000000000000000000000000000000000000000",
     "nickname":"address1"
+}
+
+### 사용자 프로필 사진 업로드
+POST {{server}}/account/profile?address=0x0000000000000000000000000000000000000000 HTTP/1.1
+Content-Type: : multipart/form-data
+
+{
+    "file": "",
 }
