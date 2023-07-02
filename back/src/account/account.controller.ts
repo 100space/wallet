@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Upl
 import { AccountService } from './account.service';
 import { CreateAccountDto, ICreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
-import { IAccount, Mnemonic } from "src/interface/mnemonic.interface";
+import { IAccount, Mnemonic } from "src/interface/account.interface";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { GetMnemonicDTO } from "./dto/get-mnemonic.dto";
 import { PostMnemonicDTO } from "./dto/post-mnemonic.dto";
@@ -19,7 +19,7 @@ export class AccountController {
   })
   @Post()
   async createAccount(@Body() { address, nickname }: ICreateAccountDto): Promise<CreateAccountDto>{
-    return this.accountService.findOrCreateAccount({ address, nickname });
+    return this.accountService.createAccount({ address, nickname });
   }
 
   @ApiOperation({
@@ -47,6 +47,6 @@ export class AccountController {
   })
   @Post('/mnemonic')
   postMnemonic(@Body() { mnemonic }: GetMnemonicDTO): PostMnemonicDTO{
-    return this.accountService.createAccount( mnemonic );
+    return this.accountService.createWallet( mnemonic );
   }
 }

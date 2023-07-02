@@ -17,7 +17,8 @@ import configuration from './config/configuration';
       load: [configuration],
     }),
     MongooseModule.forRoot(
-      `${process.env.DB_URI}`,
+      // `${process.env.DB_URI}`,
+      `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`,
     ),
     TrendsModule,
     TransactionModule,
