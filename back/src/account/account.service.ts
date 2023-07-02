@@ -49,7 +49,12 @@ export class AccountService {
     return { mnemonic }
   }
 
-  createWallet(mnemonic: Mnemonic): PostMnemonicDTO {
+  createWallet() {
+    const { privateKey, publicKey, address } = ethers.Wallet.createRandom()
+    return { privateKey, publicKey, address }
+  }
+
+  createWalletByMnemonic(mnemonic: Mnemonic): PostMnemonicDTO {
     try {
       if (mnemonic.length !== 12) throw new Error('니모닉 단어의 갯수가 올바르지 않습니다.')
 

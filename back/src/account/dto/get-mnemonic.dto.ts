@@ -6,5 +6,5 @@ export class GetMnemonicDTO {
         default:
             '["chief","like","unveil","elite","void","mixed","ball","ribbon","pipe","disagree","where","wear"]',
     })
-    mnemonic: string[];
+    mnemonic?: string[];
 }

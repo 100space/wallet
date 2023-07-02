@@ -47,6 +47,7 @@ export class AccountController {
   })
   @Post('/mnemonic')
   postMnemonic(@Body() { mnemonic }: GetMnemonicDTO): PostMnemonicDTO{
-    return this.accountService.createWallet( mnemonic );
+    if( !mnemonic ) return this.accountService.createWallet()
+    return this.accountService.createWalletByMnemonic( mnemonic );
   }
 }
