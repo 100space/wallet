@@ -17,7 +17,7 @@ const App = () => {
     }
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
-        location.pathname === "/popup.html" && !modeState.isLogin && navigator("/login")
+        ;(location.pathname === "/popup.html" || location.pathname === "/") && !modeState.isLogin && navigator("/login")
     }, [])
 
     return (

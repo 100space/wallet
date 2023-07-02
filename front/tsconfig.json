@@ -24,8 +24,9 @@
             "@styled/*": ["styled/*"],
             "@utils/*": ["utils/*"],
             "@hooks/*": ["hooks/*"],
-            "@core/*": ["core/*"]
+            "@core/*": ["core/*"],
+            "@test/*": ["test/*"]
         }
     },
-    "include": ["src"]
+    "include": ["src", "test/*.test.ts", "test/*.test.tsx"]
 }

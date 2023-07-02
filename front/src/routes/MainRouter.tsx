@@ -7,6 +7,8 @@ import { TrandsRouter } from "./trendsRouter"
 import { NFTInfoPage } from "@pages/Market"
 import { useRecoilValue } from "recoil"
 import { ModeState, MyAccount } from "@utils/localStorage"
+import { CoinInfoPage } from "@pages/Trends"
+import { InfoRouter } from "./infoRouter"
 
 export const MainRouter = () => {
     const { myMnemonic, password, nickName } = useRecoilValue(MyAccount)
@@ -21,11 +23,12 @@ export const MainRouter = () => {
                     <Route path="/login/*" element={<InitRouter />}></Route>
                 ) : (
                     <>
+                        <Route path="/" element={<MainPage />}></Route>
                         <Route path="/*" element={<MainPage />}></Route>
                         <Route path="/setting/*" element={<SettingRouter />}></Route>
                         <Route path="/market/*" element={<MarketRouter />}></Route>
                         <Route path="/trends/*" element={<TrandsRouter />}></Route>
-                        <Route path="/info/:id" element={<NFTInfoPage />}></Route>
+                        <Route path="/info/*" element={<InfoRouter />}></Route>
                     </>
                 )}
             </Routes>

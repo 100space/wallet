@@ -7,8 +7,8 @@ import { ModeState } from "@utils/localStorage"
 export const CoinSlide = (props: { coinDatas: ICoin[] }) => {
     const { mode } = useRecoilValue(ModeState)
     const coinCards = (coinsData: ICoin[]) => {
-        return coinsData.map((v) => {
-            return <CoinCard coinData={v} />
+        return coinsData.map((v, i) => {
+            return <CoinCard coinData={v} key={i} />
         })
     }
 

@@ -103,7 +103,7 @@ export const MainPage = () => {
     const [instance, setInstance] = useRecoilState(Web3Instance)
     // const { myWallet, enable } = useMyWallet()
     useEffect(() => {
-        if (!myAccount.password) navigater("/login")
+        if (!initState.isLogin) navigater("/login")
         // const web3 = new Web3()
         // const myWalletInstance = new MyWallet()
         // if (window && web3) {
