@@ -42,18 +42,18 @@ export class AccountService {
     }
   }
 
-  async createMnemonic() {
+  createMnemonic() {
     const mnemonicWord = ethers.Wallet.createRandom().mnemonic.phrase;
     const mnemonic = mnemonicWord.split(' ')
     return { mnemonic }
   }
 
-  async createWallet() {
+  createWallet() {
     const { privateKey, publicKey, address } = ethers.Wallet.createRandom()
     return { privateKey, publicKey, address }
   }
 
-  async createWalletByMnemonic({ mnemonic }: CreateWalletDto) {
+  createWalletByMnemonic({ mnemonic }: CreateWalletDto) {
     try {
       if (mnemonic.length !== 12) throw new Error('니모닉 단어의 갯수가 올바르지 않습니다.')
 
