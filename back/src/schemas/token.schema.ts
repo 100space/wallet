@@ -5,16 +5,16 @@ export type TokenDocument = HydratedDocument<Token>;
 
 @Schema()
 export class Token {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   ca: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   symbol: string;
 
   @Prop({ required: true })
   decimal: number;
 
-  @Prop()
+  @Prop({ required: true })
   image: string;
 }
 

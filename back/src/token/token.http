@@ -9,3 +9,14 @@ Content-Type: application/json
     "symbol": "bnb",
     "decimal": 18
 }
+
+### test
+POST  {{server}}/token?network=mumbai HTTP/1.1
+Content-Type: application/json
+
+{
+    "ca": "0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1",
+    "symbol": "DERC20",
+    "decimal": 18
+}
+

@@ -56,7 +56,6 @@ export const IsERC20 = createParamDecorator(
     } = ctx.switchToHttp().getRequest();
 
     try {
-      console.log(networkInfo);
       const provider = new ethers.JsonRpcProvider(networkInfo.rpc);
 
       const contract = isValidCA(provider, ca);
