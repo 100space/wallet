@@ -1,4 +1,4 @@
-import { MenuListComp } from "@common/settingComp/settingMenu"
+import { MenuListComp } from "@common/settingCon/settingMenu"
 import { PrivateExport } from "@components/PrivateExport"
 import { ModeState, MyAccount } from "@utils/localStorage"
 import { constants } from "buffer"
