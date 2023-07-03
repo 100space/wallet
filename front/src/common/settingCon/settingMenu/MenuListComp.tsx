@@ -2,6 +2,7 @@ import { Category } from "@components/Category"
 import { SettingMenuTitle } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
+import React from "react"
 
 const MenuList = [
     {MenuSub: "Wallet", content: "Current Wallet", content2: "Network"},
@@ -35,7 +36,7 @@ export const MenuListComp = () => {
                     )}
                 </SettingMenuTitle>
             ))}
-            <Btn backgroundcolor="" fontSize="1.85rem" width="80%" height="5rem" margin="2rem" mode="" onClick={()=>handleButtonClick} profile={true}>계정 지우기</Btn>
+            <Btn backgroundcolor="" fontSize="1.85rem" width="80%" height="5rem" margin="2rem" mode="" onClick={()=>handleButtonClick}>계정 지우기</Btn>
         </>
     )
 }
