@@ -4,19 +4,31 @@ const fs = require("fs")
 const path = require("path")
 
 module.exports = {
+    // jest: {
+    //     moduleNameMapper: {
+    //         "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js",
+    //         "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js",
+    //         "^@components/(.*)$": "<rootDir>/src/components/$1",
+    //         "^@utils/(.*)$": "<rootDir>/src/utils/$1",
+    //         // 나머지 alias 설정
+    //     },
+    //     moduleFileExtensions: ["js", "jsx", "ts", "tsx"], // Jest가 처리할 수 있는 파일 확장자들
+    //     transform: {
+    //         "^.+\\.tsx?$": "ts-jest", // TypeScript 파일을 Jest가 처리할 수 있게 변환
+    //     },
+    // },
     jest: {
-        preset: "ts-jest", // TypeScript를 사용하기 위한 설정
-        testEnvironment: "node",
-        moduleNameMapper: {
-            "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js",
-            "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js",
-            "^@components/(.*)$": "<rootDir>/src/components/$1",
-            "^@utils/(.*)$": "<rootDir>/src/utils/$1",
-            // 나머지 alias 설정
-        },
-        moduleFileExtensions: ["js", "jsx", "ts", "tsx"], // Jest가 처리할 수 있는 파일 확장자들
-        transform: {
-            "^.+\\.tsx?$": "ts-jest", // TypeScript 파일을 Jest가 처리할 수 있게 변환
+        configure: {
+            transform: {
+                "^.+\\.tsx?$": "ts-jest",
+                "^.+\\.ts?$": "ts-jest",
+            },
+            preset: "ts-jest", // TypeScript를 사용하기 위한 설정
+            testEnvironment: "node",
+            moduleNameMapper: {
+                axios: "axios/node/axios.cjs",
+                "^@(pages|routes|common|components|img|styled|test|hooks|core|utils)/(.+)$": "<rootDir>/src/$1/$2",
+            },
         },
     },
     plugins: [

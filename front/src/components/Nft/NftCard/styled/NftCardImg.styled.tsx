@@ -3,7 +3,8 @@ import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const NftCardImgWrap = styled.div<ISizeProps>`
-    ${SizePropsStyled};
+    width: ${(props) => props.width || "100%"};
+    min-height: ${(props) => props.height};
     &,
     & > img {
         margin: 0 auto;

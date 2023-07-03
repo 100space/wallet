@@ -28,7 +28,7 @@ export interface InputList {
     nftTitle?: string
 }
 
-export const SendComp = (props: { inputArray: InputList[] }) => {
+export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string }) => {
     const { mode } = useRecoilValue(ModeState)
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => (
@@ -44,7 +44,14 @@ export const SendComp = (props: { inputArray: InputList[] }) => {
     return (
         <>
             {inputList(props.inputArray)}
-            <Button width={"70%"} height={"5rem"} mode={mode} margin="3rem auto 0 "></Button>
+            <Button
+                width={"70%"}
+                height={"5rem"}
+                mode={mode}
+                margin="3rem auto 0 "
+                content={props.BtnContent}
+                fontSize="1.6rem"
+            ></Button>
         </>
     )
 }
