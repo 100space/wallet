@@ -2,6 +2,7 @@ import { Category } from "@components/Category"
 import { SettingMenuTitle } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
+import React from "react"
 
 const MenuList = [
     { MenuSub: "Wallet", content: "Current Wallet", content2: "Network" },
