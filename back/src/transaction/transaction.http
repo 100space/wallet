@@ -1,4 +1,4 @@
-@server = http://localhost:3000
+@server = http://localhost:3005
 
 ### 트랜잭션 실행
 POST {{server}}/transaction HTTP/1.1

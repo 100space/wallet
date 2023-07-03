@@ -14,13 +14,14 @@ export const AccountRowWrap = styled.div<ISizeProps>`
 
     & > div,
     svg {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         color: ${({ mode, theme }) => mode && theme[mode].text};
     }
 
     & > svg {
         cursor: pointer;
         font-size: 3rem;
+        color: ${({ theme, mode }) => mode && theme[mode].point200};
     }
 `
 
@@ -43,6 +44,12 @@ export const AccountRowImg = styled.img`
 export const AccountRowAddress = styled.div<IStateProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "100%"};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    & > span {
+        text-align: center;
+    }
     /* ${FlexCenter} */
     /* text-align: end; */
 `

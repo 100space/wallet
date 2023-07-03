@@ -28,25 +28,30 @@ export interface InputList {
     nftTitle?: string
 }
 
-export const SendComp = (props: { inputArray: InputList[] }) => {
+export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string }) => {
     const { mode } = useRecoilValue(ModeState)
     const inputList = (inputArray: InputList[]) => {
-        return inputArray.map((v, index) => {
-            return (
-                <>
-                    <SendCompWrapper key={index}>
-                        <SendCompWrap>{v.subject}</SendCompWrap>
-                        <InputComp placeholder={v.content} height={4} type="" fontSize={1.4} />
-                    </SendCompWrapper>
-                </>
-            )
-        })
+        return inputArray.map((v, index) => (
+            <>
+                <SendCompWrapper key={v.content}>
+                    <SendCompWrap>{v.subject}</SendCompWrap>
+                    <InputComp placeholder={v.content} height={4} type="" fontSize={1.4} />
+                </SendCompWrapper>
+            </>
+        ))
     }
 
     return (
         <>
             {inputList(props.inputArray)}
-            <Button width={"70%"} height={"5rem"} mode={mode} margin="3rem auto 0 "></Button>
+            <Button
+                width={"70%"}
+                height={"5rem"}
+                mode={mode}
+                margin="3rem auto 0 "
+                content={props.BtnContent}
+                fontSize="1.6rem"
+            ></Button>
         </>
     )
 }

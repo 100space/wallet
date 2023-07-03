@@ -7,14 +7,14 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import { KRW } from "@components/Nft/NftCard"
 
 interface ITotalSupply {
-    profile?: boolean
+    profile?: string
 }
 
 export const TotalSupply = ({ profile }: ITotalSupply) => {
     const { mode } = useRecoilValue(ModeState)
     return (
-        <TotalWrap mode={mode} profile={true}>
-            <TextComp fontSize={profile ? "2.5rem" : "3rem"} position="between" width="100%">
+        <TotalWrap mode={mode} profile={"true"}>
+            <TextComp fontSize={profile === "true" ? "2.5rem" : "3rem"} position="between" width="100%">
                 총 자산
                 <CopyToClipboard
                     text={"11231231223123"}
@@ -23,7 +23,7 @@ export const TotalSupply = ({ profile }: ITotalSupply) => {
                     <span className="account">11231231223123</span>
                 </CopyToClipboard>
             </TextComp>
-            <TextComp fontSize={profile ? "2.2rem" : "2.4rem"} position="between" width="100%">
+            <TextComp fontSize={profile === "true" ? "2.2rem" : "2.4rem"} position="between" width="100%">
                 <span>KRW</span>
                 <span>{KRW(23123210)}</span>
             </TextComp>

@@ -78,6 +78,7 @@ const data6: INFTStandard = {
 
 export const MarketPage = () => {
     const navigator = useNavigate()
+    console.dir(window.navigator.userAgent)
     return (
         <>
             <NFTSearch />

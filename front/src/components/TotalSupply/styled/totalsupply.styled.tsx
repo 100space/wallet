@@ -11,14 +11,14 @@ export const TotalWrap = styled.div<IProfileProps>`
     box-shadow: none;
     padding: 2rem;
     margin: 0 0 2rem 0;
-    margin: ${({ profile }) => (profile && "0") || "0 0 2rem 0"};
-    border-radius: ${({ profile }) => (profile && "none") || "2rem"};
-    color: ${({ theme, mode, profile }) => (profile && "white") || (mode && theme[mode].text)};
+    margin: ${({ profile }) => (profile === "true" && "0") || "0 0 2rem 0"};
+    border-radius: ${({ profile }) => (profile === "true" && "none") || "2rem"};
+    color: ${({ theme, mode, profile }) => (profile === "true" && "white") || (mode && theme[mode].text)};
     & > div {
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
     & .account {
-        font-size: ${({ profile }) => (profile && "1rem") || "1.4rem !important"};
+        font-size: ${({ profile }) => (profile === "true" && "1rem") || "1.4rem !important"};
     }
     & > div + div {
         margin-top: 3rem;

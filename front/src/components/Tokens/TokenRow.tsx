@@ -14,7 +14,7 @@ export const TokenRow = (props: { token: ITokenRow }) => {
     const [modeState, setModeState] = useGetMode()
 
     return (
-        <AccountRowWrap mode={modeState.mode} width={"100%"} height={"6rem"}>
+        <AccountRowWrap mode={modeState.mode} width={"100%"} height={"7rem"}>
             <AccountRowImgWrap width={"15%"} height={"100%"}>
                 <AccountRowImg src={props.token.tokenImg} />
             </AccountRowImgWrap>

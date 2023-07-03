@@ -4,16 +4,22 @@ import { Body } from "@common/body"
 import { Header } from "@common/header"
 import { Controller } from "@common/footer"
 import { PopupComp } from "@components/bottomSheet"
+import { useNavigate } from "react-router"
+import { useEffect } from "react"
 
 const App = () => {
     const screenWidth = window.innerWidth
     const screenHeight = window.innerHeight
     const [modeState, setChange] = useGetMode()
-
+    const navigator = useNavigate()
     const changeMode = () => {
         setChange(modeState.mode)
     }
-    console.log(1)
+    useEffect(() => {
+        // eslint-disable-next-line no-restricted-globals
+        ;(location.pathname === "/popup.html" || location.pathname === "/") && !modeState.isLogin && navigator("/login")
+    }, [])
+
     return (
         <>
             <RootWrap mode={modeState.mode}>

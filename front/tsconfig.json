@@ -23,8 +23,10 @@
             "@img/*": ["img/*"],
             "@styled/*": ["styled/*"],
             "@utils/*": ["utils/*"],
-            "@hooks/*": ["hooks/*"]
+            "@hooks/*": ["hooks/*"],
+            "@core/*": ["core/*"],
+            "@test/*": ["test/*"]
         }
     },
-    "include": ["src"]
+    "include": ["src", "test/*.test.ts", "test/*.test.tsx"]
 }

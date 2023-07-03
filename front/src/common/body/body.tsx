@@ -18,7 +18,6 @@ export const Body = () => {
     //         }
     //     }
     // }
-    console.log(sidebarstate)
 
     return (
         <>

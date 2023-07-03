@@ -49,7 +49,7 @@ export interface IBtn extends IonClickProps {
 }
 
 export interface IProfileBtn extends IBtn {
-    profile?: boolean
+    profile?: string
 }
 
 interface Idescription {
@@ -76,6 +76,6 @@ export interface ISelectedBtns extends ISizeProps {
 }
 
 export interface IProfileProps extends ISizeProps {
-    profile?: boolean
+    profile?: string
     profileState?: string
 }
