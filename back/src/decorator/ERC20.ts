@@ -5,14 +5,14 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { ethers, Contract } from 'ethers';
-import { tokenAbi } from './tokenABI';
+import { ERC20ABI } from './ERC20.ABI';
 
 const isValidCA = (provider: ethers.JsonRpcProvider, ca: string) => {
   if (ca.length < 42 || ca === undefined) {
     throw new Error('CA length is not invalid');
   }
   try {
-    return new Contract(ca, tokenAbi, provider);
+    return new Contract(ca, ERC20ABI, provider);
   } catch (error) {
     throw new Error('Contract Failed');
   }

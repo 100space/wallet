@@ -16,9 +16,7 @@ import configuration from './config/configuration';
       isGlobal: true,
       load: [configuration],
     }),
-    MongooseModule.forRoot(
-      `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,
-    ),
+    MongooseModule.forRoot(`${process.env.DB_HOST}`),
     TrendsModule,
     TransactionModule,
     TokenModule,
