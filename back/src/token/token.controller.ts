@@ -1,28 +1,29 @@
-import { Body, Controller, Post, Put } from '@nestjs/common';
+import { Controller, Post, UseInterceptors } from '@nestjs/common';
 import { TokenService } from './token.service';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { getTokenBalanceDTO, getTokenDTO } from './dto/token.dto';
+import { IsERC20 } from 'src/decorator/ERC20';
+import { NetworkValidationInterceptor } from '../interceptor/NetworkValid';
+import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { AddTokenDto } from './dto';
 
-@Controller('token')
 @ApiTags('Token')
+@Controller('token')
+@UseInterceptors(NetworkValidationInterceptor)
 export class TokenController {
   constructor(private readonly tokenService: TokenService) {}
 
-  @ApiOperation({
-    summary: '잔액을 조회합니다.',
-    description: '잔액을 조회합니다.',
-  })
   @Post()
-  getTokenBalance(@Body() { assets, account }: getTokenBalanceDTO) {
-    return this.tokenService.getTokenBalance({ assets, account });
-  }
-
   @ApiOperation({
-    summary: 'CA에 해당하는 토큰 정보를 가져옵니다.',
-    description: 'CA에 해당하는 토큰 정보를 가져옵니다.',
+    summary: '토큰을 추가합니다.',
+    description: '토큰을 추가합니다.',
   })
-  @Put()
-  getToken(@Body() { contractAddress }: getTokenDTO) {
-    return this.tokenService.getToken({ contractAddress });
+  @ApiQuery({
+    name: 'network',
+    required: false,
+    description:
+      '사용하는 네트워크를 입력합니다. \n\n mumbai, ethereum, http://localhost:8545, ... \n\n Default: mumbai',
+  })
+  @ApiBody({ type: AddTokenDto })
+  addToken(@IsERC20() { networkInfo, ca, symbol, decimal }: AddTokenDto) {
+    return this.tokenService.addToken({ networkInfo, ca, symbol, decimal });
   }
 }

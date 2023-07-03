@@ -3,16 +3,19 @@
 ## 개별 코인 페이지 렌더시: POST
 
 받는 데이터
-{
 
+```json
+{
+  "symbol": "USDT"
 }
+```
 
 ```json
 {
   "name": "Tether",
   "symbol": "USDT",
   "rank": 4,
-  "marketCap": 5,
+  "marketCap": 83177035118,
   "totalSupply": 83177035118,
   "maxSupply": 83177035118,
   "circulatingSupply": 21000000,
@@ -278,42 +281,11 @@ mnemonic: ["","","","","","","","","","","",""]
 
 ```json
 {
-  "tokenImg": "",
-  "assets": [
-    { "amount": "", "current": "KRW" },
-    { "amount": "", "current": "USD" }
-  ]
+  "ca": "",
+  "symbol": "",
+  "decimal": "",
+  "image": ""
 }
-```
-
-## 토큰 가져오기: GET PARAMS: address --> database에서 가져오기
-
-```json
-    {
-        [
-            {
-        "tokenImg": "",
-        "assets": [
-        { "amount": "", "current": "KRW" },
-        { "amount": "", "current": "USD" }
-        ]
-    },
-    {
-        "tokenImg": "",
-        "assets": [
-        { "amount": "", "current": "KRW" },
-        { "amount": "", "current": "USD" }
-        ]
-    },
-    {
-        "tokenImg": "",
-        "assets": [
-        { "amount": "", "current": "KRW" },
-        { "amount": "", "current": "USD" }
-        ]
-    }
-        ]
-    }
 ```
 
 ##

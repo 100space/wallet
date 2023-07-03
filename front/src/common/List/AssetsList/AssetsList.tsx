@@ -9,6 +9,7 @@ import { NftCard } from "@components/Nft"
 import { useGetMode } from "@hooks/useMode"
 import { usePopup } from "@hooks/usePopup"
 
+
 export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCard[] }) => {
     const [selected, setSelected] = useState([true, false])
     const [{ isOpen, contents }, setPopUp] = usePopup()
