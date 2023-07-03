@@ -7,7 +7,7 @@ import { HealthController } from './health/health.controller';
 import { TrendsModule } from './trends/trends.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { TokenModule } from './token/token.module';
-import { MnemonicModule } from './mnemonic/mnemonic.module';
+import { AccountModule } from './account/account.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -17,12 +17,13 @@ import configuration from './config/configuration';
       load: [configuration],
     }),
     MongooseModule.forRoot(
-      `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,
+      // `${process.env.DB_URI}`,
+      `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`,
     ),
     TrendsModule,
     TransactionModule,
     TokenModule,
-    MnemonicModule,
+    AccountModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],
