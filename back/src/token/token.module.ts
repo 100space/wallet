@@ -3,12 +3,17 @@ import { TokenService } from './token.service';
 import { TokenController } from './token.controller';
 import { HttpModule } from '@nestjs/axios';
 import { Web3Module } from '../web3/web3.module';
-import { MongooseModule } from "@nestjs/mongoose";
-import { Token, TokenSchema } from "src/schemas/token.schema";
+import { TokenSchema, Token } from '../schemas/token.schema';
+import { MongooseModule } from '@nestjs/mongoose';
+import { TokenRepository } from './token.repository';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Token.name, schema: TokenSchema }]), HttpModule, Web3Module],
+  imports: [
+    HttpModule,
+    Web3Module,
+    MongooseModule.forFeature([{ name: Token.name, schema: TokenSchema }]),
+  ],
   controllers: [TokenController],
-  providers: [TokenService],
+  providers: [TokenService, TokenRepository],
 })
 export class TokenModule { }
