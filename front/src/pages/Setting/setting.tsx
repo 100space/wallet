@@ -1,3 +1,4 @@
+import { MenuListComp } from "@common/settingComp/settingMenu"
 import { PrivateExport } from "@components/PrivateExport"
 import { ModeState, MyAccount } from "@utils/localStorage"
 import { constants } from "buffer"
@@ -22,9 +23,10 @@ export const SettingPage = () => {
 
     return (
         <>
-            <button onClick={localStorageClear}>Clear</button>
+            {/* <button onClick={localStorageClear}>Clear</button>
             <PrivateExport/>
-            <button onClick={herehandler}>hetererwrwerwer</button>
+            <button onClick={herehandler}>hetererwrwerwer</button> */}
+            <MenuListComp/>
         </>
     )
 }

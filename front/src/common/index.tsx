@@ -1,5 +1,6 @@
 export * from "./header"
-export * from "./Footer"
+// export * from "./Footer"
+export * from "./footer"
 export * from "./Filter"
 export * from "./Infomation"
 export * from "./List"
