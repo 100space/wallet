@@ -1,4 +1,4 @@
-import { CreateAccountDto, CreateAccountResponseDto, UploadProfileImgDto, CreateWalletDto, ValidateAccountDto, FindAccountDto, UpdateAccountDto } from "./dto";
+import { CreateAccountDto, CreateAccountResponseDto, UploadProfileImgDto, CreateWalletDto, ValidateAccountDto, FindAccountDto, UpdateAccountDto, GetAccountResponseDto, GetAccountDto } from "./dto";
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import * as bip39 from "bip39";
 import { ethers } from "ethers";
@@ -10,6 +10,16 @@ import { Model } from "mongoose";
 @Injectable()
 export class AccountService {
   constructor(@InjectModel(Account.name) private accountModel: Model<Account>) { }
+
+  async getAccount({ address }: GetAccountDto): Promise<GetAccountResponseDto>{
+    try {
+      if( await this.validation({ address })) throw new BadRequestException('Address is not valid', { cause: new Error(), description: "Address is not valid" })
+      const { nickname, image } = await this.findOne({ address })
+      return { address, nickname, image }
+    } catch (error) {
+      throw error
+    }
+  }
 
   async createAccount({ address, nickname }: CreateAccountDto): Promise<CreateAccountResponseDto> {
     try {

@@ -3,12 +3,22 @@ import { Controller, Post, Body, UseInterceptors, UploadedFile, Get, Query } fro
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags, ApiOperation } from "@nestjs/swagger";
 import { AccountService } from "./account.service";
+import { GetAccountDto, GetAccountResponseDto } from "./dto/get-account.dto";
 
 
 @Controller('account')
 @ApiTags('Account')
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
+
+  @ApiOperation({
+    summary: '계정에 대한 정보를 가져옵니다.',
+    description: '계정의 주소를 이용하여, 주소에 대한 닉네임, 이메일을 가져옵니다.'
+  })
+  @Get()
+  async getAccount(@Query('address') address: string): Promise<GetAccountResponseDto>{
+    return this.accountService.getAccount({ address });
+  }
 
   @ApiOperation({
     summary: '닉네임을 입력, 변경합니다.',
