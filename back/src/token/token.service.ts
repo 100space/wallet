@@ -1,8 +1,9 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { Web3Service } from '../web3/web3.service';
+import { TokenRepository } from './token.repository';
+import { AddTokenDto } from './dto';
 
 @Injectable()
 export class TokenService {
@@ -10,53 +11,53 @@ export class TokenService {
   private readonly baseUrl = 'https://api.coingecko.com/api/v3';
   constructor(
     private readonly httpService: HttpService,
-    private readonly web3: Web3Service,
+    private readonly tokenRepository: TokenRepository,
   ) {}
 
-  async getTokenBalance({ assets, account }) {
-    const coin = await Promise.all(
-      assets
-        .filter((value) => value.type === 'coin')
-        .map(async (value) => {
-          const balance = await this.web3.getBalance(value.ca);
-          return { type: value.type, balance };
-        }),
-    );
+  async addToken({ networkInfo, ca, symbol, decimal }: AddTokenDto) {
+    const response = await this.tokenRepository.findOne({ ca });
+    if (response === null) {
+      if (networkInfo.chainId === 1) {
+        const { image } = await this.findImageFromCoingecko({ ca });
+        const response = this.tokenRepository.create({
+          ca,
+          symbol,
+          decimal,
+          image,
+        });
+        return response;
+      }
 
-    const token = await Promise.all(
-      assets
-        .filter((value) => value.type === 'token')
-        .map(async (value) => {
-          const tokenBalance = await this.web3.getTokenBalance({
-            contractAddress: value.ca,
-            account,
-          });
-          return { type: value.type, ...tokenBalance };
-        }),
-    );
+      const response = this.tokenRepository.create({
+        ca,
+        symbol,
+        decimal,
+        image: `image` + Math.floor(Math.random() * 10),
+      });
+      return response;
+    }
 
-    return { assets: [...coin, ...token] };
+    return response;
   }
 
-  async getToken({ contractAddress }) {
-    try {
-      const { data } = await firstValueFrom(
-        this.httpService
-          .get(`${this.baseUrl}/coins/ethereum/contract/${contractAddress}`)
-          .pipe(
-            catchError((error: AxiosError) => {
-              this.logger.error(error.response.data);
-              throw error.response?.data;
-            }),
-          ),
-      );
-
-      return { image: data.image.large };
-    } catch (error) {
-      if (error?.response?.data?.error === 'coin not found') {
-        return { image: 'no image' };
-      }
-      throw new Error(error?.response?.data?.message || 'Unknown error');
-    }
+  async findImageFromCoingecko({ ca }) {
+    const {
+      data: {
+        image: { large: image },
+      },
+    } = await firstValueFrom(
+      this.httpService
+        .get(`${this.baseUrl}/coins/ethereum/contract/${ca}`)
+        .pipe(
+          catchError((error: AxiosError) => {
+            this.logger.error(error.response.data);
+            throw new NotFoundException(
+              '/coins/{id}/contract/{contract_address}',
+              { cause: new Error(), description: 'Coingecko Error' },
+            );
+          }),
+        ),
+    );
+    return { image };
   }
 }
