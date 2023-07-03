@@ -1,6 +1,7 @@
 import { Category } from "@components/Category"
 import { SettingMenuTitle } from "./styled"
 import { Btn } from "@components/Button"
+import { NavLink, Router } from "react-router-dom"
 
 const MenuList = [
     {MenuSub: "Wallet", content: "Current Wallet", content2: "Network"},
@@ -26,9 +27,11 @@ export const MenuListComp = () => {
                         throw new Error("Function not implemented.")
                     } }/>
                     {menu.content2 && (
-                        <Category category={menu.content2} onClick={function (): void {
-                            throw new Error("Function not implemented.")
-                        } }/>
+                        <NavLink to="network">
+                            <Category category={menu.content2} onClick={function (): void {
+                                throw new Error("Function not implemented.")
+                            } }/>
+                        </NavLink>
                     )}
                 </SettingMenuTitle>
             ))}
