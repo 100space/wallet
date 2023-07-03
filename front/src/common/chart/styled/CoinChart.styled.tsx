@@ -5,7 +5,7 @@ import { styled } from "styled-components"
 export const CoinChartWrap = styled.div<ISizeProps>`
     padding: 0.25rem 0;
     width: 100%;
-    background-color: ${({ theme, mode }) => (mode && theme[mode].basicBg) || "#3d3d3d"};
+    background-color: ${({ theme, mode }) => (mode && theme[mode].basicBg)};
     border-radius: 1rem;
     border: 0.05rem solid #00000075;
     ${Shadow};
