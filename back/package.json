@@ -33,6 +33,7 @@
     "@types/web3": "^1.2.2",
     "axios": "^1.4.0",
     "bip39": "^3.1.0",
+    "ethereumjs-wallet": "^1.0.2",
     "ethers": "^6.6.2",
     "mongoose": "^7.3.0",
     "multer-s3": "^3.0.1",
