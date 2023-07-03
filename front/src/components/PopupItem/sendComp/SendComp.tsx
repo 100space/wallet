@@ -21,6 +21,15 @@ export const nftGetList = [
     { subject: "계약주소(CA)", content: "0x..." },
     { subject: "토큰 아이디(Token ID)", content: "토큰 아이디" },
 ]
+
+
+export const mainList = [
+    { subject: "네트워크 이름", content: "" },
+    { subject: "네트워크 URL", content: "" },
+    { subject: "체인 ID", content: "" },
+    { subject: "통화 기호", content: "" }
+]
+
 export interface InputList {
     subject: string
     content: string
@@ -28,7 +37,7 @@ export interface InputList {
     nftTitle?: string
 }
 
-export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string }) => {
+export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string, settings?: boolean }) => {
     const { mode } = useRecoilValue(ModeState)
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => (
@@ -44,6 +53,9 @@ export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string }
     return (
         <>
             {inputList(props.inputArray)}
+            { props.settings ? 
+            <></>
+            :
             <Button
                 width={"70%"}
                 height={"5rem"}
@@ -52,6 +64,7 @@ export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string }
                 content={props.BtnContent}
                 fontSize="1.6rem"
             ></Button>
+            }
         </>
     )
 }

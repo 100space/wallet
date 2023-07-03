@@ -9,7 +9,7 @@ import { useEffect } from "react"
 
 export const Step1 = () => {
     const api = async () => {
-        const result = await requestServer.get("mnemonic")
+        const result = await requestServer.get("/account/mnemonic")
         return result.data
     }
     const { data, error, isLoading } = useQuery(["mnemonic"], api)

@@ -15,7 +15,6 @@ export const NetWorkPage = () => {
     return (
         <>
             <NFTSearch/>
-            <AssetsList/>
             {NetWorkPageList.map((menu, index) => (
                 <NavLink to="ethereum">
                     <Category category={menu.NetWorkSub} onClick={function (): void {

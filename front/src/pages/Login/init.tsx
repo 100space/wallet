@@ -75,7 +75,7 @@ export const InitPage = () => {
                     content={"홈으로"}
                     backgroundcolor={"#e3e3e3"}
                     mode={modeState.mode}
-                    onClick={() => navigate("/")}
+                    onClick={()=>navigate("/")}
                 />
                 <Button
                     width={"65%"}

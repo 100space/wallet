@@ -15,12 +15,17 @@ export const MainRouter = () => {
     const { isLogin } = useRecoilValue(ModeState)
     const pathName = useLocation()
     const navigator = useNavigate()
+    console.log(isLogin)
 
     return (
         <>
             <Routes>
                 {!isLogin ? (
-                    <Route path="/login/*" element={<InitRouter />}></Route>
+                    <>
+                        <Route path="/login/*" element={<InitRouter />}></Route>                        
+                        <Route path="/" element={<MainPage />}></Route>
+                        <Route path="/*" element={<MainPage />}></Route>
+                    </>
                 ) : (
                     <>
                         <Route path="/" element={<MainPage />}></Route>
@@ -35,3 +40,4 @@ export const MainRouter = () => {
         </>
     )
 }
+
