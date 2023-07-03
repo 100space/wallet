@@ -8,7 +8,7 @@ export class NetWorkList {
     @Prop({ required: true, unique: true })
     address: string
 
-    @Prop({ default: ["ethereurm", "arbitrum", "polygon", "goerli"]})
+    @Prop({ default: ["ETHEREUM", "ARBITRUM", "POLYGON", "GOERLI"]})
     networkList: string[]
 }
 

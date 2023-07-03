@@ -5,7 +5,7 @@ export type NetWorkDocument = HydratedDocument<NetWork>;
 
 @Schema()
 export class NetWork {
-    @Prop({ required: true, unique: true })
+    @Prop({ required: true, unique: true, index: true })
     name: string
     
     @Prop({ required: true, unique: true })

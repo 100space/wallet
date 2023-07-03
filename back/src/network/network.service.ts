@@ -1,36 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { CreateNetworkDto } from './dto/create-network.dto';
-import { UpdateNetworkDto } from './dto/update-network.dto';
-import { NetWork } from "src/schemas/network.schema";
-import { Model } from "mongoose";
-import { InjectModel } from "@nestjs/mongoose";
-import { NetWorkList } from "src/schemas/networkList.schema";
+import { NetWorkRepository } from "./network.repository";
+import { NetWorkListRepository } from "./networkList.repository";
+import { CreateNetworkDto, CreateNetworkListDto } from "./dto";
 
 @Injectable()
 export class NetworkService {
   constructor(
-    @InjectModel(NetWork.name) private networkModel: Model<NetWork>,
-    @InjectModel(NetWorkList.name) private networkListModel: Model<NetWorkList>
+    private readonly netWorkRepository: NetWorkRepository,
+    private readonly netWorkListRepository: NetWorkListRepository
   ) { }
 
-
-  create(createNetworkDto: CreateNetworkDto) {
-    return 'This action adds a new network';
+  async getNetWork(name: string) {
+    return await this.netWorkRepository.findOne(name.toUpperCase());
   }
 
-  findAll() {
-    return `This action returns all network`;
+  async createNetWork(createNetworkDto: CreateNetworkDto) {
+    createNetworkDto.name = createNetworkDto.name.toUpperCase()
+    createNetworkDto.symbol = createNetworkDto.symbol.toUpperCase()
+    return await this.netWorkRepository.create(createNetworkDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} network`;
-  }
-
-  update(id: number, updateNetworkDto: UpdateNetworkDto) {
-    return `This action updates a #${id} network`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} network`;
+  async createNetWorkListByAddress(createNetworkListDto: CreateNetworkListDto) {
+    const isData = await this.netWorkListRepository.findOne(createNetworkListDto.address)
+    if ( isData !== null) return  await this.netWorkListRepository.update(createNetworkListDto, isData.networkList)
+      return await this.netWorkListRepository.create(createNetworkListDto);
   }
 }

@@ -4,6 +4,8 @@ import { NetworkController } from './network.controller';
 import { NetWork, NetWorkSchema } from "src/schemas/network.schema";
 import { MongooseModule } from "@nestjs/mongoose";
 import { NetWorkList, NetWorkListSchema } from "src/schemas/networkList.schema";
+import { NetWorkRepository } from "./network.repository";
+import { NetWorkListRepository } from "./networkList.repository";
 
 @Module({
   imports: [MongooseModule.forFeature(
@@ -13,6 +15,6 @@ import { NetWorkList, NetWorkListSchema } from "src/schemas/networkList.schema";
     ]
   )],
   controllers: [NetworkController],
-  providers: [NetworkService]
+  providers: [NetworkService, NetWorkRepository, NetWorkListRepository]
 })
 export class NetworkModule { }

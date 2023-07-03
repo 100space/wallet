@@ -1,34 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { NetworkService } from './network.service';
-import { CreateNetworkDto } from './dto/create-network.dto';
-import { UpdateNetworkDto } from './dto/update-network.dto';
+import { CreateNetworkDto, CreateNetworkListDto } from "./dto";
 
 @Controller('network')
 export class NetworkController {
-  constructor(private readonly networkService: NetworkService) {}
-
-  @Post()
-  create(@Body() createNetworkDto: CreateNetworkDto) {
-    return this.networkService.create(createNetworkDto);
-  }
+  constructor(private readonly networkService: NetworkService) { }
 
   @Get()
-  findAll() {
-    return this.networkService.findAll();
+  async getNetWork(@Query('name') name: string) {
+    return await this.networkService.getNetWork(name);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.networkService.findOne(+id);
+  @Post()
+  async createNetWork(@Body() createNetworkDto: CreateNetworkDto) {
+    return await this.networkService.createNetWork(createNetworkDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNetworkDto: UpdateNetworkDto) {
-    return this.networkService.update(+id, updateNetworkDto);
+  @Get('account')
+  async getNetWorkList(@Query('address') address: string) {
+    console.log(address)
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.networkService.remove(+id);
+  @Post('account')
+  async createNetWorkListByAddress(@Body() createNetworkListDto: CreateNetworkListDto) {
+    return await this.networkService.createNetWorkListByAddress(createNetworkListDto);
   }
 }
+
