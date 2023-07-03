@@ -1,9 +1,8 @@
-import { CreateAccountDto, CreateAccountResponseDto, UploadProfileImgResponseDto, CreateMnemonicDto, CreateWalletDto, CreateWalletResponseDto } from "./dto";
+import { CreateAccountDto, CreateAccountResponseDto, UploadProfileImgResponseDto, CreateMnemonicDto, CreateWalletDto, CreateWalletResponseDto, GetAccountResponseDto, IAddress } from "./dto";
 import { Controller, Post, Body, UseInterceptors, UploadedFile, Get, Query } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags, ApiOperation } from "@nestjs/swagger";
 import { AccountService } from "./account.service";
-import { GetAccountDto, GetAccountResponseDto } from "./dto/get-account.dto";
 
 
 @Controller('account')
@@ -16,8 +15,8 @@ export class AccountController {
     description: '계정의 주소를 이용하여, 주소에 대한 닉네임, 이메일을 가져옵니다.'
   })
   @Get()
-  async getAccount(@Query('address') address: string): Promise<GetAccountResponseDto>{
-    return this.accountService.getAccount({ address });
+  async getAccount(@Query('address') address: IAddress): Promise<GetAccountResponseDto>{
+    return this.accountService.getAccount(address);
   }
 
   @ApiOperation({
