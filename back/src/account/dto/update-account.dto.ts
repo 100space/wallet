@@ -17,5 +17,5 @@ export class UpdateAccountDto {
     example: 'https://example.com/image.jpg',
     description: 'The image URL of the user',
   })
-  image: string;
+  image?: string;
 }
