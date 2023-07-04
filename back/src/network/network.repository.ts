@@ -10,7 +10,6 @@ export class NetWorkRepository {
 
     async create(createNetworkDto: CreateNetworkDto) {
         const result = await this.networkModel.create(createNetworkDto);
-        console.log(result)
         return true
     }
 

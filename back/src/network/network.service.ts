@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { NetWorkRepository } from "./network.repository";
 import { NetWorkListRepository } from "./networkList.repository";
-import { CreateNetworkDto, CreateNetworkListDto } from "./dto";
+import { CreateNetworkDto } from "./dto";
 
 @Injectable()
 export class NetworkService {
@@ -10,25 +10,31 @@ export class NetworkService {
     private readonly netWorkListRepository: NetWorkListRepository
   ) { }
 
-  async getNetWork(name: string) {
-    return await this.netWorkRepository.findOne(name.toUpperCase());
-  }
-
   async getNetWorkList(address: string) {
     const isData = await this.netWorkListRepository.findOne(address)
-    if ( isData === null) return await this.netWorkListRepository.create(address)
-    return isData
+    
+    if (isData === null) return await this.netWorkListRepository.create(address)
+
+    const { networkList } = isData
+    return { networkList }
   }
 
-  async createNetWork(createNetworkDto: CreateNetworkDto) {
-    createNetworkDto.name = createNetworkDto.name.toUpperCase()
+  async addNetWork(createNetworkDto: CreateNetworkDto, address: string) {
+
+    const upperName = createNetworkDto.name.toUpperCase()
+    createNetworkDto.name = upperName
     createNetworkDto.symbol = createNetworkDto.symbol.toUpperCase()
-    return await this.netWorkRepository.create(createNetworkDto);
-  }
 
-  // async createNetWorkListByAddress(createNetworkListDto: CreateNetworkListDto) {
-  //   const isData = await this.netWorkListRepository.findOne(createNetworkListDto.address)
-  //   if ( isData !== null) return  await this.netWorkListRepository.update(createNetworkListDto, isData.networkList)
-  //     return await this.netWorkListRepository.create(createNetworkListDto);
-  // }
+    const isNetWork = await this.netWorkRepository.findOne(createNetworkDto.name)
+    
+    if (isNetWork === null) await this.netWorkRepository.create(createNetworkDto);
+
+    const { networkList } = await this.netWorkListRepository.findOne(address)
+    const isNetWorkList = networkList.filter(v => v === upperName)
+
+    if (!isNetWorkList) return networkList.push(upperName)
+
+    await this.netWorkListRepository.update({ address, networkList })
+    return { networkList }
+  }
 }

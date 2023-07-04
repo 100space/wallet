@@ -1,3 +1,3 @@
 export * from "./create-network.dto"
-export * from "./create-networkList.dto"
-export * from "./update-networkList.dto"
+export * from "./update-network.dto"
+export * from "./get-network.dto"

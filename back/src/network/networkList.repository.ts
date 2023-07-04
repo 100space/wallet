@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { NetWorkList } from "src/schemas/networkList.schema";
-import { CreateNetworkListDto } from "./dto";
+import { UpdateNetworkDto } from "./dto";
 
 @Injectable()
 export class NetWorkListRepository {
@@ -13,9 +13,9 @@ export class NetWorkListRepository {
         return await this.networkListModel.create({ address, networkList: defaultData });
     }
 
-    async update(createNetworkListDto: CreateNetworkListDto, networkList: string[]) {
-        const { address } = createNetworkListDto
-        return await this.networkListModel.findOneAndUpdate({ address }, createNetworkListDto)
+    async update(updateNetworkDto: UpdateNetworkDto) {
+        const { address } = updateNetworkDto
+        return await this.networkListModel.findOneAndUpdate({ address }, updateNetworkDto)
     }
 
     async findOne(address: string) {
