@@ -20,7 +20,9 @@ export const MainRouter = () => {
         <>
             <Routes>
                 {!isLogin ? (
-                    <Route path="/login/*" element={<InitRouter />}></Route>
+                    <>
+                        <Route path="/login/*" element={<InitRouter />}></Route>
+                    </>
                 ) : (
                     <>
                         <Route path="/" element={<MainPage />}></Route>
