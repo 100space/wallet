@@ -24,7 +24,7 @@ const isValidSymbol = async (contract: ethers.Contract, symbol: string) => {
   }
   try {
     const target = await contract.symbol();
-    if (target !== symbol.toUpperCase()) {
+    if (target.toUpperCase() !== symbol.toUpperCase()) {
       throw new Error('Symbol does not match');
     }
     return target;
