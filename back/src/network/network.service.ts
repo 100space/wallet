@@ -12,7 +12,7 @@ export class NetworkService {
 
   async getNetWorkList(address: string) {
     const isData = await this.netWorkListRepository.findOne(address)
-    
+
     if (isData === null) return await this.netWorkListRepository.create(address)
 
     const { networkList } = isData
@@ -32,7 +32,7 @@ export class NetworkService {
     const { networkList } = await this.netWorkListRepository.findOne(address)
     const isNetWorkList = networkList.filter(v => v === upperName)
 
-    if (!isNetWorkList) return networkList.push(upperName)
+    if (!isNetWorkList) networkList.push(upperName)
 
     await this.netWorkListRepository.update({ address, networkList })
     return { networkList }

@@ -21,7 +21,7 @@ export class NetworkController {
     description: '네트워크 정보를 받아 네트워크를 추가합니다.'
   })
   @Post()
-  async addNetWork(@Body() createNetworkDto: CreateNetworkDto, @Query('address') address: string) {
+  async addNetWork(@Body() createNetworkDto: CreateNetworkDto, @Query('address') address: string): Promise<GetNetworkResponseDto> {
     return await this.networkService.addNetWork(createNetworkDto, address);
   }
 }
