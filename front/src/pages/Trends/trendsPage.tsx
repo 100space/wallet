@@ -3,7 +3,10 @@ import { CoinInfo } from "@common/Infomation"
 import { CoinChart } from "@common/chart"
 import { CoinSlide } from "@common/slide"
 import { PlatWrap } from "@styled/index"
+import { useQuery } from "@tanstack/react-query"
+import requestServer from "@utils/axios/requestServer"
 import { ICoin, ICoinInfo } from "@utils/interFace/coin.interface"
+import { useEffect, useState } from "react"
 
 const data: ICoinInfo = {
     marketCap: 5,
@@ -32,12 +35,37 @@ const icoin: ICoin = {
     changePercent: 0,
     rank: 1,
 }
+
 export const TrendsPage = () => {
+    const [coins, setCoins] = useState({
+        isLoading: false,
+        isError: null as null | unknown,
+        data: [] as ICoin[]
+    })
+
+    const getCoins = async () => {
+        setCoins(prev => ({ isLoading: true, isError: null, data: [...prev.data] }))
+        try {
+            const result = await requestServer.get('/trends')
+            // console.log(result)
+            setCoins(prev => ({ isLoading: false, isError: null, data: [...prev.data, ...result.data] }))
+        } catch (error) {
+            console.log(error)
+            setCoins(prev => ({ isLoading: false, isError: error, data: [] }))
+        }
+    }
+
+    useEffect(() => {
+        getCoins()
+    }, [])
+
+    // if( coins.isLoading ) return <></>
+    // if( coins.isError ) return <>{coins.isError}</>
     return (
         <>
-            <CoinSlide coinDatas={[icoin, icoin, icoin, icoin, icoin, icoin]} />
+            <CoinSlide coinDatas={coins.data} />
             <Filter filterList={["이름순", "가격순", "등락순"]} />
-            <CoinChart coinDatas={[icoin, icoin, icoin, icoin, icoin, icoin]}></CoinChart>
+            <CoinChart coinDatas={coins.data}></CoinChart>
             {/* <CoinInfo coinInfo={data} /> */}
         </>
     )
