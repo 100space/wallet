@@ -22,7 +22,6 @@ export const MainRouter = () => {
                 {!isLogin ? (
                     <>
                         <Route path="/login/*" element={<InitRouter />}></Route>
-                        <Route path="/market/*" element={<MarketRouter />}></Route>
                     </>
                 ) : (
                     <>

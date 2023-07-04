@@ -97,27 +97,27 @@ export const MarketPage = () => {
     console.dir(window.navigator.userAgent)
     return (
         <>
-            {/* <NFTSearch />
+            <NFTSearch />
             <Category
                 category={"인기 NFT"}
                 onClick={() => {
                     navigator("/market/hot")
                 }}
             />
-            <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} /> */}
+            <NFTRowList nftRows={[data2, data2, data2, data2, data2, data2]} />
             {/* <NftRow nftInfo={data2} /> */}
             {/* <NftCard nftInfo={data} /> */}
             {/* <TransactionRow txInfo={data3} /> */}
 
             {/* <NftStandardInformation nftStandardInfo={data6} /> */}
-                <MyNftInformation />
-            {/* <Category
+                {/* <MyNftInformation /> */}
+            <Category
                 category={"최근 등록된 NFT"}
                 onClick={() => {
                     navigator("/market/new")
                 }}
             />
-            <NFTSlide nftCards={[data, data, data, data, data, data, data]} /> */}
+            <NFTSlide nftCards={[data, data, data, data, data, data, data]} />
             {/* <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} /> */}
         </>
     )
