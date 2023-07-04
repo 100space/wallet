@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import { ethers } from "ethers"
+
 chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === "install") {
         // 첫 설치시 실행할 코드
@@ -24,4 +26,39 @@ chrome.runtime.onConnect.addListener(function (port) {
     port.onMessage.addListener(function (msg) {
         if (msg.content) console.log(msg.content)
     })
+})
+
+// InterceptedProvider 클래스 정의
+class InterceptedProvider extends ethers.providers.JsonRpcProvider {
+    async send(method, params) {
+        if (method === "eth_sendTransaction") {
+            console.log("Intercepted a transaction:", params)
+            params[0].gasPrice = ethers.utils.parseUnits("20", "gwei")
+        }
+
+        return super.send(method, params)
+    }
+}
+
+// InterceptedProvider 인스턴스 생성
+const provider = new InterceptedProvider("http://localhost:8545")
+const wallet = ethers.Wallet.createRandom().connect(provider)
+
+// Chrome 확장 프로그램 메시지 리스너
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.method === "sendTransaction") {
+        let signer = wallet
+        signer
+            .sendTransaction(request.data)
+            .then((transaction) => {
+                console.log(transaction)
+                sendResponse({ success: true })
+            })
+            .catch((error) => {
+                console.error(error)
+                sendResponse({ success: false })
+            })
+
+        return true // 비동기 응답을 가능하게 합니다.
+    }
 })

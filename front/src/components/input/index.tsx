@@ -4,8 +4,6 @@ import { HideIcon, InputElement, InputWrap } from "./styled"
 import { IPlaceTypeSize } from "@utils/interFace/styled.interface"
 import { Icon } from "@iconify/react"
 import { useGetMode } from "@hooks/useMode"
-import { useRecoilState, useRecoilValue } from "recoil"
-import { InitMode, MyAccount } from "@utils/localStorage"
 
 export const InputComp: React.FC<IPlaceTypeSize> = ({
     type,
