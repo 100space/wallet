@@ -1,11 +1,14 @@
 import { Filter } from "@common/Filter"
 import { CoinInfo } from "@common/Infomation"
 import { CoinChart } from "@common/chart"
+import { ErrorPage } from "@common/error"
 import { CoinSlide } from "@common/slide"
+import { LoadingBar } from "@components/loading"
 import { PlatWrap } from "@styled/index"
 import { useQuery } from "@tanstack/react-query"
 import requestServer from "@utils/axios/requestServer"
 import { ICoin, ICoinInfo } from "@utils/interFace/coin.interface"
+import { AxiosError } from "axios"
 import { useEffect, useState } from "react"
 
 const data: ICoinInfo = {
@@ -24,19 +27,13 @@ const data: ICoinInfo = {
     price: 1.0,
 }
 
-const icoin: ICoin = {
-    coinPrice: [
-        { currency: "KRW", price: 13000 },
-        { currency: "USD", price: 10 },
-    ],
-    name: "Tether",
-    symbol: "USDT",
-    image: "https://assets.coingecko.com/coins/images/325/small/Tether.png?1668148663",
-    changePercent: 0,
-    rank: 1,
-}
-
 export const TrendsPage = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [coin, setCoin] = useState({
+        isLoading: false,
+        isError: null as null | unknown,
+        data: {} as ICoinInfo
+    })
     const [coins, setCoins] = useState({
         isLoading: false,
         isError: null as null | unknown,
@@ -47,11 +44,11 @@ export const TrendsPage = () => {
         setCoins(prev => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
             const result = await requestServer.get('/trends')
-            // console.log(result)
             setCoins(prev => ({ isLoading: false, isError: null, data: [...prev.data, ...result.data] }))
         } catch (error) {
-            console.log(error)
-            setCoins(prev => ({ isLoading: false, isError: error, data: [] }))
+            if (error instanceof AxiosError) {
+                setCoins(prev => ({ isLoading: false, isError: error, data: [] }))
+            }
         }
     }
 
@@ -59,13 +56,21 @@ export const TrendsPage = () => {
         getCoins()
     }, [])
 
-    // if( coins.isLoading ) return <></>
-    // if( coins.isError ) return <>{coins.isError}</>
+    if (coins.isLoading) return <LoadingBar />
+    if (coins.isError) return <ErrorPage code={404} />
     return (
         <>
-            <CoinSlide coinDatas={coins.data} />
-            <Filter filterList={["이름순", "가격순", "등락순"]} />
-            <CoinChart coinDatas={coins.data}></CoinChart>
+            {
+                isOpen ?
+                    <CoinInfo coinInfo={coin.data} />
+                    :
+                    <>
+                        <CoinSlide coinDatas={coins.data} setCoin={setCoin} setIsOpen={setIsOpen} isOpen={isOpen} />
+                        <Filter filterList={["이름순", "가격순", "등락순"]} />
+                        <CoinChart coinDatas={coins.data} />
+                    </>
+            }
+
             {/* <CoinInfo coinInfo={data} /> */}
         </>
     )
