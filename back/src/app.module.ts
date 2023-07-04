@@ -9,6 +9,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { TokenModule } from './token/token.module';
 import { AccountModule } from './account/account.module';
 import { NetworkModule } from './network/network.module';
+import { MarketModule } from './market/market.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -18,14 +19,15 @@ import configuration from './config/configuration';
       load: [configuration],
     }),
     MongooseModule.forRoot(
-      // `${process.env.DB_URI}`,
-      `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`,
+      `${process.env.DB_URI}`,
+      // `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`,
     ),
     TrendsModule,
     TransactionModule,
     TokenModule,
     AccountModule,
     NetworkModule,
+    MarketModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],
