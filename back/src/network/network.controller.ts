@@ -18,12 +18,12 @@ export class NetworkController {
 
   @Get('account')
   async getNetWorkList(@Query('address') address: string) {
-    console.log(address)
+    return await this.networkService.getNetWorkList(address);
   }
 
-  @Post('account')
-  async createNetWorkListByAddress(@Body() createNetworkListDto: CreateNetworkListDto) {
-    return await this.networkService.createNetWorkListByAddress(createNetworkListDto);
-  }
+  // @Post('account')
+  // async createNetWorkListByAddress(@Body() createNetworkListDto: CreateNetworkListDto) {
+  //   return await this.networkService.createNetWorkListByAddress(createNetworkListDto);
+  // }
 }
 

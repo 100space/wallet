@@ -14,15 +14,21 @@ export class NetworkService {
     return await this.netWorkRepository.findOne(name.toUpperCase());
   }
 
+  async getNetWorkList(address: string) {
+    const isData = await this.netWorkListRepository.findOne(address)
+    if ( isData === null) return await this.netWorkListRepository.create(address)
+    return isData
+  }
+
   async createNetWork(createNetworkDto: CreateNetworkDto) {
     createNetworkDto.name = createNetworkDto.name.toUpperCase()
     createNetworkDto.symbol = createNetworkDto.symbol.toUpperCase()
     return await this.netWorkRepository.create(createNetworkDto);
   }
 
-  async createNetWorkListByAddress(createNetworkListDto: CreateNetworkListDto) {
-    const isData = await this.netWorkListRepository.findOne(createNetworkListDto.address)
-    if ( isData !== null) return  await this.netWorkListRepository.update(createNetworkListDto, isData.networkList)
-      return await this.netWorkListRepository.create(createNetworkListDto);
-  }
+  // async createNetWorkListByAddress(createNetworkListDto: CreateNetworkListDto) {
+  //   const isData = await this.netWorkListRepository.findOne(createNetworkListDto.address)
+  //   if ( isData !== null) return  await this.netWorkListRepository.update(createNetworkListDto, isData.networkList)
+  //     return await this.netWorkListRepository.create(createNetworkListDto);
+  // }
 }

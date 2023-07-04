@@ -8,16 +8,9 @@ import { CreateNetworkListDto } from "./dto";
 export class NetWorkListRepository {
     constructor(@InjectModel(NetWorkList.name) private networkListModel: Model<NetWorkList>) { }
 
-    dafaultData(data: string[]){
-        const defaultNetworkList = ["ETHEREUM", "ARBITRUM", "POLYGON", "GOERLI"]
-        defaultNetworkList.push(...data)
-        console.log(defaultNetworkList)
-        return defaultNetworkList
-    }
-
-    async create(createNetworkListDto: CreateNetworkListDto) {
-        this.dafaultData(createNetworkListDto.networkList)
-        return await this.networkListModel.create(createNetworkListDto);
+    async create(address: string) {
+        const defaultData = ["ETHEREUM", "ARBITRUM", "POLYGON", "GOERLI"]
+        return await this.networkListModel.create({ address, networkList: defaultData });
     }
 
     async update(createNetworkListDto: CreateNetworkListDto, networkList: string[]) {
