@@ -6,25 +6,26 @@ import {
     NftBoardContentForm,
     NftBoardContent,
 } from "./styled/Board.styled"
+import { IBlockChainNetWork } from "@utils/interFace/nft.interface";
 
-export const NftBoardContentRow = (props: { text: (string | string[])[]; isImage: boolean; open: string }) => {
+export const NftBoardContentRow = (props: { text: (string | string[])[]; isImage: IBlockChainNetWork; open: string }) => {
     const [modeState, setModeState] = useGetMode()
-
+    
     return (
         <NftBoardContentRowWrap mode={modeState.mode} height={"3.6rem"} open={props.open}>
             <NftBoardContentSubject>{props.text[0]}</NftBoardContentSubject>
             {props.isImage ? (
                 <NftBoardContentForm>
                     <Wrapper height={"1rem"}>
-                        <ImageForm src={props.text[1][0]} height={"150%"} />
+                        <ImageForm src={props.isImage.image} height={"150%"} />
                     </Wrapper>
-                    <NftBoardContent>{props.text[1][1]}</NftBoardContent>
+                    <NftBoardContent>{props.isImage.name}</NftBoardContent>
                 </NftBoardContentForm>
             ) : (
                 <NftBoardContentForm>
                     <NftBoardContent>
-                        {typeof props.text[1] === "string" && props.text[1].length === 40
-                            ? props.text[1].substring(0, 6) + "..." + props.text[1].substring(36, 40)
+                        {typeof props.text[1] === "string" && props.text[1].length === 42
+                            ? props.text[1].substring(0, 6) + "..." + props.text[1].substring(38, 42)
                             : props.text[1]}
                     </NftBoardContent>
                 </NftBoardContentForm>

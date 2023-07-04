@@ -30,19 +30,38 @@ export interface INFTRank {
 
 export interface INFTRow extends INFTCard, INFTRank {}
 
+export interface IBlockChainNetWork {
+    name: string
+    image: string
+}
+
+export interface IContent {
+    subject: string
+    value: string | number | IBlockChainNetWork
+}
+
 export interface INFTStauts {
-    blockchain: (string | string[])[]
-    supply: (string | number)[]
-    isTrade: (string | number)[]
-    isSell: (string | number)[]
+    blockchain: IContent
+    supply: IContent
+    isTrade: IContent
+    isSell: IContent
+    // blockchain: (string | string[])[]
+    // supply: (string | number)[]
+    // isTrade: (string | number)[]
+    // isSell: (string | number)[]
 }
 
 export interface INftInfomation {
-    owner: string[]
-    blockchain: (string | string[])[]
-    ca: string[]
-    tokenId: (number | string)[]
-    tokenStandard: string[]
+    owner: IContent
+    blockchain: IContent
+    ca:IContent
+    tokenId: IContent
+    tokenStandard: IContent
+    // owner: string[]
+    // blockchain: (string | string[])[]
+    // ca: string[]
+    // tokenId: (number | string)[]
+    // tokenStandard: string[]
 }
 
 export interface INFTStandardSubject {

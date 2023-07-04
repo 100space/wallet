@@ -35,7 +35,7 @@ export const MenuListComp = () => {
                     )}
                 </SettingMenuTitle>
             ))}
-            <Btn backgroundcolor="" fontSize="1.85rem" width="80%" height="5rem" margin="2rem" mode="" onClick={()=>handleButtonClick} profile={true}>계정 지우기</Btn>
+            <Btn backgroundcolor="" fontSize="1.85rem" width="80%" height="5rem" margin="2rem" mode="" onClick={()=>handleButtonClick} profile={"true"}>계정 지우기</Btn>
         </>
     )
 }
