@@ -2,40 +2,30 @@ export const theme = {
     textCoinPrice: "#FFBD62",
     darkMode: {
         // 배경색
-        basicBg: "#2e2e2e",
-        basicDeepBg: "#1D1D1D",
-        bg200: "#1f1f1f",
-
-
-        // // 배경색
-        // bg200: "#555555",
-        // bg100: "#8d8d8d",
-        // bgCoin: "#4f4f4f",
-        // bgInfo: "#4f4f4f",
-        // bgDescription: "#222222",
-        // bgBtn: "#000000",
-        // mnimonicColor: "#888",
-        // profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
+        basicBg: "#181818",
+        basicLightBg: "#2c2c2c",
+        bg200: "#323232",
+        bgInfo: "#343434",
+        bgDescription: "#222222",
+        profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
 
         // //point 색상
-        // point300: "#E4562A",
-        // point200: "#FF8756",
-        // point100: "#FFC964",
+        point200: "#FF8756",
+        point100: "#FFC964",
 
         // //text 색상
-        // pointText: "#ffeeb5",
-        // text: "#ffffff",
-        // textCoinSymbol: "#ffffff",
-        // textCoinName: "#888",
-        // texthide: "#aaa",
-        // textCoinPrice: "#FFBD62",
+        pointText: "#ffeeb5",
+        text: "#ffffff",
+        textCoinSymbol: "#ffffff",
+        textCoinName: "#888",
+        texthide: "#aaa",
+        textCoinPrice: "#FFBD62",
 
         // // 버튼관련 색상
-        // buttonBg: "linear-gradient(135deg, #5779eb, #ff8756)",
-        // buttonHover: "linear-gradient(135deg, #e64ee9, #8192f0, #c3e3fe)",
-        // buttonActive: "linear-gradient(135deg, #d54121, #e3582c)",
-
-        // footerColor: "#74cffc",
+        buttonBg:"#46a2f2",
+        buttonHover: "#142a3a",
+        popupBtnBg: "#42578e",
+        footerColor: "#5493ff",
     },
     lightMode: {
         basicBg: "#e3a12f",

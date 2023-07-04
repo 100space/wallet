@@ -46,6 +46,7 @@ export interface IBtn extends IonClickProps {
     fontSize?: string
     mode: string
     children?: string | ReactNode
+    color?:string
 }
 
 export interface IProfileBtn extends IBtn {

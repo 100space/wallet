@@ -1,4 +1,3 @@
-import { AssetsList } from "@common/List"
 import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
 import { NavLink } from "react-router-dom"

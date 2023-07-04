@@ -6,7 +6,7 @@ export const CopyFunctionWrap = styled.div<ISizeProps>`
     display: flex;
     margin-top: 1rem;
     ${SizePropsStyled}
-    color: ${({ theme, mode }) => mode && theme[mode].texthide};
+    color: ${({ theme, mode }) => mode && theme[mode].text};
     cursor: pointer;
 `
 

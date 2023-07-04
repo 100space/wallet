@@ -1,8 +1,12 @@
 import logo from "@img/logo.png"
+import { ImgWrap } from "./styled"
+
 export const LogoComp = () => {
     return (
         <>
-            <img src={logo} alt="" />
+            <ImgWrap>
+                <img src={logo} alt="" />
+            </ImgWrap>
         </>
     )
 }

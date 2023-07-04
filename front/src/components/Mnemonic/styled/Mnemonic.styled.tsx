@@ -12,16 +12,16 @@ export const MnemonicBoxWrap = styled.div<ISizeProps>`
 
 export const MnemonicBox = styled.div<IMnemonicBox>`
     ${SizePropsStyled}
-    position: relative;
+        position: relative;
     padding: 1rem 2rem;
     min-height: 9rem;
-    background-color: ${(props) => props.bgColor || "#555555"};
+    background-color: ${({ theme, mode }) => mode && theme[mode].bgInfo};
     box-sizing: border-box;
 `
 
 export const MnemonicContent = styled.div<IMenmonicContent>`
     ${SizePropsStyled}
-    color: ${(props) => props.color || "#bbbbbb"};
+    color: ${({ theme, mode }) => mode && theme[mode].text };
     font-size: 1.8rem;
     line-height: 3rem;
     font-weight: 400;

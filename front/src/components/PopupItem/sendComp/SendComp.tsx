@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil"
 import { ConInfo } from "@components/Description"
 import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
 import { Wrapper } from "@styled/index"
+import { useGetMode } from "@hooks/useMode"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요" },
@@ -39,10 +40,11 @@ export interface InputList {
 
 export const SendComp = (props: { inputArray: InputList[]; BtnContent?: string, settings?: boolean }) => {
     const { mode } = useRecoilValue(ModeState)
+    const [modeState, setModeState] = useGetMode()
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => (
             <>
-                <SendCompWrapper key={v.content}>
+                <SendCompWrapper key={v.content} mode={modeState.mode}>
                     <SendCompWrap>{v.subject}</SendCompWrap>
                     <InputComp placeholder={v.content} height={4} type="" fontSize={1.4} />
                 </SendCompWrapper>
