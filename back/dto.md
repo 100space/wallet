@@ -66,7 +66,6 @@
 
 ```json
 {
-  "rank": 11,
   "name": "NONGDAMGOM",
   "image": "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
   "owner": "Char1ey",
@@ -140,7 +139,7 @@ ca:"",
 {
   "ca": ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
   "supply": ["발행량", "100개"],
-  "isTrade": ["거래가능", "99개"],
+  "isTrade": ["거래가능", "true"],
   "isSell": ["판매중", "50개"],
   "owner": ["내 계정 닉네임", "내 계정 주소"],
   "blockchain": [
@@ -163,7 +162,7 @@ ca:"",
 }
 ```
 
-### NFTStatus POST
+<!-- ### NFTStatus POST
 
 ```json
 {
@@ -211,7 +210,7 @@ ca:"",
   "sellPrice": { "currency": "ETH", "price": 0.013 },
   "chargePrice": { "currency": "ETH", "price": 0.0000013 }
 }
-```
+``` -->
 
 =============================================================
 

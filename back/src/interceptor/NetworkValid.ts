@@ -23,6 +23,10 @@ const isValidNetwork = (network: string) => {
   }
 };
 
+const isValidChainId = (currentChainId: string | number, chainId: number) => {
+  if (currentChainId !== chainId) throw new Error('ChainId is not valid');
+};
+
 @Injectable()
 export class NetworkValidationInterceptor implements NestInterceptor {
   async intercept(
@@ -30,7 +34,7 @@ export class NetworkValidationInterceptor implements NestInterceptor {
     next: CallHandler,
   ): Promise<Observable<any>> {
     const req = context.switchToHttp().getRequest();
-    const network = req.query.network;
+    const network = req.cookies.network;
 
     if (!network || network.length === 0) {
       req.networkInfo = networks.mumbai;
@@ -43,9 +47,14 @@ export class NetworkValidationInterceptor implements NestInterceptor {
     }
 
     try {
-      const provider = isValidNetwork(network);
+      const currentNetwork = JSON.parse(network);
+      const provider = isValidNetwork(currentNetwork.rpc);
       const { chainId } = await provider.getNetwork();
-      req.networkInfo = { rpc: req.query.network, chainId: Number(chainId) };
+      isValidChainId(currentNetwork.chainId, Number(chainId));
+      req.networkInfo = {
+        rpc: currentNetwork.rpc,
+        chainId: Number(chainId),
+      };
       return next.handle();
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
