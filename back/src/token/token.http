@@ -1,7 +1,8 @@
-@server = http://localhost:3000
+@server = {{$dotenv PROTOCOL}}://{{$dotenv HOST}}:{{$dotenv PORT}}
 
 ### 토큰 추가하기
-POST {{server}}/token?network=ethereum HTTP/1.1
+POST {{server}}/token HTTP/1.1
+Cookie: network={"rpc":"{{$dotenv ETHEREUM_NETWORK}}", "chainId": 1}
 Content-Type: application/json
 
 {
@@ -10,8 +11,9 @@ Content-Type: application/json
     "decimal": 18
 }
 
-### test
-POST  {{server}}/token?network=mumbai HTTP/1.1
+### 테스트넷 토큰 추가하기
+POST  {{server}}/token HTTP/1.1
+Cookie: network={"rpc":"{{$dotenv MUMBAI_NETWORK}}", "chainId": 80001}
 Content-Type: application/json
 
 {

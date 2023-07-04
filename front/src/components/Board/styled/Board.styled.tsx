@@ -27,4 +27,5 @@ export const NftBoardContentForm = styled.div<ISizeProps>`
     }
 `
 
-export const NftBoardContent = styled.div<ISizeProps>``
+export const NftBoardContent = styled.div<ISizeProps>`
+`
