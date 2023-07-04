@@ -2,7 +2,7 @@ import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
 import { ITokenRow } from "@utils/interFace/core"
 import { INFTCard, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
-import { ModeState, InitMode, IsCheck, MyAccount, Web3Instance } from "@utils/localStorage"
+import { ModeState, InitMode, IsCheck, MyProfile, Web3Instance } from "@utils/localStorage"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
@@ -95,15 +95,16 @@ declare global {
 }
 export const MainPage = () => {
     const navigater = useNavigate()
-
+    const location = useLocation()
     const [initState, setInitState] = useRecoilState(ModeState)
     const [manageMode, setManageMode] = useRecoilState(InitMode)
     const [isCheck, setIsCheck] = useRecoilState(IsCheck)
-    const [myAccount, setMyAccount] = useRecoilState(MyAccount)
+    const [myProfile, setMyProfile] = useRecoilState(MyProfile)
     const [instance, setInstance] = useRecoilState(Web3Instance)
     // const { myWallet, enable } = useMyWallet()
     useEffect(() => {
-        if (!initState.isLogin) navigater("/login")
+        console.log(location.pathname)
+        !initState.isLogin && navigater("/login")
         // const web3 = new Web3()
         // const myWalletInstance = new MyWallet()
         // if (window && web3) {
@@ -118,7 +119,7 @@ export const MainPage = () => {
         const myWalletInstance = new MyWallet()
         console.log(myWalletInstance)
     }, [])
-    useEffect(() => {}, [instance])
+
     return (
         <>
             <TotalSupply></TotalSupply>
