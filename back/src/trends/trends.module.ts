@@ -5,9 +5,7 @@ import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
-    HttpModule.register({
-      baseURL: 'https://api.coingecko.com/api/v3/',
-    }),
+    HttpModule,
   ],
   controllers: [TrendsController],
   providers: [TrendsService],
