@@ -22,7 +22,7 @@ export const Scanner = () => {
                         if (typeof result === "string" && result.length === 42) {
                             ConfirmAlert(result, setScanOpen, setOpen)
                         } else {
-                            throw new Error("Invalid QR code format") // 예외 발생
+                            throw new Error(result) // 예외 발생
                         }
                     }}
                     onError={(error) => {

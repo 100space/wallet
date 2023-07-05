@@ -4,19 +4,6 @@ const fs = require("fs")
 const path = require("path")
 
 module.exports = {
-    // jest: {
-    //     moduleNameMapper: {
-    //         "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js",
-    //         "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js",
-    //         "^@components/(.*)$": "<rootDir>/src/components/$1",
-    //         "^@utils/(.*)$": "<rootDir>/src/utils/$1",
-    //         // 나머지 alias 설정
-    //     },
-    //     moduleFileExtensions: ["js", "jsx", "ts", "tsx"], // Jest가 처리할 수 있는 파일 확장자들
-    //     transform: {
-    //         "^.+\\.tsx?$": "ts-jest", // TypeScript 파일을 Jest가 처리할 수 있게 변환
-    //     },
-    // },
     jest: {
         configure: {
             transform: {
@@ -52,7 +39,7 @@ module.exports = {
         },
         mode: "development",
         devtool: "inline-source-map",
-        configure: (webpackConfig) => {
+        configure: (webpackConfig, { env, paths }) => {
             // manifest.json 파일 경로
             const manifestPath = path.resolve(__dirname, "public/manifest.json")
 

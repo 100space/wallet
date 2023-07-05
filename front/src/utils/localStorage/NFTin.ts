@@ -26,7 +26,7 @@ export const MyProfile = atom({
 })
 export const MyAccounts = atom({
     key: "myAccounts",
-    default: { privateKey: "", publicKey: "", address: "" },
+    default: [{ privateKey: "", publicKey: "", address: "" }],
     effects_UNSTABLE: [persistAtom],
 })
 export const InitMode = atom({
