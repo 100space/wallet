@@ -4,11 +4,9 @@ import { CoinChart } from "@common/chart"
 import { ErrorPage } from "@common/error"
 import { CoinSlide } from "@common/slide"
 import { LoadingBar } from "@components/loading"
-import { PlatWrap } from "@styled/index"
-import { useQuery } from "@tanstack/react-query"
 import requestServer from "@utils/axios/requestServer"
 import { ICoin, ICoinInfo } from "@utils/interFace/coin.interface"
-import { AxiosError } from "axios"
+import axios, { AxiosError, AxiosResponse } from "axios"
 import { useEffect, useState } from "react"
 
 const data: ICoinInfo = {
@@ -36,7 +34,7 @@ export const TrendsPage = () => {
     })
     const [coins, setCoins] = useState({
         isLoading: false,
-        isError: null as null | unknown,
+        isError: null as null | AxiosResponse<any, any> | undefined,
         data: [] as ICoin[]
     })
 
@@ -45,9 +43,9 @@ export const TrendsPage = () => {
         try {
             const result = await requestServer.get('/trends')
             setCoins(prev => ({ isLoading: false, isError: null, data: [...prev.data, ...result.data] }))
-        } catch (error) {
-            if (error instanceof AxiosError) {
-                setCoins(prev => ({ isLoading: false, isError: error, data: [] }))
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                setCoins({ isLoading: false, isError: e.response, data: [] })
             }
         }
     }
@@ -57,7 +55,7 @@ export const TrendsPage = () => {
     }, [])
 
     if (coins.isLoading) return <LoadingBar />
-    if (coins.isError) return <ErrorPage code={404} />
+    if (coins.isError && typeof(coins.isError.status) === "number") return <ErrorPage code={coins.isError.status} message={coins.isError.data.message} />
     return (
         <>
             {

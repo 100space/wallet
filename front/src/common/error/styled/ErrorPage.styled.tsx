@@ -11,7 +11,7 @@ const animateTextBackground = keyframes`
     }
 
     50%{
-        background-position: 100% 100%;
+        background-position: 100%;
     }
 
     75%{
@@ -30,9 +30,14 @@ export const Error404Wrap = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
+
+    & > div:nth-last-child(1) {
+        margin-top: 3rem;
+        height: 5rem;
+    }
 `
 export const ErrorNumber = styled.h1`
-    font-size: 20rem;
+    font-size: 12rem;
     font-weight: bold;
 
     &::after {
@@ -44,6 +49,11 @@ export const ErrorNumber = styled.h1`
         background-size: 400%;
         text-shadow: 1px 1px 2px transparentize(#fff, .75);
         animation: ${animateTextBackground} 4s ease-in-out infinite;
+    }
+
+    & > svg > defs > * {
+        color: white;
+        background-color: black;
     }
 `
 export const ErrorContent = styled.p<ISizeProps>`
