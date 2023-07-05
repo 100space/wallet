@@ -1,4 +1,4 @@
-export const ERC721ABI = [
+export const ERC721_ABI = [
   {
     constant: true,
     inputs: [],

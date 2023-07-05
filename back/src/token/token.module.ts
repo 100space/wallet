@@ -16,4 +16,4 @@ import { TokenRepository } from './token.repository';
   controllers: [TokenController],
   providers: [TokenService, TokenRepository],
 })
-export class TokenModule { }
+export class TokenModule {}

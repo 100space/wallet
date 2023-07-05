@@ -1,0 +1,25 @@
+@server = {{$dotenv PROTOCOL}}://{{$dotenv HOST}}:{{$dotenv PORT}}
+
+###
+GET {{server}}/market HTTP/1.1
+
+// metadata: ipfs://QmVXbeGajzbAAVk5rw9CQmysAbBUz6SHBiT2RLj4HbmsBt
+
+###
+POST {{server}}/market HTTP/1.1
+Content-Type: application/json
+
+{
+    "ca": "0xA3b0E897B5166379a14dF88B5bf50c530270556a"
+}
+
+###
+POST {{server}}/market/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "eoa": "0x28C9fC2f5C973EEEb00e0692074f2569501078F3"
+}
+
+###
+GET https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=0x299EA2050a99271aB608526aA83DdCFcA69A0fCB&startblock=0&endblock=99999999999&page=1&offset=10&sort=asc&apikey={{$dotenv POLYGON_SCAN}}

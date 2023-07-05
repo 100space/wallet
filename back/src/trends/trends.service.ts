@@ -1,8 +1,12 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { ICoinList, ICoinInfo } from '../interface/trends.interface';
+import {
+  ICoinList,
+  ICoinInfo,
+  IGetCoinList,
+} from '../interface/trends.interface';
 
 @Injectable()
 export class TrendsService {
@@ -11,7 +15,17 @@ export class TrendsService {
 
   async simplePrice({ id }) {
     const { data } = await firstValueFrom(
-      this.httpService.get(`simple/price?ids=${id}&vs_currencies=usd%2Ckrw`),
+      this.httpService
+        .get(`simple/price?ids=${id}&vs_currencies=usd%2Ckrw`)
+        .pipe(
+          catchError((error: AxiosError) => {
+            this.logger.error(error.response.data);
+            throw new BadGatewayException('Unable to get price data', {
+              cause: new Error(),
+              description: 'Coingecko Error',
+            });
+          }),
+        ),
     );
     const keys = Object.keys(data[id]);
     return keys.map((v) => {
@@ -26,13 +40,16 @@ export class TrendsService {
         .pipe(
           catchError((error: AxiosError) => {
             this.logger.error(error.response.data);
-            throw { type: 'coingecko error', message: 'coins/markets' };
+            throw new BadGatewayException('Unable to get coin list', {
+              cause: new Error(),
+              description: 'Coingecko Error',
+            });
           }),
         ),
     );
 
     const response = await Promise.all(
-      data.map(async (v, i) => {
+      data.map(async (v: IGetCoinList, i: number) => {
         return {
           rank: i + 1,
           name: v.name,
@@ -54,7 +71,7 @@ export class TrendsService {
       this.httpService.get(`search?query=${symbol}`).pipe(
         catchError((error: AxiosError) => {
           this.logger.error(error.response.data);
-          throw new NotFoundException('search', {
+          throw new BadGatewayException('Unable to get token id', {
             cause: new Error(),
             description: 'Coingecko Error',
           });
@@ -68,7 +85,7 @@ export class TrendsService {
       this.httpService.get(`coins/${id}`).pipe(
         catchError((error: AxiosError) => {
           this.logger.error(error.response.data);
-          throw new NotFoundException('coins/{id}', {
+          throw new BadGatewayException('Unable to get token data', {
             cause: new Error(),
             description: 'Coingecko Error',
           });
