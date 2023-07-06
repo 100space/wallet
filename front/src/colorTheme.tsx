@@ -28,7 +28,7 @@ export const theme = {
         footerColor: "#5493ff",
     },
     lightMode: {
-        basicBg: "#e3a12f",
+        basicBg: "#fff4e1",
         // bg300: "#aaaaaa",
         // bg200: "#bfbfbf",
         // bg100: "#e8e8e8",
