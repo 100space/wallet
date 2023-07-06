@@ -5,7 +5,7 @@ export type TrendDocument = HydratedDocument<Trend>;
 
 @Schema()
 export class Trend {
-    @Prop({ required: true, unique: true })
+    @Prop({ required: true })
     name: string
 
     @Prop({ required: true, unique: true, index: true })
@@ -14,16 +14,16 @@ export class Trend {
     @Prop({ required: true })
     rank: number
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     marketCap: number
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     totalSupply: number
 
-    @Prop({ required: true })
-    maxSupply: number | null
+    @Prop({ required: false })
+    maxSupply: number
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     circulatingSupply: number
 
     @Prop({ required: true })

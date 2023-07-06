@@ -3,11 +3,15 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { ICoinList, ICoinInfo } from '../interface/trends.interface';
+import { TrendRepository } from "./trends.repository";
 
 @Injectable()
 export class TrendsService {
   private readonly logger = new Logger(TrendsService.name);
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly trendRepository: TrendRepository
+    ) {}
 
   async simplePrice({ id }) {
     const { data } = await firstValueFrom(
