@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button style="width: 100%; height: 10rem" id="approveButton">Approve</button>
+        <script>
+            document.getElementById("approveButton").addEventListener("click", function () {
+                let transactionParams = window.transactionParams
+                // ethers 라이브러리를 사용하여 트랜잭션을 서명하고 전송합니다.
+                // 이 부분은 실제 서명 및 전송 로직에 따라 달라집니다.
+
+                chrome.runtime.sendMessage({ type: "signAndSendTransaction", transactionParams }, function (response) {
+                    console.log(response)
+                })
+            })
+        </script>
+    </body>
+</html>

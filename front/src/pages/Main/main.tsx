@@ -12,8 +12,7 @@ import { NFTInfoPage } from ".."
 // import MyWallet from "@core/wallet"
 import myWallet from "@core/wallet"
 import myProvider from "@core/provider"
-import Web3, { net } from "web3"
-import { ethers, id } from "ethers"
+import { ethers } from "ethers"
 import NFTin from "@core/index"
 
 const tokenData: ITokenRow[] = [
@@ -94,6 +93,7 @@ const nftData: INFTCard[] = [
 declare global {
     interface Window {
         ethereum?: any
+        abc?: any
         // MyWallet: MyWallet
     }
 }
@@ -108,11 +108,12 @@ export const MainPage = () => {
     const [instance, setInstance] = useRecoilState(Web3Instance)
     // const { myWallet, enable } = useMyWallet()
 
+    const network = process.env.REACT_APP_MUMBAI_NETWORK
+    const eth = new ethers.JsonRpcProvider(network as string)
+    const provider = new myProvider(network as string)
+    const wallet = new myWallet(myAccounts.privateKey, provider)
     useEffect(() => {
-        const network = process.env.REACT_APP_MUMBAI_NETWORK
         !initState.isLogin && navigater("/login")
-        // const provider = new myProvider(network as string)
-        // const wallet = new myWallet(myAccounts.privateKey, provider)
         // console.log(myAccounts.privateKey)
         // console.log(myWallet.createRandom(provider))
         // console.log(wallet.fromEncryptedJson())
@@ -128,14 +129,10 @@ export const MainPage = () => {
         // console.log(nftin.provider.request({ method: "eth_requestAccounts" }).then(console.log))
 
         // console.log(wallet.signTransaction({ to: "0x0", value: 0 }))
-
-        // provider
-        //     .request({
-        //         method: "eth_accounts",
-        //     })
-        //     .then((res: any) => {
-        //         console.log(res)
-        //     })
+        if (!window.abc) {
+            window.abc = wallet
+        }
+        console.log(new ethers.JsonRpcSigner(provider, myAccounts.address))
     }, [])
 
     return (

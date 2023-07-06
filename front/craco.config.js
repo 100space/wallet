@@ -58,11 +58,14 @@ module.exports = {
                     },
                 },
                 background: {
-                    service_worker: "background.js",
+                    service_worker: "/background.js",
+                    type: "module",
                 },
+                minimum_chrome_version: "92",
+
                 web_accessible_resources: [
                     {
-                        resources: ["external.js"],
+                        resources: ["external.js", "windowproperty.js"],
                         matches: ["<all_urls>"],
                     },
                 ],
@@ -77,6 +80,20 @@ module.exports = {
 
             // manifest.json 파일 생성
             fs.writeFileSync(manifestPath, JSON.stringify(manifestContent, null, 2))
+
+            if (env === "production") {
+                webpackConfig.entry = {
+                    main: paths.appIndexJs, // 기존의 CRA 엔트리 포인트
+                    background: path.resolve(__dirname, "./public/background.js"), // 배경 스크립트
+                }
+
+                // output.filename을 함수로 설정하여, 각 엔트리 포인트에 대한 결과물 파일 이름을 지정
+                webpackConfig.output.filename = (chunkData) => {
+                    return chunkData.chunk.name === "background"
+                        ? "background.js"
+                        : "static/js/[name].[contenthash:8].js"
+                }
+            }
 
             return webpackConfig
         },

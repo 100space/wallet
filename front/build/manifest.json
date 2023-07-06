@@ -12,12 +12,15 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "/background.js",
+    "type": "module"
   },
+  "minimum_chrome_version": "92",
   "web_accessible_resources": [
     {
       "resources": [
-        "external.js"
+        "external.js",
+        "windowproperty.js"
       ],
       "matches": [
         "<all_urls>"
