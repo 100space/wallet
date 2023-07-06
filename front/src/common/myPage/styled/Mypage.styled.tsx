@@ -21,7 +21,8 @@ export const MypageWrapper = styled.div<ISizeProps>`
     }
 `
 
-export const MyProfile = styled.img`
+
+export const MyProfile = styled.input`
     width: 12rem;
     height: 12rem;
     border-radius: 6.5rem;
@@ -31,6 +32,7 @@ export const MyProfile = styled.img`
     z-index: 1;
     position: relative;
     top: 2.7rem;
+    background-color: #fff;
 `
 
 export const MyNickName = styled.input`

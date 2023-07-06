@@ -3,9 +3,9 @@ import { MypageWrapper, MyProfile, MyNickName, TotalSupplyWrap } from "./styled"
 import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
 import { Btn } from "@components/Button"
-// import profile  from "@img/profile.png"
-import pro from "@img/pro.png"
+import profile from "@img/profile.png"
 import { useGetMode } from "@hooks/useMode"
+import { MyProfileWrap } from "./MyProfileWrap"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -23,7 +23,10 @@ export const Mypage = () => {
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
-                <MyProfile src={pro} />
+                {/* <MyProfileWrap>
+                    <MyProfile src={profile} type="file" accept="image/*"/>
+                </MyProfileWrap> */}
+                {<MyProfileWrap/>}
                 <MyNickName placeholder="NickName" />
                 <TotalSupplyWrap>
                     <TotalSupply />
