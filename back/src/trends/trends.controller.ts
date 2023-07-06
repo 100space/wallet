@@ -24,8 +24,14 @@ export class TrendsController {
     required: false,
     example: 10,
   })
-  getCoinList(@Query() { count = 10 }) {
-    return this.trendsService.getCoinList({ count });
+  @ApiQuery({
+    name: 'sort',
+    description: 'rank, name, price 중 어느 것을 기준으로 가져올지 정해줍니다.',
+    required: false,
+    example: 'name',
+  })
+  getCoinList(@Query() { sort = "rank",count = 10 }) {
+    return this.trendsService.getCoinInfomation(sort, count);
   }
 
   @Post()
