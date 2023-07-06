@@ -8,6 +8,11 @@ import { TokenSymbolDto } from './dto/get-token-trends.dto';
 export class TrendsController {
   constructor(private readonly trendsService: TrendsService) {}
 
+  @Get('exchange')
+  getExchange(@Query() { from, to }) {
+    return this.trendsService.getExchange({ from, to });
+  }
+
   @Get()
   @ApiOperation({
     summary: '코인 리스트를 가져옵니다.',

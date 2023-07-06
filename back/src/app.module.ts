@@ -9,6 +9,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { TokenModule } from './token/token.module';
 import { AccountModule } from './account/account.module';
 import { MarketModule } from './market/market.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import configuration from './config/configuration';
 
 @Module({
@@ -21,6 +22,7 @@ import configuration from './config/configuration';
       `${process.env.DB_URI}`,
       // `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`,
     ),
+    ScheduleModule.forRoot(),
     TrendsModule,
     TransactionModule,
     TokenModule,

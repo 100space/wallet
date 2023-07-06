@@ -101,12 +101,6 @@ export class MarketService {
     };
   }
 
-  async getPrice({ id }) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [usdPrice, krwPrice] = await this.trendService.simplePrice({ id });
-    return krwPrice.price;
-  }
-
   async listNft({ result }): Promise<IListNft[]> {
     try {
       return await Promise.all(
@@ -122,7 +116,7 @@ export class MarketService {
           ] = v;
 
           const data = await this.getMetadata({ metadata });
-          const krwPrice = await this.getPrice({ id: 'matic-network' });
+          const krwPrice = this.trendService.krw.price;
 
           const prices = [
             {

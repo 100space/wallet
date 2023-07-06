@@ -1,5 +1,11 @@
 import { HttpService } from '@nestjs/axios';
-import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadGatewayException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import {
@@ -7,16 +13,56 @@ import {
   ICoinInfo,
   IGetCoinList,
 } from '../interface/trends.interface';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class TrendsService {
   private readonly logger = new Logger(TrendsService.name);
+  public krw = { currency: 'KRW', price: 1200 };
   constructor(private readonly httpService: HttpService) {}
 
-  async simplePrice({ id }) {
+  async getExchange({ from = 'USD', to = 'KRW' }) {
+    try {
+      const {
+        data: { conversion_rates },
+      } = await this.httpService.axiosRef.get(
+        `https://v6.exchangerate-api.com/v6/${process.env.EXCHANGE_API_KEY}/latest/${from}`,
+      );
+
+      const currencyCode = to.split(',');
+      const result = currencyCode.map((v) => {
+        const code = v.toUpperCase();
+        return { currency: code, price: conversion_rates[code] };
+      });
+
+      return result;
+    } catch (error) {
+      this.logger.error(error.response.data);
+      throw new InternalServerErrorException('Can not get exchange', {
+        cause: new Error(),
+        description: 'Get Exchange Error',
+      });
+    }
+  }
+
+  @Cron('0 10 9 * * *', { timeZone: 'Asia/Seoul' })
+  async cronExchange() {
+    try {
+      const [response] = await this.getExchange({});
+      this.krw = response;
+      console.log(this.krw);
+    } catch (error) {
+      throw new NotFoundException('Cron Exchange Error', {
+        cause: new Error(),
+        description: 'Cron Exchange Error',
+      });
+    }
+  }
+
+  async simplePrice({ id, currency = 'USD' }) {
     const { data } = await firstValueFrom(
       this.httpService
-        .get(`simple/price?ids=${id}&vs_currencies=usd%2Ckrw`)
+        .get(`simple/price?ids=${id}&vs_currencies=${currency}`)
         .pipe(
           catchError((error: AxiosError) => {
             this.logger.error(error.response.data);
@@ -27,16 +73,13 @@ export class TrendsService {
           }),
         ),
     );
-    const keys = Object.keys(data[id]);
-    return keys.map((v) => {
-      return { currency: v.toUpperCase(), price: data[id][v] };
-    });
+    return { currency: currency.toUpperCase(), price: data[id][currency] };
   }
 
-  async getCoinList({ count }): Promise<ICoinList[]> {
+  async getCoinList({ currency = 'USD', count }): Promise<ICoinList[]> {
     const { data } = await firstValueFrom(
       this.httpService
-        .get(`coins/markets?vs_currency=usd&per_page=${count}`)
+        .get(`coins/markets?vs_currency=${currency}&per_page=${count}`)
         .pipe(
           catchError((error: AxiosError) => {
             this.logger.error(error.response.data);
@@ -49,14 +92,20 @@ export class TrendsService {
     );
 
     const response = await Promise.all(
-      data.map(async (v: IGetCoinList, i: number) => {
+      data.map((v: IGetCoinList, i: number) => {
         return {
           rank: i + 1,
           name: v.name,
           symbol: v.symbol,
           image: v.image,
           changePercent: v.price_change_percentage_24h,
-          coinPrice: await this.simplePrice({ id: v.id }),
+          coinPrice: [
+            { currency: currency.toUpperCase(), price: v.current_price },
+            {
+              currency: this.krw.currency,
+              price: this.krw.price * v.current_price,
+            },
+          ],
         };
       }),
     );

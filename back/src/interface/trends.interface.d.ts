@@ -13,6 +13,7 @@ export interface IGetCoinList {
   symbol: string;
   image: string;
   price_change_percentage_24h: number;
+  current_price: number;
   id: string;
 }
 
