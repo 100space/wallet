@@ -11,7 +11,7 @@ export const MypageWrapper = styled.div<ISizeProps>`
     justify-content: space-evenly;
     align-items: center;
     overflow-y: scroll;
-    background: ${({ theme, mode }) => mode && theme[mode].profileBg};
+    background: ${({ theme, mode }) => mode && theme[mode].bgInfo};
     padding: 0 1rem;
     &::-webkit-scrollbar {
         display: none;
@@ -44,8 +44,9 @@ export const MyNickName = styled.input`
     position: relative;
     bottom: 5rem;
     border: none;
-    background-color: #ffffff2a;
-    border: 0.1rem solid #cccccc6a;
+    &>span {
+        background-color: #e3e2e2;
+    }
 `
 
 export const TotalSupplyWrap = styled.div`

@@ -17,7 +17,7 @@ export const InputWrap = styled.div<IFocusTypeSize>`
         width: 3rem;
         height: 3rem;
     }
-    background-color: ${({theme, mode}) => (mode&&theme[mode].basicLightBg)};
+    background-color: ${({theme, mode}) => (mode&&theme[mode].settingInputBg )};
 `
 
 export const InputElement = styled.input<IPlaceTypeSize>`
@@ -30,7 +30,7 @@ export const InputElement = styled.input<IPlaceTypeSize>`
     &:focus {
         outline: none;
     }
-    background-color: ${({ theme, mode }) => (mode&&theme[mode].basicLightBg)};
+    background-color: ${({ theme, mode }) => (mode&&theme[mode].settingInputBg)};
     color: ${({ theme, mode }) => (mode&&theme[mode].text)};
     &::placeholder {
         color: ${({ theme, mode }) => (mode&&theme[mode].text)};

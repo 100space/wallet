@@ -31,7 +31,7 @@ export const BottomSheetWrap = styled.div<IStateProps>`
     height: ${({ popupstate }) => (popupstate === "true" ? "fit-content" : "0rem")};
     transition: all 0.5s cubic-bezier(0.15, 0.22, 0.12, 0.44);
     overflow: hidden;
-    background-color: #3c3c3c;
+    background-color: ${({ theme, mode}) => mode && theme[mode].popupBg};
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
     ${FlexCenter}
@@ -66,7 +66,6 @@ export const MyAccountWrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #fff;
     font-size: 1.8rem;
     & > div {
         display: flex;

@@ -12,8 +12,8 @@ export const CategoryWrap = styled.div<ISizeProps>`
 
     &:hover,
     &:hover > div {
-        color: ${({ mode, theme }) => mode && theme[mode].buttonBg};
-        background-color: ${({ mode, theme }) => mode && theme[mode].text};
+        color: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol};
+        background-color: ${({ mode, theme }) => mode && theme[mode].point100};
     }
 
     & > div {

@@ -21,7 +21,7 @@ export const MnemonicBox = styled.div<IMnemonicBox>`
 
 export const MnemonicContent = styled.div<IMenmonicContent>`
     ${SizePropsStyled}
-    color: ${({ theme, mode }) => mode && theme[mode].text };
+    color: ${({ theme, mode }) => mode && theme[mode].text};
     font-size: 1.8rem;
     line-height: 3rem;
     font-weight: 400;

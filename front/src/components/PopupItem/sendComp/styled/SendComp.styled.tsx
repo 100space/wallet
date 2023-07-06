@@ -14,7 +14,7 @@ export const SendCompWrapper = styled.div<ISizeProps>`
     display: flex;
     flex-direction: column;
     font-size: 1.4rem;
-    color: white;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
     & > div:nth-child(2) {
         border-radius: 0.5rem;
     }

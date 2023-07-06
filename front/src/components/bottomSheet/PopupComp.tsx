@@ -5,8 +5,10 @@ import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
 import { usePopup } from "@hooks/usePopup"
 import { IMatched } from "@utils/interFace/core"
+import { useGetMode } from "@hooks/useMode"
 
 export const PopupComp = () => {
+    const [modeState, setChange] = useGetMode()
     const [{ isOpen, contents }, setPopup] = usePopup()
     const { mode } = useRecoilValue(ModeState)
     const handleClick = () => {
@@ -24,7 +26,7 @@ export const PopupComp = () => {
 
     return (
         <>
-            <BottomSheetWrap popupstate={isOpen.toString()}>
+            <BottomSheetWrap mode={modeState.mode} popupstate={isOpen.toString()}>
                 <BtnWrap>
                     <CloseBtn onClick={handleClick} />
                 </BtnWrap>

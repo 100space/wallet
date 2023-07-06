@@ -30,7 +30,7 @@ export const Mypage = () => {
                 </TotalSupplyWrap>
                 {/* <div className="btnWrap"> */}
                 <Btn
-                    backgroundcolor=""
+                    backgroundcolor="#fff"
                     width="80%"
                     height="5rem"
                     margin=""
@@ -38,11 +38,12 @@ export const Mypage = () => {
                     onClick={() => handleButtonClick}
                     fontSize="1.7rem"
                     profile={"true"}
+                    color="black"
                 >
                     계정 잠금
                 </Btn>
                 <Btn
-                    backgroundcolor=""
+                    backgroundcolor="#fff"
                     width="80%"
                     height="5rem"
                     margin=""
@@ -50,6 +51,7 @@ export const Mypage = () => {
                     onClick={() => handleButtonClick}
                     fontSize="1.7rem"
                     profile={"true"}
+                    color="red"
                 >
                     계정 삭제
                 </Btn>

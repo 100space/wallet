@@ -9,7 +9,6 @@ export const Btn = styled.button<IProfileBtn>`
     margin: ${(props) => props.margin || ""};
     border-radius: ${({ profile }) => (profile === "true" && "0.7rem") || "5rem"};
     border: none;
-    box-shadow: ${({ profile }) => (profile === "true" && "none") || "0 0 0.2rem 0.1rem #3a3939"};
     font-size: ${(props) => props.fontSize || "1.7rem"};
     color: ${({ color, theme, mode, profile }) => color || (mode && theme[mode].text)};
     background: ${({ backgroundcolor, theme, mode }) => backgroundcolor || (mode && theme[mode].buttonBg) };
@@ -26,7 +25,8 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     margin: 1rem auto;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
-    /* background: ${({ mode, theme }) => mode && theme[mode].buttonBg}; */
+    background: ${({ mode, theme }) => mode && theme[mode].buttonBg};
+    border-radius: 1rem;
 `
 
 export const TokenListButton = styled.button<IonClickProps>`

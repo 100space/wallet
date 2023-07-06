@@ -26,6 +26,7 @@ export interface IStateProps extends ISizeProps {
 export interface ITypeSize extends ISizeProps {
     type?: string
     name?: string
+    color?: string
 }
 export interface IPlaceTypeSize extends ITypeSize {
     placeholder?: string
