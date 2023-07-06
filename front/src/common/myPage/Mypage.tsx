@@ -1,11 +1,10 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { MypageWrapper, MyProfile, MyNickName, TotalSupplyWrap } from "./styled"
+import { MypageWrapper, FileUpload, MyProfile, MyProfileLabel, MyNickName, UpLoadBtn, TotalSupplyWrap } from "./styled"
 import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
-import { Btn } from "@components/Button"
-import profile from "@img/profile.png"
+import { Btn, Button } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
-import { MyProfileWrap } from "./MyProfileWrap"
+import { FormEvent, useState } from "react"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -20,13 +19,32 @@ const data: INFTCard = {
 export const Mypage = () => {
     const [modeState, setChange] = useGetMode()
     const handleButtonClick = (e: MouseEvent) => {}
+    const ProfileUploadForm = () => {
+        const [ imageFile, setImageFile ] = useState(null)
+
+        const handleForSubmit = (e: FormEvent) => {
+            e.preventDefault()
+
+            const formData = new FormData()
+            formData.append("profileImage", imageFile)
+        }
+
+        const handleFileChange = (e) => {
+            const file = e.target.files[0]
+            setImageFile(file)
+        }
+    }
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
-                {/* <MyProfileWrap>
-                    <MyProfile src={profile} type="file" accept="image/*"/>
-                </MyProfileWrap> */}
-                {<MyProfileWrap/>}
+                {<MyProfile/>}
+                        <form onSubmit={handleFormSubmit}>
+                            <MyProfileLabel>
+                                이미지 업로드
+                                <FileUpload type="file" accept="image/*" onChange={handleFileChange} />
+                            </MyProfileLabel>
+                            <UpLoadBtn type="submit"/>
+                        </form>
                 <MyNickName placeholder="NickName" />
                 <TotalSupplyWrap>
                     <TotalSupply />

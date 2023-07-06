@@ -21,8 +21,12 @@ export const MypageWrapper = styled.div<ISizeProps>`
     }
 `
 
+export const FileUpload = styled.input`
+    display: none;
+`
 
-export const MyProfile = styled.input`
+
+export const MyProfile = styled.div`
     width: 12rem;
     height: 12rem;
     border-radius: 6.5rem;
@@ -31,8 +35,14 @@ export const MyProfile = styled.input`
     align-items: center;
     z-index: 1;
     position: relative;
-    top: 2.7rem;
+    /* top: 2.7rem; */
     background-color: #fff;
+`
+
+export const MyProfileLabel = styled.label`
+    cursor: pointer;
+    font-size: 1.7rem;
+    color: #000000;
 `
 
 export const MyNickName = styled.input`
@@ -44,11 +54,15 @@ export const MyNickName = styled.input`
     font-size: 2rem;
     color: #000000;
     position: relative;
-    bottom: 5rem;
+    /* bottom: 5rem; */
     border: none;
     &>span {
         background-color: #e3e2e2;
     }
+`
+
+export const UpLoadBtn = styled.button`
+    
 `
 
 export const TotalSupplyWrap = styled.div`
@@ -58,3 +72,4 @@ export const TotalSupplyWrap = styled.div`
     bottom: 3rem;
     position: relative;
 `
+
