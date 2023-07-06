@@ -46,7 +46,7 @@ export const CoinNameForm = ({ image ,name, symbol, width, type }: ICoinName) =>
             </CoinNameImgWrap>
             <CoinNameWrap>
                 <CoinSymbol>
-                    {symbol}
+                    {symbol.toUpperCase()}
                 </CoinSymbol>
                 <CoinName>
                     {name}

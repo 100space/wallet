@@ -3,7 +3,7 @@ import { BlockList } from "@common/List/TxList"
 import { QrComp, SendComp, sendList, tokenBringList } from "@components/PopupItem"
 import { usePopup } from "@hooks/usePopup"
 import { IBlockRow } from "@utils/interFace/block.interface"
-import { IAccountRow } from "@utils/interFace/core"
+import { IAccountRow, address } from "@utils/interFace/core"
 import { IAccountAmount } from "@utils/interFace/core"
 
 const blockData: IBlockRow[] = [
@@ -34,27 +34,34 @@ const blockData: IBlockRow[] = [
 ]
 
 const data: IAccountRow = {
-    accountImg: "https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880",
+    accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
     address: "0x90231ur90jwqoie2130373570809729836544453",
     asset: { amount: 123, currency: "BTC" },
 }
-export const PopUpItem = () => {
+export const PopUpItem = ({ address }: { address?: string }) => {
     const [{ isOpen, contents }, setPopup] = usePopup()
-    console.log(contents)
     const itemSwitch = () => {
+        if (contents.indexOf("0x") !== -1 && contents.length === 42) {
+            return <SendComp inputArray={sendList} BtnContent={"송금하기"} address={address} />
+        }
         switch (contents) {
             case "트랜잭션":
                 return <BlockList blocks={blockData} />
             case "입금받기":
                 return <QrComp />
             case "토큰 가져오기":
-                return <SendComp inputArray={tokenBringList} />
+                return <SendComp inputArray={tokenBringList} BtnContent={contents} />
             case "송금하기":
-                return <SendComp inputArray={sendList} />
+                return address ? (
+                    <SendComp inputArray={sendList} BtnContent={contents} address={address} />
+                ) : (
+                    <SendComp inputArray={sendList} BtnContent={contents} />
+                )
             case "My Account":
                 return <AccountList accounts={[data, data, data]} />
+
             default:
-                break
+                return null
         }
     }
 

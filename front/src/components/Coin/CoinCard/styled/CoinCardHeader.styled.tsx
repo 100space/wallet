@@ -70,7 +70,7 @@ export const CoinCardHeader = ({image, symbol, name}: ICoinName) => {
                 </CoinCardHeaderImgWrap>
                 <CoinCardHeaderContentWrap>
                     <CoinCardHeaderSymbol>
-                        {symbol}
+                        {symbol.toUpperCase()}
                     </CoinCardHeaderSymbol>
                     <CoinCardHeaderName>
                         {name}

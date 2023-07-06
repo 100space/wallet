@@ -2,7 +2,7 @@ import { AgreeWrap, AgreeCheckBoxWrap, AgreeCheckBox, AgreeContentWrap, AgreeCon
 import { ChangeEvent, useEffect } from "react"
 import { useGetMode } from "@hooks/useMode"
 import { useRecoilState } from "recoil"
-import { IsCheck, MyAccount } from "@utils/localStorage"
+import { IsCheck } from "@utils/localStorage"
 import { IMnemonic } from "@utils/interFace/core"
 
 const data = {
@@ -12,9 +12,7 @@ const data = {
 export const Agree = ({ mnemonic }: IMnemonic) => {
     const [modeState, setChange] = useGetMode()
     const [isCheck, setIsCheck] = useRecoilState(IsCheck)
-    const [myAccounts, setMyAccounts] = useRecoilState(MyAccount)
     const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setMyAccounts({ ...myAccounts, myMnemonic: mnemonic })
         setIsCheck({ ...isCheck, step1: e.currentTarget.checked })
     }
     useEffect(() => {

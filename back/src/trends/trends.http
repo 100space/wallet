@@ -8,7 +8,7 @@ POST {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "symbol": "BNB"
+    "symbol": "eth"
 }
 
 ### 환율 정보

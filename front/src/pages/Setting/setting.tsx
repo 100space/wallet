@@ -1,5 +1,6 @@
+import { MenuListComp } from "@common/settingCon/settingMenu"
 import { PrivateExport } from "@components/PrivateExport"
-import { ModeState, MyAccount } from "@utils/localStorage"
+import { ModeState, MyProfile } from "@utils/localStorage"
 import { constants } from "buffer"
 import { type } from "os"
 // import MyWallet from "core"
@@ -11,7 +12,7 @@ import Web3, { WebSocketProvider, providers } from "web3"
 export const SettingPage = () => {
     const navigator = useNavigate()
     const clearModeState = useResetRecoilState(ModeState)
-    const clearMyAccount = useResetRecoilState(MyAccount)
+    const clearMyAccount = useResetRecoilState(MyProfile)
 
     const localStorageClear = () => {
         clearModeState()
@@ -22,9 +23,10 @@ export const SettingPage = () => {
 
     return (
         <>
-            <button onClick={localStorageClear}>Clear</button>
+            {/* <button onClick={localStorageClear}>Clear</button>
             <PrivateExport/>
-            <button onClick={herehandler}>hetererwrwerwer</button>
+            <button onClick={herehandler}>hetererwrwerwer</button> */}
+            <MenuListComp />
         </>
     )
 }

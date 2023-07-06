@@ -3,7 +3,8 @@ import { INFTContent, ISizeProps } from "@utils/interFace/styled.interface"
 import styled, { css } from "styled-components"
 
 export const NftCardContentsWrap = styled.div<ISizeProps>`
-    ${SizePropsStyled};
+    width: ${(props) => props.width || "100%"};
+    min-height: ${(props) => props.height};
     padding: 0.5rem 0;
     display: flex;
     flex-direction: column;

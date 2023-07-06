@@ -1,5 +1,5 @@
-import { CreateAccountDto, CreateAccountResponseDto, UploadProfileImgDto, CreateWalletDto, ValidateAccountDto, FindAccountDto, UpdateAccountDto } from "./dto";
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { IAddress, CreateAccountDto, CreateAccountResponseDto, UploadProfileImgDto, CreateWalletDto, ValidateAccountDto, FindAccountDto, UpdateAccountDto, GetAccountResponseDto } from "./dto";
+import { BadRequestException, ConsoleLogger, Injectable, NotFoundException } from '@nestjs/common';
 import * as bip39 from "bip39";
 import { ethers } from "ethers";
 import { Account } from "src/schemas/account.schema";
@@ -11,14 +11,28 @@ import { Model } from "mongoose";
 export class AccountService {
   constructor(@InjectModel(Account.name) private accountModel: Model<Account>) { }
 
+  async getAccount(address : IAddress): Promise<GetAccountResponseDto>{
+    try {
+      if(!await this.validation({ address })) throw new BadRequestException('Address is not valid', { cause: new Error(), description: "Address is not valid" })
+      const isAddress = await this.findOne({ address })
+      
+      if( isAddress === null ) throw new BadRequestException('Address is not exist', { cause: new Error(), description: "Address is not exist" })
+      
+      const { nickname, image } = isAddress
+
+      return { address, nickname, image }
+    } catch (error) {
+      throw error
+    }
+  }
+
   async createAccount({ address, nickname }: CreateAccountDto): Promise<CreateAccountResponseDto> {
     try {
 
       if (!this.validation({ address })) throw new BadRequestException('Address is not valid', { cause: new Error(), description: "Address is not valid" })
-
-      const isAddress = await this.accountModel.findOne({ address })
-      if (isAddress !== null) await this.accountModel.updateOne({ address }, { address, nickname })
-      else await this.accountModel.create({ address, nickname })
+      const isAddress = await this.findOne({ address })
+      if (isAddress !== null) await this.update({ address, nickname })
+      else await this.create({ address, nickname })
 
       return { success: true };
     } catch (error) {
@@ -88,7 +102,7 @@ export class AccountService {
 
   async create(createAccountDto: CreateAccountDto) {
     try {
-      return await this.accountModel.create(createAccountDto)
+      return (await this.accountModel.create(createAccountDto)).save()
     } catch (error) {
 
     }
