@@ -12,7 +12,7 @@ import { NFTInfoPage } from ".."
 // import MyWallet from "@core/wallet"
 import myWallet from "@core/wallet"
 import myProvider from "@core/provider"
-import { ethers } from "ethers"
+import { BrowserProvider, ethers } from "ethers"
 import NFTin from "@core/index"
 
 const tokenData: ITokenRow[] = [
@@ -112,6 +112,11 @@ export const MainPage = () => {
     const eth = new ethers.JsonRpcProvider(network as string)
     const provider = new myProvider(network as string)
     const wallet = new myWallet(myAccounts.privateKey, provider)
+    const nftin = new NFTin(provider, wallet)
+    const data = {
+        nftin,
+    }
+
     useEffect(() => {
         !initState.isLogin && navigater("/login")
         // console.log(myAccounts.privateKey)

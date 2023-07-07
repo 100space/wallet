@@ -10,37 +10,22 @@ chrome.runtime.onInstalled.addListener((details) => {
         // 버전 업데이트 또는 확장 프로그램에서 새로고침시
     }
 })
+// const provider = new ethers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/fe6fb1e940ac43ea956b72a82103f2ad")
+const signer = new ethers.Transaction()
+console.log(signer, "ethers")
 // 익스텐션 메시지 수신
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === "externalScript") {
-        // external.js로부터 받은 메시지 처리
-        console.log("external.js로부터 메시지 수신:", message.data)
-        // 응답을 보내고자 할 경우 sendResponse 함수 사용
-        sendResponse({ success: true })
+    const provider = new ethers.BrowserProvider(window.abc)
+    console.log(provider, "provider")
+    console.log("event에서 보내는 메시지 수신:", message)
+    const { type, method, params } = message
+    if (type === "req") {
+        provider.send(method, params).then((response) => {
+            console.log("노드 요청한 곳 :", response)
+            sendResponse({ from: "res", response })
+        })
     }
-    if (message.type === "windowProperty") {
-        const { method, params } = message.data
-        if (method === "eth_requestAccounts" || method === "eth_accounts") {
-            if (globalThis.abc && "address" in globalThis.abc) {
-                const address = globalThis.abc.address
-                if (!address) sendResponse({ address: [] })
-                sendResponse({ address })
-                return true
-            }
-        }
-        if (method.method === "eth_sendTransaction") {
-            if (globalThis.abc && "sendTransaction" in globalThis.abc) {
-                let tx = params
-                openWallet(tx)
-                globalThis.abc.sendTransaction(params[0])
-                console.log(globalThis.abc)
-                if (tx) sendResponse({ status: "success" })
-                return true
-            }
-        }
-        sendResponse({ status: "success" })
-        return true
-    }
+    return true
 })
 const openWallet = (tx) => {
     console.log("openWallet", tx)

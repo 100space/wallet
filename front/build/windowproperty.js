@@ -6,16 +6,15 @@ let messageId = 0
 const messagePromises = {}
 
 window.addEventListener("message", (event) => {
-    console.log(event)
-    if (event.data.from === "responseAccount") {
-        messagePromises[event.data.id].resolve(event.data.response)
-        delete messagePromises[event.data.id]
+    const { type, id, response } = event.data
+    if ((type === "res", id in messagePromises)) {
+        console.log(response, "messagePromises")
     }
 })
 
 function postMessageAsync(method, params) {
     const id = messageId++
-    const message = { from: "ClientPage", id, method, params }
+    const message = { type: "req", id, method, params }
     return new Promise((resolve, reject) => {
         messagePromises[id] = { resolve, reject }
         window.postMessage(message, "*")
@@ -23,7 +22,7 @@ function postMessageAsync(method, params) {
 }
 
 window.abc = {
-    request: async (method, params) => {
+    request: async ({ method, params }) => {
         console.log("request", method, params)
         return postMessageAsync(method, params)
     },
