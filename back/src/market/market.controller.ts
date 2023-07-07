@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MarketService } from './market.service';
 import { ListNftByCaDto, ListNftByEoaDto } from './dto/market.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';

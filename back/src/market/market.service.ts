@@ -7,11 +7,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Contract, Provider } from 'ethers';
-import { MARKET_ABI } from 'src/abi/MARKET.ABI';
+import { MARKET_ABI } from '../abi/MARKET.ABI';
 import { MarketRepository } from './market.repository';
-import { TrendsService } from 'src/trends/trends.service';
+import { TrendsService } from '../trends/trends.service';
 import { ListNftByCaDto, ListNftByEoaDto } from './dto/market.dto';
-import { IListNft } from 'src/interface/market.interface';
+import { IListNft } from '../interface/market.interface';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { AxiosError } from 'axios';

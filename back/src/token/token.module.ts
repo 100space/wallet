@@ -11,7 +11,10 @@ import { TokenRepository } from './token.repository';
   imports: [
     HttpModule,
     Web3Module,
-    MongooseModule.forFeature([{ name: Token.name, schema: TokenSchema }]),
+    MongooseModule.forFeature(
+      [{ name: Token.name, schema: TokenSchema }],
+      'local',
+    ),
   ],
   controllers: [TokenController],
   providers: [TokenService, TokenRepository],
