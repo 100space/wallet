@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Collection } from 'src/schemas/collections.schema';
-import { Event } from 'src/schemas/events.schema';
+import { Collection } from '../schemas/collections.schema';
+import { Event } from '../schemas/events.schema';
 
 @Injectable()
 export class MarketRepository {
   constructor(
-    @InjectModel(Collection.name) private collectionModel: Model<Collection>,
-    @InjectModel(Event.name) private eventModel: Model<Event>,
+    @InjectModel(Collection.name, 'market')
+    private collectionModel: Model<Collection>,
+    @InjectModel(Event.name, 'market') private eventModel: Model<Event>,
   ) {}
 
   async findAll() {

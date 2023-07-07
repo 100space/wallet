@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { TrendRepository } from "./trends.repository";
+import { TrendRepository } from './trends.repository';
 import {
   ICoinList,
   ICoinInfo,
@@ -22,9 +22,8 @@ export class TrendsService {
   public krw = { currency: 'KRW', price: 1200 };
   constructor(
     private readonly httpService: HttpService,
-    private readonly trendRepository: TrendRepository
-    ) {}
-
+    private readonly trendRepository: TrendRepository,
+  ) {}
 
   async getExchange({ from = 'USD', to = 'KRW' }) {
     try {

@@ -11,10 +11,13 @@ import { Event, EventSchema } from 'src/schemas/events.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Collection.name, schema: CollectionSchema },
-      { name: Event.name, schema: EventSchema },
-    ]),
+    MongooseModule.forFeature(
+      [
+        { name: Collection.name, schema: CollectionSchema },
+        { name: Event.name, schema: EventSchema },
+      ],
+      'market',
+    ),
     HttpModule,
     TrendsModule,
   ],
