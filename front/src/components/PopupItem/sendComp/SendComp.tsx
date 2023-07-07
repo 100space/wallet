@@ -51,23 +51,21 @@ export const SendComp = (props: {
     const [modeState, setModeState] = useGetMode()
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => (
-            <>
-                <SendCompWrapper key={index} mode={modeState.mode}>
-                    <SendCompWrap>{v.subject}</SendCompWrap>
-                    {v.className === "contractAddress" ? (
-                        <InputComp
-                            value={props.address}
-                            placeholder={v.content}
-                            height={4}
-                            type=""
-                            fontSize={1.4}
-                            className={v.className}
-                        />
-                    ) : (
-                        <InputComp placeholder={v.content} height={4} type="" fontSize={1.4} className={v.className} />
-                    )}
-                </SendCompWrapper>
-            </>
+            <SendCompWrapper key={index} mode={modeState.mode}>
+                <SendCompWrap>{v.subject}</SendCompWrap>
+                {v.className === "contractAddress" ? (
+                    <InputComp
+                        value={props.address}
+                        placeholder={v.content}
+                        height={4}
+                        type=""
+                        fontSize={1.4}
+                        className={v.className}
+                    />
+                ) : (
+                    <InputComp placeholder={v.content} height={4} type="" fontSize={1.4} className={v.className} />
+                )}
+            </SendCompWrapper>
         ))
     }
 

@@ -7,8 +7,10 @@ import { usePopup } from "@hooks/usePopup"
 import { IMatched, address } from "@utils/interFace/core"
 import { useGetMode } from "@hooks/useMode"
 
+
 export const PopupComp = ({ address }: { address?: address }) => {
     const [modeState, setChange] = useGetMode()
+
     const [{ isOpen, contents }, setPopup] = usePopup()
     const { mode } = useRecoilValue(ModeState)
     const handleClick = () => {
@@ -23,7 +25,7 @@ export const PopupComp = ({ address }: { address?: address }) => {
         트랜잭션: { text: "현재 선택된 계정의 거래정보를 가져옵니다." },
         "My Account": { text: "사용할 계정을 선택해주세요." },
     }
-
+    console.log(matchText[contents]?.text)
     return (
         <>
             <BottomSheetWrap mode={modeState.mode} popupstate={isOpen.toString()}>
@@ -31,7 +33,7 @@ export const PopupComp = ({ address }: { address?: address }) => {
                     <CloseBtn onClick={handleClick} />
                 </BtnWrap>
                 <PopupText mode={mode}>
-                    <h1>{matchText[contents]?.content !== undefined || "송금하기"}</h1>
+                    <h1>{(matchText[contents]?.text === undefined && "송금하기") || contents}</h1>
                     <div className="PopupText">{matchText[contents]?.text || contents}</div>
                 </PopupText>
                 <PopUpItemWrap>

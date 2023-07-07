@@ -21,15 +21,14 @@ export const FunctionWrap = styled.div<ISizeProps>`
 `
 
 export const HeaderSubJect = styled.div<TextProps>`
-    width: fit-content;
-    margin: 0 auto;
-    /* position: absolute; */
-    /* left: calc(50% - 15rem); */
+    width: 100%;
     font-size: ${(props) => props.fontSize || "inherit"};
     color: ${({ theme, mode }) => mode && theme[mode].text};
     font-weight: 800;
     text-align: center;
     ${FlexCenter}
+    justify-content: flex-start;
+    margin-left: 3rem;
     flex-direction: row;
     & > svg {
         cursor: pointer;

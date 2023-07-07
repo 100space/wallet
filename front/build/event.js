@@ -1,23 +1,29 @@
 /* eslint-disable no-undef */
-document.body.addEventListener("click", function (e) {
-    const port = chrome.runtime.connect({ name: "popup" })
-    if (e.target.id === "yourButtonId") {
-        let message = { content: "Clicked!" }
-        // chrome.runtime.sendMessage(message)
-        port.postMessage(message)
-    }
+// import { ethers } from "ethers"
+
+const s = document.createElement("script")
+s.src = chrome.runtime.getURL("windowproperty.js")
+;(document.head || document.documentElement).appendChild(s)
+
+window.addEventListener("message", (event) => {
+    const { type, id, method, params } = event.data
+    console.log(event.data, "event.data")
+    chrome.runtime.sendMessage({ type, method, params }, (response) => {
+        if (type === "res" && response) {
+            console.log("background.js에서 돌려 받는 결과값:", response)
+            window.postMessage({ from: "res", id, response }, "*")
+        }
+    })
 })
-
-// 스크립트를 생성합니다.
-let script = document.createElement("script")
-
-// 스크립트의 내용을 정의합니다. 이것은 웹 페이지의 JavaScript 컨텍스트에서 실행됩니다.
-script.textContent = `
-  window.postMessage({ direction: "from-page", message: "Hello from the webpage!" }, "*");
-`
-
-// 스크립트를 DOM에 주입합니다.
-;(document.head || document.documentElement).appendChild(script)
-
-// 사용이 끝난 후에는 스크립트를 DOM에서 제거합니다.
-script.remove()
+// background script로부터 메시지를 수신하여 window.abc 객체를 설정합니다.
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//     if (message.action === "setWindowABC") {
+//         window.abc = {
+//             request: function (method, params) {
+//                 console.log("windowproperty.js에서의 메시지:", method, params)
+//                 window.postMessage({ from: "WindowObj", method, params }, "*")
+//             },
+//         }
+//         console.log("window.abc 객체가 설정되었습니다.")
+//     }
+// })
