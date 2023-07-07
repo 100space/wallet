@@ -116,7 +116,6 @@ export const MainPage = () => {
     const data = {
         nftin,
     }
-
     useEffect(() => {
         !initState.isLogin && navigater("/login")
         // console.log(myAccounts.privateKey)

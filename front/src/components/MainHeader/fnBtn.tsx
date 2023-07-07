@@ -12,7 +12,6 @@ import { ScanOpen } from "@utils/localStorage"
 export const FunctionBtn = () => {
     const [modeState, setChange] = useGetMode()
     const [fnBtnstate, setfnBtnState] = useState(false)
-    const [modeState, setChange] = useGetMode()
     const [scanOpen, setScanOpen] = useRecoilState(ScanOpen)
 
     const bellClick = () => {
