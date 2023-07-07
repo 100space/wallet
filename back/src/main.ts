@@ -15,7 +15,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('NFTin')
     .setDescription('NFTin API Description')
-    .setVersion('0.1')
+    .setVersion('0.2')
     .addTag('NFT')
     .build();
 

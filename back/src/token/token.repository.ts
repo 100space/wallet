@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Token } from 'src/schemas/token.schema';
+import { Token } from '../schemas/token.schema';
 import { CreateTokenDto } from './dto';
 
 @Injectable()
 export class TokenRepository {
-  constructor(@InjectModel(Token.name) private tokenModel: Model<Token>) {}
+  constructor(
+    @InjectModel(Token.name, 'local') private tokenModel: Model<Token>,
+  ) {}
 
   create({ ca, symbol, decimal, image }: CreateTokenDto) {
     const response = new this.tokenModel({ ca, symbol, decimal, image });

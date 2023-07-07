@@ -18,7 +18,6 @@ export class TrendsService {
     this.getCoinList()
   }
 
-
   async getExchange({ from = 'USD', to = 'KRW' }) {
     try {
       const {
