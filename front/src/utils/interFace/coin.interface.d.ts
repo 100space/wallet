@@ -53,6 +53,8 @@ export type TCoinInfoRow = (string | number)[]
 
 export interface ICoinInfoRow extends ITypeSize {
     content: TCoinInfoRow
+    price?:boolean
+    percent?:boolean
 }
 
 // 코인 정보 페이지

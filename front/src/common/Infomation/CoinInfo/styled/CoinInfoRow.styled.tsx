@@ -2,7 +2,7 @@ import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { BorderBottom } from "@styled/index"
 import { ICoinInfoRow, TCoinInfoRow } from "@utils/interFace/coin.interface"
-import { ISizeProps } from "@utils/interFace/styled.interface"
+import { IIndexProps, ISizeProps, ITypeSize } from "@utils/interFace/styled.interface"
 import { styled } from "styled-components"
 
 export const CoinInfoRowWrap = styled.div<ISizeProps>`
@@ -16,53 +16,33 @@ export const CoinInfoRowWrap = styled.div<ISizeProps>`
     & > div {
         font-size: 1.6rem;
         font-weight: 500;
-        color: ${({ theme, mode }) => mode && theme[mode].text};
     }
     // 44rem
     & > div:nth-child(1) {
-        width: 27%;
+        width: 35%;
     }
 
     & > div:nth-child(2) {
-        width: 45%;
+        width: 65%;
         text-align: right;
-        color: ${({ theme, mode }) => mode && theme[mode].textCoinPrice};
-    }
-
-    & > div:nth-child(3) {
-        max-width: 6rem;
-        width: 7%;
-        text-align: center;
-        color: ${({ theme, mode }) => mode && theme[mode].textCoinPrice};
-    }
-
-    & > div:nth-child(4) {
-        width: 7.5rem;
-        text-align: right;
-        color: ${({ color }) => color};
     }
 `
 
-export const CoinInfoRowContent = styled.div<ISizeProps>`
-    color: ${({ color }) => color};
+export const CoinInfoRowContent = styled.div<IIndexProps>`
+    color: ${({ theme, mode, index, color, percent, price }) => (percent && index === 1 && color) || ((index === 1) && (mode && theme[mode].textCoinPrice)) || (mode && theme[mode].text)};
 `
 
 export const CoinInfoRow = (props: ICoinInfoRow) => {
     const [modeState, setChange] = useGetMode()
 
     const coinInfoRowList = (coindata: TCoinInfoRow) => {
-        return coindata.map((v, index, array) => {
-            // if (array.length === 2)
-            const dataCheck = index === 3 && typeof v === "number"
-            const plusCheck = dataCheck && v >= 0
-            const minusCheck = dataCheck && v < 0
-            const colorCheck = dataCheck && v >= 0 ? "#00d17f" : "#e84562"
+        return coindata.map((v, idx, array) => {
+
+            const color = (typeof (v) === 'number' && v >= 0) ? "#00d17f" : "#e84562"
+
             return (
-                <CoinInfoRowContent mode={modeState.mode} color={colorCheck} key={index}>
-                    {plusCheck ? <Icon icon={"mingcute:arrow-up-line"} color={colorCheck}></Icon> : <></>}
-                    {minusCheck ? <Icon icon={"mingcute:arrow-up-line"} vFlip={true} color={colorCheck}></Icon> : <></>}
-                    {v.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                    {dataCheck ? "%" : ""}
+                <CoinInfoRowContent mode={modeState.mode} color={color} percent={props.percent} price={props.price} key={idx} index={idx}>
+                    {(props.price && idx === 1 ? "$ " : "") + v.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + (props.percent && idx === 1 ? " %" : "")}
                 </CoinInfoRowContent>
             )
         })

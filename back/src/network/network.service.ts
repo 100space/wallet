@@ -15,7 +15,15 @@ export class NetworkService {
 
     if (isData === null) return await this.netWorkListRepository.create(address)
 
+    
     const { networkList } = isData
+
+    // const networksInfomation = networkList.map(v => {
+    //   return this.netWorkRepository.findOne(v)
+    // })
+
+    // const networks = await Promise.all(networksInfomation)
+
     return { networkList }
   }
 
