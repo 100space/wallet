@@ -8,6 +8,8 @@ import { TrendsModule } from './trends/trends.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { TokenModule } from './token/token.module';
 import { AccountModule } from './account/account.module';
+import { NetworkModule } from './network/network.module';
+import { MarketModule } from './market/market.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -24,6 +26,8 @@ import configuration from './config/configuration';
     TransactionModule,
     TokenModule,
     AccountModule,
+    NetworkModule,
+    MarketModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],

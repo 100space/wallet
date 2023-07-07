@@ -1,9 +1,13 @@
-import { InitMode } from "@utils/localStorage"
-import { useRecoilState } from "recoil"
+import { InitMode, MyAccounts, MyProfile } from "@utils/localStorage"
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { Step1, Step2, Step3, Step4 } from "."
+import { useEffect } from "react"
 
 export const InitStepPage = () => {
     const [{ initMode, initStep }, setManageMode] = useRecoilState(InitMode)
+    const resetMyProfile = useResetRecoilState(MyProfile)
+    const clearMyAccounts = useResetRecoilState(MyAccounts)
+    const myProfile = useRecoilValue(MyProfile)
     const render = (initStep: string) => {
         switch (initStep) {
             case "step1":
