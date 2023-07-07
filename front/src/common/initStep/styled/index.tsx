@@ -60,9 +60,14 @@ export const TextComp = styled.div<TextProps>`
         padding: 0.7rem 1.4rem;
         border-radius: 1rem;
         font-size: 1.2rem !important;
-        background-color: #33333365;
+        background-color: #ffc850;
     }
 `
+
+export const AccountAdWrap = styled.div<ISizeProps>`
+    
+`
+
 export const InputWrap = styled.div<ISizeProps>`
     width: 100%;
     height: 20%;

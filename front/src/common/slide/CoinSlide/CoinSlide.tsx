@@ -6,6 +6,8 @@ import { ModeState } from "@utils/localStorage"
 import { MouseEvent } from "react"
 import requestServer from "@utils/axios/requestServer"
 
+
+
 export const CoinSlide = (props: {
     coinDatas: ICoin[],
     setCoin: React.Dispatch<React.SetStateAction<{
@@ -17,7 +19,6 @@ export const CoinSlide = (props: {
     isOpen: boolean
 }) => {
     const { mode } = useRecoilValue(ModeState)
-
     const handleClick = async (e: MouseEvent, data: string) => {
         await getCoin(data)
         props.setIsOpen(!props.isOpen)
@@ -34,15 +35,13 @@ export const CoinSlide = (props: {
         }
 
     }
-
     const coinCards = (coinsData: ICoin[]) => {
         return coinsData.map((v, i) => {
             return <CoinCard coinData={v} key={i} onClick={handleClick} />
         })
     }
-
     return (
-        <CoinSlideWrap>
+        <CoinSlideWrap mode={mode}>
             <CoinSlideSubject mode={mode}>추천 코인</CoinSlideSubject>
             <CoinSlider>{coinCards(props.coinDatas)}</CoinSlider>
         </CoinSlideWrap>

@@ -9,6 +9,7 @@ import { useEffect } from "react"
 import { Scanner } from "@components/PopupItem/QR/scanner"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { IsPopUp, ScanOpen } from "@utils/localStorage"
+import { MyNftInformation } from "@common/Infomation/MyNftInformation"
 
 const App = () => {
     const screenWidth = window.innerWidth
@@ -20,7 +21,6 @@ const App = () => {
         setChange(modeState.mode)
     }
     const [isOpen, setOpen] = useRecoilState(IsPopUp)
-    console.log(isOpen)
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
         ;(location.pathname === "/popup.html" || location.pathname === "/") && !modeState.isLogin && navigator("/login")

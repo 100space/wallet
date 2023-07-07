@@ -10,10 +10,13 @@ export const CoinWrap = styled.div<ISizeProps>`
     color: ${({ theme }) => theme[mode].text || ""};
     border-bottom: 0.1rem solid #00000075;
     &:nth-child(2n) {
-        background-color: ${({ theme, mode }) => (mode && theme[mode].basicBg) || ""};
+        background-color: ${({ theme, mode }) => (mode && theme[mode].coinBg)};
     }
     &:nth-last-child(1) {
         border: none;
+    }
+    &:nth-child(n){
+        background-color: ${({ theme, mode }) => (mode && theme[mode].coinBg)};
     }
 `
 
