@@ -1,6 +1,6 @@
 import { Controller, Post, UseInterceptors } from '@nestjs/common';
 import { TokenService } from './token.service';
-import { IsERC20 } from 'src/decorator/ERC20';
+import { IsERC20 } from '../decorator/ERC20';
 import { NetworkValidationInterceptor } from '../interceptor/NetworkValid';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AddTokenDto } from './dto';

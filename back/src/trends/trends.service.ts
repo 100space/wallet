@@ -16,7 +16,6 @@ export class TrendsService {
     private readonly trendRepository: TrendRepository
   ) { }
 
-
   async getExchange({ from = 'USD', to = 'KRW' }) {
     try {
       const {

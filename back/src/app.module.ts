@@ -20,9 +20,10 @@ import configuration from './config/configuration';
       load: [configuration],
     }),
     MongooseModule.forRoot(
-      // `${process.env.DB_URI}`,
       `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`,
+      { connectionName: 'local' },
     ),
+    MongooseModule.forRoot(process.env.DB_URI, { connectionName: 'market' }),
     ScheduleModule.forRoot(),
     TrendsModule,
     TransactionModule,
