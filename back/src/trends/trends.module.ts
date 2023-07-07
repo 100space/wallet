@@ -11,5 +11,6 @@ import { HttpModule } from '@nestjs/axios';
   ],
   controllers: [TrendsController],
   providers: [TrendsService],
+  exports: [TrendsService],
 })
 export class TrendsModule {}

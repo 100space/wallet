@@ -4,10 +4,10 @@ import { PopUpItem } from "./popupItem"
 import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
 import { usePopup } from "@hooks/usePopup"
-import { IMatched } from "@utils/interFace/core"
+import { IMatched, address } from "@utils/interFace/core"
 import { useGetMode } from "@hooks/useMode"
 
-export const PopupComp = () => {
+export const PopupComp = ({ address }: { address?: address }) => {
     const [modeState, setChange] = useGetMode()
     const [{ isOpen, contents }, setPopup] = usePopup()
     const { mode } = useRecoilValue(ModeState)
@@ -31,11 +31,11 @@ export const PopupComp = () => {
                     <CloseBtn onClick={handleClick} />
                 </BtnWrap>
                 <PopupText mode={mode}>
-                    <h1>{matchText[contents]?.content !== undefined || contents}</h1>
-                    <div className="PopupText">{matchText[contents]?.text}</div>
+                    <h1>{matchText[contents]?.content !== undefined || "송금하기"}</h1>
+                    <div className="PopupText">{matchText[contents]?.text || contents}</div>
                 </PopupText>
                 <PopUpItemWrap>
-                    <PopUpItem />
+                    <PopUpItem address={contents} />
                 </PopUpItemWrap>
             </BottomSheetWrap>
         </>

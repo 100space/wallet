@@ -18,25 +18,40 @@ const data3: ITransaction = {
     ],
 }
 
-const data4: INFTStauts = {
-    blockchain: [
-        "블록체인",
-        ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
-    ],
-    supply: ["발행량", "100개"],
-    isTrade: ["거래가능", "99개"],
-    isSell: ["판매중", "50개"],
-}
+// const data4: INFTStauts = {
+//     blockchain: [
+//         "블록체인",
+//         ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
+//     ],
+//     supply: ["발행량", "100개"],
+//     isTrade: ["거래가능", "99개"],
+//     isSell: ["판매중", "50개"],
+// }
 
 const data5: INftInfomation = {
-    owner: ["소유자", "0xas987f98as0987g"],
-    blockchain: [
-        "블록체인",
-        ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
-    ],
-    ca: ["계약주소", "0xs089d7fsd089f7896578923"],
-    tokenId: ["토큰 ID", "50"],
-    tokenStandard: ["토큰 표준", "ERC 1155"],
+    owner: {
+        subject: "내 계정 닉네임",
+        value: "내 계정 주소"
+    },
+    blockchain: {
+        subject: "블록체인",
+        value: {
+            name: "Polygon",
+            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
+        }
+    },
+    ca: {
+        subject: "계약주소",
+        value: "0x0000000000000000000000000000000000000000"
+    },
+    tokenId: {
+        subject: "토큰 ID",
+        value: 50
+    },
+    tokenStandard: {
+        subject: "토큰 표준",
+        value: "ERC 1155"
+    },
 }
 const data6: INFTStandard = {
     nftName: "Gdori",
@@ -63,7 +78,7 @@ export const NFTInfoPage = () => {
                 <NftStandardInformation nftStandardInfo={data6} />
             </PlatWrap>
             <PlatWrap mode={mode}>
-                <NftStatus nftStatus={data4} />
+                {/* <NftStatus nftStatus={data4} /> */}
             </PlatWrap>
             <PlatWrap mode={mode}>
                 <NftInfomation nftInfo={data5} />

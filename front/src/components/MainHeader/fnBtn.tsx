@@ -4,14 +4,17 @@ import { useGetMode } from "@hooks/useMode"
 import { Icon } from "@iconify/react"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
+import { Scanner } from "@components/PopupItem/QR/scanner"
+import { useNavigate } from "react-router"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { ScanOpen } from "@utils/localStorage"
 
 export const FunctionBtn = () => {
     const [modeState, setChange] = useGetMode()
     const [fnBtnstate, setfnBtnState] = useState(false)
+    const [modeState, setChange] = useGetMode()
+    const [scanOpen, setScanOpen] = useRecoilState(ScanOpen)
 
-    const qrClick = () => {
-        setfnBtnState(!fnBtnstate)
-    }
     const bellClick = () => {
         setfnBtnState(!fnBtnstate)
     }
@@ -19,7 +22,7 @@ export const FunctionBtn = () => {
     return (
         <>
             <FunctionWrap mode={modeState.mode}>
-                <Icon icon="gg:qr" />
+                <Icon icon="gg:qr" onClick={() => setScanOpen(!scanOpen)} />
                 <NavLink style={{fontSize:"3rem"}} to="/*/alarm">
                     <Icon icon="ph:bell" onClick={bellClick}/>
                 </NavLink>

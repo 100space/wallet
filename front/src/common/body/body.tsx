@@ -1,6 +1,6 @@
 import { MainRouter } from "routes"
 import { BodyWrap, SideBar } from "./styled"
-import { useRef, useState } from "react"
+import { memo, useRef, useState } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { IsSideBar } from "@utils/localStorage"
 import { Mypage } from "@common/myPage"

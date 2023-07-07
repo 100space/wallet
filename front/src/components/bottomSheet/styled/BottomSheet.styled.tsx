@@ -49,6 +49,7 @@ export const PopupText = styled.div<IStateProps>`
     & > div {
         font-size: 1.6rem;
         padding: 0 6rem;
+        word-break: break-all;
     }
 `
 export const PopUpItemWrap = styled.div`

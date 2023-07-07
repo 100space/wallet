@@ -21,9 +21,10 @@ export const FunctionWrap = styled.div<ISizeProps>`
 `
 
 export const HeaderSubJect = styled.div<TextProps>`
-    width: 30rem;
-    position: absolute;
-    left: calc(50% - 15rem);
+    width: fit-content;
+    margin: 0 auto;
+    /* position: absolute; */
+    /* left: calc(50% - 15rem); */
     font-size: ${(props) => props.fontSize || "inherit"};
     color: ${({ theme, mode }) => mode && theme[mode].text};
     font-weight: 800;

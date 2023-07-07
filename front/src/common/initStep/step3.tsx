@@ -4,7 +4,7 @@ import { Description } from "@components/Description"
 import { InputComp } from "@components/input"
 import { useGetMode } from "@hooks/useMode"
 import { CryptoPassword } from "@utils/crypto/crypto"
-import { IsCheck, MyAccount } from "@utils/localStorage"
+import { IsCheck, MyProfile } from "@utils/localStorage"
 import React, { ReactElement, useRef } from "react"
 import { useRecoilState } from "recoil"
 import { FormBtn, InputWrap, StepWrap } from "./styled"
@@ -13,7 +13,7 @@ export const Step3 = () => {
     const info = ["닉네임을 입력해주세요", "비밀번호를 입력해주세요", "비밀번호를 확인해주세요"]
     const [modeState, setChange] = useGetMode()
     const [isCheck, setIsCheck] = useRecoilState(IsCheck)
-    const [myAccounts, setMyAccounts] = useRecoilState(MyAccount)
+    const [myProfile, setMyProfile] = useRecoilState(MyProfile)
     const InfoComp = info.map((v, i) => {
         return (
             <InputWrap mode={modeState.mode} key={i}>
@@ -28,7 +28,7 @@ export const Step3 = () => {
         const password = (e.currentTarget[1] as HTMLInputElement).value
         const checkPassword = (e.currentTarget[2] as HTMLInputElement).value
         if (password !== checkPassword) return Alert.fire({ icon: "error", title: "비밀번호를 확인해주세요" })
-        setMyAccounts({ ...myAccounts, password: CryptoPassword(password), nickName })
+        setMyProfile({ ...myProfile, password: CryptoPassword(password), nickName })
         setIsCheck({ ...isCheck, step3: true })
         Alert.fire({ icon: "success", title: "정상적으로 저장되었습니다." })
     }

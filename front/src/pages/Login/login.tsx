@@ -4,7 +4,7 @@ import { InputComp } from "@components/input"
 import { LogoComp } from "@components/Logo"
 import { useGetMode } from "@hooks/useMode"
 import { CryptoPassword } from "@utils/crypto/crypto"
-import { InitMode, IsCheck, ModeState, MyAccount } from "@utils/localStorage"
+import { InitMode, IsCheck, ModeState, MyProfile } from "@utils/localStorage"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useRecoilState, useResetRecoilState } from "recoil"
@@ -13,11 +13,11 @@ import { LoginWrap } from "./styled"
 export const LoginPage = () => {
     const [manageMode, setManageMode] = useRecoilState(InitMode)
     const [pw, setPw] = useState("")
-    const [{ myMnemonic, password, nickName }, setMyAccounts] = useRecoilState(MyAccount)
+    const [{ myMnemonic, password, nickName }, setMyAccounts] = useRecoilState(MyProfile)
     const [modeState, setChange] = useGetMode()
     const navigate = useNavigate()
     const resetIsCheck = useResetRecoilState(ModeState)
-    const resetMyAccount = useResetRecoilState(MyAccount)
+    const resetMyAccount = useResetRecoilState(MyProfile)
     const reset = () => {
         resetIsCheck()
         resetMyAccount()
