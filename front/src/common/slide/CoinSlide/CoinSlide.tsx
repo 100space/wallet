@@ -18,8 +18,8 @@ export const CoinSlide = (props: {
 }) => {
     const { mode } = useRecoilValue(ModeState)
 
-    const handleClick = (e: MouseEvent, data: string) => {
-        getCoin(data)
+    const handleClick = async (e: MouseEvent, data: string) => {
+        await getCoin(data)
         props.setIsOpen(!props.isOpen)
     }
 

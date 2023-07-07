@@ -5,7 +5,7 @@ import { styled } from "styled-components"
 
 export const CoinInfoHeaderWrap = styled.header<ISizeProps>`
     ${BorderBottom}
-    padding: 0.75rem 1.5rem;
+    padding: 2rem 1.5rem;
     display: flex;
     align-items: center;
     min-width: 36rem;

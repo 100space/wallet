@@ -30,7 +30,7 @@ export class TrendsController {
     required: false,
     example: 'name',
   })
-  getCoinList(@Query() { sort = "rank", count = 20 }) {
+  getCoinList(@Query() { sort = "rank", count = 50 }) {
     return this.trendsService.getCoinInfomation(sort, count);
   }
 
