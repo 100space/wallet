@@ -20,21 +20,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     if (message.type === "windowProperty") {
         const { method, params } = message.data
-        console.log("windowProperty 메시지 수신:", method, params, 1111111)
-
-        // chrome.windows.create({ url: "approve.html", type: "popup", height: 600, width: 400 }, function (win) {
-        //     if (win) {
-        //         sendResponse({ status: "success" })
-        //     } else {
-        //         sendResponse({ status: "error" })
-        //     }
-        // })
-        if (method.method === "eth_requestAccounts") {
+        if (method === "eth_requestAccounts" || method === "eth_accounts") {
             if (globalThis.abc && "address" in globalThis.abc) {
                 const address = globalThis.abc.address
-                console.log(globalThis)
-                console.log(address)
-                if (address) sendResponse({ status: "success", data: address })
+                if (!address) sendResponse({ address: [] })
+                sendResponse({ address })
+                return true
+            }
+        }
+        if (method.method === "eth_sendTransaction") {
+            if (globalThis.abc && "sendTransaction" in globalThis.abc) {
+                let tx = params
+                openWallet(tx)
+                globalThis.abc.sendTransaction(params[0])
+                console.log(globalThis.abc)
+                if (tx) sendResponse({ status: "success" })
                 return true
             }
         }
@@ -43,8 +43,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 })
 const openWallet = (tx) => {
+    console.log("openWallet", tx)
     chrome.windows.create({ url: "approve.html", type: "popup", height: 600, width: 400 }, (win) => {
         if (win) {
+            chrome.runtime.sendMessage({
+                type: "TRANSACTION_DATA",
+                data: tx,
+            })
             console.log("success")
         } else {
             console.log("error")
