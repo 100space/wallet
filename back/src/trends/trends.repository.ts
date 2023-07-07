@@ -34,11 +34,13 @@ export class TrendRepository {
     }
   }
 
-  async findOne(symbol) {
-    return await this.trendModel.findOne({ symbol });
-  }
+    async findOne(symbol: string) {
+        return await this.trendModel.findOne({ symbol });
+    }
 
-  async findAll() {
-    return await this.trendModel.find();
-  }
+    async find(sort: string, count: number) {
+        const sortOption = {}
+        sortOption[sort] = 1
+        return await this.trendModel.find().sort(sortOption).limit(count).select('rank name symbol image changePercent price');
+    }
 }

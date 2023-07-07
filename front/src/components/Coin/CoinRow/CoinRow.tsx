@@ -18,7 +18,7 @@ export const CoinRow = (props: { coinData: ICoin }) => {
             />
             <CoinPrice
                 width={type === "row" ? "45%" : ""}
-                price={props.coinData.coinPrice[0].price}
+                price={Math.floor(props.coinData.coinPrice[0].price * 1000)/1000}
                 currency={props.coinData.coinPrice[0].currency}
             />
             <CoinRate width={type === "row" ? "15%" : ""} changePercent={props.coinData.changePercent} />

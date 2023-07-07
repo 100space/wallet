@@ -8,7 +8,9 @@ import { TrendRepository } from './trends.repository';
 
 @Module({
   imports: [
-    HttpModule,
+    HttpModule.register({
+      baseURL: 'https://api.coingecko.com/api/v3/',
+    }),
     MongooseModule.forFeature(
       [{ name: Trend.name, schema: TrendSchema }],
       'local',

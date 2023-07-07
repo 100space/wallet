@@ -1,11 +1,16 @@
 export interface ICoinList {
-  id: string;
+  id?: string;
   rank: number;
   name: string;
   symbol: string;
   image: string;
   changePercent: number;
-  coinPrice: object[];
+  coinPrice: ICoinPrice[];
+}
+
+export interface ICoinPrice {
+  currency: string
+  price: number
 }
 
 export interface IGetCoinList {
