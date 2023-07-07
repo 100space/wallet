@@ -8,10 +8,6 @@ import { NavLink } from "react-router-dom"
 export const FunctionBtn = () => {
     const [modeState, setChange] = useGetMode()
     const [fnBtnstate, setfnBtnState] = useState(false)
-
-    const qrClick = () => {
-        setfnBtnState(!fnBtnstate)
-    }
     const bellClick = () => {
         setfnBtnState(!fnBtnstate)
     }
@@ -20,7 +16,7 @@ export const FunctionBtn = () => {
         <>
             <FunctionWrap mode={modeState.mode}>
                 <Icon icon="gg:qr" />
-                <NavLink style={{fontSize:"3rem", display:"flex", justifyContent:"center", alignItems:"center"}} to="/*/alarm">
+                <NavLink style={{fontSize:"3rem", display:"flex", justifyContent:"center", alignItems:"center"}} to="/alarm">
                     <Icon icon="ph:bell" onClick={bellClick}/>
                 </NavLink>
                 {/* {modeState ? <Icon icon="ph:bell-fill" /> : <Icon icon="ph:bell" />} */}

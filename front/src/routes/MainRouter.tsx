@@ -32,7 +32,7 @@ export const MainRouter = () => {
                     <>
                         <Route path="/" element={<MainPage />}></Route>
                         <Route path="/*" element={<MainPage />}></Route>
-                        <Route path="/*/alarm" element={<Alarm />}></Route>
+                        <Route path="/alarm" element={<Alarm />}></Route>
                         <Route path="/setting/*" element={<SettingRouter />}></Route>
                         <Route path="/market/*" element={<MarketRouter />}></Route>
                         <Route path="/trends/*" element={<TrandsRouter />}></Route>

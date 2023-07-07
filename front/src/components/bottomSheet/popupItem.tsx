@@ -1,5 +1,6 @@
 import { AccountList } from "@common/List"
 import { BlockList } from "@common/List/TxList"
+import { AccountBtn } from "@components/AccountBtn"
 import { QrComp, SendComp, sendList, tokenBringList } from "@components/PopupItem"
 import { usePopup } from "@hooks/usePopup"
 import { IBlockRow } from "@utils/interFace/block.interface"
@@ -51,7 +52,10 @@ export const PopUpItem = () => {
             case "송금하기":
                 return <SendComp inputArray={sendList} BtnContent={contents} />
             case "My Account":
-                return <AccountList accounts={[data, data, data]} />
+                return <>
+                    <AccountList accounts={[data, data, data]} />
+                    <AccountBtn/>
+                </>
             default:
                 break
         }
