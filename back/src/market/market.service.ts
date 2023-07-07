@@ -186,7 +186,7 @@ export class MarketService {
     if (timeElapsed < 60 * 60 * 24)
       return `${Math.floor(timeElapsed / (60 * 60))}시간 전`;
     if (timeElapsed < 60 * 60 * 24 * 7)
-      return `${Math.floor((timeElapsed / 60) * 60 * 24)}일 전`;
+      return `${Math.floor(timeElapsed / (60 * 60 * 24))}일 전`;
     return parsedTime.toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'short',
