@@ -7,11 +7,13 @@ import { MarketRepository } from './market.repository';
 import { ethers } from 'ethers';
 import { TrendsModule } from 'src/trends/trends.module';
 import { HttpModule } from '@nestjs/axios';
+import { Event, EventSchema } from 'src/schemas/events.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: Collection.name, schema: CollectionSchema },
+      { name: Event.name, schema: EventSchema },
     ]),
     HttpModule,
     TrendsModule,

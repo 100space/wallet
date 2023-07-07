@@ -162,6 +162,23 @@ ca:"",
   "collectionName": "asdfasdf",
   "sellPrice": { "currency": "ETH", "price": 0.013 },
   "chargePrice": { "currency": "ETH", "price": 0.0000013 }
+},
+
+{
+  "ca": "0x194e1822Dfa63f27D91e5EfBbCE232142Ba0d0FC",
+  "supply": 100,
+  "isTrade": true,
+  "creator": "0xa68b32d87c7F83234f73E427a0d0aFdaB905d518",
+  "blockchain": {
+    "polygon": "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912"
+  },
+  "tokenId": 1,
+  "tokenStandard": "ERC 721",
+  "nftName": "Gdori",
+  "owner": "0x28C9fC2f5C973EEEb00e0692074f2569501078F3",
+  "collectionName": "asdfasdf",
+  "sellPrice": { "currency": "MATIC", "price": 0.013 },
+  "fee": { "currency": "MATIC", "price": 0.0000013 } // 판매가격의 1%
 }
 ```
 

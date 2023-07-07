@@ -1,25 +1,43 @@
 @server = {{$dotenv PROTOCOL}}://{{$dotenv HOST}}:{{$dotenv PORT}}/market
 
-###
+### NFT 컬렉션 리스트
 GET {{server}} HTTP/1.1
 
 // metadata: ipfs://QmVXbeGajzbAAVk5rw9CQmysAbBUz6SHBiT2RLj4HbmsBt
 
-###
+### CA 기준 NFT
 POST {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xA3b0E897B5166379a14dF88B5bf50c530270556a"
+    "ca": "0x0373a517569A4C9Ead2Cd85fCeb7E1fE694e6e4b"
 }
 
-###
+### EOA 기준 NFT
 POST {{server}}/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "eoa": "0x28C9fC2f5C973EEEb00e0692074f2569501078F3"
+    "eoa": "0x26A7456A05a3d0b24Ce5e732575FF456571d6Ec5"
+}
+
+### NFT의 트랜잭션
+POST {{server}}/transaction HTTP/1.1
+Content-Type: application/json
+
+{
+    "ca": "0x0373a517569A4C9Ead2Cd85fCeb7E1fE694e6e4b",
+    "tokenId": 1
+}
+
+### NFT 컬렉션의 정보
+POST {{server}}/info HTTP/1.1
+Content-Type: application/json
+
+{
+    "ca": "0x6Cd0b10f6dba6a132cCa8ec5eb3CF32916d44157",
+    "tokenId": 1
 }
 
 ###
-GET https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=0x299EA2050a99271aB608526aA83DdCFcA69A0fCB&startblock=0&endblock=99999999999&page=1&offset=10&sort=asc&apikey={{$dotenv POLYGON_SCAN}}
+GET https://api-testnet.polygonscan.com/api?module=contract&action=getabi&address=0xA3b0E897B5166379a14dF88B5bf50c530270556a&apikey={{$dotenv POLYGON_SCAN}}
