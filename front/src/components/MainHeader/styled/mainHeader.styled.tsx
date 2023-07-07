@@ -9,6 +9,7 @@ export const HeaderWrapper = styled.div`
     padding: 1rem;
 `
 export const FunctionWrap = styled.div<ISizeProps>`
+    position: relative;
     ${FlexSpaceBetween}
     width: 20%;
     height: 100%;
@@ -18,6 +19,7 @@ export const FunctionWrap = styled.div<ISizeProps>`
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
 `
+
 export const HeaderSubJect = styled.div<TextProps>`
     width: fit-content;
     margin: 0 auto;

@@ -1,11 +1,10 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { MypageWrapper, MyProfile, MyNickName, TotalSupplyWrap } from "./styled"
+import { MypageWrapper, FileUpload, MyProfile, MyProfileLabel, MyNickName, UpLoadBtn, TotalSupplyWrap } from "./styled"
 import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
-import { Btn } from "@components/Button"
-// import profile  from "@img/profile.png"
-import pro from "@img/pro.png"
+import { Btn, Button } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
+import { FormEvent, useState } from "react"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -20,17 +19,31 @@ const data: INFTCard = {
 export const Mypage = () => {
     const [modeState, setChange] = useGetMode()
     const handleButtonClick = (e: MouseEvent) => {}
+    const ProfileUploadForm = () => {
+        const [ imageFile, setImageFile ] = useState(null)
+
+        const handleForSubmit = (e: FormEvent) => {
+            e.preventDefault()
+        }
+    }
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
-                <MyProfile src={pro} />
+                {<MyProfile/>}
+                        <form>
+                            <MyProfileLabel>
+                                이미지 업로드
+                                <FileUpload type="file" accept="image/*"/>
+                            </MyProfileLabel>
+                            <UpLoadBtn type="submit"/>
+                        </form>
                 <MyNickName placeholder="NickName" />
                 <TotalSupplyWrap>
                     <TotalSupply />
                 </TotalSupplyWrap>
                 {/* <div className="btnWrap"> */}
                 <Btn
-                    backgroundcolor=""
+                    backgroundcolor="#fff"
                     width="80%"
                     height="5rem"
                     margin=""
@@ -38,11 +51,12 @@ export const Mypage = () => {
                     onClick={() => handleButtonClick}
                     fontSize="1.7rem"
                     profile={"true"}
+                    color="black"
                 >
                     계정 잠금
                 </Btn>
                 <Btn
-                    backgroundcolor=""
+                    backgroundcolor="#fff"
                     width="80%"
                     height="5rem"
                     margin=""
@@ -50,6 +64,7 @@ export const Mypage = () => {
                     onClick={() => handleButtonClick}
                     fontSize="1.7rem"
                     profile={"true"}
+                    color="red"
                 >
                     계정 삭제
                 </Btn>

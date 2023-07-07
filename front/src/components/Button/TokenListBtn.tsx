@@ -14,7 +14,7 @@ export const TokenListBtn = ({
     const [modeState, setModeState] = useGetMode()
 
     return (
-        <TokenListBtnWrap width={width}>
+        <TokenListBtnWrap width={width} mode={modeState.mode}>
             <TokenListButton mode={modeState.mode} height={"5rem"} onClick={onClick}>
                 {children}
             </TokenListButton>

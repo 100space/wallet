@@ -9,8 +9,12 @@ export const RowWrap = styled.div<ISizeProps>`
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    &:nth-child(n) {
+        /* background: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol}; */
+        background: ${({ mode, theme }) => mode && theme[mode].coinBg};
+    }
     &:nth-child(2n) {
-        background: ${({ mode, theme }) => mode && theme[mode].basicBg};
+        background: ${({ mode, theme }) => mode && theme[mode].nftRowBg};
     }
 `
 

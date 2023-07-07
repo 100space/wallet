@@ -1,7 +1,9 @@
 import { Category } from "@components/Category"
-import { SettingMenuTitle } from "./styled"
+import { SettingMenuTitle, SubWrap } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
+import React from "react"
+import { useGetMode } from "@hooks/useMode"
 
 const MenuList = [
     { MenuSub: "Wallet", content: "Current Wallet", content2: "Network" },
@@ -16,12 +18,13 @@ interface IMenu {
 }
 
 export const MenuListComp = () => {
+    const [modeState, setChange] = useGetMode()
     const handleButtonClick = (e: MouseEvent) => {}
     return (
         <>
             {MenuList.map((menu, index) => (
-                <SettingMenuTitle key={index}>
-                    <h1>{menu.MenuSub}</h1>
+                <SettingMenuTitle key={index} mode={modeState.mode}>
+                    <SubWrap mode={modeState} style={{textDecorationLine: "underline"}}>{menu.MenuSub}</SubWrap>
                     <Category
                         category={menu.content}
                         onClick={function (): void {
@@ -41,7 +44,8 @@ export const MenuListComp = () => {
                 </SettingMenuTitle>
             ))}
             <Btn
-                backgroundcolor=""
+                backgroundcolor="#f71e1e"
+                color="white"
                 fontSize="1.85rem"
                 width="80%"
                 height="5rem"

@@ -12,8 +12,8 @@ export const CategoryWrap = styled.div<ISizeProps>`
 
     &:hover,
     &:hover > div {
-        color: ${({ mode, theme }) => mode && theme[mode].bgBtn};
-        background-color: ${({ mode, theme }) => mode && theme[mode].text};
+        color: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol};
+        background-color: ${({ mode, theme }) => mode && theme[mode].point100};
     }
 
     & > div {
@@ -33,7 +33,7 @@ export const CategoryArrow = styled.div<ISizeProps>`
     border-radius: 50%;
 
     &:hover {
-        color: ${({ mode, theme }) => mode && theme[mode].bgBtn};
+        color: ${({ mode, theme }) => mode && theme[mode].buttonBg};
         background-color: ${({ mode, theme }) => mode && theme[mode].text};
     }
 `

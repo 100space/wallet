@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil"
 import { ConInfo } from "@components/Description"
 import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
 import { Wrapper } from "@styled/index"
+import { useGetMode } from "@hooks/useMode"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
@@ -21,6 +22,15 @@ export const nftGetList = [
     { subject: "계약주소(CA)", content: "0x...", className: "contractAddress" },
     { subject: "토큰 아이디(Token ID)", content: "토큰 아이디", className: "tokenId" },
 ]
+
+
+export const mainList = [
+    { subject: "네트워크 이름", content: "" },
+    { subject: "네트워크 URL", content: "" },
+    { subject: "체인 ID", content: "" },
+    { subject: "통화 기호", content: "" }
+]
+
 export interface InputList {
     subject: string
     content: string
@@ -30,6 +40,7 @@ export interface InputList {
     address?: string
 }
 
+
 export const SendComp = (props: {
     inputArray: InputList[]
     BtnContent?: string
@@ -37,10 +48,11 @@ export const SendComp = (props: {
     address?: string
 }) => {
     const { mode } = useRecoilValue(ModeState)
+    const [modeState, setModeState] = useGetMode()
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => (
             <>
-                <SendCompWrapper key={index}>
+                <SendCompWrapper key={index} mode={modeState.mode}>
                     <SendCompWrap>{v.subject}</SendCompWrap>
                     {v.className === "contractAddress" ? (
                         <InputComp
@@ -62,6 +74,9 @@ export const SendComp = (props: {
     return (
         <>
             {inputList(props.inputArray)}
+            { props.settings ? 
+            <></>
+            :
             <Button
                 width={"70%"}
                 height={"5rem"}
@@ -70,6 +85,7 @@ export const SendComp = (props: {
                 content={props.BtnContent}
                 fontSize="1.6rem"
             ></Button>
+            }
         </>
     )
 }

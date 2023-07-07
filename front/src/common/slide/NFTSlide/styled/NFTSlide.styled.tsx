@@ -7,7 +7,6 @@ export const NFTSlideWrap = styled.div<ISizeProps>`
     justify-content: flex-start;
     width: ${({ width }) => width || "100%"};
     /* background-color: ${({ mode, theme }) => mode && theme[mode].basicDeepBg}; */
-    background-color: #454343;
     border-radius: 1rem;
     box-sizing: border-box;
     overflow-x: scroll;

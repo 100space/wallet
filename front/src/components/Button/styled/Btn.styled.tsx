@@ -9,14 +9,9 @@ export const Btn = styled.button<IProfileBtn>`
     margin: ${(props) => props.margin || ""};
     border-radius: ${({ profile }) => (profile === "true" && "0.7rem") || "5rem"};
     border: none;
-    box-shadow: ${({ profile }) => (profile === "true" && "none") || "0 0 0.2rem 0.1rem #3a3939"};
-    font-size: ${(props) => props.fontSize || "1.2rem"};
-    color: ${({ backgroundcolor, theme, mode, profile }) => (backgroundcolor && "#333") || (mode && theme[mode].text)};
-    background: ${({ backgroundcolor, theme, mode, profile }) =>
-        backgroundcolor || (mode && theme[mode].bg200) || (profile === "true" && mode && theme[mode].bg200)};
-    &:hover {
-        /* background: ${({ theme, mode }) => mode && theme[mode].buttonHover}; */
-    }
+    font-size: ${(props) => props.fontSize || "1.7rem"};
+    color: ${({ color, theme, mode, profile }) => color || (mode && theme[mode].text)};
+    background: ${({ backgroundcolor, theme, mode }) => backgroundcolor || (mode && theme[mode].buttonBg) };
     &:active {
         background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
     }
@@ -30,6 +25,8 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     margin: 1rem auto;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
+    background: ${({ mode, theme }) => mode && theme[mode].buttonBg};
+    border-radius: 1rem;
 `
 
 export const TokenListButton = styled.button<IonClickProps>`
@@ -41,8 +38,9 @@ export const TokenListButton = styled.button<IonClickProps>`
     font-weight: 700;
     border: none;
     border-radius: 4rem;
-    color: ${({ mode, theme }) => mode && theme[mode].bgBtn};
+    color: ${({  mode, theme }) => mode && theme[mode].text};
+    background: ${({  mode, theme }) =>  mode && theme[mode].buttonBg };
     &:active {
-        background: ${({ mode, theme }) => mode && theme[mode].buttonBg};
+        background: ${({ mode, theme }) => mode && theme[mode].buttonBg };
     }
 `
