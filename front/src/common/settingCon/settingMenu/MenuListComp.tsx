@@ -1,5 +1,5 @@
 import { Category } from "@components/Category"
-import { SettingMenuTitle } from "./styled"
+import { SettingMenuTitle, SubWrap } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
 import React from "react"
@@ -23,8 +23,8 @@ export const MenuListComp = () => {
     return (
         <>
             {MenuList.map((menu, index) => (
-                <SettingMenuTitle key={index}>
-                    <h1 style={{textDecorationLine: "underline"}}>{menu.MenuSub}</h1>
+                <SettingMenuTitle key={index} mode={modeState.mode}>
+                    <SubWrap mode={modeState} style={{textDecorationLine: "underline"}}>{menu.MenuSub}</SubWrap>
                     <Category
                         category={menu.content}
                         onClick={function (): void {
@@ -44,8 +44,8 @@ export const MenuListComp = () => {
                 </SettingMenuTitle>
             ))}
             <Btn
-                backgroundcolor="red"
-                color="#fff"
+                backgroundcolor="#f71e1e"
+                color="white"
                 fontSize="1.85rem"
                 width="80%"
                 height="5rem"

@@ -6,8 +6,6 @@ export const CoinSlider = styled.div<ISizeProps>`
     padding: 1rem 0.5rem;
     display: flex;
     overflow: scroll;
-    background-color: ${({ theme, mode }) => mode && theme[mode].coinSlideBg};
-
     & > div {
         &:nth-child(1) {
             margin-left: 0;

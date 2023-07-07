@@ -30,7 +30,7 @@ export const IsPopUp = atom({
 })
 export const ModeState = atom({
     key: "initState",
-    default: { isLogin: false, mode: "lightMode" },
+    default: { isLogin: false, mode: "darkMode" },
     effects_UNSTABLE: [persistAtom],
 })
 export const MyAccount = atom({

@@ -1,3 +1,4 @@
+import { Alarm } from "@common/alarm"
 import { MenuListComp } from "@common/settingCon/settingMenu"
 import { PrivateExport } from "@components/PrivateExport"
 import { ModeState, MyAccount } from "@utils/localStorage"

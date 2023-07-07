@@ -24,24 +24,16 @@ export const Mypage = () => {
 
         const handleForSubmit = (e: FormEvent) => {
             e.preventDefault()
-
-            const formData = new FormData()
-            formData.append("profileImage", imageFile)
-        }
-
-        const handleFileChange = (e) => {
-            const file = e.target.files[0]
-            setImageFile(file)
         }
     }
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
                 {<MyProfile/>}
-                        <form onSubmit={handleFormSubmit}>
+                        <form>
                             <MyProfileLabel>
                                 이미지 업로드
-                                <FileUpload type="file" accept="image/*" onChange={handleFileChange} />
+                                <FileUpload type="file" accept="image/*"/>
                             </MyProfileLabel>
                             <UpLoadBtn type="submit"/>
                         </form>

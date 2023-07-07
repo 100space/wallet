@@ -63,6 +63,11 @@ export const TextComp = styled.div<TextProps>`
         background-color: #ffc850;
     }
 `
+
+export const AccountAdWrap = styled.div<ISizeProps>`
+    
+`
+
 export const InputWrap = styled.div<ISizeProps>`
     width: 100%;
     height: 20%;

@@ -1,6 +1,7 @@
 import { Board, NftBoardHeader, NftBoardContentRows } from "@components/Board"
 import { useOpenHandler } from "@hooks/useOpen"
 import { INftInfomation } from "@utils/interFace/nft.interface"
+import { Route } from "react-router"
 
 export const NftInfomation = (props: { nftInfo: INftInfomation }) => {
     const [isOpen, handleClose] = useOpenHandler()
