@@ -7,6 +7,12 @@ export interface ISizeProps {
     mode?: string
 }
 
+export interface IIndexProps extends ISizeProps {
+    index: number
+    percent?: boolean
+    price?: boolean
+}
+
 export interface IonClickProps extends ISizeProps {
     onClick?: MouseEventHandler<HTMLButtonElement>
     open?: string

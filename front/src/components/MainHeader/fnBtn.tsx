@@ -22,8 +22,8 @@ export const FunctionBtn = () => {
         <>
             <FunctionWrap mode={modeState.mode}>
                 <Icon icon="gg:qr" onClick={() => setScanOpen(!scanOpen)} />
-                <NavLink style={{ fontSize: "3rem" }} to="/*/alarm">
-                    <Icon icon="ph:bell" onClick={bellClick} />
+                <NavLink style={{fontSize:"3rem", display:"flex", justifyContent:"center", alignItems:"center"}} to="/alarm">
+                    <Icon icon="ph:bell" onClick={bellClick}/>
                 </NavLink>
                 {/* {modeState ? <Icon icon="ph:bell-fill" /> : <Icon icon="ph:bell" />} */}
             </FunctionWrap>

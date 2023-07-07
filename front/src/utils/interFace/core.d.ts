@@ -1,3 +1,5 @@
+import { MouseEvent } from "react"
+
 export type address = string
 export type hash = string
 export type Wallet = Account[]
@@ -47,4 +49,8 @@ export interface IAccountAmount {
 export interface ITokenRow {
     tokenImg: string
     assets: IAccountAmount[]
+}
+
+export interface IClickHandler {
+    onClick: (e: MouseEvent) => void
 }
