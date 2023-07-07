@@ -1,5 +1,5 @@
+// windowproperty.js
 /* eslint-disable no-undef */
-
 console.log("windowproperty.js is being loaded")
 
 let messageId = 0
@@ -18,10 +18,14 @@ function postMessageAsync(method, params) {
     return new Promise((resolve, reject) => {
         messagePromises[id] = { resolve, reject }
         window.postMessage(message, "*")
+        console.log(message)
     })
 }
 
 window.abc = {
+    enable: async () => {
+        return postMessageAsync("eth_requestAccounts")
+    },
     request: async ({ method, params }) => {
         console.log("request", method, params)
         return postMessageAsync(method, params)

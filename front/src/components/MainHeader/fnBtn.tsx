@@ -12,7 +12,6 @@ import { ScanOpen } from "@utils/localStorage"
 export const FunctionBtn = () => {
     const [modeState, setChange] = useGetMode()
     const [fnBtnstate, setfnBtnState] = useState(false)
-    const [modeState, setChange] = useGetMode()
     const [scanOpen, setScanOpen] = useRecoilState(ScanOpen)
 
     const bellClick = () => {
@@ -23,8 +22,8 @@ export const FunctionBtn = () => {
         <>
             <FunctionWrap mode={modeState.mode}>
                 <Icon icon="gg:qr" onClick={() => setScanOpen(!scanOpen)} />
-                <NavLink style={{fontSize:"3rem"}} to="/*/alarm">
-                    <Icon icon="ph:bell" onClick={bellClick}/>
+                <NavLink style={{ fontSize: "3rem" }} to="/*/alarm">
+                    <Icon icon="ph:bell" onClick={bellClick} />
                 </NavLink>
                 {/* {modeState ? <Icon icon="ph:bell-fill" /> : <Icon icon="ph:bell" />} */}
             </FunctionWrap>
