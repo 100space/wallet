@@ -12,4 +12,4 @@ Content-Type: application/json
 }
 
 ### 환율 정보
-GET {{server}}/exchange?to=kRw,JpY HTTP/1.1
+GET {{server}}/exchange?to=kRw,usd HTTP/1.1

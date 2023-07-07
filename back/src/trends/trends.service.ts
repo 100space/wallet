@@ -14,7 +14,9 @@ export class TrendsService {
   constructor(
     private readonly httpService: HttpService,
     private readonly trendRepository: TrendRepository
-  ) { }
+  ) {
+    this.getCoinList()
+  }
 
 
   async getExchange({ from = 'USD', to = 'KRW' }) {
@@ -101,9 +103,9 @@ export class TrendsService {
     return true;
   }
 
-  async updateCoinInfomation(symbol: string, updateTrendDto: UpdateTrendDto){
+  async updateCoinInfomation(symbol: string, updateTrendDto: UpdateTrendDto) {
     try {
-      if(!await this.trendRepository.update(symbol, updateTrendDto)) throw new ForbiddenException('Failed to update data', { cause: new Error(), description: 'Failed to update data'})
+      if (!await this.trendRepository.update(symbol, updateTrendDto)) throw new ForbiddenException('Failed to update data', { cause: new Error(), description: 'Failed to update data' })
       return true
     } catch (error) {
       throw error
@@ -111,7 +113,7 @@ export class TrendsService {
   }
 
   // sort = price | rank | name
-  async getCoinInfomation(sort = 'rank', count = 10): Promise<ICoinList[]>{
+  async getCoinInfomation(sort = 'rank', count = 10): Promise<ICoinList[]> {
     const coinData = await this.trendRepository.find(sort, count)
     const response: ICoinList[] = coinData.map(v => ({
       rank: v.rank,
@@ -121,53 +123,56 @@ export class TrendsService {
       changePercent: v.changePercent,
       coinPrice: [
         { currency: this.krw.currency, price: (v.price * this.krw.price) },
-        { currency: "USD", price: v.price}
+        { currency: "USD", price: v.price }
       ]
     }))
     return response
   }
 
   async getTokenData({ symbol }): Promise<ICoinInfo> {
-    const {
-      data: { coins },
-    } = await firstValueFrom(
-      this.httpService.get(`search?query=${symbol}`).pipe(
-        catchError((error: AxiosError) => {
-          this.logger.error(error.response.data);
-          throw new BadGatewayException('Unable to get token id', {
-            cause: new Error(),
-            description: 'Coingecko Error',
-          });
-        }),
-      ),
-    );
+    return await this.trendRepository.findOne(symbol)
+    // const {
+    //   data: { coins },
+    // } = await firstValueFrom(
+    //   this.httpService.get(`search?query=${symbol}`).pipe(
+    //     catchError((error: AxiosError) => {
+    //       this.logger.error(error.response.data);
+    //       throw new BadGatewayException('Unable to get token id', {
+    //         cause: new Error(),
+    //         description: 'Coingecko Error',
+    //       });
+    //     }),
+    //   ),
+    // );
 
-    const id = coins[0].id;
+    // const id = coins[0].id;
 
-    const { data } = await firstValueFrom(
-      this.httpService.get(`coins/${id}`).pipe(
-        catchError((error: AxiosError) => {
-          this.logger.error(error.response.data);
-          throw new BadGatewayException('Unable to get token data', {
-            cause: new Error(),
-            description: 'Coingecko Error',
-          });
-        }),
-      ),
-    );
-    return {
-      name: data.name,
-      symbol: data.symbol,
-      rank: data.market_cap_rank,
-      marketCap: data.market_data.market_cap.krw,
-      totalSupply: data.market_data.total_supply,
-      maxSupply: data.market_data.max_supply,
-      circulatingSupply: data.market_data.circulating_supply,
-      description: data.description.ko.replace(/\r\n/g, ''),
-      image: data.image.large,
-      changePercent: data.market_data.price_change_percentage_24h,
-      currency: 'KRW',
-      price: data.market_data.current_price.krw,
-    };
+    // const { data } = await firstValueFrom(
+    //   this.httpService.get(`coins/${id}`).pipe(
+    //     catchError((error: AxiosError) => {
+    //       this.logger.error(error.response.data);
+    //       throw new BadGatewayException('Unable to get token data', {
+    //         cause: new Error(),
+    //         description: 'Coingecko Error',
+    //       });
+    //     }),
+    //   ),
+    // );
+
+
+    // return {
+    //   name: data.name,
+    //   symbol: data.symbol,
+    //   rank: data.market_cap_rank,
+    //   marketCap: data.market_data.market_cap.krw,
+    //   totalSupply: data.market_data.total_supply,
+    //   maxSupply: data.market_data.max_supply,
+    //   circulatingSupply: data.market_data.circulating_supply,
+    //   description: data.description.ko.replace(/\r\n/g, ''),
+    //   image: data.image.large,
+    //   changePercent: data.market_data.price_change_percentage_24h,
+    //   currency: 'KRW',
+    //   price: data.market_data.current_price.krw,
+    // };
   }
 }

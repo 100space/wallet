@@ -6,7 +6,7 @@ import { TokenSymbolDto } from './dto/get-token-trends.dto';
 @ApiTags('Trends')
 @Controller('trends')
 export class TrendsController {
-  constructor(private readonly trendsService: TrendsService) {}
+  constructor(private readonly trendsService: TrendsService) { }
 
   @Get('exchange')
   getExchange(@Query() { from, to }) {
@@ -30,7 +30,7 @@ export class TrendsController {
     required: false,
     example: 'name',
   })
-  getCoinList(@Query() { sort = "rank",count = 10 }) {
+  getCoinList(@Query() { sort = "rank", count = 20 }) {
     return this.trendsService.getCoinInfomation(sort, count);
   }
 
