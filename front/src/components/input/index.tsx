@@ -23,7 +23,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({
     }
     return (
         <>
-            <InputWrap focusmode={focusmode} height={height} width={width} type={type}>
+            <InputWrap focusmode={focusmode} height={height} width={width} type={type} mode={modeState.mode}>
                 <InputElement
                     type={type === "text" || type === "" ? "text" : isVisible ? "text" : "password"}
                     height={height}
@@ -37,6 +37,7 @@ export const InputComp: React.FC<IPlaceTypeSize> = ({
                         setIsValue(e.target.value)
                     }}
                     onChange={onChange}
+                    mode={modeState.mode}
                 />
                 {type === "password" && (
                     <HideIcon width="3rem" onClick={handleVisible} mode={modeState.mode}>

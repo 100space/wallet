@@ -27,6 +27,7 @@ export interface IStateProps extends ISizeProps {
 export interface ITypeSize extends ISizeProps {
     type?: string
     name?: string
+    color?: string
 }
 export interface IPlaceTypeSize extends ITypeSize {
     placeholder?: string
@@ -49,6 +50,7 @@ export interface IBtn extends IonClickProps {
     fontSize?: string
     mode: string
     children?: string | ReactNode
+    color?:string
 }
 
 export interface IProfileBtn extends IBtn {

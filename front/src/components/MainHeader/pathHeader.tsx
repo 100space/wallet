@@ -3,6 +3,7 @@ import { useLocation } from "react-router"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { HeaderSubJect } from "./styled"
 import { Icon } from "@iconify/react"
+import { useState } from "react"
 
 export const PathHeader = () => {
     const pathName = useLocation().pathname
@@ -12,6 +13,7 @@ export const PathHeader = () => {
     const handleClick = () => {
         setIsPopUp({ isOpen: !isOpen, contents: "My Account" })
     }
+    
     const checkPathName =
         pathName.indexOf("/setting") >= 0
             ? "setting"

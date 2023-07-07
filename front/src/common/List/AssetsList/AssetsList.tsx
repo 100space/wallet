@@ -8,6 +8,7 @@ import { MouseEvent, useState } from "react"
 import { NftCard } from "@components/Nft"
 import { useGetMode } from "@hooks/useMode"
 import { usePopup } from "@hooks/usePopup"
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCard[] }) => {
@@ -33,23 +34,25 @@ export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCard[
         setPopUp(innerHTML)
     }
     return (
-        <AssetsListWrap>
-            <AssetsListHeader onClick={handleClick} selected={selected} />
-            {props.tokenList && selected[0] && (
-                <>
-                    <AssetsNFTHeader mode={modeState.mode}>{"My Assets"}</AssetsNFTHeader>
-                    {assetTokenList(props.tokenList)}
-                </>
-            )}
-            {props.nftList && selected[1] && (
-                <>
-                    <AssetsNFTHeader mode={modeState.mode}>{"My Collection"}</AssetsNFTHeader>
-                    <AssetsNFTCardsWrap>{nftCardsList(props.nftList)}</AssetsNFTCardsWrap>
-                </>
-            )}
-            <TokenListBtn width={"70%"} onClick={handlePopup}>
-                {selected[0] === true ? "토큰 가져오기" : "NFT 가져오기"}
-            </TokenListBtn>
-        </AssetsListWrap>
+            <AssetsListWrap>
+                    <AssetsListHeader onClick={handleClick} selected={selected} />
+                {props.tokenList && selected[0] && (
+                    <>
+                        <AssetsNFTHeader mode={modeState.mode}>{"My Assets"}</AssetsNFTHeader>
+                        {assetTokenList(props.tokenList)}
+                    </>
+                )}
+                {props.nftList && selected[1] && (
+                    <>
+                        <AssetsNFTHeader mode={modeState.mode}>{"My Collection"}</AssetsNFTHeader>
+                            <AssetsNFTCardsWrap>
+                                {nftCardsList(props.nftList)}
+                            </AssetsNFTCardsWrap>
+                    </>
+                )}
+                <TokenListBtn width={"70%"} onClick={handlePopup}>
+                    {selected[0] === true ? "토큰 가져오기" : "NFT 가져오기"}
+                </TokenListBtn>
+            </AssetsListWrap>
     )
 }

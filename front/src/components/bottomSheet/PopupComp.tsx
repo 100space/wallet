@@ -5,13 +5,18 @@ import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
 import { usePopup } from "@hooks/usePopup"
 import { IMatched, address } from "@utils/interFace/core"
+import { useGetMode } from "@hooks/useMode"
 
-export const PopupComp = () => {
+
+export const PopupComp = ({ address }: { address?: address }) => {
+    const [modeState, setChange] = useGetMode()
+
     const [{ isOpen, contents }, setPopup] = usePopup()
     const { mode } = useRecoilValue(ModeState)
     const handleClick = () => {
         setPopup("")
     }
+
     const matchText: IMatched = {
         "토큰 가져오기": { text: "토큰의 계약주소와 토큰의 정보를 이용하여 토큰을 가져올 수 있습니다." },
         송금하기: { text: "송금할 계좌와 금액을 입력해주세요." },
@@ -23,7 +28,7 @@ export const PopupComp = () => {
     console.log(matchText[contents]?.text)
     return (
         <>
-            <BottomSheetWrap popupstate={isOpen.toString()}>
+            <BottomSheetWrap mode={modeState.mode} popupstate={isOpen.toString()}>
                 <BtnWrap>
                     <CloseBtn onClick={handleClick} />
                 </BtnWrap>

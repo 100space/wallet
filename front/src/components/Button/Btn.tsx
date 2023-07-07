@@ -10,6 +10,7 @@ export const Button: React.FC<IBtn> = ({
     fontSize,
     onClick,
     backgroundcolor,
+    color
 }) => {
     return (
         <Btn
@@ -20,6 +21,7 @@ export const Button: React.FC<IBtn> = ({
             mode={mode}
             onClick={onClick}
             fontSize={fontSize}
+            color={color}
         >
             {content}
         </Btn>
