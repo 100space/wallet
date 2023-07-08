@@ -1,5 +1,6 @@
-import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
+import { ISizeProps } from "@utils/interFace/styled.interface"
+
 
 export const AccountBtnWrapper = styled.div`
     display: flex;
