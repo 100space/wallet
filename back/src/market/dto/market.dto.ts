@@ -11,7 +11,7 @@ export class ListNftByEoaDto {
 export class ListNftByCaDto {
   @ApiProperty({
     description: 'NFT의 CA',
-    default: '0xA3b0E897B5166379a14dF88B5bf50c530270556a',
+    default: '0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1',
   })
   ca: string;
 }

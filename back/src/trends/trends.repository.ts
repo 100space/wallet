@@ -1,17 +1,35 @@
 import { Trend } from '../schemas/trend.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateTrendDto } from './dto/create-trend.dto';
 import { UpdateTrendDto } from './dto/update-trend.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TrendRepository {
   constructor(
     @InjectModel(Trend.name, 'local') private trendModel: Model<Trend>,
-  ) {}
+    private configService: ConfigService,
+  ) {
+    this.initiate();
+  }
 
-  async create(createTrendDto: CreateTrendDto) {
+  async initiate() {
+    try {
+      await this.trendModel.deleteMany({});
+      const basicData = this.configService.get('trendDatas');
+      if (!(await this.create(basicData)))
+        throw new ForbiddenException('Failed to create basicData', {
+          cause: new Error(),
+          description: 'Failed to create basicData',
+        });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async create(createTrendDto: CreateTrendDto | CreateTrendDto[]) {
     try {
       await this.trendModel.create(createTrendDto);
       return true;
@@ -34,13 +52,24 @@ export class TrendRepository {
     }
   }
 
-    async findOne(symbol: string) {
-        return await this.trendModel.findOne({ symbol });
-    }
+  async findOne(symbol: string) {
+    return await this.trendModel.findOne({ symbol });
+  }
 
-    async find(sort: string, count: number) {
-        const sortOption = {}
-        sortOption[sort] = 1
-        return await this.trendModel.find().sort(sortOption).limit(count).select('rank name symbol image changePercent price');
-    }
+  async find(sort: string, count: number) {
+    const sortOption = {};
+    sortOption[sort] = 1;
+    return await this.trendModel
+      .find()
+      .sort(sortOption)
+      .limit(count)
+      .select('rank name symbol image changePercent price');
+  }
+
+  async findMany({ symbolList }: { symbolList: string[] }) {
+    return await this.trendModel.find(
+      { symbol: { $in: symbolList } },
+      { _id: 0, name: 1, image: 1, currency: 1, price: 1, symbol: 1 },
+    );
+  }
 }
