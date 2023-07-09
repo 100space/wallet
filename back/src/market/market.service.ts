@@ -23,6 +23,8 @@ export class MarketService {
   private readonly logger = new Logger(MarketService.name);
   private readonly contract: Contract;
   private readonly PREFIX = 10 ** 18;
+  private currencyPrice = 0
+  private currency = "matic"
   constructor(
     @Inject('Provider') private readonly provider: Provider,
     private readonly httpService: HttpService,
@@ -34,11 +36,13 @@ export class MarketService {
       MARKET_ABI,
       this.provider,
     );
+    this.changeBasicCurrency({ symbol: this.currency })
   }
 
   async listCollections() {
     try {
       const response = await this.marketRepository.findAll();
+      console.log(response)
       return response.map((v) => {
         return {
           ca: v.address,
@@ -46,6 +50,13 @@ export class MarketService {
           nickname: v.symbol,
           description: v.description,
           image: v.logo,
+          prices: [
+            {
+              currency: "KRW", price: v.floorPrice * this.currencyPrice
+            },
+            {
+              currency: this.currency, price: v.floorPrice * this.currencyPrice
+            }]
         };
       });
     } catch (error) {
@@ -249,5 +260,12 @@ export class MarketService {
         description: 'Get NftInfo Error',
       });
     }
+  }
+
+  async changeBasicCurrency({ symbol }: { symbol: string }) {
+    this.currency = symbol.toUpperCase()
+    const currencyPrice = (await this.trendService.getTokenData({ symbol })).price
+    this.currencyPrice = Math.floor(currencyPrice * 1000) / 1000
+    return "변경되었습니다."
   }
 }

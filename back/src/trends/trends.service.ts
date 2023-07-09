@@ -16,6 +16,7 @@ export class TrendsService {
     private readonly trendRepository: TrendRepository
   ) {
     this.getCoinList()
+
   }
 
   async getExchange({ from = 'USD', to = 'KRW' }) {
@@ -57,26 +58,9 @@ export class TrendsService {
     }
   }
 
-  // async simplePrice({ id, currency = 'USD' }) {
-  //   const { data } = await firstValueFrom(
-  //     this.httpService
-  //       .get(`simple/price?ids=${id}&vs_currencies=${currency}`)
-  //       .pipe(
-  //         catchError((error: AxiosError) => {
-  //           this.logger.error(error.response.data);
-  //           throw new BadGatewayException('Unable to get price data', {
-  //             cause: new Error(),
-  //             description: 'Coingecko Error',
-  //           });
-  //         }),
-  //       ),
-  //   );
-  //   return { currency: currency.toUpperCase(), price: data[id][currency] };
-  // }
-
   @Interval(180000)
   async getCoinList(): Promise<boolean> {
-    console.log('실행되었습니다.', new Date().getMinutes())
+    console.log(`현재시각 ${new Date().getHours()}시 ${new Date().getMinutes()}분 갱신되었습니다.`)
     const { data } = await firstValueFrom(
       this.httpService
         .get(`coins/markets?vs_currency=USD&per_page=100`)
@@ -130,48 +114,5 @@ export class TrendsService {
 
   async getTokenData({ symbol }): Promise<ICoinInfo> {
     return await this.trendRepository.findOne(symbol)
-    // const {
-    //   data: { coins },
-    // } = await firstValueFrom(
-    //   this.httpService.get(`search?query=${symbol}`).pipe(
-    //     catchError((error: AxiosError) => {
-    //       this.logger.error(error.response.data);
-    //       throw new BadGatewayException('Unable to get token id', {
-    //         cause: new Error(),
-    //         description: 'Coingecko Error',
-    //       });
-    //     }),
-    //   ),
-    // );
-
-    // const id = coins[0].id;
-
-    // const { data } = await firstValueFrom(
-    //   this.httpService.get(`coins/${id}`).pipe(
-    //     catchError((error: AxiosError) => {
-    //       this.logger.error(error.response.data);
-    //       throw new BadGatewayException('Unable to get token data', {
-    //         cause: new Error(),
-    //         description: 'Coingecko Error',
-    //       });
-    //     }),
-    //   ),
-    // );
-
-
-    // return {
-    //   name: data.name,
-    //   symbol: data.symbol,
-    //   rank: data.market_cap_rank,
-    //   marketCap: data.market_data.market_cap.krw,
-    //   totalSupply: data.market_data.total_supply,
-    //   maxSupply: data.market_data.max_supply,
-    //   circulatingSupply: data.market_data.circulating_supply,
-    //   description: data.description.ko.replace(/\r\n/g, ''),
-    //   image: data.image.large,
-    //   changePercent: data.market_data.price_change_percentage_24h,
-    //   currency: 'KRW',
-    //   price: data.market_data.current_price.krw,
-    // };
   }
 }

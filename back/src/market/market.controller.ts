@@ -8,7 +8,7 @@ import { NftInfoDto } from './dto/info-market.dto';
 @ApiTags('Market')
 @Controller('market')
 export class MarketController {
-  constructor(private readonly marketService: MarketService) {}
+  constructor(private readonly marketService: MarketService) { }
 
   @Get()
   @ApiOperation({
@@ -53,5 +53,14 @@ export class MarketController {
   })
   listNftByCa(@Body() { ca }: ListNftByCaDto) {
     return this.marketService.listNftByCa({ ca });
+  }
+
+  @Post('currency')
+  @ApiOperation({
+    summary: '네트워트의 따라 화폐를 변경합니다.',
+    description: 'symbol을 받아 해당 통화를 symbol로 변경합니다.',
+  })
+  changeBasicCurrency(@Body() { symbol = "matic" }: { symbol: string }) {
+    return this.marketService.changeBasicCurrency({ symbol });
   }
 }
