@@ -28,4 +28,5 @@ export const AccountGetBtn = styled.div<ISizeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 `

@@ -1,17 +1,23 @@
 import { AccountGetBtn } from "@components/AccountBtn/styled"
 import { CloseBtn } from "@components/CloseBtn"
-import { GetWalletWrap } from "./styled"
+import { CloseWrap, GetWalletSub, GetWalletWrapper, WalletInfo, WalletInfoWrap } from "./styled"
+import { useGetMode } from "@hooks/useMode"
 
 export const GetWallet = () => {
+    const [modeState, setChange] = useGetMode()
 
     return(
         <>
-            <GetWalletWrap>
-                <CloseBtn/>
-                <h1>비공개키를 입력해주세요.</h1>
-                <div></div>
+            <GetWalletWrapper mode={modeState.mode}>
+                <CloseWrap>
+                    <CloseBtn/>
+                </CloseWrap>
+                <GetWalletSub>비공개키를 입력해주세요.</GetWalletSub>
+                <WalletInfoWrap>
+                    <WalletInfo></WalletInfo>
+                </WalletInfoWrap>
                 <AccountGetBtn/>
-            </GetWalletWrap>
+            </GetWalletWrapper>
         </>
     )
 }
