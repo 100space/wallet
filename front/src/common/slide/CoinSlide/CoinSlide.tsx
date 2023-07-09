@@ -40,6 +40,7 @@ export const CoinSlide = (props: {
             return <CoinCard coinData={v} key={i} onClick={handleClick} />
         })
     }
+
     return (
         <CoinSlideWrap mode={mode}>
             <CoinSlideSubject mode={mode}>추천 코인</CoinSlideSubject>

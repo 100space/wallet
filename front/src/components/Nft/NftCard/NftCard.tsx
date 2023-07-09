@@ -21,7 +21,7 @@ export const NftCard = memo((props: { nftInfo: INFTCard; className: string }) =>
     return pathname.indexOf("/market/new") >= 0 || pathname.indexOf("/market") <= 0 ? (
         <NftCardWrap color={getRandomColor()} width={"100%"} height={"26rem"}>
             <NftCardImg width={"90%"} height={"60%"} image={props.nftInfo.image} className={props.className} />
-            <NftContents name={props.nftInfo.name} owner={props.nftInfo.owner} prices={props.nftInfo.prices} />
+            <NftContents name={props.nftInfo.name} owner={props.nftInfo.nickname} prices={props.nftInfo.prices} />
         </NftCardWrap>
     ) : (
         <NftCardWrap color={getRandomColor()} width={"50rem"} height={"25rem"}>

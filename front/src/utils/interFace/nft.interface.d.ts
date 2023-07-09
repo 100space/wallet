@@ -1,5 +1,12 @@
 import { ISizeProps } from "./styled.interface"
 
+export interface INFTInfo {
+    ca?: string
+    name: string
+    owner?: string
+    nickname?: string
+}
+
 export interface INFTPrice {
     currency: string
     price: number
@@ -12,23 +19,17 @@ export interface INFTImg extends ISizeProps {
     className?: string
 }
 
-export interface INFTInfo {
-    ca?: string
-    name: string
-    owner: string
-}
-
 export interface INFTContents extends INFTInfo {
     prices: INFTPrices
 }
 
-export interface INFTCard extends INFTImg, INFTContents {}
+export interface INFTCard extends INFTImg, INFTContents { }
 
 export interface INFTRank {
-    rank: number
+    rank?: number
 }
 
-export interface INFTRow extends INFTCard, INFTRank {}
+export interface INFTRow extends INFTCard, INFTRank { }
 
 export interface IBlockChainNetWork {
     name: string
@@ -54,7 +55,7 @@ export interface INFTStauts {
 export interface INftInfomation {
     owner: IContent
     blockchain: IContent
-    ca:IContent
+    ca: IContent
     tokenId: IContent
     tokenStandard: IContent
     // owner: string[]

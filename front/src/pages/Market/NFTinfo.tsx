@@ -64,7 +64,11 @@ const data6: INFTStandard = {
     chargePrice: { currency: "ETH", price: 0.0000013 },
 }
 
-export const NFTInfoPage = () => {
+interface INFTInfoPage {
+    ca: string
+}
+
+export const NFTInfoPage = ({ ca }: INFTInfoPage) => {
     const { mode } = useRecoilValue(ModeState)
     return (
         <>

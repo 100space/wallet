@@ -1,6 +1,8 @@
 import { Filter } from "@common/Filter"
 import { NFTRowList } from "@common/List"
 import { INFTRow } from "@utils/interFace/nft.interface"
+import { SelectedNFTCa } from "@utils/localStorage"
+import { useRecoilState } from "recoil"
 
 const data1: INFTRow = {
     rank: 1,
@@ -54,10 +56,12 @@ const data4: INFTRow = {
 }
 
 export const HotPage = () => {
+    const [nftCa, setNftCa] = useRecoilState(SelectedNFTCa)
+
     return (
         <>
             <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
-            <NFTRowList nftRows={[data1, data2, data3, data4, data5, data2]} />
+            <NFTRowList nftRows={[data1, data2, data3, data4, data5, data2]} setNftCa={setNftCa} />
         </>
     )
 }
