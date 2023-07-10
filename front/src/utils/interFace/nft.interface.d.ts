@@ -57,10 +57,6 @@ export interface INFTStauts {
     supply: IContent
     isTrade: IContent
     isSell: IContent
-    // blockchain: (string | string[])[]
-    // supply: (string | number)[]
-    // isTrade: (string | number)[]
-    // isSell: (string | number)[]
 }
 
 export interface INftInfomation {
@@ -69,11 +65,8 @@ export interface INftInfomation {
     ca: IContent
     tokenId: IContent
     tokenStandard: IContent
-    // owner: string[]
-    // blockchain: (string | string[])[]
-    // ca: string[]
-    // tokenId: (number | string)[]
-    // tokenStandard: string[]
+    supply: IContent
+    isTrade: IContent
 }
 
 export interface INFTStandardSubject {

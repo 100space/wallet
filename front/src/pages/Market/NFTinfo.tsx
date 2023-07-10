@@ -82,7 +82,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
             {/* <NftStatus nftStatus={data4} /> */}
             {/* </PlatWrap> */}
             <PlatWrap mode={mode}>
-                <NftInfomation owner={{ subject: "소유자", value: nft.data.owner }} blockchain={{ subject: "토큰 표준", value: nft.data.blockchain }} ca={{ subject: "계약주소", value: nft.data.ca }} tokenId={{ subject: "토큰 ID", value: nft.data.tokenId }} tokenStandard={{ subject: "토큰 표준", value: nft.data.tokenStandard }} />
+                <NftInfomation owner={{ subject: "소유자", value: nft.data.owner }} blockchain={{ subject: "블록체인", value: nft.data.blockchain }} ca={{ subject: "계약주소", value: nft.data.ca }} tokenId={{ subject: "토큰 ID", value: nft.data.tokenId }} tokenStandard={{ subject: "토큰 표준", value: nft.data.tokenStandard }} supply={{ subject: "공급량", value: nft.data.supply }} isTrade={{ subject: "판매", value: nft.data.isTrade }} />
             </PlatWrap>
             <PlatWrap mode={mode}>
                 <NftTxList txList={[data3, data3, data3, data3, data3]} />
