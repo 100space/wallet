@@ -8,7 +8,7 @@ export const theme = {
         bgInfo: "#343434",
         bgDescription: "#222222",
         profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
-        popupBg: "#323232", 
+        popupBg: "#3f3f3f", 
         settingInputBg: "#212121",
         searchBg: "#fff",
         coinSlideBg: "#33333382",
@@ -16,6 +16,7 @@ export const theme = {
         alarmBg: "#585858",
         nftRowBg: "#494949",
         coinCardBg:"#05296a",
+        AccountGetBtnBg:"#3a75bd",
         
         // point 색상
         point200: "#FF8756",
@@ -50,6 +51,7 @@ export const theme = {
         coinBg: "#fff",
         alarmBg: "#ffc37f",
         nftRowBg: "#FEF8E4",
+        AccountGetBtnBg:"#026985",
         
         // //point 색상
         point200: "#faa12c",

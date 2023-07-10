@@ -22,12 +22,12 @@ export const AccountRow = (props: { account: IAccountRow }) => {
 
     return (
         <AccountRowWrap mode={modeState.mode} width={"100%"} height={"6rem"}>
-            <AccountRowImgWrap width={"30%"} height={"90%"}>
+            <AccountRowImgWrap width={"10%"} height={"90%"}>
                 <AccountRowImg src={props.account.accountImg} className="AccountImg" />
             </AccountRowImgWrap>
                 <AccountAdWrap>
-                    <AccountRowAddress width={"55%"}>
-                        <TextComp fontSize="2rem" width={"55%"}>
+                    <AccountRowAddress  width={"80%"}>
+                        <TextComp position={"relative"}style={{right: "4rem"}} fontSize="2rem" width={"70%"}>
                             Account 1
                         </TextComp>
                         <span>{props.account.address.substring(0, 6) + "..." + props.account.address.substring(36, 40)}</span>
@@ -36,7 +36,7 @@ export const AccountRow = (props: { account: IAccountRow }) => {
             <AccountAssets width={"25%"}>
                 <TextComp fontSize="1.4rem">{props.account.asset.amount + " " + props.account.asset.currency}</TextComp>
             </AccountAssets>
-            <Icon icon={"ep:arrow-up-bold"} rotate={1} width={"5%"} />
+            <Icon icon={"ep:arrow-up-bold"} rotate={1} style={{fontSize:"2.5rem"}} color="#ffc74d"/>
         </AccountRowWrap>
     )
 }

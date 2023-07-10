@@ -11,6 +11,8 @@ import { CoinInfoPage } from "@pages/Trends"
 import { InfoRouter } from "./infoRouter"
 import { NftInfomation } from "@common/Infomation"
 import { Alarm } from "@common/alarm"
+import { GetWallet } from "@components/getWallet"
+import { PathHeader } from "@components/MainHeader"
 import { Scanner } from "@components/PopupItem/QR/scanner"
 
 export const MainRouter = () => {
@@ -33,7 +35,7 @@ export const MainRouter = () => {
                     <>
                         <Route path="/" element={<MainPage />}></Route>
                         <Route path="/*" element={<MainPage />}></Route>
-                        <Route path="/*/alarm" element={<Alarm />}></Route>
+                        <Route path="/alarm" element={<Alarm />}></Route> 
                         <Route path="/setting/*" element={<SettingRouter />}></Route>
                         <Route path="/market/*" element={<MarketRouter />}></Route>
                         <Route path="/trends/*" element={<TrandsRouter />}></Route>

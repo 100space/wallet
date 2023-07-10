@@ -54,18 +54,22 @@ export const TextComp = styled.div<TextProps>`
     text-align: center;
     width: ${(props) => props.width || "fit-content"};
     color: ${({ color, theme, mode }) => color || (mode && theme[mode].text) || "inherit"};
+    display: flex;
     & > .account {
         display: block;
         width: fit-content;
         padding: 0.7rem 1.4rem;
         border-radius: 1rem;
         font-size: 1.2rem !important;
-        background-color: #ffc850;
+        background-color: #ffb71d;
     }
 `
 
 export const AccountAdWrap = styled.div<ISizeProps>`
-    
+    width: 42%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 `
 
 export const InputWrap = styled.div<ISizeProps>`

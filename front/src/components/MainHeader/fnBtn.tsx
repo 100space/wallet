@@ -13,7 +13,6 @@ export const FunctionBtn = () => {
     const [modeState, setChange] = useGetMode()
     const [fnBtnstate, setfnBtnState] = useState(false)
     const [scanOpen, setScanOpen] = useRecoilState(ScanOpen)
-
     const bellClick = () => {
         setfnBtnState(!fnBtnstate)
     }
