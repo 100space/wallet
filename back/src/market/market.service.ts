@@ -122,10 +122,10 @@ export class MarketService {
 
           const prices = [
             {
-              curreny: 'KRW',
+              currency: 'KRW',
               price: (Number(price) / this.PREFIX) * krwPrice,
             },
-            { curreny: 'MATIC', price: Number(price) / this.PREFIX },
+            { currency: 'MATIC', price: Number(price) / this.PREFIX },
           ];
 
           return {

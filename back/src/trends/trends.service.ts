@@ -1,11 +1,19 @@
 import { HttpService } from '@nestjs/axios';
-import { BadGatewayException, ForbiddenException, Injectable, InternalServerErrorException, Logger, NotFoundException, } from '@nestjs/common';
+import {
+  BadGatewayException,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { AxiosError } from 'axios';
-import { catchError, firstValueFrom } from 'rxjs';
-import { TrendRepository } from "./trends.repository";
-import { ICoinList, ICoinInfo, IGetCoinList, } from '../interface/trends.interface';
+import { catchError, firstValueFrom, map } from 'rxjs';
+import { TrendRepository } from './trends.repository';
+import { ICoinList, ICoinInfo } from '../interface/trends.interface';
 import { Cron, Interval } from '@nestjs/schedule';
-import { UpdateTrendDto } from "./dto/update-trend.dto";
+import { UpdateTrendDto } from './dto/update-trend.dto';
+import { ListTokensDto } from './dto/list-tokens-trends.dto';
 
 @Injectable()
 export class TrendsService {
@@ -13,9 +21,9 @@ export class TrendsService {
   public krw = { currency: 'KRW', price: 1200 };
   constructor(
     private readonly httpService: HttpService,
-    private readonly trendRepository: TrendRepository
+    private readonly trendRepository: TrendRepository,
   ) {
-    this.getCoinList()
+    this.getCoinList();
   }
 
   async getExchange({ from = 'USD', to = 'KRW' }) {
@@ -42,7 +50,6 @@ export class TrendsService {
     }
   }
 
-
   @Cron('0 10 9 * * *', { timeZone: 'Asia/Seoul' })
   async cronExchange() {
     try {
@@ -57,121 +64,121 @@ export class TrendsService {
     }
   }
 
-  // async simplePrice({ id, currency = 'USD' }) {
-  //   const { data } = await firstValueFrom(
-  //     this.httpService
-  //       .get(`simple/price?ids=${id}&vs_currencies=${currency}`)
-  //       .pipe(
-  //         catchError((error: AxiosError) => {
-  //           this.logger.error(error.response.data);
-  //           throw new BadGatewayException('Unable to get price data', {
-  //             cause: new Error(),
-  //             description: 'Coingecko Error',
-  //           });
-  //         }),
-  //       ),
-  //   );
-  //   return { currency: currency.toUpperCase(), price: data[id][currency] };
-  // }
-
   @Interval(180000)
   async getCoinList(): Promise<boolean> {
-    console.log('실행되었습니다.', new Date().getMinutes())
+    console.log('실행되었습니다.', new Date().getMinutes());
     const { data } = await firstValueFrom(
-      this.httpService
-        .get(`coins/markets?vs_currency=USD&per_page=100`)
-        .pipe(
-          catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw new BadGatewayException('Unable to get coin list', {
-              cause: new Error(),
-              description: 'Coingecko Error',
-            });
-          }),
-        ),
+      this.httpService.get(`coins/markets?vs_currency=USD&per_page=100`).pipe(
+        catchError((error: AxiosError) => {
+          this.logger.error(error.response.data);
+          throw new BadGatewayException('Unable to get coin list', {
+            cause: new Error(),
+            description: 'Coingecko Error',
+          });
+        }),
+      ),
     );
 
-    await data.forEach(v => {
+    await data.forEach((v) => {
       this.updateCoinInfomation(v.symbol, {
         rank: v.market_cap_rank,
         price: v.current_price,
         changePercent: v.price_change_percentage_24h,
-      })
-    })
+      });
+    });
 
     return true;
   }
 
   async updateCoinInfomation(symbol: string, updateTrendDto: UpdateTrendDto) {
     try {
-      if (!await this.trendRepository.update(symbol, updateTrendDto)) throw new ForbiddenException('Failed to update data', { cause: new Error(), description: 'Failed to update data' })
-      return true
+      if (!(await this.trendRepository.update(symbol, updateTrendDto)))
+        throw new ForbiddenException('Failed to update data', {
+          cause: new Error(),
+          description: 'Failed to update data',
+        });
+      return true;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
   // sort = price | rank | name
   async getCoinInfomation(sort = 'rank', count = 10): Promise<ICoinList[]> {
-    const coinData = await this.trendRepository.find(sort, count)
-    const response: ICoinList[] = coinData.map(v => ({
+    const coinData = await this.trendRepository.find(sort, count);
+    const response: ICoinList[] = coinData.map((v) => ({
       rank: v.rank,
       name: v.name,
       symbol: v.symbol,
       image: v.image,
       changePercent: v.changePercent,
       coinPrice: [
-        { currency: this.krw.currency, price: (v.price * this.krw.price) },
-        { currency: "USD", price: v.price }
-      ]
-    }))
-    return response
+        { currency: this.krw.currency, price: v.price * this.krw.price },
+        { currency: 'USD', price: v.price },
+      ],
+    }));
+    return response;
   }
 
   async getTokenData({ symbol }): Promise<ICoinInfo> {
-    return await this.trendRepository.findOne(symbol)
-    // const {
-    //   data: { coins },
-    // } = await firstValueFrom(
-    //   this.httpService.get(`search?query=${symbol}`).pipe(
-    //     catchError((error: AxiosError) => {
-    //       this.logger.error(error.response.data);
-    //       throw new BadGatewayException('Unable to get token id', {
-    //         cause: new Error(),
-    //         description: 'Coingecko Error',
-    //       });
-    //     }),
-    //   ),
-    // );
+    return await this.trendRepository.findOne(symbol);
+  }
 
-    // const id = coins[0].id;
+  async getTokenList({ tokens }: ListTokensDto) {
+    const symbolList = tokens.map((v) => v.symbol.toLowerCase());
 
-    // const { data } = await firstValueFrom(
-    //   this.httpService.get(`coins/${id}`).pipe(
-    //     catchError((error: AxiosError) => {
-    //       this.logger.error(error.response.data);
-    //       throw new BadGatewayException('Unable to get token data', {
-    //         cause: new Error(),
-    //         description: 'Coingecko Error',
-    //       });
-    //     }),
-    //   ),
-    // );
+    const response = await Promise.all(
+      symbolList.map(async (v) => {
+        const data = await this.trendRepository.findWithOptions({
+          symbol: v,
+          options: {
+            _id: 0,
+            name: 1,
+            image: 1,
+            currency: 1,
+            price: 1,
+            symbol: 1,
+          },
+        });
+        const check = this.checkResponse(data);
+        return { ...check, symbol: v };
+      }),
+    );
 
+    return await Promise.all(
+      response.map((value, index) => {
+        const [result] = response.filter(
+          (_, i) => value.symbol === tokens[i].symbol.toLowerCase(),
+        );
+        return {
+          tokenImg: result.image,
+          assets: [
+            {
+              amount: tokens[index].amount,
+              currency: result.symbol.toUpperCase(),
+            },
+            {
+              amount: tokens[index].amount * result.price,
+              currency: result.currency,
+            },
+          ],
+        };
+      }),
+    );
+  }
 
-    // return {
-    //   name: data.name,
-    //   symbol: data.symbol,
-    //   rank: data.market_cap_rank,
-    //   marketCap: data.market_data.market_cap.krw,
-    //   totalSupply: data.market_data.total_supply,
-    //   maxSupply: data.market_data.max_supply,
-    //   circulatingSupply: data.market_data.circulating_supply,
-    //   description: data.description.ko.replace(/\r\n/g, ''),
-    //   image: data.image.large,
-    //   changePercent: data.market_data.price_change_percentage_24h,
-    //   currency: 'KRW',
-    //   price: data.market_data.current_price.krw,
-    // };
+  checkResponse(data) {
+    if (!data || data === null || data.length === 0) {
+      return {
+        name: '',
+        symbol: '',
+        image: `sample` + Math.floor(Math.random() * 10) + '.jpg',
+        currency: 'KRW',
+        price: 0,
+      };
+    }
+
+    const [result] = data;
+    return result;
   }
 }

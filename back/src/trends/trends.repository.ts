@@ -29,7 +29,7 @@ export class TrendRepository {
     }
   }
 
-  async create(createTrendDto: CreateTrendDto) {
+  async create(createTrendDto: CreateTrendDto | CreateTrendDto[]) {
     try {
       await this.trendModel.create(createTrendDto);
       return true;
@@ -64,5 +64,11 @@ export class TrendRepository {
       .sort(sortOption)
       .limit(count)
       .select('rank name symbol image changePercent price');
+  }
+  async findWithOptions({ symbol, options }) {
+    const result = await this.trendModel
+      .find({ symbol }, { ...options })
+      .lean();
+    return result;
   }
 }
