@@ -1,6 +1,7 @@
 
 import { NFTRowList } from "@common/List"
 import { ErrorPage } from "@common/error"
+import { NFTSlide } from "@common/slide/NFTSlide"
 import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
 import { LoadingBar } from "@components/loading"
@@ -101,13 +102,7 @@ export const MarketPage = () => {
                     navigator("/market/new")
                 }}
             />
-            {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} setNftCa={setNftCa} /> */}
-            {/* <NftRow nftInfo={data2} /> */}
-            {/* <NftCard nftInfo={data} /> */}
-            {/* <TransactionRow txInfo={data3} /> */}
-
-            {/* <NftStandardInformation nftStandardInfo={data6} /> */}
-            {/* <MyNftInformation /> */}
+            <NFTSlide nftCards={nfts.data} setNftCa={setNftCa} />
             {/* <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} /> */}
         </>
     )

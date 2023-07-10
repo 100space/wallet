@@ -23,16 +23,6 @@ const data3: ITransaction = {
     ],
 }
 
-// const data4: INFTStauts = {
-//     blockchain: [
-//         "블록체인",
-//         ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
-//     ],
-//     supply: ["발행량", "100개"],
-//     isTrade: ["거래가능", "99개"],
-//     isSell: ["판매중", "50개"],
-// }
-
 interface INFTInfoPage {
     ca: string
     tokenId: number
@@ -78,9 +68,6 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
             <PlatWrap mode={mode}>
                 <NftStandardInformation sellPrice={nft.data.price} fee={nft.data.fee} nftName={nft.data.nftName} tokenId={nft.data.tokenId} like={0} creator={nft.data.creator} owner={nft.data.owner} collectionName={nft.data.collectionName} />
             </PlatWrap>
-            {/* <PlatWrap mode={mode}> */}
-            {/* <NftStatus nftStatus={data4} /> */}
-            {/* </PlatWrap> */}
             <PlatWrap mode={mode}>
                 <NftInfomation owner={{ subject: "소유자", value: nft.data.owner }} blockchain={{ subject: "블록체인", value: nft.data.blockchain }} ca={{ subject: "계약주소", value: nft.data.ca }} tokenId={{ subject: "토큰 ID", value: nft.data.tokenId }} tokenStandard={{ subject: "토큰 표준", value: nft.data.tokenStandard }} supply={{ subject: "공급량", value: nft.data.supply }} isTrade={{ subject: "판매", value: nft.data.isTrade }} />
             </PlatWrap>
