@@ -1,11 +1,17 @@
 import { TextComp } from "@common/initStep/styled"
 import { TotalWrap } from "./styled"
-import { useRecoilValue } from "recoil"
 import { ModeState, MyAccounts, MyTokens } from "@utils/localStorage"
+import { selector, useRecoilValue } from "recoil"
 import { Alert } from "@components/Alert/alert"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { KRW } from "@components/Nft/NftCard"
 import { useGetMode } from "@hooks/useMode"
+import { atom } from "recoil"
+import { ModeState, MyAccounts } from "@utils/localStorage"
+import { useEffect, useState } from "react"
+
+const storedValue = localStorage.getItem('MyAccounts.address')
+const numericValue = storedValue ? parseInt(storedValue, 10) : 0
 
 interface ITotalSupply {
   profile?: string

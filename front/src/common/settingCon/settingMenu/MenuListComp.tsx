@@ -32,12 +32,7 @@ export const MenuListComp = () => {
                     <Category category={menu.content} onClick={handleButtonClick} />
                     {menu.content2 && (
                         <NavLink to="network">
-                            <Category
-                                category={menu.content2}
-                                onClick={function (): void {
-                                    throw new Error("Function not implemented.")
-                                }}
-                            />
+                            <Category onClick={handleButtonClick} category={menu.content2}/>
                         </NavLink>
                     )}
                 </SettingMenuTitle>
