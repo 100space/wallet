@@ -1,6 +1,6 @@
 import { FlexCenter } from "@styled/index"
 import { queryByPlaceholderText } from "@testing-library/react"
-import { IStateProps, IonClickProps } from "@utils/interFace/styled.interface"
+import { ISizeProps, IStateProps, IonClickProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const Wrap = styled.div`
@@ -31,9 +31,10 @@ export const BottomSheetWrap = styled.div<IStateProps>`
     height: ${({ popupstate }) => (popupstate === "true" ? "fit-content" : "0rem")};
     transition: all 0.5s cubic-bezier(0.15, 0.22, 0.12, 0.44);
     overflow: hidden;
-    background-color: ${({ theme, mode}) => mode && theme[mode].popupBg};
+    background-color: ${({ theme, mode }) => mode && theme[mode].popupBg};
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
+    box-shadow: 0 -1rem 1rem 0.1rem #3d3d3d;
     ${FlexCenter}
 `
 export const PopupText = styled.div<IStateProps>`
@@ -59,7 +60,7 @@ export const PopUpItemWrap = styled.div`
     margin: 0 auto;
 `
 
-export const MyAccountWrapper = styled.div`
+export const MyAccountWrapper = styled.div<ISizeProps>`
     width: 100%;
     height: fit-content;
     margin-top: 2rem;
@@ -68,6 +69,8 @@ export const MyAccountWrapper = styled.div`
     align-items: center;
     flex-direction: column;
     font-size: 1.8rem;
+    word-break: break-all;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
     & > div {
         display: flex;
         justify-content: flex-end;

@@ -12,7 +12,7 @@ import { TextComp, AccountAdWrap } from "@common/initStep/styled"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
 
-export const AccountRow = (props: { account: IAccountRow }) => {
+export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
     const [modeState, setModeState] = useGetMode()
     const [accountState, setAccountState] = useState(false)
 
@@ -22,17 +22,19 @@ export const AccountRow = (props: { account: IAccountRow }) => {
 
     return (
         <AccountRowWrap mode={modeState.mode} width={"100%"} height={"6rem"}>
-            <AccountRowImgWrap width={"10%"} height={"90%"}>
+            <AccountRowImgWrap width={"20%"} height={"90%"}>
                 <AccountRowImg src={props.account.accountImg} className="AccountImg" />
             </AccountRowImgWrap>
-                <AccountAdWrap>
-                    <AccountRowAddress  width={"80%"}>
-                        <TextComp position={"relative"}style={{right: "4rem"}} fontSize="2rem" width={"70%"}>
-                            Account 1
-                        </TextComp>
-                        <span>{props.account.address.substring(0, 6) + "..." + props.account.address.substring(36, 40)}</span>
-                    </AccountRowAddress>
-                </AccountAdWrap>
+            <AccountAdWrap>
+                <AccountRowAddress width={"100%"}>
+                    <TextComp fontSize="2rem" width={"100%"}>
+                        Account {props.index}
+                    </TextComp>
+                    <span>
+                        {props.account.address.substring(0, 8) + "..." + props.account.address.substring(34, 40)}
+                    </span>
+                </AccountRowAddress>
+            </AccountAdWrap>
             <AccountAssets width={"25%"}>
                 <TextComp fontSize="1.4rem">{props.account.asset.amount + " " + props.account.asset.currency}</TextComp>
             </AccountAssets>

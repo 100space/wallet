@@ -20,6 +20,7 @@ export const Step2 = () => {
 
     const createAccountApi = async (mnemonic: string[]) => {
         console.log(mnemonic)
+        if (typeof mnemonic === "string") return
         const { data } = await requestServer.post("/account/mnemonic", { mnemonic })
         setMyAccounts({ ...data })
         return data
@@ -43,13 +44,15 @@ export const Step2 = () => {
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        createAccountApi(myProfile.myMnemonic)
+        if (myProfile.myMnemonic !== 64) createAccountApi(myProfile.myMnemonic)
         const length = e.currentTarget.elements.length - 1
         const mnemonicArray: string[] = []
+
         if (initMode.initMode === "create") {
             for (let i = 0; i < length; i++) {
                 mnemonicArray.push((e.currentTarget[i] as HTMLInputElement).value)
             }
+            console.log(typeof myProfile.myMnemonic)
             if (typeof myProfile.myMnemonic === "string")
                 return Alert.fire({ icon: "info", title: "다음 단계를 진행하세요" })
             const result = myProfile.myMnemonic.filter((v: string, i: number) => v === mnemonicArray[i])

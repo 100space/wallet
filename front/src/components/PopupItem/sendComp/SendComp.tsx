@@ -1,11 +1,12 @@
 import { Button } from "@components/Button"
 import { InputComp } from "@components/input"
-import { ModeState } from "@utils/localStorage"
+import { ModeState, MyAccounts } from "@utils/localStorage"
 import { useRecoilValue } from "recoil"
-import { ConInfo } from "@components/Description"
 import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
-import { Wrapper } from "@styled/index"
 import { useGetMode } from "@hooks/useMode"
+import NFTin from "@core/index"
+import { ethers } from "ethers"
+import { useNFTin } from "@hooks/useNFTin"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
@@ -48,6 +49,28 @@ export const SendComp = (props: {
 }) => {
     const { mode } = useRecoilValue(ModeState)
     const [modeState, setModeState] = useGetMode()
+    const myAccounts = useRecoilValue(MyAccounts)
+    const nftin = useNFTin()
+
+    const handlerWeb3Fn = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        console.log("handlerWeb3Fn")
+        console.log((e.currentTarget[0] as HTMLFormElement).value)
+        console.log((e.currentTarget[1] as HTMLFormElement).value)
+        const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
+        const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
+        const tx = {
+            from: myAccounts.address,
+            to: (e.currentTarget[0] as HTMLFormElement).value,
+            value: valueInWei,
+        }
+        // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
+        console.log(tx)
+        const result = await nftin.sendTransaction(tx)
+        console.log(result)
+    }
+
     const inputList = (inputArray: InputList[]) => {
         return inputArray.map((v, index) => (
             <SendCompWrapper key={index} mode={modeState.mode}>
@@ -69,7 +92,7 @@ export const SendComp = (props: {
     }
 
     return (
-        <>
+        <form onSubmit={handlerWeb3Fn}>
             {inputList(props.inputArray)}
             {props.settings ? (
                 <></>
@@ -83,6 +106,6 @@ export const SendComp = (props: {
                     fontSize="1.6rem"
                 ></Button>
             )}
-        </>
+        </form>
     )
 }

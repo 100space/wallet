@@ -22,7 +22,7 @@ const DescripList: IDescripList = {
     },
 }
 
-export const Description = ({ step }: { step: string }) => {
+export const Description = ({ step }: { step: string; onClick?: () => void }) => {
     const [modeState, setChange] = useGetMode()
     return (
         <DescriptWrap mode={modeState.mode}>
