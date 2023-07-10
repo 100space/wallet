@@ -7,6 +7,7 @@ export default class NFTin {
     public wallet: MyWallet
 
     constructor(network: string, privateKey: string) {
+        console.log(network, privateKey)
         this.provider = new MyProvider(network)
         this.wallet = new MyWallet(privateKey, this.provider)
     }

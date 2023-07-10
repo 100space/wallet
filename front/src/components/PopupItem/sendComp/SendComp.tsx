@@ -58,7 +58,6 @@ export const SendComp = (props: {
 
   const handlerWeb3Fn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
     if ((e.currentTarget as HTMLElement).className === "getToken") {
       const ca = (e.currentTarget[0] as HTMLFormElement).value
       const symbol = (e.currentTarget[1] as HTMLFormElement).value

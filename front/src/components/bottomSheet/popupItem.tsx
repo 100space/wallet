@@ -45,27 +45,38 @@ export const PopUpItem = ({ address }: { address?: string }) => {
   const [{ isOpen, contents }, setPopup] = usePopup()
   const myAccontList = useRecoilValue(MyAccountsList)
   console.log(myAccontList)
+    const data = myAccontList.map((v: typeof myAccontList) => ({
+        accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+        address: v.address,
+        asset: { amount: "123", currency: "BTC" },
+        alias: v.alias,
+    }))
 
-  const data = myAccontList.map((v: typeof myAccontList) => ({
-    accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
-    address: v.address,
-    asset: { amount: "123", currency: "BTC" },
-  }))
-
-  const itemSwitch = () => {
-    if (contents.indexOf("0x") !== -1 && contents.length === 42) {
-      return <SendComp inputArray={sendList} BtnContent={"송금하기"} address={address} key={address} />
-    }
-    switch (contents) {
-      case "트랜잭션":
-        return <BlockList blocks={blockData} />
-      case "입금받기":
-        return <QrComp />
-      case "토큰 가져오기":
-        return <SendComp inputArray={tokenBringList} BtnContent={contents} key={contents} className="getToken" />
-      case "송금하기":
-        return <SendComp inputArray={sendList} BtnContent={contents} key={contents} />
-
+    const itemSwitch = () => {
+        if (contents.indexOf("0x") !== -1 && contents.length === 42) {
+            return (
+                <SendComp
+                    inputArray={sendList}
+                    BtnContent={"송금하기"}
+                    address={address}
+                    key={address}
+                    className="sendTransaction"
+                />
+            )
+        }
+        switch (contents) {
+            case "트랜잭션":
+                return <BlockList blocks={blockData} />
+            case "입금받기":
+                return <QrComp />
+            case "토큰 가져오기":
+                return (
+                    <SendComp inputArray={tokenBringList} BtnContent={contents} key={contents} className="getToken" />
+                )
+            case "송금하기":
+                return (
+                    <SendComp inputArray={sendList} BtnContent={contents} key={contents} className="sendTransaction" />
+                )
       case "My Account":
         return <AccountList accounts={data} />
       default:

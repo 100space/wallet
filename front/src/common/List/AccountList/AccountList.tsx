@@ -16,9 +16,8 @@ export const AccountList = (props: { accounts: IAccountRow[] }) => {
     }
     const handleCreateWallet = async () => {
         const newAccount = await nftin.wallet.createAccount()
-        console.log(newAccount)
-        console.log(accountList)
-        setAccountList([...accountList, newAccount])
+        const createWallet = { ...newAccount, alias: `Account ${accountList.length - 1}` }
+        setAccountList([...accountList, createWallet])
     }
     return (
         <AccountListWrap>

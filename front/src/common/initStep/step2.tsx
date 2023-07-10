@@ -22,7 +22,7 @@ export const Step2 = () => {
         console.log(mnemonic)
         if (typeof mnemonic === "string") return
         const { data } = await requestServer.post("/account/mnemonic", { mnemonic })
-        setMyAccounts({ ...data })
+        setMyAccounts({ ...myAccounts, ...data })
         return data
     }
 

@@ -11,7 +11,10 @@ export const AccountRowWrap = styled.div<ISizeProps>`
     align-items: center;
     background-color: ${({ mode, theme }) => mode && theme[mode].bgBasic};
     box-sizing: border-box;
-
+    margin: 0 auto;
+    & + & {
+        margin-top: 2rem;
+    }
     & > div,
     svg {
         font-size: 1.4rem;
@@ -47,6 +50,7 @@ export const AccountRowAddress = styled.div<IStateProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    margin: 0 auto;
     & > span {
         text-align: center;
     }

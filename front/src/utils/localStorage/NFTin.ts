@@ -25,19 +25,13 @@ export const MyProfile = atom({
   effects_UNSTABLE: [persistAtom],
 })
 export const MyAccounts = atom({
-  key: "myAccounts",
-  default: [{ privateKey: "", publicKey: "", address: "0x0000000000000000000000000000000000000000" }],
-  effects_UNSTABLE: [persistAtom],
+    key: "myAccounts",
+    default: { privateKey: "", publicKey: "", address: "", alias: "123" },
+    effects_UNSTABLE: [persistAtom],
 })
 export const MyAccountsList = atom({
   key: "accountsList",
   default: [],
-  effects_UNSTABLE: [persistAtom],
-})
-
-export const AllMyAccounts = atom({
-  key: "allMyAccounts",
-  default: [{ privateKey: "", publicKey: "", address: "" }],
   effects_UNSTABLE: [persistAtom],
 })
 

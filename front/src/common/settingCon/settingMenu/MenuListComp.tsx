@@ -29,14 +29,15 @@ export const MenuListComp = () => {
                     <SubWrap mode={modeState} style={{ textDecorationLine: "underline" }}>
                         {menu.MenuSub}
                     </SubWrap>
-                    <Category category={menu.content} onClick={handleButtonClick} />
+                    <Category category={menu.content} onClick={(e: MouseEvent) => handleButtonClick(e)} />
                     {menu.content2 && (
                         <NavLink to="network">
-                            <Category onClick={handleButtonClick} category={menu.content2}/>
+                            <Category category={menu.content2} onClick={(e: MouseEvent) => handleButtonClick(e)} />
                         </NavLink>
                     )}
                 </SettingMenuTitle>
             ))}
+            e
             <Btn
                 backgroundcolor="#f71e1e"
                 color="white"
