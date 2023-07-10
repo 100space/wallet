@@ -4,10 +4,11 @@ import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
 import { Btn, Button } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
-import { FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 import { IsSideBar } from "@utils/localStorage"
+import { setSelectionRange } from "@testing-library/user-event/dist/utils"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -36,6 +37,7 @@ export const Mypage = () => {
             e.preventDefault()
         }
     }
+
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
@@ -64,19 +66,6 @@ export const Mypage = () => {
                     color="black"
                 >
                     계정 잠금
-                </Btn>
-                <Btn
-                    backgroundcolor="#fff"
-                    width="80%"
-                    height="5rem"
-                    margin=""
-                    mode=""
-                    onClick={(e: MouseEvent) => handleButtonClick(e)}
-                    fontSize="1.7rem"
-                    profile={"true"}
-                    color="red"
-                >
-                    계정 삭제
                 </Btn>
                 {/* </div> */}
             </MypageWrapper>

@@ -34,7 +34,7 @@ export const BottomSheetWrap = styled.div<IStateProps>`
     background-color: ${({ theme, mode }) => mode && theme[mode].popupBg};
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
-    box-shadow: 0 -1rem 1rem 0.1rem #3d3d3d;
+    /* box-shadow: 0 -1rem 1rem 0.1rem #3d3d3d; */
     ${FlexCenter}
 `
 export const PopupText = styled.div<IStateProps>`
