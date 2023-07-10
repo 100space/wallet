@@ -52,10 +52,10 @@ export class MarketService {
           image: v.logo,
           prices: [
             {
-              currency: "KRW", price: v.floorPrice * this.currencyPrice
+              currency: "KRW", price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
             },
             {
-              currency: this.currency, price: v.floorPrice * this.currencyPrice
+              currency: this.currency, price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
             }]
         };
       });
@@ -70,6 +70,7 @@ export class MarketService {
   async listNftByCa({ ca }: ListNftByCaDto) {
     try {
       const result = await this.contract.getAllTokensInCollection(ca);
+      console.log(result)
 
       return await this.listNft({ result });
     } catch (error) {
@@ -133,10 +134,10 @@ export class MarketService {
 
           const prices = [
             {
-              curreny: 'KRW',
+              currency: 'KRW',
               price: (Number(price) / this.PREFIX) * krwPrice,
             },
-            { curreny: 'MATIC', price: Number(price) / this.PREFIX },
+            { currency: 'MATIC', price: Number(price) / this.PREFIX },
           ];
 
           return {

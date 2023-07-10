@@ -9,7 +9,7 @@ export const NftContents = (props: { nftInfo: INFTRow }) => {
         <RowContentsWrap height={"5.6rem"}>
             <RowContentWrap height={"50%"} mode={modeState.mode}>
                 <RowContent>
-                    {props.nftInfo.name}
+                    <span>Collection</span>
                 </RowContent>
                 <RowContent>
                     {props.nftInfo.prices[1].price} {props.nftInfo.prices[1].currency}
@@ -18,7 +18,7 @@ export const NftContents = (props: { nftInfo: INFTRow }) => {
 
             <RowContentWrap height={"50%"} mode={modeState.mode}>
                 <RowContent>
-                    <span>소유자 : </span> {props.nftInfo.nickname}
+                    {props.nftInfo.name}
                 </RowContent>
                 <RowContent>
                     ≈ {props.nftInfo.prices[0].price} {props.nftInfo.prices[0].currency}

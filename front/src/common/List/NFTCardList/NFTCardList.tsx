@@ -1,10 +1,10 @@
 import { NftCard } from "@components/Nft"
-import { INFTCard } from "@utils/interFace/nft.interface"
+import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
 import { NFTCardListWrap } from "./styled/NFTCardList.styled"
 import { SetterOrUpdater } from "recoil"
 
-export const NFTCardList = (props: { nftCards: INFTCard[], setNftCa: SetterOrUpdater<string> }) => {
-    const nftCards = (nftCards: INFTCard[]) => {
+export const NFTCardList = (props: { nftCards: INFTCardByMarket[], setNftCa?: SetterOrUpdater<string> }) => {
+    const nftCards = (nftCards: INFTCardByMarket[]) => {
         return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" />)
     }
 

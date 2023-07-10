@@ -15,7 +15,7 @@ export const NFTRowList = (props: { nftRows: INFTRow[], setNftCa: SetterOrUpdate
     const clickNftRow = (e: MouseEvent, ca: string | undefined) => {
         if (ca === undefined) return
         setNftCa(ca)
-        navigate(`market/nft/${ca}`)
+        navigate(`collection/${ca}`)
     }
 
     const nftRows = (nftRows: INFTRow[]) => {

@@ -3,9 +3,12 @@ import { NftTxList } from "@common/List"
 import { NftStatus } from "@common/NftStatus"
 import { TransactionRow } from "@components/Transaction"
 import { ImageForm, PlatWrap } from "@styled/index"
+import requestServer from "@utils/axios/requestServer"
 import { INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 
 const data3: ITransaction = {
@@ -70,6 +73,30 @@ interface INFTInfoPage {
 
 export const NFTInfoPage = ({ ca }: INFTInfoPage) => {
     const { mode } = useRecoilValue(ModeState)
+    const [nft, setNft] = useState({
+        isLoading: false,
+        isError: null as null | unknown,
+        data: {} as any
+    })
+
+
+    const getNFT = async () => {
+        setNft(prev => ({ isLoading: true, isError: null, data: prev.data }))
+        try {
+            // await requestServer.post()
+            setNft(prev => ({ isLoading: false, isError: null, data: prev.data }))
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        console.log(ca)
+    }, [])
+
+
+
+
     return (
         <>
             <PlatWrap mode={mode}>
@@ -88,7 +115,7 @@ export const NFTInfoPage = ({ ca }: INFTInfoPage) => {
                 <NftInfomation nftInfo={data5} />
             </PlatWrap>
             <PlatWrap mode={mode}>
-                <NftTxList txList={[data3, data3, data3, data3, data3]} />
+                {/* <NftTxList txList={[data3, data3, data3, data3, data3]} /> */}
             </PlatWrap>
         </>
     )

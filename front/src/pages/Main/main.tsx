@@ -143,7 +143,7 @@ export const MainPage = () => {
         <>
             <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
-            <AssetsList tokenList={tokenData} nftList={nftData} />
+            {/* <AssetsList tokenList={tokenData} nftList={nftData} /> */}
             {/* <NFTInfoPage /> */}
             {/* <MyNftInformation /> */}
         </>

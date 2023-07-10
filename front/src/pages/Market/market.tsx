@@ -132,14 +132,14 @@ export const MarketPage = () => {
         <>
             <NFTSearch />
             <Category
-                category={"인기 NFT"}
+                category={"인기 컬렉션"}
                 onClick={() => {
                     navigator("/market/hot")
                 }}
             />
             <NFTRowList nftRows={nfts.data} setNftCa={setNftCa} />
             <Category
-                category={"최근 등록된 NFT"}
+                category={"최근 등록된 컬렉션"}
                 onClick={() => {
                     navigator("/market/new")
                 }}

@@ -15,7 +15,7 @@ export class TrendsService {
     private readonly httpService: HttpService,
     private readonly trendRepository: TrendRepository
   ) {
-    this.getCoinList()
+    // this.getCoinList()
 
   }
 

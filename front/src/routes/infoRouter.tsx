@@ -9,7 +9,7 @@ export const InfoRouter = () => {
 
     return (
         <Routes>
-            <Route path={`nft/:${nftCa}`} element={<NFTInfoPage ca={nftCa} />}></Route>
+            <Route path={`nft/${nftCa}`} element={<NFTInfoPage ca={nftCa} />}></Route>
             <Route path="coin/:id" element={<CoinInfoPage />}></Route>
         </Routes>
     )

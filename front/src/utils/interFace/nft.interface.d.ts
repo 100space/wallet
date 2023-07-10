@@ -84,3 +84,15 @@ export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, IN
     sellPrice: INFTPrice
     chargePrice: INFTPrice
 }
+
+export interface INFTCardByMarket {
+    name: string
+    image: string
+    descrition?: string
+    marketId?: string
+    owner?: string
+    nftAddress?: string
+    tokenId?: string
+    prices: INFTPrice[]
+    isSoldOut?: boolean
+}
