@@ -33,32 +33,6 @@ const data3: ITransaction = {
 //     isSell: ["판매중", "50개"],
 // }
 
-const data5: INftInfomation = {
-    owner: {
-        subject: "내 계정 닉네임",
-        value: "내 계정 주소"
-    },
-    blockchain: {
-        subject: "블록체인",
-        value: {
-            name: "Polygon",
-            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
-        }
-    },
-    ca: {
-        subject: "계약주소",
-        value: "0x0000000000000000000000000000000000000000"
-    },
-    tokenId: {
-        subject: "토큰 ID",
-        value: 50
-    },
-    tokenStandard: {
-        subject: "토큰 표준",
-        value: "ERC 1155"
-    },
-}
-
 interface INFTInfoPage {
     ca: string
     tokenId: number
@@ -76,9 +50,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
         setNft(prev => ({ isLoading: true, isError: null, data: null }))
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
-            console.log(111111111111111, response)
             setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
-            console.log(ca, tokenId)
             console.log(response.data)
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -89,7 +61,6 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
 
     useEffect(() => {
         getNFT()
-        console.log(ca, tokenId)
     }, [])
 
 
@@ -111,7 +82,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
             {/* <NftStatus nftStatus={data4} /> */}
             {/* </PlatWrap> */}
             <PlatWrap mode={mode}>
-                <NftInfomation nftInfo={data5} />
+                <NftInfomation owner={{ subject: "소유자", value: nft.data.owner }} blockchain={{ subject: "토큰 표준", value: nft.data.blockchain }} ca={{ subject: "계약주소", value: nft.data.ca }} tokenId={{ subject: "토큰 ID", value: nft.data.tokenId }} tokenStandard={{ subject: "토큰 표준", value: nft.data.tokenStandard }} />
             </PlatWrap>
             <PlatWrap mode={mode}>
                 <NftTxList txList={[data3, data3, data3, data3, data3]} />

@@ -42,32 +42,6 @@ const data4: INFTStauts = {
     },
 }
 
-const data5: INftInfomation = {
-    owner: {
-        subject: "내 계정 닉네임",
-        value: "내 계정 주소"
-    },
-    blockchain: {
-        subject: "블록체인",
-        value: {
-            name: "Polygon",
-            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
-        }
-    },
-    ca: {
-        subject: "계약주소",
-        value: "0x0000000000000000000000000000000000000000"
-    },
-    tokenId: {
-        subject: "토큰 ID",
-        value: 50
-    },
-    tokenStandard: {
-        subject: "토큰 표준",
-        value: "ERC 1155"
-    },
-}
-
 // const data6: INFTStandard = {
 //     nftName: "Gdori",
 //     nftId: 1234,

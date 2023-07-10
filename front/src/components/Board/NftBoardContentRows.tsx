@@ -2,6 +2,7 @@ import { Wrapper } from "@styled/index"
 import { NftBoardContentRow } from "./NftBoardContentRow"
 import { NftBoardWrap } from "./styled/NftBoard.styled"
 import { INftInfomation, INFTStauts } from "@utils/interFace/nft.interface"
+import { LoadingBar } from "@components/loading"
 
 export const NftBoardContentRows = (props: { info: INFTStauts | INftInfomation; open: string }) => {
 
@@ -20,6 +21,7 @@ export const NftBoardContentRows = (props: { info: INFTStauts | INftInfomation; 
         })
     }
 
+    if (!props.info) return <LoadingBar />
     return (
         <NftBoardWrap>
             <Wrapper>
