@@ -4,7 +4,7 @@ import { InputComp } from "@components/input"
 import { LogoComp } from "@components/Logo"
 import { useGetMode } from "@hooks/useMode"
 import { CryptoPassword } from "@utils/crypto/crypto"
-import { InitMode, IsCheck, ModeState, MyProfile } from "@utils/localStorage"
+import { InitMode, IsCheck, ModeState, MyAccountsList, MyProfile } from "@utils/localStorage"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useRecoilState, useResetRecoilState } from "recoil"
@@ -12,11 +12,13 @@ import { LoginWrap } from "./styled"
 
 export const LoginPage = () => {
     const [manageMode, setManageMode] = useRecoilState(InitMode)
+    const [isCheck, setIsCheck] = useRecoilState(IsCheck)
     const [pw, setPw] = useState("")
     const [{ myMnemonic, password, nickName }, setMyAccounts] = useRecoilState(MyProfile)
     const [modeState, setChange] = useGetMode()
     const navigate = useNavigate()
     const resetIsCheck = useResetRecoilState(ModeState)
+    const resetMyAccountList = useResetRecoilState(MyAccountsList)
     const resetMyAccount = useResetRecoilState(MyProfile)
     const reset = () => {
         resetIsCheck()
@@ -26,6 +28,7 @@ export const LoginPage = () => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (modeState.isLogin !== false) return
         if (e.currentTarget.innerHTML === "create") {
+            resetMyAccountList()
             setManageMode({ ...manageMode, initMode: "create" })
             return navigate("/login/init")
         } else if (e.currentTarget.innerHTML === "manage") {
@@ -34,11 +37,12 @@ export const LoginPage = () => {
         } else if (e.currentTarget.innerHTML === "enter") {
             const inputPw = CryptoPassword(pw)
             if (password !== inputPw) return Alert.fire({ icon: "error", title: "비밀번호가 틀렸습니다." })
+            setChange({ ...modeState, isLoginState: !modeState.isLogin })
             Alert.fire({ icon: "success", title: "성공적으로 로그인했습니다" })
             return navigate("/")
         } else if (e.currentTarget.innerHTML === "forget") {
+            reset()
             setManageMode({ ...manageMode, initMode: "manage" })
-            setChange({ ...modeState, isLogin: true })
             return navigate("/login/init")
         }
     }
@@ -60,9 +64,6 @@ export const LoginPage = () => {
                 key={v}
             />
         ))
-    useEffect(() => {
-        reset()
-    }, [])
 
     return (
         <LoginWrap mode={modeState.mode}>

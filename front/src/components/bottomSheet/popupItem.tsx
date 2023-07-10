@@ -5,6 +5,8 @@ import { usePopup } from "@hooks/usePopup"
 import { IBlockRow } from "@utils/interFace/block.interface"
 import { IAccountRow, address } from "@utils/interFace/core"
 import { IAccountAmount } from "@utils/interFace/core"
+import { MyAccountsList } from "@utils/localStorage"
+import { useRecoilValue } from "recoil"
 
 const blockData: IBlockRow[] = [
     {
@@ -33,13 +35,22 @@ const blockData: IBlockRow[] = [
     },
 ]
 
-const data: IAccountRow = {
-    accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
-    address: "0x90231ur90jwqoie2130373570809729836544453",
-    asset: { amount: 123, currency: "BTC" },
-}
+// const data: IAccountRow = {
+//     accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+//     address: "0x90231ur90jwqoie2130373570809729836544453",
+//     asset: { amount: 123, currency: "BTC" },
+// }
 export const PopUpItem = ({ address }: { address?: string }) => {
     const [{ isOpen, contents }, setPopup] = usePopup()
+    const myAccontList = useRecoilValue(MyAccountsList)
+    console.log(myAccontList)
+
+    const data = myAccontList.map((v: typeof myAccontList) => ({
+        accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+        address: v.address,
+        asset: { amount: "123", currency: "BTC" },
+    }))
+
     const itemSwitch = () => {
         if (contents.indexOf("0x") !== -1 && contents.length === 42) {
             return <SendComp inputArray={sendList} BtnContent={"송금하기"} address={address} key={address} />
@@ -55,7 +66,7 @@ export const PopUpItem = ({ address }: { address?: string }) => {
                 return <SendComp inputArray={sendList} BtnContent={contents} key={contents} />
 
             case "My Account":
-                return <AccountList accounts={[data, data, data]} />
+                return <AccountList accounts={data} />
 
             default:
                 return null

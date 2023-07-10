@@ -2,10 +2,10 @@ import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
 import { ITokenRow } from "@utils/interFace/core"
 import { INFTCard, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
-import { ModeState, InitMode, IsCheck, MyProfile, Web3Instance, MyAccounts } from "@utils/localStorage"
+import { ModeState, InitMode, IsCheck, MyProfile, Web3Instance, MyAccounts, MyAccountsList } from "@utils/localStorage"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useResetRecoilState } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
 import { MyNftInformation } from "@common/Infomation/MyNftInformation"
 import { NFTInfoPage } from ".."
@@ -14,6 +14,8 @@ import myWallet from "@core/wallet"
 import myProvider from "@core/provider"
 import { BrowserProvider, ethers } from "ethers"
 import NFTin from "@core/index"
+import MyProvider from "@core/provider"
+import { useNFTin } from "@hooks/useNFTin"
 
 const tokenData: ITokenRow[] = [
     {
@@ -90,35 +92,16 @@ const nftData: INFTCard[] = [
         owner: "Char1ey",
     },
 ]
-declare global {
-    interface Window {
-        ethereum?: any
-        abc?: any
-        // MyWallet: MyWallet
-    }
-}
 export const MainPage = () => {
     const navigater = useNavigate()
-    const location = useLocation()
+    const resetAccountList = useResetRecoilState(MyAccountsList)
+    const [myAccount, setMyAccount] = useRecoilState(MyAccounts)
     const [initState, setInitState] = useRecoilState(ModeState)
-    const [manageMode, setManageMode] = useRecoilState(InitMode)
-    const [isCheck, setIsCheck] = useRecoilState(IsCheck)
-    const [myProfile, setMyProfile] = useRecoilState(MyProfile)
-    const [myAccounts, setMyAccounts] = useRecoilState(MyAccounts)
-    const [instance, setInstance] = useRecoilState(Web3Instance)
-    // const { myWallet, enable } = useMyWallet()
+    const nftin = useNFTin()
 
-    const network = process.env.REACT_APP_MUMBAI_NETWORK
-    const eth = new ethers.JsonRpcProvider(network as string)
-    const provider = new myProvider(network as string)
-    const wallet = new myWallet(myAccounts.privateKey, provider)
-    const nftin = new NFTin(provider, wallet)
-    const data = {
-        nftin,
-    }
     useEffect(() => {
         !initState.isLogin && navigater("/login")
-        // console.log(myAccounts.privateKey)
+        // console.log(myAccounts.privateKrey)
         // console.log(myWallet.createRandom(provider))
         // console.log(wallet.fromEncryptedJson())
         // const nftin = new NFTin(provider, wallet)
@@ -133,10 +116,12 @@ export const MainPage = () => {
         // console.log(nftin.provider.request({ method: "eth_requestAccounts" }).then(console.log))
 
         // console.log(wallet.signTransaction({ to: "0x0", value: 0 }))
+        console.log(myAccount)
+
         if (!window.abc) {
-            window.abc = wallet
+            window.abc = nftin
+            window.ethers = ethers
         }
-        console.log(new ethers.JsonRpcSigner(provider, myAccounts.address))
     }, [])
 
     return (

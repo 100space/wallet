@@ -29,6 +29,11 @@ export const MyAccounts = atom({
     default: [{ privateKey: "", publicKey: "", address: "" }],
     effects_UNSTABLE: [persistAtom],
 })
+export const MyAccountsList = atom({
+    key: "accountsList",
+    default: [],
+    effects_UNSTABLE: [persistAtom],
+})
 export const InitMode = atom({
     key: "loginMode",
     default: { initMode: "", initStep: "" },

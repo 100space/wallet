@@ -65,7 +65,7 @@ export const TextComp = styled.div<TextProps>`
 `
 
 export const AccountAdWrap = styled.div<ISizeProps>`
-    
+    width: 100%;
 `
 
 export const InputWrap = styled.div<ISizeProps>`
