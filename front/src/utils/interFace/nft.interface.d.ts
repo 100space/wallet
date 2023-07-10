@@ -83,7 +83,7 @@ export interface INFTStandardSubject {
 }
 
 export interface INFTStandardCreater {
-    creater: string
+    creator: string
     owner: string
 }
 
@@ -116,10 +116,10 @@ export interface INFTNetworkByMarket {
 export interface INFTInfomationByMarket {
     ca: string
     tokenId: number
-    name: string
+    nftName: string
     price: INFTPrice
     fee: INFTPrice
-    creater: string
+    creator: string
     blockchain: INFTNetworkByMarket
     supply: number
     symbol: string

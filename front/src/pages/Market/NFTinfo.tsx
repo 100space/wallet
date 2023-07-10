@@ -69,16 +69,15 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
     const [nft, setNft] = useState({
         isLoading: false,
         isError: null as null | unknown,
-        data: {} as INFTInfomationByMarket
+        data: {} as INFTInfomationByMarket | null
     })
 
     const getNFT = async () => {
-        setNft(prev => ({ isLoading: true, isError: null, data: {} as INFTInfomationByMarket }))
+        setNft(prev => ({ isLoading: true, isError: null, data: null }))
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
             setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
             console.log(response.data)
-            console.log(nft.data)
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 setNft({ isLoading: false, isError: e.response, data: {} as INFTInfomationByMarket })
@@ -92,7 +91,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
 
 
 
-    if (nft.isLoading || !nft.data.price) return <LoadingBar />
+    if (nft.isLoading || !nft.data) return <LoadingBar />
     if (nft.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
@@ -103,7 +102,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
                 />
             </PlatWrap>
             <PlatWrap mode={mode}>
-                <NftStandardInformation sellPrice={nft.data.price} fee={nft.data.fee} nftName={nft.data.name} tokenId={nft.data.tokenId} like={0} creater={nft.data.creater} owner={nft.data.owner} collectionName={nft.data.collectionName} />
+                <NftStandardInformation sellPrice={nft.data.price} fee={nft.data.fee} nftName={nft.data.nftName} tokenId={nft.data.tokenId} like={0} creator={nft.data.creator} owner={nft.data.owner} collectionName={nft.data.collectionName} />
             </PlatWrap>
             {/* <PlatWrap mode={mode}> */}
             {/* <NftStatus nftStatus={data4} /> */}

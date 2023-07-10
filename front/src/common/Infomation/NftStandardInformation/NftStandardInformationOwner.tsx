@@ -3,11 +3,11 @@ import { CollectionOwnerWrap, CollectionSubject } from "./styled/NftStandardInfo
 import { INFTStandardCreater } from "@utils/interFace/nft.interface"
 import { ImageForm } from "@styled/index"
 
-export const NftStandardInformationOwner = ({ creater }: INFTStandardCreater) => {
+export const NftStandardInformationOwner = ({ creator }: INFTStandardCreater) => {
     const [modeState, setModeState] = useGetMode()
     return (
         <CollectionOwnerWrap mode={modeState.mode}>
-            <CollectionSubject>Create by {creater}</CollectionSubject>
+            <CollectionSubject>Create by {creator}</CollectionSubject>
         </CollectionOwnerWrap>
     )
 }

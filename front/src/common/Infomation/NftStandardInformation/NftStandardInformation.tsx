@@ -5,16 +5,16 @@ import { NftStandardInformationCollection } from "./NftStandardInformationCollec
 import { NftStandardInformationOwner } from "./NftStandardInformationOwner"
 import { NftStandardInformationSubject } from "./NftStandardInformationSubject"
 import { PriceRow } from "@components/PriceRow"
+import { LoadingBar } from "@components/loading"
 
-export const NftStandardInformation = ({ nftName, tokenId, like, creater, collectionName, sellPrice, fee, owner }: INFTStandard) => {
-    console.log(creater)
+export const NftStandardInformation = ({ nftName, tokenId, like, creator, collectionName, sellPrice, fee, owner }: INFTStandard) => {
 
     return (
         <Board>
             <NftStandardInformationCollection collectionName={collectionName} />
             <Wrapper>
                 <NftStandardInformationSubject nftName={nftName} tokenId={tokenId} like={like} />
-                <NftStandardInformationOwner creater={creater} owner={owner} />
+                <NftStandardInformationOwner creator={creator} owner={owner} />
             </Wrapper>
             <PriceRow text={["소유자", owner]} />
             <PriceRow text={["판매가격", sellPrice.price, sellPrice.currency]} />
