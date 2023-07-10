@@ -10,8 +10,8 @@ export const CategoryWrap = styled.div<ISizeProps>`
     margin: 1rem 0;
     border-radius: 1rem;
 
-    &:hover,
-    &:hover > div {
+    &:active,
+    &:active > div {
         color: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol};
         background-color: ${({ mode, theme }) => mode && theme[mode].point100};
     }

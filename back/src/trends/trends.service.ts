@@ -68,7 +68,7 @@ export class TrendsService {
   async getCoinList(): Promise<boolean> {
     console.log('실행되었습니다.', new Date().getMinutes());
     const { data } = await firstValueFrom(
-      this.httpService.get(`coins/markets?vs_currency=USD&per_page=100`).pipe(
+      this.httpService.get(`coins/markets?vs_currency=KRW&per_page=100`).pipe(
         catchError((error: AxiosError) => {
           this.logger.error(error.response.data);
           throw new BadGatewayException('Unable to get coin list', {

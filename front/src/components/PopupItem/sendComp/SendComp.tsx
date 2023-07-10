@@ -54,21 +54,27 @@ export const SendComp = (props: {
 
     const handlerWeb3Fn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-        console.log("handlerWeb3Fn")
-        console.log((e.currentTarget[0] as HTMLFormElement).value)
-        console.log((e.currentTarget[1] as HTMLFormElement).value)
-        const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
-        const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
-        const tx = {
-            from: myAccounts.address,
-            to: (e.currentTarget[0] as HTMLFormElement).value,
-            value: valueInWei,
+        if ((e.target as HTMLFormElement).className === "getToken") {
+            console.log(11)
         }
-        // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
-        console.log(tx)
-        const result = await nftin.sendTransaction(tx)
-        console.log(result)
+        if ((e.target as HTMLFormElement).className === "sendTransaction") {
+            console.log("handlerWeb3Fn")
+            console.log((e.currentTarget[0] as HTMLFormElement).value)
+            console.log((e.currentTarget[1] as HTMLFormElement).value)
+            const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
+            const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
+            const tx = {
+                from: myAccounts.address,
+                to: (e.currentTarget[0] as HTMLFormElement).value,
+                value: valueInWei,
+            }
+            // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
+            console.log(tx)
+            const result = await nftin.sendTransaction(tx)
+            console.log(result)
+        }
+        if ((e.target as HTMLFormElement).className === "getToken") {
+        }
     }
 
     const inputList = (inputArray: InputList[]) => {
@@ -92,7 +98,7 @@ export const SendComp = (props: {
     }
 
     return (
-        <form onSubmit={handlerWeb3Fn}>
+        <form onSubmit={handlerWeb3Fn} className={props.className}>
             {inputList(props.inputArray)}
             {props.settings ? (
                 <></>

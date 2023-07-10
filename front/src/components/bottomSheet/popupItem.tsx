@@ -50,11 +50,20 @@ export const PopUpItem = ({ address }: { address?: string }) => {
         accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
         address: v.address,
         asset: { amount: "123", currency: "BTC" },
+        alias: v.alias,
     }))
 
     const itemSwitch = () => {
         if (contents.indexOf("0x") !== -1 && contents.length === 42) {
-            return <SendComp inputArray={sendList} BtnContent={"송금하기"} address={address} key={address} />
+            return (
+                <SendComp
+                    inputArray={sendList}
+                    BtnContent={"송금하기"}
+                    address={address}
+                    key={address}
+                    className="sendTransaction"
+                />
+            )
         }
         switch (contents) {
             case "트랜잭션":
@@ -62,9 +71,13 @@ export const PopUpItem = ({ address }: { address?: string }) => {
             case "입금받기":
                 return <QrComp />
             case "토큰 가져오기":
-                return <SendComp inputArray={tokenBringList} BtnContent={contents} key={contents} />
+                return (
+                    <SendComp inputArray={tokenBringList} BtnContent={contents} key={contents} className="getToken" />
+                )
             case "송금하기":
-                return <SendComp inputArray={sendList} BtnContent={contents} key={contents} />
+                return (
+                    <SendComp inputArray={sendList} BtnContent={contents} key={contents} className="sendTransaction" />
+                )
 
             case "My Account":
                 return <AccountList accounts={data} />
