@@ -10,30 +10,30 @@ import { MyAccountsList } from "@utils/localStorage"
 import { useRecoilValue } from "recoil"
 
 const blockData: IBlockRow[] = [
-    {
-        blockNumber: 17562089,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562088,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562087,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562086,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562085,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
-    {
-        blockNumber: 17562084,
-        blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
-    },
+  {
+    blockNumber: 17562089,
+    blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
+  },
+  {
+    blockNumber: 17562088,
+    blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
+  },
+  {
+    blockNumber: 17562087,
+    blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
+  },
+  {
+    blockNumber: 17562086,
+    blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
+  },
+  {
+    blockNumber: 17562085,
+    blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
+  },
+  {
+    blockNumber: 17562084,
+    blockHash: "0x664b309cdedb2c0045e9a7fce8866080dd54e984d8e97cc76f01e0980db6b5f4",
+  },
 ]
 
 // const data: IAccountRow = {
@@ -42,10 +42,9 @@ const blockData: IBlockRow[] = [
 //     asset: { amount: 123, currency: "BTC" },
 // }
 export const PopUpItem = ({ address }: { address?: string }) => {
-    const [{ isOpen, contents }, setPopup] = usePopup()
-    const myAccontList = useRecoilValue(MyAccountsList)
-    console.log(myAccontList)
-
+  const [{ isOpen, contents }, setPopup] = usePopup()
+  const myAccontList = useRecoilValue(MyAccountsList)
+  console.log(myAccontList)
     const data = myAccontList.map((v: typeof myAccontList) => ({
         accountImg: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
         address: v.address,
@@ -78,13 +77,12 @@ export const PopUpItem = ({ address }: { address?: string }) => {
                 return (
                     <SendComp inputArray={sendList} BtnContent={contents} key={contents} className="sendTransaction" />
                 )
-
-            case "My Account":
-                return <AccountList accounts={data} />
-            default:
-                return null
-        }
+      case "My Account":
+        return <AccountList accounts={data} />
+      default:
+        return null
     }
+  }
 
-    return <>{itemSwitch()}</>
+  return <>{itemSwitch()}</>
 }

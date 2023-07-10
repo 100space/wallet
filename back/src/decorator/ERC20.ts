@@ -60,7 +60,7 @@ export const IsERC20 = createParamDecorator(
 
       const contract = isValidCA(provider, ca);
       const validSymbol = await isValidSymbol(contract, symbol);
-      const validDecimal = await isValidDecimal(contract, decimal);
+      const validDecimal = await isValidDecimal(contract, Number(decimal));
 
       return { networkInfo, ca, symbol: validSymbol, decimal: validDecimal };
     } catch (error) {

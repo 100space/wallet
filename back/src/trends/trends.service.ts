@@ -23,7 +23,7 @@ export class TrendsService {
     private readonly httpService: HttpService,
     private readonly trendRepository: TrendRepository,
   ) {
-    this.getCoinList();
+    // this.getCoinList();
   }
 
   async getExchange({ from = 'USD', to = 'KRW' }) {
@@ -150,6 +150,9 @@ export class TrendsService {
         const [result] = response.filter(
           (_, i) => value.symbol === tokens[i].symbol.toLowerCase(),
         );
+        if (!Number.isInteger(tokens[index].amount)) {
+          tokens[index].amount = Number(tokens[index].amount.toFixed(3));
+        }
         return {
           tokenImg: result.image,
           assets: [
@@ -158,7 +161,7 @@ export class TrendsService {
               currency: result.symbol.toUpperCase(),
             },
             {
-              amount: tokens[index].amount * result.price,
+              amount: Number((tokens[index].amount * result.price).toFixed(3)),
               currency: result.currency,
             },
           ],

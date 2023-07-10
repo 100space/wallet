@@ -11,7 +11,7 @@ export const theme = {
         popupBg: "#3f3f3f", 
         settingInputBg: "#212121",
         searchBg: "#fff",
-        coinSlideBg: "#33333382",
+        coinSlideBg: "#1b3d5d",
         coinBg: "#434343",
         alarmBg: "#585858",
         nftRowBg: "#494949",
