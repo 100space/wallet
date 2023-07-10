@@ -37,7 +37,6 @@ export const MenuListComp = () => {
                     )}
                 </SettingMenuTitle>
             ))}
-            e
             <Btn
                 backgroundcolor="#f71e1e"
                 color="white"

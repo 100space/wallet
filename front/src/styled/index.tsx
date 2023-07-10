@@ -58,6 +58,7 @@ export const PlatWrap = styled.div<ISizeProps>`
     height: fit-content;
     background: ${({ theme, mode }) => mode && theme[mode].bg300};
     ${Shadow}
+    ${FlexCenter}
     padding: 1rem;
     margin: 0 0 1rem 0;
     border-radius: 1rem;

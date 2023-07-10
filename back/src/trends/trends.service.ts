@@ -66,7 +66,9 @@ export class TrendsService {
 
   @Interval(180000)
   async getCoinList(): Promise<boolean> {
-    console.log(`현재시각 ${new Date().getHours()}시 ${new Date().getMinutes()}분 갱신되었습니다.`)
+    console.log(
+      `현재시각 ${new Date().getHours()}시 ${new Date().getMinutes()}분 갱신되었습니다.`,
+    );
 
     const { data } = await firstValueFrom(
       this.httpService.get(`coins/markets?vs_currency=KRW&per_page=100`).pipe(
