@@ -39,6 +39,7 @@ export interface IAccountRow {
     accountImg: string
     address: string
     asset: IAccountAmount
+    alias: string
 }
 
 export interface IAccountAmount {

@@ -1,11 +1,19 @@
 import { HttpService } from '@nestjs/axios';
-import { BadGatewayException, ForbiddenException, Injectable, InternalServerErrorException, Logger, NotFoundException, } from '@nestjs/common';
+import {
+  BadGatewayException,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { AxiosError } from 'axios';
-import { catchError, firstValueFrom } from 'rxjs';
-import { TrendRepository } from "./trends.repository";
-import { ICoinList, ICoinInfo, IGetCoinList, } from '../interface/trends.interface';
+import { catchError, firstValueFrom, map } from 'rxjs';
+import { TrendRepository } from './trends.repository';
+import { ICoinList, ICoinInfo } from '../interface/trends.interface';
 import { Cron, Interval } from '@nestjs/schedule';
-import { UpdateTrendDto } from "./dto/update-trend.dto";
+import { UpdateTrendDto } from './dto/update-trend.dto';
+import { ListTokensDto } from './dto/list-tokens-trends.dto';
 
 @Injectable()
 export class TrendsService {
@@ -13,10 +21,9 @@ export class TrendsService {
   public krw = { currency: 'KRW', price: 1200 };
   constructor(
     private readonly httpService: HttpService,
-    private readonly trendRepository: TrendRepository
+    private readonly trendRepository: TrendRepository,
   ) {
-    // this.getCoinList()
-
+    // this.getCoinList();
   }
 
   async getExchange({ from = 'USD', to = 'KRW' }) {
@@ -43,7 +50,6 @@ export class TrendsService {
     }
   }
 
-
   @Cron('0 10 9 * * *', { timeZone: 'Asia/Seoul' })
   async cronExchange() {
     try {
@@ -61,58 +67,122 @@ export class TrendsService {
   @Interval(180000)
   async getCoinList(): Promise<boolean> {
     console.log(`현재시각 ${new Date().getHours()}시 ${new Date().getMinutes()}분 갱신되었습니다.`)
+
     const { data } = await firstValueFrom(
-      this.httpService
-        .get(`coins/markets?vs_currency=USD&per_page=100`)
-        .pipe(
-          catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw new BadGatewayException('Unable to get coin list', {
-              cause: new Error(),
-              description: 'Coingecko Error',
-            });
-          }),
-        ),
+      this.httpService.get(`coins/markets?vs_currency=KRW&per_page=100`).pipe(
+        catchError((error: AxiosError) => {
+          this.logger.error(error.response.data);
+          throw new BadGatewayException('Unable to get coin list', {
+            cause: new Error(),
+            description: 'Coingecko Error',
+          });
+        }),
+      ),
     );
 
-    await data.forEach(v => {
+    await data.forEach((v) => {
       this.updateCoinInfomation(v.symbol, {
         rank: v.market_cap_rank,
         price: v.current_price,
         changePercent: v.price_change_percentage_24h,
-      })
-    })
+      });
+    });
 
     return true;
   }
 
   async updateCoinInfomation(symbol: string, updateTrendDto: UpdateTrendDto) {
     try {
-      if (!await this.trendRepository.update(symbol, updateTrendDto)) throw new ForbiddenException('Failed to update data', { cause: new Error(), description: 'Failed to update data' })
-      return true
+      if (!(await this.trendRepository.update(symbol, updateTrendDto)))
+        throw new ForbiddenException('Failed to update data', {
+          cause: new Error(),
+          description: 'Failed to update data',
+        });
+      return true;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
   // sort = price | rank | name
   async getCoinInfomation(sort = 'rank', count = 10): Promise<ICoinList[]> {
-    const coinData = await this.trendRepository.find(sort, count)
-    const response: ICoinList[] = coinData.map(v => ({
+    const coinData = await this.trendRepository.find(sort, count);
+    const response: ICoinList[] = coinData.map((v) => ({
       rank: v.rank,
       name: v.name,
       symbol: v.symbol,
       image: v.image,
       changePercent: v.changePercent,
       coinPrice: [
-        { currency: this.krw.currency, price: (v.price * this.krw.price) },
-        { currency: "USD", price: v.price }
-      ]
-    }))
-    return response
+        { currency: this.krw.currency, price: v.price * this.krw.price },
+        { currency: 'USD', price: v.price },
+      ],
+    }));
+    return response;
   }
 
   async getTokenData({ symbol }): Promise<ICoinInfo> {
-    return await this.trendRepository.findOne(symbol)
+    return await this.trendRepository.findOne(symbol);
+  }
+
+  async getTokenList({ tokens }: ListTokensDto) {
+    const symbolList = tokens.map((v) => v.symbol.toLowerCase());
+
+    const response = await Promise.all(
+      symbolList.map(async (v) => {
+        const data = await this.trendRepository.findWithOptions({
+          symbol: v,
+          options: {
+            _id: 0,
+            name: 1,
+            image: 1,
+            currency: 1,
+            price: 1,
+            symbol: 1,
+          },
+        });
+        const check = this.checkResponse(data);
+        return { ...check, symbol: v };
+      }),
+    );
+
+    return await Promise.all(
+      response.map((value, index) => {
+        const [result] = response.filter(
+          (_, i) => value.symbol === tokens[i].symbol.toLowerCase(),
+        );
+        if (!Number.isInteger(tokens[index].amount)) {
+          tokens[index].amount = Number(tokens[index].amount.toFixed(3));
+        }
+        return {
+          tokenImg: result.image,
+          assets: [
+            {
+              amount: tokens[index].amount,
+              currency: result.symbol.toUpperCase(),
+            },
+            {
+              amount: Number((tokens[index].amount * result.price).toFixed(3)),
+              currency: result.currency,
+            },
+          ],
+        };
+      }),
+    );
+  }
+
+  checkResponse(data) {
+    if (!data || data === null || data.length === 0) {
+      return {
+        name: '',
+        symbol: '',
+        image: `sample` + Math.floor(Math.random() * 10) + '.jpg',
+        currency: 'KRW',
+        price: 0,
+      };
+    }
+
+    const [result] = data;
+    return result;
   }
 }

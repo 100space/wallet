@@ -19,30 +19,25 @@ interface IMenu {
 
 export const MenuListComp = () => {
     const [modeState, setChange] = useGetMode()
-    const handleButtonClick = (e: MouseEvent) => {}
+    const handleButtonClick = (e: MouseEvent) => {
+        console.log("click")
+    }
     return (
         <>
             {MenuList.map((menu, index) => (
                 <SettingMenuTitle key={index} mode={modeState.mode}>
-                    <SubWrap mode={modeState} style={{textDecorationLine: "underline"}}>{menu.MenuSub}</SubWrap>
-                    <Category
-                        category={menu.content}
-                        onClick={function (): void {
-                            throw new Error("Function not implemented.")
-                        }}
-                    />
+                    <SubWrap mode={modeState} style={{ textDecorationLine: "underline" }}>
+                        {menu.MenuSub}
+                    </SubWrap>
+                    <Category category={menu.content} onClick={(e: MouseEvent) => handleButtonClick(e)} />
                     {menu.content2 && (
                         <NavLink to="network">
-                            <Category
-                                category={menu.content2}
-                                onClick={function (): void {
-                                    throw new Error("Function not implemented.")
-                                }}
-                            />
+                            <Category category={menu.content2} onClick={(e: MouseEvent) => handleButtonClick(e)} />
                         </NavLink>
                     )}
                 </SettingMenuTitle>
             ))}
+            e
             <Btn
                 backgroundcolor="#f71e1e"
                 color="white"

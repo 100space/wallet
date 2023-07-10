@@ -7,8 +7,13 @@ class MyWallet extends Wallet {
         super(privateKey, provider)
     }
     async createAccount() {
-        Wallet.createRandom()
-        return
+        const a = Wallet.createRandom()
+        const newAccount = {
+            privateKey: a.privateKey,
+            publicKey: a.publicKey,
+            address: a.address,
+        }
+        return newAccount
     }
 }
 

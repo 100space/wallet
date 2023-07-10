@@ -13,7 +13,7 @@ export const NFTSearch = () => {
 
     return (
         <NFTSearchWrap mode={modeState.mode}>
-            <NFTSearchInput placeholder="NFT를 검색해주세요" mode={modeState.mode} />
+            {/* <NFTSearchInput placeholder="NFT를 검색해주세요" mode={modeState.mode} /> */}
             <Icon icon={"ic:round-search"} onClick={handelClickSearchIcon} />
         </NFTSearchWrap>
     )

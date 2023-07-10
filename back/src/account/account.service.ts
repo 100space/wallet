@@ -114,6 +114,7 @@ export class AccountService {
 
   createWalletByMnemonic({ mnemonic }: CreateWalletDto) {
     try {
+      console.log(mnemonic);
       if (mnemonic.length !== 12)
         throw new Error('니모닉 단어의 갯수가 올바르지 않습니다.');
 

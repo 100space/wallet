@@ -3,11 +3,12 @@ import { TrendsService } from './trends.service';
 import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { TokenSymbolDto } from './dto/get-token-trends.dto';
 import { ExchangeParams } from './dto/get-exchange-trends.dto';
+import { ListTokensDto } from './dto/list-tokens-trends.dto';
 
 @ApiTags('Trends')
 @Controller('trends')
 export class TrendsController {
-  constructor(private readonly trendsService: TrendsService) { }
+  constructor(private readonly trendsService: TrendsService) {}
 
   @Get('exchange')
   @ApiOperation({
@@ -35,8 +36,19 @@ export class TrendsController {
     required: false,
     example: 'name',
   })
-  getCoinList(@Query() { sort = "rank", count = 50 }) {
+  getCoinList(@Query() { sort = 'rank', count = 50 }) {
     return this.trendsService.getCoinInfomation(sort, count);
+  }
+
+  @Post('tokens')
+  @ApiOperation({
+    summary:
+      '가지고 있는 토큰의 Symbol과 수량을 받아 토큰 이미지와 가격을 제공받습니다.',
+    description:
+      '가지고 있는 토큰의 Symbol과 수량을 받아 토큰 이미지와 가격을 제공받습니다.',
+  })
+  getTokenList(@Body() { tokens }: ListTokensDto) {
+    return this.trendsService.getTokenList({ tokens });
   }
 
   @Post()

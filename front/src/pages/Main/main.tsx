@@ -1,149 +1,115 @@
 import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
-import { ITokenRow } from "@utils/interFace/core"
-import { INFTCard, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
-import { ModeState, InitMode, IsCheck, MyProfile, Web3Instance, MyAccounts } from "@utils/localStorage"
+import { INFTCard } from "@utils/interFace/nft.interface"
+import { ModeState, MyTokens, MyInfo, MyNetwork, MyAccounts, MyNFT, MyAccountsList } from "@utils/localStorage"
 import { useEffect } from "react"
-import { useLocation, useNavigate } from "react-router"
-import { useRecoilState } from "recoil"
+import { useNavigate } from "react-router"
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
-import { MyNftInformation } from "@common/Infomation/MyNftInformation"
-import { NFTInfoPage } from ".."
-// import MyWallet from "@core/wallet"
-import myWallet from "@core/wallet"
-import myProvider from "@core/provider"
-import { BrowserProvider, ethers } from "ethers"
-import NFTin from "@core/index"
+import MyWallet from "@core/provider"
+import requestServer from "@utils/axios/requestServer"
+import { useQueries, useQuery } from "@tanstack/react-query"
+import { Contract, ethers } from "ethers"
+import { useNFTin } from "@hooks/useNFTin"
 
-const tokenData: ITokenRow[] = [
-    {
-        tokenImg: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-        assets: [
-            { amount: 10, currency: "BTC" },
-            { amount: 3000000000, currency: "KRW" },
-        ],
-    },
-    {
-        tokenImg: "https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880",
-        assets: [
-            { amount: 54, currency: "ETH" },
-            { amount: 35650000, currency: "KRW" },
-        ],
-    },
-    {
-        tokenImg: "https://assets.coingecko.com/coins/images/325/thumb/Tether.png?1668148663",
-        assets: [
-            { amount: 12.4, currency: "USDT" },
-            { amount: 124000, currency: "KRW" },
-        ],
-    },
-    {
-        tokenImg: "https://assets.coingecko.com/coins/images/825/thumb/bnb-icon2_2x.png?1644979850",
-        assets: [
-            { amount: 124, currency: "MATIC" },
-            { amount: 1240000, currency: "KRW" },
-        ],
-    },
-    {
-        tokenImg: "https://assets.coingecko.com/coins/images/6319/thumb/USD_Coin_icon.png?1547042389",
-        assets: [
-            { amount: 9.4, currency: "USDC" },
-            { amount: 19000, currency: "KRW" },
-        ],
-    },
-]
-const nftData: INFTCard[] = [
-    {
-        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9677.jpg",
-        prices: [
-            { currency: "KRW", price: 360000 },
-            { currency: "ETH", price: 0.1 },
-        ],
-        name: "DigiDaigaku",
-        owner: "Char1ey",
-    },
-    {
-        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9679.jpg",
-        prices: [
-            { currency: "KRW", price: 360000 },
-            { currency: "ETH", price: 0.1 },
-        ],
-        name: "DigiDaigaku",
-        owner: "Char1ey",
-    },
-    {
-        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9676.jpg",
-        prices: [
-            { currency: "KRW", price: 360000 },
-            { currency: "ETH", price: 0.1 },
-        ],
-        name: "DigiDaigaku",
-        owner: "Char1ey",
-    },
-    {
-        image: "https://ipfs.io/ipfs/QmT5Mx7RLwZdqLztHkumF4Qq7EyficKcdf972yZyVUF9Hj/9678.jpg",
-        prices: [
-            { currency: "KRW", price: 360000 },
-            { currency: "ETH", price: 0.1 },
-        ],
-        name: "DigiDaigaku",
-        owner: "Char1ey",
-    },
-]
 declare global {
-    interface Window {
-        ethereum?: any
-        abc?: any
-        // MyWallet: MyWallet
-    }
+  interface Window {
+    ethereum?: any
+    MyWallet: MyWallet
+  }
 }
 export const MainPage = () => {
-    const navigater = useNavigate()
-    const location = useLocation()
     const [initState, setInitState] = useRecoilState(ModeState)
-    const [manageMode, setManageMode] = useRecoilState(InitMode)
-    const [isCheck, setIsCheck] = useRecoilState(IsCheck)
-    const [myProfile, setMyProfile] = useRecoilState(MyProfile)
-    const [myAccounts, setMyAccounts] = useRecoilState(MyAccounts)
-    const [instance, setInstance] = useRecoilState(Web3Instance)
-    // const { myWallet, enable } = useMyWallet()
+    const navigater = useNavigate()
+    !initState.isLogin && navigater("/login")
+    const [myAccount, setMyAccount] = useRecoilState(MyAccounts)
+    const [myTokens, setMyTokens] = useRecoilState(MyTokens)
+    const [myInfo, setMyInfo] = useRecoilState(MyInfo)
+    const [network, setNetwork] = useRecoilState(MyNetwork)
+    const [myNft, setMyNft] = useRecoilState(MyNFT)
+    const myAccounts = useRecoilValue(MyAccounts)
+    const nftin = useNFTin()
 
-    const network = process.env.REACT_APP_MUMBAI_NETWORK
-    const eth = new ethers.JsonRpcProvider(network as string)
-    const provider = new myProvider(network as string)
-    const wallet = new myWallet(myAccounts.privateKey, provider)
-    const nftin = new NFTin(provider, wallet)
-    const data = {
-        nftin,
+    const getMyCoins = async () => {
+        if (nftin === null) return null
+        const myTokens = myInfo[network as keyof typeof myInfo].tokens
+        const result = await Promise.all(
+            myTokens.map(async (v) => {
+                // const provider = new ethers.JsonRpcProvider(process.env.REACT_APP_MUMBAI_NETWORK)
+                const provider = nftin.provider
+                console.log(provider)
+                const abi = [
+                    "function decimals() view returns (string)",
+                    "function symbol() view returns (string)",
+                    "function balanceOf(address addr) view returns (uint)",
+                ]
+                // String(v.ca), abi, provider
+                const contract = new Contract(String(v.ca), abi, provider)
+                const balance = await contract.balanceOf("0xfAD153d059F9dA994F1688b3333f2Fb415682a14")
+                const amount = ethers.formatEther(balance)
+                return { symbol: v.symbol, amount: Number(amount) }
+            })
+        )
+        const { data } = await requestServer.post("trends/tokens", {
+            tokens: result,
+        })
+        return data
     }
+
+    const getMyNft = async () => {
+        if (nftin === null) return null
+        const { data } = await requestServer.post("market/user", {
+            eoa: "0x26A7456A05a3d0b24Ce5e732575FF456571d6Ec5",
+        })
+        return data
+    }
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ["post", "myTokens"],
+        queryFn: getMyCoins,
+        onSuccess: (data: any) => {
+          setMyTokens([...data])
+        },
+        refetchOnWindowFocus: true,
+      },
+      {
+        queryKey: ["post", "myNFTs"],
+        queryFn: getMyNft,
+        onSuccess: (data: any) => {
+          setMyNft([...data])
+        },
+        refetchOnWindowFocus: true,
+      },
+    ],
+  })
     useEffect(() => {
         !initState.isLogin && navigater("/login")
-        // console.log(myAccounts.privateKey)
-        // console.log(myWallet.createRandom(provider))
-        // console.log(wallet.fromEncryptedJson())
-        // const nftin = new NFTin(provider, wallet)
-        // console.log(
-        //     nftin.provider
-        //         .send("eth_getBalance", ["0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9", "latest"])
-        //         .then((resalt) => {
-        //             console.log(ethers.formatEther(resalt))
-        //         })
-        // )
-        // console.log(nftin.wallet.createRandom(provider))
-        // console.log(nftin.provider.request({ method: "eth_requestAccounts" }).then(console.log))
-
-        // console.log(wallet.signTransaction({ to: "0x0", value: 0 }))
+        console.log(myAccount)
         if (!window.abc) {
-            window.abc = wallet
+            window.abc = nftin
+            window.ethers = ethers
         }
-        console.log(new ethers.JsonRpcSigner(provider, myAccounts.address))
-    }, [])
+        const fetchData = async () => {
+            if (nftin) {
+                const myAssetData = await getMyCoins()
+                const myNftData = await getMyNft()
+                if (myAssetData) {
+                    setMyTokens([...myAssetData])
+                }
+                if (myNftData) {
+                    setMyNft([...myNftData])
+                }
+            }
+        }
 
+        fetchData()
+    }, [nftin])
     return (
         <>
             <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
-            <AssetsList tokenList={tokenData} nftList={nftData} />
+            <AssetsList tokenList={myTokens} nftList={myNft} />
             {/* <NFTInfoPage /> */}
             {/* <MyNftInformation /> */}
         </>

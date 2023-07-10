@@ -4,27 +4,32 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateTrendDto } from './dto/create-trend.dto';
 import { UpdateTrendDto } from './dto/update-trend.dto';
-import { ConfigService } from "@nestjs/config";
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TrendRepository {
   constructor(
     @InjectModel(Trend.name, 'local') private trendModel: Model<Trend>,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {
-    this.initiate()
+    this.initiate();
   }
 
   async initiate() {
     try {
-      await this.trendModel.deleteMany({})
-      const basicData = this.configService.get('trendDatas')
-      if (!await this.create(basicData)) throw new ForbiddenException('Failed to create basicData', { cause: new Error(), description: 'Failed to create basicData' })
+      await this.trendModel.deleteMany({});
+      const basicData = this.configService.get('trendDatas');
+      if (!(await this.create(basicData)))
+        throw new ForbiddenException('Failed to create basicData', {
+          cause: new Error(),
+          description: 'Failed to create basicData',
+        });
     } catch (error) {
-      throw error
+      throw error;
     }
   }
-  async create(createTrendDto: CreateTrendDto) {
+
+  async create(createTrendDto: CreateTrendDto | CreateTrendDto[]) {
     try {
       await this.trendModel.create(createTrendDto);
       return true;
@@ -52,8 +57,18 @@ export class TrendRepository {
   }
 
   async find(sort: string, count: number) {
-    const sortOption = {}
-    sortOption[sort] = 1
-    return await this.trendModel.find().sort(sortOption).limit(count).select('rank name symbol image changePercent price');
+    const sortOption = {};
+    sortOption[sort] = 1;
+    return await this.trendModel
+      .find()
+      .sort(sortOption)
+      .limit(count)
+      .select('rank name symbol image changePercent price');
+  }
+  async findWithOptions({ symbol, options }) {
+    const result = await this.trendModel
+      .find({ symbol }, { ...options })
+      .lean();
+    return result;
   }
 }

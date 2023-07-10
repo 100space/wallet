@@ -4,7 +4,11 @@ import { NftCard } from "@components/Nft/NftCard"
 import { INFTCard } from "@utils/interFace/nft.interface"
 import { Btn, Button } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
-import { FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
+import { useNavigate } from "react-router"
+import { useRecoilState } from "recoil"
+import { IsSideBar } from "@utils/localStorage"
+import { setSelectionRange } from "@testing-library/user-event/dist/utils"
 
 const data: INFTCard = {
     name: "NONGDAMGOM",
@@ -18,25 +22,33 @@ const data: INFTCard = {
 
 export const Mypage = () => {
     const [modeState, setChange] = useGetMode()
-    const handleButtonClick = (e: MouseEvent) => {}
+    const navigator = useNavigate()
+    const [isMypage, setIsMypage] = useRecoilState(IsSideBar)
+    console.log(modeState)
+    const handleButtonClick = (e: MouseEvent) => {
+        setChange({ ...modeState, isLoginState: !modeState.isLogin })
+        navigator("/login")
+        setIsMypage(false)
+    }
     const ProfileUploadForm = () => {
-        const [ imageFile, setImageFile ] = useState(null)
+        const [imageFile, setImageFile] = useState(null)
 
         const handleForSubmit = (e: FormEvent) => {
             e.preventDefault()
         }
     }
+
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
-                {<MyProfile/>}
-                        <form>
-                            <MyProfileLabel>
-                                이미지 업로드
-                                <FileUpload type="file" accept="image/*"/>
-                            </MyProfileLabel>
-                            <UpLoadBtn type="submit"/>
-                        </form>
+                {<MyProfile />}
+                <form>
+                    <MyProfileLabel>
+                        이미지 업로드
+                        <FileUpload type="file" accept="image/*" />
+                    </MyProfileLabel>
+                    <UpLoadBtn type="submit" />
+                </form>
                 <MyNickName placeholder="NickName" />
                 <TotalSupplyWrap>
                     <TotalSupply />
@@ -48,25 +60,12 @@ export const Mypage = () => {
                     height="5rem"
                     margin=""
                     mode=""
-                    onClick={() => handleButtonClick}
+                    onClick={(e: MouseEvent) => handleButtonClick(e)}
                     fontSize="1.7rem"
                     profile={"true"}
                     color="black"
                 >
                     계정 잠금
-                </Btn>
-                <Btn
-                    backgroundcolor="#fff"
-                    width="80%"
-                    height="5rem"
-                    margin=""
-                    mode=""
-                    onClick={() => handleButtonClick}
-                    fontSize="1.7rem"
-                    profile={"true"}
-                    color="red"
-                >
-                    계정 삭제
                 </Btn>
                 {/* </div> */}
             </MypageWrapper>

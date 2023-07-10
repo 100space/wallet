@@ -7,7 +7,6 @@ import { usePopup } from "@hooks/usePopup"
 import { IMatched, address } from "@utils/interFace/core"
 import { useGetMode } from "@hooks/useMode"
 
-
 export const PopupComp = ({ address }: { address?: address }) => {
     const [modeState, setChange] = useGetMode()
 

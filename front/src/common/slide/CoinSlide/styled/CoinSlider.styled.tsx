@@ -12,5 +12,6 @@ export const CoinSlider = styled.div<ISizeProps>`
         }
         margin-left: 1rem;
         ${Shadow}
+        background-color: #ffffff;
     }
 `
