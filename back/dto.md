@@ -66,7 +66,6 @@
 
 ```json
 {
-  "rank": 11,
   "name": "NONGDAMGOM",
   "image": "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
   "owner": "Char1ey",
@@ -83,13 +82,16 @@ GET 요청
 
 ```json
 {
-  [{"name": "NONGDAMGOM",
-  "image": "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-  "owner": "Char1ey",
-  "prices": [
-    { "currency": "KRW", "price": 4500 },
-    { "currency": "ETH", "price": 0.0005 }
-  ]},
+  [
+    {
+    "name": "NONGDAMGOM",
+    "image": "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
+    "owner": "Char1ey",
+    "prices": [
+        { "currency": "KRW", "price": 4500 },
+        { "currency": "ETH", "price": 0.0005 }
+      ]
+  },
   {"name": "NONGDAMGOM",
   "image": "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
   "owner": "Char1ey",
@@ -140,7 +142,7 @@ ca:"",
 {
   "ca": ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
   "supply": ["발행량", "100개"],
-  "isTrade": ["거래가능", "99개"],
+  "isTrade": ["거래가능", "true"],
   "isSell": ["판매중", "50개"],
   "owner": ["내 계정 닉네임", "내 계정 주소"],
   "blockchain": [
@@ -160,10 +162,27 @@ ca:"",
   "collectionName": "asdfasdf",
   "sellPrice": { "currency": "ETH", "price": 0.013 },
   "chargePrice": { "currency": "ETH", "price": 0.0000013 }
+},
+
+{
+  "ca": "0x194e1822Dfa63f27D91e5EfBbCE232142Ba0d0FC",
+  "supply": 100,
+  "isTrade": true,
+  "creator": "0xa68b32d87c7F83234f73E427a0d0aFdaB905d518",
+  "blockchain": {
+    "polygon": "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912"
+  },
+  "tokenId": 1,
+  "tokenStandard": "ERC 721",
+  "nftName": "Gdori",
+  "owner": "0x28C9fC2f5C973EEEb00e0692074f2569501078F3",
+  "collectionName": "asdfasdf",
+  "sellPrice": { "currency": "MATIC", "price": 0.013 },
+  "fee": { "currency": "MATIC", "price": 0.0000013 } // 판매가격의 1%
 }
 ```
 
-### NFTStatus POST
+<!-- ### NFTStatus POST
 
 ```json
 {
@@ -211,7 +230,7 @@ ca:"",
   "sellPrice": { "currency": "ETH", "price": 0.013 },
   "chargePrice": { "currency": "ETH", "price": 0.0000013 }
 }
-```
+``` -->
 
 =============================================================
 

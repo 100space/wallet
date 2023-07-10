@@ -61,3 +61,25 @@ export const AssetsListHeaderTabs = styled.div<ISizeProps>`
         font-size: 2rem;
     }
 `
+
+export const BackBtnHeaderWrap = styled.div<ISizeProps>`
+    display: flex;
+    align-items: center;
+    position: absolute;
+    padding: 0 2rem;
+    top: 0;
+    left: 0;
+    width: ${({ width }) => width || "100vw"};
+    height: ${({ height }) => height || "100%"};
+    background-color: ${({ mode, theme }) => mode && theme[mode].basicBg};
+`
+
+export const BackBtnHeaderContent = styled.div<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: ${({ mode, theme }) => mode && theme[mode].text};
+`

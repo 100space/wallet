@@ -17,8 +17,9 @@ export const Mnemonic = ({ mnemonic }: IMnemonic) => {
     }
 
     useEffect(() => {
-        setMnemonicString(mnemonic.join(" "))
-    }, [])
+        if (!mnemonic) return
+        mnemonic && setMnemonicString(mnemonic.join(" "))
+    }, [mnemonic])
 
     return (
         <MnemonicBoxWrap height="100%" mode={modeState.mode}>

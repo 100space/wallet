@@ -47,10 +47,10 @@ export const CoinNameForm = ({ image ,name, symbol, width, type }: ICoinName) =>
             </CoinNameImgWrap>
             <CoinNameWrap>
                 <CoinSymbol mode={modeState.mode}>
-                    {symbol}
+                    {symbol.toUpperCase()}
                 </CoinSymbol>
                 <CoinName>
-                    {name}
+                    {name.length >= 10 ? name.substring(0, 7) + "...": name}
                 </CoinName>
             </CoinNameWrap>
         </CoinNameFormWrap>

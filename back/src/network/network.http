@@ -1,0 +1,16 @@
+@server = http://localhost:3005
+
+### 네트워크 조회
+GET {{server}}/network?address=0x0000000000000000000000000000000000000000  HTTP/1.1
+Content-Type: application/json
+
+### 네트워크 추가
+POST {{server}}/network?address=0x0000000000000000000000000000000000000000  HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"Polygon",
+    "networkUrl":"https://polygon-mainnet.infura.io",
+    "chainId":137,
+    "symbol":"MATIC"
+}

@@ -4,19 +4,6 @@ const fs = require("fs")
 const path = require("path")
 
 module.exports = {
-    // jest: {
-    //     moduleNameMapper: {
-    //         "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js",
-    //         "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js",
-    //         "^@components/(.*)$": "<rootDir>/src/components/$1",
-    //         "^@utils/(.*)$": "<rootDir>/src/utils/$1",
-    //         // 나머지 alias 설정
-    //     },
-    //     moduleFileExtensions: ["js", "jsx", "ts", "tsx"], // Jest가 처리할 수 있는 파일 확장자들
-    //     transform: {
-    //         "^.+\\.tsx?$": "ts-jest", // TypeScript 파일을 Jest가 처리할 수 있게 변환
-    //     },
-    // },
     jest: {
         configure: {
             transform: {
@@ -52,7 +39,7 @@ module.exports = {
         },
         mode: "development",
         devtool: "inline-source-map",
-        configure: (webpackConfig) => {
+        configure: (webpackConfig, { env, paths }) => {
             // manifest.json 파일 경로
             const manifestPath = path.resolve(__dirname, "public/manifest.json")
 
@@ -71,11 +58,14 @@ module.exports = {
                     },
                 },
                 background: {
-                    service_worker: "background.js",
+                    service_worker: "/background.js",
+                    type: "module",
                 },
+                minimum_chrome_version: "92",
+
                 web_accessible_resources: [
                     {
-                        resources: ["external.js"],
+                        resources: ["external.js", "windowproperty.js"],
                         matches: ["<all_urls>"],
                     },
                 ],
@@ -90,6 +80,20 @@ module.exports = {
 
             // manifest.json 파일 생성
             fs.writeFileSync(manifestPath, JSON.stringify(manifestContent, null, 2))
+
+            if (env === "production") {
+                webpackConfig.entry = {
+                    main: paths.appIndexJs, // 기존의 CRA 엔트리 포인트
+                    background: path.resolve(__dirname, "./public/background.js"), // 배경 스크립트
+                }
+
+                // output.filename을 함수로 설정하여, 각 엔트리 포인트에 대한 결과물 파일 이름을 지정
+                webpackConfig.output.filename = (chunkData) => {
+                    return chunkData.chunk.name === "background"
+                        ? "background.js"
+                        : "static/js/[name].[contenthash:8].js"
+                }
+            }
 
             return webpackConfig
         },

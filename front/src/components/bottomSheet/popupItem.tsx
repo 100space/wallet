@@ -4,7 +4,7 @@ import { AccountBtn } from "@components/AccountBtn"
 import { QrComp, SendComp, sendList, tokenBringList } from "@components/PopupItem"
 import { usePopup } from "@hooks/usePopup"
 import { IBlockRow } from "@utils/interFace/block.interface"
-import { IAccountRow } from "@utils/interFace/core"
+import { IAccountRow, address } from "@utils/interFace/core"
 import { IAccountAmount } from "@utils/interFace/core"
 
 const blockData: IBlockRow[] = [
@@ -39,25 +39,26 @@ const data: IAccountRow = {
     address: "0x90231ur90jwqoie2130373570809729836544453",
     asset: { amount: 123, currency: "BTC" },
 }
-export const PopUpItem = () => {
+export const PopUpItem = ({ address }: { address?: string }) => {
     const [{ isOpen, contents }, setPopup] = usePopup()
     const itemSwitch = () => {
+        if (contents.indexOf("0x") !== -1 && contents.length === 42) {
+            return <SendComp inputArray={sendList} BtnContent={"송금하기"} address={address} key={address} />
+        }
         switch (contents) {
             case "트랜잭션":
                 return <BlockList blocks={blockData} />
             case "입금받기":
                 return <QrComp />
             case "토큰 가져오기":
-                return <SendComp inputArray={tokenBringList} BtnContent={contents} />
+                return <SendComp inputArray={tokenBringList} BtnContent={contents} key={contents} />
             case "송금하기":
-                return <SendComp inputArray={sendList} BtnContent={contents} />
+                return <SendComp inputArray={sendList} BtnContent={contents} key={contents} />
+
             case "My Account":
-                return <>
-                    <AccountList accounts={[data, data, data]} />
-                    <AccountBtn/>
-                </>
+                return <AccountList accounts={[data, data, data]} />
             default:
-                break
+                return null
         }
     }
 

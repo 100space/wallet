@@ -8,8 +8,8 @@ import { ISizeProps } from "@utils/interFace/styled.interface"
 
 export const MyNftInformationWrap = styled.div<ISizeProps>`
     padding: 2rem;
-    width: ${({ width }) => width || "100%" };
-    height: ${({ height }) => height || "100%" };
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
 
     & > div {
         margin-top: 4rem;
@@ -21,24 +21,51 @@ export const MyNftInformationWrap = styled.div<ISizeProps>`
 `
 
 const data4: INFTStauts = {
-    blockchain: [
-        "블록체인",
-        ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
-    ],
-    supply: ["발행량", "100개"],
-    isTrade: ["거래가능", "99개"],
-    isSell: ["판매중", "50개"],
+    blockchain: {
+        subject: "블록체인",
+        value: {
+            name: "Polygon",
+            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
+        }
+    },
+    supply: {
+        subject: "발행량",
+        value: "100개"
+    },
+    isTrade: {
+        subject: "거래가능",
+        value: "100개"
+    },
+    isSell: {
+        subject: "판매중",
+        value: "50개"
+    },
 }
 
 const data5: INftInfomation = {
-    owner: ["내 계정 닉네임", "내 계정 주소"],
-    blockchain: [
-        "블록체인",
-        ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
-    ],
-    ca: ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
-    tokenId: ["토큰 ID", 50],
-    tokenStandard: ["토큰 표준", "ERC 1155"],
+    owner: {
+        subject: "내 계정 닉네임",
+        value: "내 계정 주소"
+    },
+    blockchain: {
+        subject: "블록체인",
+        value: {
+            name: "Polygon",
+            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
+        }
+    },
+    ca: {
+        subject: "계약주소",
+        value: "0x0000000000000000000000000000000000000000"
+    },
+    tokenId: {
+        subject: "토큰 ID",
+        value: 50
+    },
+    tokenStandard: {
+        subject: "토큰 표준",
+        value: "ERC 1155"
+    },
 }
 
 const data6: INFTStandard = {
@@ -48,8 +75,8 @@ const data6: INFTStandard = {
     ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
     owner: "내 계정",
     collectionName: "asdfasdf",
-    sellPrice: {currency: "ETH", price: 0.013},
-    chargePrice: {currency: "ETH", price: 0.0000013}
+    sellPrice: { currency: "ETH", price: 0.013 },
+    chargePrice: { currency: "ETH", price: 0.0000013 }
 }
 
 export const MyNftInformation = () => {

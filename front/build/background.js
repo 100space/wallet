@@ -1,27 +1,2 @@
-/* eslint-disable no-undef */
-chrome.runtime.onInstalled.addListener((details) => {
-    if (details.reason === "install") {
-        // 첫 설치시 실행할 코드
-        console.log("확장 프로그램이 설치되었습니다.")
-    } else if (details.reason === "update") {
-        console.log("확장 프로그램이 새로고칭되었습니다.")
-        // 버전 업데이트 또는 확장 프로그램에서 새로고침시
-    }
-})
-
-// 익스텐션 메시지 수신
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === "externalScript") {
-        // external.js로부터 받은 메시지 처리
-        console.log("external.js로부터 메시지 수신:", message.data)
-        // 응답을 보내고자 할 경우 sendResponse 함수 사용
-        sendResponse({ success: true })
-    }
-})
-
-chrome.runtime.onConnect.addListener(function (port) {
-    console.assert(port.name === "popup")
-    port.onMessage.addListener(function (msg) {
-        if (msg.content) console.log(msg.content)
-    })
-})
+(()=>{"use strict";chrome.runtime.onInstalled.addListener((e=>{"install"===e.reason?console.log("\ud655\uc7a5 \ud504\ub85c\uadf8\ub7a8\uc774 \uc124\uce58\ub418\uc5c8\uc2b5\ub2c8\ub2e4."):"update"===e.reason&&console.log("\ud655\uc7a5 \ud504\ub85c\uadf8\ub7a8\uc774 \uc0c8\ub85c\uace0\uce6d\ub418\uc5c8\uc2b5\ub2c8\ub2e4.")})),chrome.runtime.onMessage.addListener(((e,o,n)=>{console.log("event\uc5d0\uc11c \ubcf4\ub0b4\ub294 \uba54\uc2dc\uc9c0 \uc218\uc2e0:",e);const{type:s,method:r,params:t}=e;return"req"===s&&provider.send(r,t).then((e=>{console.log("\ub178\ub4dc \uc694\uccad\ud55c \uacf3 :",e),n({type:"res",response:e})})),!0}))})();
+//# sourceMappingURL=background.js.map

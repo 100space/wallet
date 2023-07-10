@@ -12,7 +12,7 @@ export const BodyWrap = styled.div<BottomCheck>`
 `
 export const SideBar = styled.div<IStateProps>`
     width: 85%;
-    height: calc(91.5% - 6rem);
+    height: calc(91.7% - 6rem);
     position: absolute;
     top: 8.5%;
     left: ${({ sidebarstate }) => (sidebarstate === "true" ? "0%" : "-100%")};

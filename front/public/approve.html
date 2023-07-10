@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Approve Transaction</h1>
+        <p>Please review the following transaction data:</p>
+        <pre id="transactionData"></pre>
+        <button id="approveButton">Approve</button>
+        <button id="rejectButton">Reject</button>
+
+        <script src="./event.js">
+
+
+            chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+                if (message.type === "TRANSACTION_DATA") {
+                let element = document.getElementById("transactionData")
+                element.textContent = JSON.stringify(message.data, null, 2)
+                }
+            })
+
+            const sendMsg = (type, data) => {
+                chrome.runtime.sendMessage({ type, data }, (response) => {
+                    console.log(response)
+                })
+            }
+
+            document.getElementById("approveButton").addEventListener("click", () => {
+                let transactionParams = window.transactionParams
+                sendMsg("signAndSendTransaction", transactionParams)
+                console.log("Transaction approved!")
+            })
+
+            document.getElementById("rejectButton").addEventListener("click", () => {
+                sendMsg("transactionRejected", {})
+                console.log("Transaction rejected!")
+            })
+        </script>
+    </body>
+</html>
