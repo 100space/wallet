@@ -1,16 +1,20 @@
 import { NFTCardList } from "@common/List"
 import { ErrorPage } from "@common/error"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
 import { LoadingBar } from "@components/loading"
 import requestServer from "@utils/axios/requestServer"
 import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 
 interface INFTCollection {
     ca: string
+    name: string
 }
 
-export const NFTCollection = ({ ca }: INFTCollection) => {
+export const NFTCollection = ({ ca, name }: INFTCollection) => {
+    const navigate = useNavigate()
     const [nfts, setNfts] = useState({
         isLoading: false,
         isError: null as null | unknown,
@@ -29,6 +33,10 @@ export const NFTCollection = ({ ca }: INFTCollection) => {
         }
     }
 
+    const clickBackBtn = (e: MouseEvent) => {
+        navigate('/market')
+    }
+
     useEffect(() => {
         getNFTs()
     }, [])
@@ -37,6 +45,7 @@ export const NFTCollection = ({ ca }: INFTCollection) => {
     if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
+            <BackBtnHeader content={name} onClick={clickBackBtn} />
             <NFTCardList nftCards={nfts.data} />
         </>
     )

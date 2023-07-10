@@ -1,7 +1,7 @@
 import { Filter } from "@common/Filter"
 import { NFTRowList } from "@common/List"
 import { INFTRow } from "@utils/interFace/nft.interface"
-import { SelectedNFTCa } from "@utils/localStorage"
+import { SelectedCollection } from "@utils/localStorage"
 import { useRecoilState } from "recoil"
 
 const data1: INFTRow = {
@@ -56,7 +56,7 @@ const data4: INFTRow = {
 }
 
 export const HotPage = () => {
-    const [nftCa, setNftCa] = useRecoilState(SelectedNFTCa)
+    const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
     return (
         <>

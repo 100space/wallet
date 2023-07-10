@@ -1,7 +1,10 @@
 import { atom } from "recoil"
 
-export const SelectedNFTCa = atom({
+export const SelectedCollection = atom({
     key: "collection",
-    default: "0x0000000000000000000000000000000000000000",
+    default: {
+        ca: "0x0000000000000000000000000000000000000000",
+        name: ""
+    },
     // effects_UNSTABLE: [web3Ins],
 })

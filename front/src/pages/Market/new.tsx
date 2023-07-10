@@ -1,7 +1,7 @@
 import { Filter } from "@common/Filter"
 import { NFTCardList } from "@common/List"
 import { INFTCard } from "@utils/interFace/nft.interface"
-import { SelectedNFTCa } from "@utils/localStorage"
+import { SelectedCollection } from "@utils/localStorage"
 import { useRecoilState } from "recoil"
 
 // const data: INFTCard = {
@@ -14,7 +14,7 @@ import { useRecoilState } from "recoil"
 //     ],
 // }
 export const NewPage = () => {
-    const [nftCa, setNftCa] = useRecoilState(SelectedNFTCa)
+    const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
     return (
         <>

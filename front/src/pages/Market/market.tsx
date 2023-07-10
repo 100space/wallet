@@ -1,23 +1,15 @@
-import { Filter } from "@common/Filter/Filter"
-import { MyNftInformation } from "@common/Infomation/MyNftInformation"
+
 import { NFTRowList } from "@common/List"
-import { NFTCardList } from "@common/List/NFTCardList"
-import { NftTxList } from "@common/List/NftTxList"
-import { NftStatus } from "@common/NftStatus"
-import { NftInfomation, NftStandardInformation } from "@common/index"
-import { NFTSlide } from "@common/slide/NFTSlide"
 import { Category } from "@components/Category"
-import { NftCard, NftRow } from "@components/Nft"
 import { NFTSearch } from "@components/Search"
-import { TransactionRow } from "@components/Transaction"
 import requestServer from "@utils/axios/requestServer"
-import { INFTCard, INFTRow, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTCard, INFTStandard, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
-import { SelectedNFTCa } from "@utils/localStorage"
+import { SelectedCollection } from "@utils/localStorage"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
 
 // const data: INFTCard = {
 //     ca: '0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1',
@@ -106,7 +98,7 @@ export const MarketPage = () => {
         isError: null as null | unknown,
         data: [] as INFTCard[]
     })
-    const [nftCa, setNftCa] = useRecoilState(SelectedNFTCa)
+    const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
 
     const getNFTs = async () => {
