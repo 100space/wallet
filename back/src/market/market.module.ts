@@ -31,4 +31,4 @@ import { Event, EventSchema } from 'src/schemas/events.schema';
     },
   ],
 })
-export class MarketModule {}
+export class MarketModule { }

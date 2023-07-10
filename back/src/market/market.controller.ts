@@ -8,15 +8,15 @@ import { NftInfoDto } from './dto/info-market.dto';
 @ApiTags('Market')
 @Controller('market')
 export class MarketController {
-  constructor(private readonly marketService: MarketService) {}
+  constructor(private readonly marketService: MarketService) { }
 
   @Get()
   @ApiOperation({
     summary: 'NFT 컬렉션들을 가져옵니다.',
     description: 'NFT 컬렉션들을 가져옵니다.',
   })
-  listCollections() {
-    return this.marketService.listCollections();
+  async listCollections() {
+    return await this.marketService.listCollections();
   }
 
   @Post('user')
@@ -24,8 +24,8 @@ export class MarketController {
     summary: 'EOA를 기준으로 NFT들을 가져옵니다.',
     description: 'EOA를 기준으로 NFT들을 가져옵니다.',
   })
-  listNftByEoa(@Body() { eoa }: ListNftByEoaDto) {
-    return this.marketService.listNftByEoa({ eoa });
+  async listNftByEoa(@Body() { eoa }: ListNftByEoaDto) {
+    return await this.marketService.listNftByEoa({ eoa });
   }
 
   @Post('transaction')
@@ -33,8 +33,8 @@ export class MarketController {
     summary: 'CA와 TokenId를 받아 해당 NFT의 트랜잭션 기록을 보여줍니다.',
     description: 'CA와 TokenId를 받아 해당 NFT의 트랜잭션 기록을 보여줍니다.',
   })
-  listNftTransaction(@Body() { ca, tokenId }: ListNftTransactionDto) {
-    return this.marketService.listNftTransaction({ ca, tokenId });
+  async listNftTransaction(@Body() { ca, tokenId }: ListNftTransactionDto) {
+    return await this.marketService.listNftTransaction({ ca, tokenId });
   }
 
   @Post('info')
@@ -42,8 +42,8 @@ export class MarketController {
     summary: 'CA와 TokenId를 받아 해당 NFT의 정보를 보여줍니다.',
     description: 'CA와 TokenId를 받아 해당 NFT의 정보를 보여줍니다.',
   })
-  nftInfo(@Body() { ca, tokenId }: NftInfoDto) {
-    return this.marketService.nftInfo({ ca, tokenId });
+  async nftInfo(@Body() { ca, tokenId }: NftInfoDto) {
+    return await this.marketService.nftInfo({ ca, tokenId });
   }
 
   @Post()
@@ -51,7 +51,16 @@ export class MarketController {
     summary: 'CA를 기준으로 NFT들을 가져옵니다.',
     description: 'CA를 기준으로 NFT들을 가져옵니다.',
   })
-  listNftByCa(@Body() { ca }: ListNftByCaDto) {
-    return this.marketService.listNftByCa({ ca });
+  async listNftByCa(@Body() { ca }: ListNftByCaDto) {
+    return await this.marketService.listNftByCa({ ca });
+  }
+
+  @Post('currency')
+  @ApiOperation({
+    summary: '네트워트의 따라 화폐를 변경합니다.',
+    description: 'symbol을 받아 해당 통화를 symbol로 변경합니다.',
+  })
+  async changeBasicCurrency(@Body() { symbol = "matic" }: { symbol: string }) {
+    return await this.marketService.changeBasicCurrency({ symbol });
   }
 }

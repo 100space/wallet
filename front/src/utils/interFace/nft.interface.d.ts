@@ -1,5 +1,12 @@
 import { ISizeProps } from "./styled.interface"
 
+export interface INFTInfo {
+    ca?: string
+    name: string
+    owner?: string
+    nickname?: string
+}
+
 export interface INFTPrice {
   currency: string
   price: number
@@ -12,28 +19,28 @@ export interface INFTImg extends ISizeProps {
   className?: string
 }
 
-export interface INFTInfo {
-  ca?: string
-  name: string
-  owner: string
-  descrition?: string
-  marketId?: number
-  nftAddress?: string
-  tokenId?: number
-  isSoldOut?: boolean
-}
+// export interface INFTInfo {
+//   ca?: string
+//   name: string
+//   owner: string
+//   descrition?: string
+//   marketId?: number
+//   nftAddress?: string
+//   tokenId?: number
+//   isSoldOut?: boolean
+// }
 
 export interface INFTContents extends INFTInfo {
   prices: INFTPrices
 }
 
-export interface INFTCard extends INFTImg, INFTContents {}
+export interface INFTCard extends INFTImg, INFTContents { }
 
 export interface INFTRank {
-  rank: number
+    rank?: number
 }
 
-export interface INFTRow extends INFTCard, INFTRank {}
+export interface INFTRow extends INFTCard, INFTRank { }
 
 export interface IBlockChainNetWork {
   name: string
@@ -57,16 +64,16 @@ export interface INFTStauts {
 }
 
 export interface INftInfomation {
-  owner: IContent
-  blockchain: IContent
-  ca: IContent
-  tokenId: IContent
-  tokenStandard: IContent
-  // owner: string[]
-  // blockchain: (string | string[])[]
-  // ca: string[]
-  // tokenId: (number | string)[]
-  // tokenStandard: string[]
+    owner: IContent
+    blockchain: IContent
+    ca: IContent
+    tokenId: IContent
+    tokenStandard: IContent
+    // owner: string[]
+    // blockchain: (string | string[])[]
+    // ca: string[]
+    // tokenId: (number | string)[]
+    // tokenStandard: string[]
 }
 
 export interface INFTStandardSubject {
@@ -87,4 +94,39 @@ export interface INFTStandardCollection {
 export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, INFTStandardCollection {
   sellPrice: INFTPrice
   chargePrice: INFTPrice
+}
+
+export interface INFTCardByMarket {
+    name: string
+    image: string
+    descrition?: string
+    marketId?: string
+    owner?: string
+    nftAddress?: string
+    tokenId?: number
+    prices: INFTPrice[]
+    isSoldOut?: boolean
+}
+
+export interface INFTNetworkByMarket {
+    name: string
+    image: string
+}
+
+export interface INFTInfomationByMarket {
+    ca: string
+    tokenId: number
+    name: string
+    price: INFTPrice
+    fee: INFTPrice
+    creater: string
+    blockchain: INFTNetworkByMarket
+    supply: number
+    symbol: string
+    collectionName: string
+    tokenStandard: string
+    description: string
+    image: string
+    owner: string
+    isTrade: string
 }

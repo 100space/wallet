@@ -10,14 +10,14 @@ export class MarketRepository {
     @InjectModel(Collection.name, 'market')
     private collectionModel: Model<Collection>,
     @InjectModel(Event.name, 'market') private eventModel: Model<Event>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.collectionModel
       .find(
         {},
-        { _id: 0, address: 1, name: 1, symbol: 1, description: 1, logo: 1 },
-      )
+        { _id: 0, address: 1, name: 1, symbol: 1, description: 1, logo: 1, floorPrice: 1 },
+      ).sort({ updatedAt: -1 })
       .lean();
   }
 

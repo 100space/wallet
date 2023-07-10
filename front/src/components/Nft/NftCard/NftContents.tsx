@@ -15,7 +15,7 @@ export const NftContents = ({ name, owner, prices }: INFTContents) => {
                     {name}
                 </NftCardContent>
                 <NftCardContent mode={modeState.mode} height={"1.1rem"} types={"owner"}>
-                    by {owner}
+                    by {owner?.substring(0, 6) + '...'}
                 </NftCardContent>
             </NftCardContentWrap>
             <NftCardContentWrap>

@@ -10,7 +10,7 @@ POST {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xd9eB5aaEeef4E56c8Ed5573Cc8f83344FA4e94c9"
+    "ca": "0x476642C2AdDF5c88e38BcC36a0B346872504419d"
 }
 
 ### EOA 기준 NFT
@@ -18,7 +18,7 @@ POST {{server}}/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "eoa": "0x28C9fC2f5C973EEEb00e0692074f2569501078F3"
+    "eoa": "0x476642C2AdDF5c88e38BcC36a0B346872504419d"
 }
 
 ### NFT의 트랜잭션
@@ -26,17 +26,25 @@ POST {{server}}/transaction HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1",
+    "ca": "0x476642C2AdDF5c88e38BcC36a0B346872504419d",
     "tokenId": 1
 }
 
-### NFT 컬렉션의 정보
+### NFT의 정보
 POST {{server}}/info HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1",
+    "ca": "0x476642C2AdDF5c88e38BcC36a0B346872504419d",
     "tokenId": 1
+}
+
+### 기준 화폐 변경
+POST {{server}}/currency HTTP/1.1
+Content-Type: application/json
+
+{
+    "symbol": "matic"
 }
 
 ###

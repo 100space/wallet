@@ -23,6 +23,8 @@ export class MarketService {
   private readonly logger = new Logger(MarketService.name);
   private readonly contract: Contract;
   private readonly PREFIX = 10 ** 18;
+  private currencyPrice = 0
+  private currency = "matic"
   constructor(
     @Inject('Provider') private readonly provider: Provider,
     private readonly httpService: HttpService,
@@ -34,11 +36,13 @@ export class MarketService {
       MARKET_ABI,
       this.provider,
     );
+    this.changeBasicCurrency({ symbol: this.currency })
   }
 
   async listCollections() {
     try {
       const response = await this.marketRepository.findAll();
+      console.log(response)
       return response.map((v) => {
         return {
           ca: v.address,
@@ -46,6 +50,13 @@ export class MarketService {
           nickname: v.symbol,
           description: v.description,
           image: v.logo,
+          prices: [
+            {
+              currency: "KRW", price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
+            },
+            {
+              currency: this.currency, price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
+            }]
         };
       });
     } catch (error) {
@@ -59,6 +70,7 @@ export class MarketService {
   async listNftByCa({ ca }: ListNftByCaDto) {
     try {
       const result = await this.contract.getAllTokensInCollection(ca);
+      console.log(result)
 
       return await this.listNft({ result });
     } catch (error) {
@@ -228,8 +240,8 @@ export class MarketService {
       if (!tokenInfo) throw new Error('TokenInfo is empty');
 
       const blockchain = {
-        polygon:
-          'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912',
+        name: "polygon",
+        image: 'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912'
       };
 
       return {
@@ -249,5 +261,12 @@ export class MarketService {
         description: 'Get NftInfo Error',
       });
     }
+  }
+
+  async changeBasicCurrency({ symbol }: { symbol: string }) {
+    this.currency = symbol.toUpperCase()
+    const currencyPrice = (await this.trendService.getTokenData({ symbol })).price
+    this.currencyPrice = Math.floor(currencyPrice * 1000) / 1000
+    return "변경되었습니다."
   }
 }
