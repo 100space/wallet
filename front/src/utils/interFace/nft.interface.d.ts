@@ -34,13 +34,13 @@ export interface INFTContents extends INFTInfo {
     prices: INFTPrices
 }
 
-export interface INFTCard extends INFTImg, INFTContents {}
+export interface INFTCard extends INFTImg, INFTContents { }
 
 export interface INFTRank {
     rank?: number
 }
 
-export interface INFTRow extends INFTCard, INFTRank {}
+export interface INFTRow extends INFTCard, INFTRank { }
 
 export interface IBlockChainNetWork {
     name: string
@@ -78,12 +78,12 @@ export interface INftInfomation {
 
 export interface INFTStandardSubject {
     nftName: string
-    nftId: number
+    tokenId: number
     like: number
 }
 
-export interface INFTStandardOwner {
-    ownerImage: string
+export interface INFTStandardCreater {
+    creater: string
     owner: string
 }
 
@@ -91,9 +91,9 @@ export interface INFTStandardCollection {
     collectionName: string
 }
 
-export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, INFTStandardCollection {
+export interface INFTStandard extends INFTStandardSubject, INFTStandardCreater, INFTStandardCollection {
     sellPrice: INFTPrice
-    chargePrice: INFTPrice
+    fee: INFTPrice
 }
 
 export interface INFTCardByMarket {

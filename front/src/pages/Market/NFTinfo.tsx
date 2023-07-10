@@ -6,12 +6,11 @@ import { TransactionRow } from "@components/Transaction"
 import { LoadingBar } from "@components/loading"
 import { ImageForm, PlatWrap } from "@styled/index"
 import requestServer from "@utils/axios/requestServer"
-import { INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTInfomationByMarket, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 
 const data3: ITransaction = {
@@ -59,16 +58,6 @@ const data5: INftInfomation = {
         value: "ERC 1155"
     },
 }
-const data6: INFTStandard = {
-    nftName: "Gdori",
-    nftId: 1234,
-    like: 1234,
-    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-    owner: "내 계정",
-    collectionName: "asdfasdf",
-    sellPrice: { currency: "ETH", price: 0.013 },
-    chargePrice: { currency: "ETH", price: 0.0000013 },
-}
 
 interface INFTInfoPage {
     ca: string
@@ -80,17 +69,19 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
     const [nft, setNft] = useState({
         isLoading: false,
         isError: null as null | unknown,
-        data: {} as any
+        data: {} as INFTInfomationByMarket
     })
 
     const getNFT = async () => {
-        setNft(prev => ({ isLoading: true, isError: null, data: prev.data }))
+        setNft(prev => ({ isLoading: true, isError: null, data: {} as INFTInfomationByMarket }))
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
             setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
+            console.log(response.data)
+            console.log(nft.data)
         } catch (e) {
             if (axios.isAxiosError(e)) {
-                setNft({ isLoading: false, isError: e.response, data: {} })
+                setNft({ isLoading: false, isError: e.response, data: {} as INFTInfomationByMarket })
             }
         }
     }
@@ -101,7 +92,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
 
 
 
-    if (nft.isLoading) return <LoadingBar />
+    if (nft.isLoading || !nft.data.price) return <LoadingBar />
     if (nft.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
@@ -112,7 +103,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
                 />
             </PlatWrap>
             <PlatWrap mode={mode}>
-                <NftStandardInformation nftStandardInfo={data6} />
+                <NftStandardInformation sellPrice={nft.data.price} fee={nft.data.fee} nftName={nft.data.name} tokenId={nft.data.tokenId} like={0} creater={nft.data.creater} owner={nft.data.owner} collectionName={nft.data.collectionName} />
             </PlatWrap>
             {/* <PlatWrap mode={mode}> */}
             {/* <NftStatus nftStatus={data4} /> */}

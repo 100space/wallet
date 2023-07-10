@@ -39,7 +39,6 @@ export const NFTCollection = ({ ca, name }: INFTCollection) => {
 
     useEffect(() => {
         getNFTs(ca)
-        console.log(1, "화면이 렌더되었습니다")
     }, [])
 
     if (nfts.isLoading) return <LoadingBar />

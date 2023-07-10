@@ -6,17 +6,19 @@ import { NftStandardInformationOwner } from "./NftStandardInformationOwner"
 import { NftStandardInformationSubject } from "./NftStandardInformationSubject"
 import { PriceRow } from "@components/PriceRow"
 
+export const NftStandardInformation = ({ nftName, tokenId, like, creater, collectionName, sellPrice, fee, owner }: INFTStandard) => {
+    console.log(creater)
 
-export const NftStandardInformation = (props: { nftStandardInfo: INFTStandard }) => {
     return (
         <Board>
-            <NftStandardInformationCollection collectionName={props.nftStandardInfo.collectionName} />
+            <NftStandardInformationCollection collectionName={collectionName} />
             <Wrapper>
-                <NftStandardInformationSubject nftName={props.nftStandardInfo.nftName} nftId={props.nftStandardInfo.nftId} like={props.nftStandardInfo.like} />
-                <NftStandardInformationOwner ownerImage={props.nftStandardInfo.ownerImage} owner={props.nftStandardInfo.owner} />
+                <NftStandardInformationSubject nftName={nftName} tokenId={tokenId} like={like} />
+                <NftStandardInformationOwner creater={creater} owner={owner} />
             </Wrapper>
-            <PriceRow text={["판매가격", props.nftStandardInfo.sellPrice.price, props.nftStandardInfo.sellPrice.currency]}/>
-            <PriceRow text={["수수료", props.nftStandardInfo.chargePrice.price, props.nftStandardInfo.chargePrice.currency]}/>
+            <PriceRow text={["소유자", owner]} />
+            <PriceRow text={["판매가격", sellPrice.price, sellPrice.currency]} />
+            <PriceRow text={["수수료", fee.price, fee.currency]} />
         </Board>
     )
 }

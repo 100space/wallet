@@ -116,8 +116,8 @@ export class TrendsService {
       image: v.image,
       changePercent: v.changePercent,
       coinPrice: [
-        { currency: this.krw.currency, price: v.price * this.krw.price },
-        { currency: 'USD', price: v.price },
+        { currency: this.krw.currency, price: v.price },
+        { currency: 'USD', price: Math.floor((v.price / this.krw.price) * 1000) / 1000 },
       ],
     }));
     return response;

@@ -68,24 +68,26 @@ const data5: INftInfomation = {
     },
 }
 
-const data6: INFTStandard = {
-    nftName: "Gdori",
-    nftId: 1234,
-    like: 1234,
-    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-    owner: "내 계정",
-    collectionName: "asdfasdf",
-    sellPrice: { currency: "ETH", price: 0.013 },
-    chargePrice: { currency: "ETH", price: 0.0000013 }
-}
+// const data6: INFTStandard = {
+//     nftName: "Gdori",
+//     nftId: 1234,
+//     like: 1234,
+//     ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+//     owner: "내 계정",
+//     collectionName: "asdfasdf",
+//     sellPrice: { currency: "ETH", price: 0.013 },
+//     fee: { currency: "ETH", price: 0.0000013 }
+// }
 
 export const MyNftInformation = () => {
     return (
-        <MyNftInformationWrap>
-            <NFTInfomationImg />
-            <NftStandardInformation nftStandardInfo={data6} />
-            <NftStatus nftStatus={data4} />
-            <NftInfomation nftInfo={data5} />
-        </MyNftInformationWrap>
+        <>
+        </>
+        // <MyNftInformationWrap>
+        //     <NFTInfomationImg />
+        //     <NftStandardInformation sellPrice={data6.sellPrice} fee={data6.fee} nftName={data6.nftName} nftId={data6.nftId} like={data6.like} ownerImage={data6.ownerImage} owner={data6.owner} collectionName={data6.collectionName} />
+        //     <NftStatus nftStatus={data4} />
+        //     <NftInfomation nftInfo={data5} />
+        // </MyNftInformationWrap>
     )
 }
