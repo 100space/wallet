@@ -66,10 +66,10 @@ export class TrendRepository {
       .select('rank name symbol image changePercent price');
   }
 
-  async findMany({ symbolList }: { symbolList: string[] }) {
-    return await this.trendModel.find(
-      { symbol: { $in: symbolList } },
-      { _id: 0, name: 1, image: 1, currency: 1, price: 1, symbol: 1 },
-    );
+  async findWithOptions({ symbol, options }) {
+    const result = await this.trendModel
+      .find({ symbol }, { ...options })
+      .lean();
+    return result;
   }
 }

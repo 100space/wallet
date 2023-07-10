@@ -19,5 +19,5 @@ POST {{server}}/tokens HTTP/1.1
 Content-Type: application/json
 
 {
-  "tokens": [{"symbol": "eth", "amount": 10}, {"symbol": "btc", "amount": 1}]
+  "tokens": [{"symbol": "matic", "amount": 10}, {"symbol": "derc20", "amount": 1}]
 }

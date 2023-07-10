@@ -2,16 +2,30 @@ import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
 import { ITokenRow } from "@utils/interFace/core"
 import { INFTCard, INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
-import { ModeState, InitMode, IsCheck, MyProfile, Web3Instance, MyTokens } from "@utils/localStorage"
+import {
+  ModeState,
+  InitMode,
+  IsCheck,
+  MyProfile,
+  Web3Instance,
+  MyTokens,
+  MyInfo,
+  MyNetwork,
+  MyAccounts,
+  MyNFT,
+} from "@utils/localStorage"
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
 import { MyNftInformation } from "@common/Infomation/MyNftInformation"
 import { NFTInfoPage } from ".."
 import MyWallet from "@core/provider"
 import Web3 from "web3"
 import requestServer from "@utils/axios/requestServer"
+import { useQueries, useQuery } from "@tanstack/react-query"
+import { Contract, ethers } from "ethers"
+import { abi } from "web3/lib/commonjs/eth.exports"
 
 // const tokenData: ITokenRow[] = [
 //   {
@@ -103,23 +117,72 @@ export const MainPage = () => {
   const [myProfile, setMyProfile] = useRecoilState(MyProfile)
   const [instance, setInstance] = useRecoilState(Web3Instance)
   const [myTokens, setMyTokens] = useRecoilState(MyTokens)
+  const [myInfo, setMyInfo] = useRecoilState(MyInfo)
+  const [network, setNetwork] = useRecoilState(MyNetwork)
+  const [myNft, setMyNft] = useRecoilState(MyNFT)
+  const myAccounts = useRecoilValue(MyAccounts)
 
   const getMyCoins = async () => {
+    const myTokens = myInfo[network as keyof typeof myInfo].tokens
+
+    const result = await Promise.all(
+      myTokens.map(async (v) => {
+        const provider = new ethers.JsonRpcProvider(process.env.REACT_APP_MUMBAI)
+
+        const abi = [
+          "function decimals() view returns (string)",
+          "function symbol() view returns (string)",
+          "function balanceOf(address addr) view returns (uint)",
+        ]
+
+        const contract = new Contract(String(v.ca), abi, provider)
+        const balance = await contract.balanceOf("0xfAD153d059F9dA994F1688b3333f2Fb415682a14")
+        const amount = ethers.formatEther(balance)
+        return { symbol: v.symbol, amount: Number(amount) }
+      })
+    )
+
     const { data } = await requestServer.post("trends/tokens", {
-      tokens: [
-        { symbol: "eth", amount: 10 },
-        { symbol: "btc", amount: 1 },
-      ],
+      tokens: result,
     })
-    setMyTokens(data)
+
+    return data
   }
+
+  const getMyNft = async () => {
+    const { data } = await requestServer.post("market/user", {
+      eoa: "0x26A7456A05a3d0b24Ce5e732575FF456571d6Ec5",
+    })
+
+    return data
+  }
+
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ["post", "myTokens"],
+        queryFn: getMyCoins,
+        onSuccess: (data: any) => {
+          setMyTokens([...data])
+        },
+        refetchOnWindowFocus: true,
+      },
+      {
+        queryKey: ["post", "myNFTs"],
+        queryFn: getMyNft,
+        onSuccess: (data: any) => {
+          setMyNft([...data])
+        },
+        refetchOnWindowFocus: true,
+      },
+    ],
+  })
 
   // const { myWallet, enable } = useMyWallet()
   useEffect(() => {
     console.log(location.pathname)
     !initState.isLogin && navigater("/login")
-    getMyCoins()
-    // const web3 = new Web3()
+
     // const myWalletInstance = new MyWallet()
     // if (window && web3) {
     //     window.ethereum = [window.ethereum, myWalletInstance.web3.provider]
@@ -129,7 +192,6 @@ export const MainPage = () => {
     //     //     method: "eth_chainId",
     //     // }).then(console.log)
     // }
-
     const myWalletInstance = new MyWallet()
     console.log(myWalletInstance)
   }, [])
@@ -138,7 +200,7 @@ export const MainPage = () => {
     <>
       <TotalSupply></TotalSupply>
       <PopupBtn></PopupBtn>
-      <AssetsList tokenList={myTokens} nftList={nftData} />
+      <AssetsList tokenList={myTokens} nftList={myNft} />
       {/* <NFTInfoPage /> */}
       {/* <MyNftInformation /> */}
     </>

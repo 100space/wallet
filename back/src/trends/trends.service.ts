@@ -165,15 +165,29 @@ export class TrendsService {
   async getTokenList({ tokens }: ListTokensDto) {
     const symbolList = tokens.map((v) => v.symbol.toLowerCase());
 
-    const response = await this.trendRepository.findMany({ symbolList });
-    console.log(response);
+    const response = await Promise.all(
+      symbolList.map(async (v) => {
+        const data = await this.trendRepository.findWithOptions({
+          symbol: v,
+          options: {
+            _id: 0,
+            name: 1,
+            image: 1,
+            currency: 1,
+            price: 1,
+            symbol: 1,
+          },
+        });
+        const check = this.checkResponse(data);
+        return { ...check, symbol: v };
+      }),
+    );
 
     return await Promise.all(
       response.map((value, index) => {
         const [result] = response.filter(
           (_, i) => value.symbol === tokens[i].symbol.toLowerCase(),
         );
-        console.log(result);
         return {
           tokenImg: result.image,
           assets: [
@@ -189,5 +203,20 @@ export class TrendsService {
         };
       }),
     );
+  }
+
+  checkResponse(data) {
+    if (!data || data === null || data.length === 0) {
+      return {
+        name: '',
+        symbol: '',
+        image: `sample` + Math.floor(Math.random() * 10) + '.jpg',
+        currency: 'KRW',
+        price: 0,
+      };
+    }
+
+    const [result] = data;
+    return result;
   }
 }
