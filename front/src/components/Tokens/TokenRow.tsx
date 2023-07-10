@@ -12,7 +12,7 @@ import { TokenInfoWrap } from "./styled/TokenRow.styled"
 
 export const TokenRow = (props: { token: ITokenRow }) => {
     const [modeState, setModeState] = useGetMode()
-
+    console.log(props.token.assets[0])
     return (
         <AccountRowWrap mode={modeState.mode} width={"100%"} height={"7rem"}>
             <AccountRowImgWrap width={"15%"} height={"100%"}>
@@ -21,7 +21,9 @@ export const TokenRow = (props: { token: ITokenRow }) => {
 
             <TokenInfoWrap width={"80%"} height={"100%"}>
                 <AccountRowAddress>
-                    {props.token.assets[0].amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +
+                    {(Math.floor(props.token.assets[0].amount * 1000) / 1000)
+                        .toString()
+                        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +
                         " " +
                         props.token.assets[0].currency}
                 </AccountRowAddress>
@@ -29,7 +31,9 @@ export const TokenRow = (props: { token: ITokenRow }) => {
                 <AccountAssets>
                     {props.token.assets[1].currency +
                         " " +
-                        props.token.assets[1].amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                        (Math.floor(props.token.assets[1].amount * 1000) / 1000)
+                            .toString()
+                            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
                 </AccountAssets>
             </TokenInfoWrap>
 
