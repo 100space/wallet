@@ -1,7 +1,9 @@
 
 import { NFTRowList } from "@common/List"
+import { ErrorPage } from "@common/error"
 import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
+import { LoadingBar } from "@components/loading"
 import requestServer from "@utils/axios/requestServer"
 import { INFTCard, INFTStandard, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
@@ -106,8 +108,6 @@ export const MarketPage = () => {
         try {
             const response = await requestServer.get('/market')
             setNfts(prev => ({ isLoading: false, isError: null, data: [...response.data] }))
-            console.log(nfts)
-
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 setNfts({ isLoading: false, isError: e.response, data: [] })
@@ -120,6 +120,8 @@ export const MarketPage = () => {
         getNFTs()
     }, [])
 
+    if (nfts.isLoading) return <LoadingBar />
+    if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
             <NFTSearch />

@@ -21,7 +21,12 @@ export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCardB
     }
 
     const nftCardsList = (nftCards: INFTCardByMarket[]) => {
-        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" />)
+        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" onClick={clickNftCard} />)
+    }
+
+    const clickNftCard = (e: MouseEvent, ca: string, tokenId: number) => {
+        console.log(ca)
+        console.log(tokenId)
     }
 
     const handleClick = (e: MouseEvent, index: number) => {
@@ -33,6 +38,7 @@ export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCardB
         const { innerHTML } = e.target as HTMLButtonElement
         setPopUp(innerHTML)
     }
+
     return (
         <AssetsListWrap>
             <AssetsListHeader onClick={handleClick} selected={selected} />

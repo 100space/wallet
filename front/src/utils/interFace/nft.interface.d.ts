@@ -92,7 +92,30 @@ export interface INFTCardByMarket {
     marketId?: string
     owner?: string
     nftAddress?: string
-    tokenId?: string
+    tokenId?: number
     prices: INFTPrice[]
     isSoldOut?: boolean
+}
+
+export interface INFTNetworkByMarket {
+    name: string
+    image: string
+}
+
+export interface INFTInfomationByMarket {
+    ca: string
+    tokenId: number
+    name: string
+    price: INFTPrice
+    fee: INFTPrice
+    creater: string
+    blockchain: INFTNetworkByMarket
+    supply: number
+    symbol: string
+    collectionName: string
+    tokenStandard: string
+    description: string
+    image: string
+    owner: string
+    isTrade: string
 }

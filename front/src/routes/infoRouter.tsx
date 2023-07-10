@@ -1,15 +1,15 @@
 import { NFTInfoPage } from "@pages/Market"
 import { CoinInfoPage } from "@pages/Trends"
-import { SelectedCollection } from "@utils/localStorage"
+import { NFTByCollection, SelectedCollection } from "@utils/localStorage"
 import { Route, Routes } from "react-router"
 import { useRecoilValue } from "recoil"
 
 export const InfoRouter = () => {
-    const collection = useRecoilValue(SelectedCollection)
+    const nftInfo = useRecoilValue(NFTByCollection)
 
     return (
         <Routes>
-            <Route path={`nft/${collection.ca}`} element={<NFTInfoPage ca={collection.ca} />}></Route>
+            <Route path={`nft/${nftInfo.ca}/${nftInfo.tokenId}`} element={<NFTInfoPage ca={nftInfo.ca} tokenId={nftInfo.tokenId} />}></Route>
             <Route path="coin/:id" element={<CoinInfoPage />}></Route>
         </Routes>
     )

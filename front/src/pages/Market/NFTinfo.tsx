@@ -1,12 +1,15 @@
 import { NftInfomation, NftStandardInformation } from "@common/Infomation"
 import { NftTxList } from "@common/List"
 import { NftStatus } from "@common/NftStatus"
+import { ErrorPage } from "@common/error"
 import { TransactionRow } from "@components/Transaction"
+import { LoadingBar } from "@components/loading"
 import { ImageForm, PlatWrap } from "@styled/index"
 import requestServer from "@utils/axios/requestServer"
 import { INFTStandard, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
+import axios from "axios"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
@@ -69,9 +72,10 @@ const data6: INFTStandard = {
 
 interface INFTInfoPage {
     ca: string
+    tokenId: number
 }
 
-export const NFTInfoPage = ({ ca }: INFTInfoPage) => {
+export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
     const { mode } = useRecoilValue(ModeState)
     const [nft, setNft] = useState({
         isLoading: false,
@@ -79,43 +83,45 @@ export const NFTInfoPage = ({ ca }: INFTInfoPage) => {
         data: {} as any
     })
 
-
     const getNFT = async () => {
         setNft(prev => ({ isLoading: true, isError: null, data: prev.data }))
         try {
-            // await requestServer.post()
-            setNft(prev => ({ isLoading: false, isError: null, data: prev.data }))
-        } catch (error) {
-
+            const response = await requestServer.post('/market/info', { ca, tokenId })
+            setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                setNft({ isLoading: false, isError: e.response, data: {} })
+            }
         }
     }
 
     useEffect(() => {
-        console.log(ca)
+        getNFT()
     }, [])
 
 
 
-
+    if (nft.isLoading) return <LoadingBar />
+    if (nft.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
             <PlatWrap mode={mode}>
                 <ImageForm
                     height={"75vw"}
-                    src="https://assets.coingecko.com/nft_contracts/images/3145/small/degods.png?1680194340"
+                    src={nft.data.image}
                 />
             </PlatWrap>
             <PlatWrap mode={mode}>
                 <NftStandardInformation nftStandardInfo={data6} />
             </PlatWrap>
-            <PlatWrap mode={mode}>
-                {/* <NftStatus nftStatus={data4} /> */}
-            </PlatWrap>
+            {/* <PlatWrap mode={mode}> */}
+            {/* <NftStatus nftStatus={data4} /> */}
+            {/* </PlatWrap> */}
             <PlatWrap mode={mode}>
                 <NftInfomation nftInfo={data5} />
             </PlatWrap>
             <PlatWrap mode={mode}>
-                {/* <NftTxList txList={[data3, data3, data3, data3, data3]} /> */}
+                <NftTxList txList={[data3, data3, data3, data3, data3]} />
             </PlatWrap>
         </>
     )

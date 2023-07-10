@@ -21,10 +21,10 @@ export const NFTCollection = ({ ca, name }: INFTCollection) => {
         data: [] as INFTCardByMarket[]
     })
 
-    const getNFTs = async () => {
-        setNfts({ isLoading: true, isError: null, data: [] })
+    const getNFTs = async (contractAddress: string) => {
+        setNfts(prev => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
-            const response = await requestServer.post('/market', { ca })
+            const response = await requestServer.post('/market', { ca: contractAddress })
             setNfts({ isLoading: false, isError: null, data: [...response.data] })
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -38,7 +38,8 @@ export const NFTCollection = ({ ca, name }: INFTCollection) => {
     }
 
     useEffect(() => {
-        getNFTs()
+        getNFTs(ca)
+        console.log(1, "화면이 렌더되었습니다")
     }, [])
 
     if (nfts.isLoading) return <LoadingBar />

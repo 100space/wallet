@@ -240,8 +240,8 @@ export class MarketService {
       if (!tokenInfo) throw new Error('TokenInfo is empty');
 
       const blockchain = {
-        polygon:
-          'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912',
+        name: "polygon",
+        image: 'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912'
       };
 
       return {
