@@ -9,6 +9,7 @@ import { LoadingBar } from "@components/loading"
 
 export const NftStandardInformation = ({ nftName, tokenId, like, creator, collectionName, sellPrice, fee, owner }: INFTStandard) => {
 
+    if (!creator) return <LoadingBar />
     return (
         <Board>
             <NftStandardInformationCollection collectionName={collectionName} />

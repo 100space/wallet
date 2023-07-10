@@ -76,7 +76,9 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
         setNft(prev => ({ isLoading: true, isError: null, data: null }))
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
+            console.log(111111111111111, response)
             setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
+            console.log(ca, tokenId)
             console.log(response.data)
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -87,6 +89,7 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
 
     useEffect(() => {
         getNFT()
+        console.log(ca, tokenId)
     }, [])
 
 
