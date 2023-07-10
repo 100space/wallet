@@ -5,7 +5,7 @@ import { styled } from "styled-components"
 
 export const TotalWrap = styled.div<IProfileProps>`
     height: fit-content;
-    background: ${({ theme, mode}) =>
+    background: ${({ theme, mode, profile}) =>
         (mode && theme[mode].basicBg)};
     box-shadow: none;
     padding: 2rem;
