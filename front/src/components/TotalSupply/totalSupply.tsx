@@ -5,6 +5,7 @@ import { ModeState } from "@utils/localStorage"
 import { Alert } from "@components/Alert/alert"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { KRW } from "@components/Nft/NftCard"
+import { useGetMode } from "@hooks/useMode"
 
 interface ITotalSupply {
     profile?: string

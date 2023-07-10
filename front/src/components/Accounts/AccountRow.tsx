@@ -38,7 +38,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
             <AccountAssets width={"25%"}>
                 <TextComp fontSize="1.4rem">{props.account.asset.amount + " " + props.account.asset.currency}</TextComp>
             </AccountAssets>
-            <Icon icon={"ep:arrow-up-bold"} rotate={1} width={"5%"} />
+            <Icon icon={"ep:arrow-up-bold"} rotate={1} style={{fontSize:"2.5rem"}} color="#ffc74d"/>
         </AccountRowWrap>
     )
 }
