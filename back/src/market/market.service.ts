@@ -276,6 +276,10 @@ export class MarketService {
     this.currency = symbol.toUpperCase();
     const currencyPrice = (await this.trendService.getTokenData({ symbol }))
       .price;
+    if (currencyPrice === null) {
+      this.currencyPrice = Math.floor(0 * 1000) / 1000;
+      return '변경되었습니다.';
+    }
     this.currencyPrice = Math.floor(currencyPrice * 1000) / 1000;
     return '변경되었습니다.';
   }
