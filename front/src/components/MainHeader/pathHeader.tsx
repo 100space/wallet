@@ -46,7 +46,7 @@ export const PathHeader = () => {
             return (
                 <HeaderSubJect fontSize="2rem" mode={mode}>
                     {alias ? alias : "Untitled"}
-                    <Icon icon={"ep:arrow-up-bold"} rotate={2} width={"2.4rem"} height={"100%"} onClick={handleClick} />
+                    <Icon style={{color: "#e6bc23"}} icon={"ep:arrow-up-bold"} rotate={2} width={"2.4rem"} height={"100%"} onClick={handleClick} />
                 </HeaderSubJect>
             )
     }

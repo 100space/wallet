@@ -12,6 +12,6 @@ export const CoinSlider = styled.div<ISizeProps>`
         }
         margin-left: 1rem;
         ${Shadow}
-        background-color: #ffffff;
+        background-color: ${({ theme, mode }) => mode && theme[mode].coinSlideBg};
     }
 `

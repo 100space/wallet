@@ -17,12 +17,12 @@ export const PopupWrap = styled.div<ISizeProps>`
     cursor: pointer;
     width: 30%;
     height: 4rem;
-    background-color: ${({ theme, mode }) => mode && theme[mode].popupBtnBg};
+    background-color: ${({ theme, mode }) => mode && theme[mode].bringBg};
+    color: ${({ theme, mode }) => mode && theme[mode].sendText};
     border-radius: 1.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
     font-weight: 600;
-    color: ${({ theme,mode }) => mode && theme[mode].text };
 `

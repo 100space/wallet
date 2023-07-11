@@ -7,7 +7,7 @@ export const CoinWrap = styled.div<ISizeProps>`
     display: flex;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "4.8rem"};
-    color: ${({ theme }) => theme[mode].text || ""};
+    color: ${({ theme }) => theme[mode].text};
     border-bottom: 0.1rem solid #00000075;
     &:nth-child(2n) {
         background-color: ${({ theme, mode }) => (mode && theme[mode].coinBg)};
@@ -27,5 +27,5 @@ export const CoinContent = styled.div<ITypeSize>`
     font-weight: 700;
     text-align: center;
     line-height: ${({ height }) => height || "4.8rem"};
-    color: ${({ color, theme }) => color || theme[mode].text};
+    color: ${({ color, theme, mode }) => mode && theme[mode].text};
 `

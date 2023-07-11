@@ -6,7 +6,6 @@ import styled from "styled-components"
 export const Wrap = styled.div`
     width: 100%;
     height: 100%;
-    background-color: #272727;
 `
 
 export const BtnWrap = styled.div`
@@ -34,7 +33,7 @@ export const BottomSheetWrap = styled.div<IStateProps>`
     background-color: ${({ theme, mode }) => mode && theme[mode].popupBg};
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
-    box-shadow: 0 -0.2rem 0.3rem 0.1rem ${({ theme, mode }) => mode && theme[mode].basicLightBg};
+    /* box-shadow: 0 -0.2rem 0.3rem 0.1rem ${({ theme, mode }) => mode && theme[mode].basicLightBg}; */
     ${FlexCenter}
 `
 export const PopupText = styled.div<IStateProps>`

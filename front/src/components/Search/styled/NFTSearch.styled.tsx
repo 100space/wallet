@@ -8,7 +8,9 @@ export const NFTSearchWrap = styled.div<ISizeProps>`
     align-items: center;
 
     & > input {
-        width: 100%;
+        width: 80%;
+        position: relative;
+        right: 2rem;
     }
 
     & > svg {

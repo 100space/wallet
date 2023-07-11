@@ -12,6 +12,7 @@ export const Btn = styled.button<IProfileBtn>`
     font-size: ${(props) => props.fontSize || "1.7rem"};
     color: ${({ color, theme, mode, profile }) => color || (mode && theme[mode].text)};
     background: ${({ backgroundcolor, theme, mode }) => backgroundcolor || (mode && theme[mode].buttonBg) };
+    font-family: "Titillium Web", sans-serif;
     &:active {
         background: ${({ theme, mode }) => mode && theme[mode].buttonHover};
     }
@@ -25,7 +26,7 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     margin: 1rem auto;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
-    background: ${({ mode, theme }) => mode && theme[mode].buttonBg};
+    background: ${({ mode, theme }) => mode && theme[mode].tokenBg};
     border-radius: 1rem;
 `
 
@@ -39,8 +40,8 @@ export const TokenListButton = styled.button<IonClickProps>`
     border: none;
     border-radius: 4rem;
     color: ${({  mode, theme }) => mode && theme[mode].text};
-    background: ${({  mode, theme }) =>  mode && theme[mode].buttonBg };
+    background: ${({  mode, theme }) =>  mode && theme[mode].tokenBg };
     &:active {
-        background: ${({ mode, theme }) => mode && theme[mode].buttonBg };
+        background: ${({ mode, theme }) => mode && theme[mode].tokenBg };
     }
 `

@@ -7,7 +7,7 @@ export const CoinInfoWrap = styled.div<ISizeProps>`
     min-width: 36rem;
     width: ${({ width }) => width || "100%"};
     min-height: 15rem;
-    background-color: ${({ theme, mode }) => mode && theme[mode].bgInfo};
+    /* background-color: ${({ theme, mode }) => mode && theme[mode].desBg};  */
     border-radius: 1rem;
     ${Shadow}
 `
