@@ -1,7 +1,7 @@
 import { Button } from "@components/Button"
 import { InputComp } from "@components/input"
-import { ModeState, MyAccounts, MyInfo, MyNetwork } from "@utils/localStorage"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { IsPopUp, ModeState, MyAccounts, MyInfo, MyNetwork } from "@utils/localStorage"
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
 import { useGetMode } from "@hooks/useMode"
 import NFTin from "@core/index"
@@ -9,6 +9,7 @@ import { ethers } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
 import { useQuery } from "@tanstack/react-query"
 import requestServer from "@utils/axios/requestServer"
+import { Alert } from "@components/Alert/alert"
 
 export const sendList = [
   { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
@@ -54,6 +55,7 @@ export const SendComp = (props: {
   const [myInfo, setMyInfo] = useRecoilState(MyInfo)
   const myAccounts = useRecoilValue(MyAccounts)
   const network = useRecoilValue(MyNetwork)
+  const popupReset = useResetRecoilState(IsPopUp)
   const nftin = useNFTin()
 
   const handlerWeb3Fn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,32 +67,36 @@ export const SendComp = (props: {
 
       console.log(ca, symbol, decimal)
 
-      const response = await requestServer.post("token", {
-        ca,
-        symbol,
-        decimal,
-      })
+      try {
+        const response = await requestServer.post("token", {
+          ca,
+          symbol,
+          decimal,
+        })
 
-      if (myInfo[network as keyof typeof myInfo].tokens.filter((v) => v.ca === response.data.ca).length === 0) {
-        console.log("add")
-        const updatedMyInfo = {
-          ...myInfo,
-          [network]: {
-            ...myInfo[network as keyof typeof myInfo],
-            tokens: [
-              ...myInfo[network as keyof typeof myInfo].tokens,
-              {
-                ca: response.data.ca,
-                symbol: response.data.symbol,
-                decimal: response.data.decimal,
-              },
-            ],
-          },
+        if (myInfo[network as keyof typeof myInfo].tokens.filter((v: any) => v.ca === response.data.ca).length === 0) {
+          console.log("add")
+          const updatedMyInfo = {
+            ...myInfo,
+            [network]: {
+              ...myInfo[network as keyof typeof myInfo],
+              tokens: [
+                ...myInfo[network as keyof typeof myInfo].tokens,
+                {
+                  ca: response.data.ca,
+                  symbol: response.data.symbol,
+                  decimal: response.data.decimal,
+                },
+              ],
+            },
+          }
+          setMyInfo({ ...updatedMyInfo })
+          return popupReset()
         }
-        return setMyInfo({ ...updatedMyInfo })
+        return Alert.fire({ icon: "warning", title: "이미 추가된 토큰입니다." })
+      } catch (err) {
+        return Alert.fire({ icon: "warning", title: "올바른 값으로 다시 입력해주세요." })
       }
-      console.log("no add")
-      return
     }
   }
 

@@ -12,7 +12,7 @@ export class TrendRepository {
     @InjectModel(Trend.name, 'local') private trendModel: Model<Trend>,
     private configService: ConfigService,
   ) {
-    this.initiate();
+    // this.initiate();
   }
 
   async initiate() {

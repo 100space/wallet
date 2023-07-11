@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { MarketService } from './market.service';
 import { ListNftByCaDto, ListNftByEoaDto } from './dto/market.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -8,7 +8,7 @@ import { NftInfoDto } from './dto/info-market.dto';
 @ApiTags('Market')
 @Controller('market')
 export class MarketController {
-  constructor(private readonly marketService: MarketService) { }
+  constructor(private readonly marketService: MarketService) {}
 
   @Get()
   @ApiOperation({
@@ -46,6 +46,15 @@ export class MarketController {
     return await this.marketService.nftInfo({ ca, tokenId });
   }
 
+  @Post('currency')
+  @ApiOperation({
+    summary: '네트워크에 따라 화폐를 변경합니다.',
+    description: 'symbol을 받아 해당 통화를 symbol로 변경합니다.',
+  })
+  async changeBasicCurrency(@Body() { symbol = 'matic' }: { symbol: string }) {
+    return await this.marketService.changeBasicCurrency({ symbol });
+  }
+
   @Post()
   @ApiOperation({
     summary: 'CA를 기준으로 NFT들을 가져옵니다.',
@@ -54,13 +63,8 @@ export class MarketController {
   async listNftByCa(@Body() { ca }: ListNftByCaDto) {
     return await this.marketService.listNftByCa({ ca });
   }
-
-  @Post('currency')
-  @ApiOperation({
-    summary: '네트워트의 따라 화폐를 변경합니다.',
-    description: 'symbol을 받아 해당 통화를 symbol로 변경합니다.',
-  })
-  async changeBasicCurrency(@Body() { symbol = "matic" }: { symbol: string }) {
-    return await this.marketService.changeBasicCurrency({ symbol });
+  @Put()
+  async addNft(@Body() { ca, tokenId }) {
+    return await this.marketService.addNft({ ca, tokenId });
   }
 }
