@@ -1,11 +1,10 @@
-
 node_modules
 # OS
 .DS_Store
 
 *.env
 dist
-build
+
 
 # Local .terraform directories
 **/.terraform/*
@@ -27,3 +26,6 @@ terraform.rc
 
 test.md
 key.md
+
+# Build directory
+build
