@@ -11,6 +11,7 @@ import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 
 const data3: ITransaction = {
@@ -23,20 +24,17 @@ const data3: ITransaction = {
     ],
 }
 
-interface INFTInfoPage {
-    ca: string
-    tokenId: number
-}
 
-export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
+export const NFTInfoPage = () => {
     const { mode } = useRecoilValue(ModeState)
+    const location = useLocation()
     const [nft, setNft] = useState({
         isLoading: false,
         isError: null as null | unknown,
         data: {} as INFTInfomationByMarket | null
     })
 
-    const getNFT = async () => {
+    const getNFT = async ({ ca, tokenId }: { ca: string, tokenId: number }) => {
         setNft(prev => ({ isLoading: true, isError: null, data: null }))
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
@@ -49,8 +47,13 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
         }
     }
 
+    const createPath = (pathname: string) => {
+        const url = pathname.split("/")
+        return { ca: url[url.length - 2], tokenId: parseInt(url[url.length - 1]) }
+    }
+
     useEffect(() => {
-        getNFT()
+        getNFT(createPath(location.pathname))
     }, [])
 
 
