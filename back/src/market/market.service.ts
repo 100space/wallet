@@ -17,14 +17,15 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { AxiosError } from 'axios';
 import { ListNftTransactionDto } from './dto/transaction-market.dto';
 import { NftInfoDto } from './dto/info-market.dto';
+import { ERC721_ABI } from 'src/abi/ERC721.ABI';
 
 @Injectable()
 export class MarketService {
   private readonly logger = new Logger(MarketService.name);
   private readonly contract: Contract;
   private readonly PREFIX = 10 ** 18;
-  private currencyPrice = 0
-  private currency = "matic"
+  private currencyPrice = 0;
+  private currency = 'matic';
   constructor(
     @Inject('Provider') private readonly provider: Provider,
     private readonly httpService: HttpService,
@@ -36,7 +37,7 @@ export class MarketService {
       MARKET_ABI,
       this.provider,
     );
-    this.changeBasicCurrency({ symbol: this.currency })
+    this.changeBasicCurrency({ symbol: this.currency });
   }
 
   async listCollections() {
@@ -57,11 +58,16 @@ export class MarketService {
           latest: v.createdAt,
           prices: [
             {
-              currency: "KRW", price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
+              currency: 'KRW',
+              price:
+                Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000,
             },
             {
-              currency: this.currency, price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
-            }]
+              currency: this.currency,
+              price:
+                Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000,
+            },
+          ],
         };
       });
     } catch (error) {
@@ -244,8 +250,9 @@ export class MarketService {
       if (!tokenInfo) throw new Error('TokenInfo is empty');
 
       const blockchain = {
-        name: "polygon",
-        image: 'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912'
+        name: 'polygon',
+        image:
+          'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?}1624446912',
       };
 
       return {
@@ -268,9 +275,30 @@ export class MarketService {
   }
 
   async changeBasicCurrency({ symbol }: { symbol: string }) {
-    this.currency = symbol.toUpperCase()
-    const currencyPrice = (await this.trendService.getTokenData({ symbol })).price
-    this.currencyPrice = Math.floor(currencyPrice * 1000) / 1000
-    return "변경되었습니다."
+    this.currency = symbol.toUpperCase();
+    const currencyPrice = (await this.trendService.getTokenData({ symbol }))
+      .price;
+    this.currencyPrice = Math.floor(currencyPrice * 1000) / 1000;
+    return '변경되었습니다.';
+  }
+
+  async addNft({ ca, tokenId }) {
+    const abi = ERC721_ABI;
+    const contract = new Contract(ca, abi, this.provider);
+
+    const totalSupply = await contract.totalSupply();
+
+    // const result = await contract.tokenURI(tokenId);
+    // console.log(result);
+
+    // const ipfsUrl = 'https://ipfs.io/ipfs/';
+
+    // const { data } = await firstValueFrom(
+    //   this.httpService.get(`${ipfsUrl}${result.replace('ipfs://', '')}.json`),
+    // );
+
+    // console.log(data);
+
+    // console.log(`${ipfsUrl}${data.image.replace('ipfs://', '')}`);
   }
 }

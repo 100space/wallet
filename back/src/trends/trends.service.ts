@@ -8,7 +8,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { AxiosError } from 'axios';
-import { catchError, firstValueFrom, map } from 'rxjs';
+import { catchError, firstValueFrom } from 'rxjs';
 import { TrendRepository } from './trends.repository';
 import { ICoinList, ICoinInfo } from '../interface/trends.interface';
 import { Cron, Interval } from '@nestjs/schedule';

@@ -146,3 +146,205 @@ cancelAuction:function
 getAllTokensInCollection:function
 getUserTokens:function
 ```
+
+```
+export const ERC721_ABI = [
+  {
+    constant: true,
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [
+      {
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 토큰의 총 공급량 조회
+  input : x
+  retrun : uint256 타입의 총 공급량
+
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+    ],
+    name: 'balanceOf',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'balance',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 특정 EOA가 소유한 토큰 수 조회
+  input : EOA
+  return : uint256 타입의 해당 주소가 소유한 토큰 수
+
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'getApproved',
+    outputs: [
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 특정 토큰의 승인된 운영자 주소 조회
+  input : tokenId
+  return : 해당 토큰의 승인된 운영자의 EOA
+
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
+    ],
+    name: 'isApprovedForAll',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => operator에게 owner의 모든 자산을 관리할 수 있는지 여부
+  input : owner : 토큰의 소유자 EOA
+          operator : 마켓 운영자 EOA
+  return : boolean
+
+  {
+    inputs: [],
+    name: 'name',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 토큰 컨트랙트의 이름을 조회
+  input : x
+  return : string 타입의 토큰 컨트랙트 이름
+
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'ownerOf',
+    outputs: [
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 특정 토큰의 소유자 주소를 조회
+  input : tokenId
+  return : 해당 토큰의 소유자 EOA
+
+  {
+    inputs: [
+      {
+        internalType: 'bytes4',
+        name: 'interfaceId',
+        type: 'bytes4',
+      },
+    ],
+    name: 'supportsInterface',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 지정된 인터페이스 ID가 이 컨트랙트에서 지원되는지 확인
+  input : 인터페이스 ID
+  return : boolean
+
+  {
+    inputs: [],
+    name: 'symbol',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 토큰 컨트랙트의 심볼을 조회
+  input : x
+  return string 타입의 토큰 컨트랙트의 심볼
+
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'tokenURI',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  => 특정 토큰의 URI(토큰의 정보?) 조회
+  input : tokenId
+  return : string 타입의 해당 토큰의 URI
+
+];
+
+```

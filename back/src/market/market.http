@@ -1,45 +1,45 @@
 @server = {{$dotenv PROTOCOL}}://{{$dotenv HOST}}:{{$dotenv PORT}}/market
 
-### NFT 컬렉션 리스트
+### NFT 컬렉션들을 가져옵니다.
 GET {{server}} HTTP/1.1
 
 // metadata: ipfs://QmVXbeGajzbAAVk5rw9CQmysAbBUz6SHBiT2RLj4HbmsBt
 
-### CA 기준 NFT
+
+### CA를 기준으로 NFT들을 가져옵니다.
 POST {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xDF714Ee7B088b46Fff7db8840A256C6118046786"
+    "ca": "0x5d5709E5BEaE948a4B68967607B8dE304197A951"
 }
-
-### EOA 기준 NFT
+### EOA를 기준으로 NFT들을 가져옵니다.
 POST {{server}}/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "eoa": "0x476642C2AdDF5c88e38BcC36a0B346872504419d"
+    "eoa": "0xFA2e0fBBE47B0dbe0B3c4caD0cC81a57F8A663d3"
 }
 
-### NFT의 트랜잭션
+### CA와 TokenId를 받아 해당 NFT의 트랜잭션 기록을 보여줍니다.
 POST {{server}}/transaction HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xDF714Ee7B088b46Fff7db8840A256C6118046786",
+    "ca": "0x5d5709E5BEaE948a4B68967607B8dE304197A951",
     "tokenId": 1
 }
 
-### NFT의 정보
+### CA와 TokenId를 받아 해당 NFT의 정보를 보여줍니다.
 POST {{server}}/info HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0xDF714Ee7B088b46Fff7db8840A256C6118046786",
+    "ca": "0x5d5709E5BEaE948a4B68967607B8dE304197A951",
     "tokenId": 1
 }
 
-### 기준 화폐 변경
+### 네트워크에 따라 화폐를 변경합니다.
 POST {{server}}/currency HTTP/1.1
 Content-Type: application/json
 
@@ -47,5 +47,14 @@ Content-Type: application/json
     "symbol": "matic"
 }
 
-###
-GET https://api-testnet.polygonscan.com/api?module=contract&action=getabi&address=0xA3b0E897B5166379a14dF88B5bf50c530270556a&apikey={{$dotenv POLYGON_SCAN}}
+
+### NFT 테스트
+PUT {{server}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "ca": "0x468613F44FA1a55bEC3F139539F9abB746726DB0",
+    "tokenId": 2
+}
+
+# ipfs://bafybeifvbaj3l3ilz37qz5rhp5xniq5mrypv4wl77zhpgqlibojz4esdpq/1
