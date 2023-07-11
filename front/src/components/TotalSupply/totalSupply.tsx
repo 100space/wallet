@@ -35,7 +35,7 @@ export const TotalSupply = ({ profile }: ITotalSupply) => {
                     text={address}
                     onCopy={() => Alert.fire({ icon: "info", title: "클립보드에 복사되었습니다." })}
                 >
-                    <span className="account">{address.substring(0, 8) + "..." + address.substring(34, 40)}</span>
+                    <span className="account">{address.substring(0, 8) + "..." + address.substring(36, 42)}</span>
                 </CopyToClipboard>
             </TextComp>
             <TextComp fontSize={profile === "true" ? "2.2rem" : "2.4rem"} position="between" width="100%">

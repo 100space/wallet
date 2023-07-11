@@ -3,6 +3,9 @@ console.log("external.js has been loaded")
 let checkInterval = setInterval(() => {
     if (window.abc) {
         console.log("Ethereum object is available!")
+        chrome.action.setPopup({
+            popup: "popup.html",
+        })
         clearInterval(checkInterval) // 지갑이 준비되었으므로 체크를 멈춥니다.
         console.log(window.abc, "window.abc")
 

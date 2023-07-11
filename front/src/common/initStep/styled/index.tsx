@@ -66,7 +66,7 @@ export const TextComp = styled.div<TextProps>`
 `
 
 export const AccountAdWrap = styled.div<ISizeProps>`
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     align-items: center;

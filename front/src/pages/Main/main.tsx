@@ -13,10 +13,10 @@ import { Contract, ethers } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
 
 declare global {
-  interface Window {
-    ethereum?: any
-    MyWallet: MyWallet
-  }
+    interface Window {
+        ethereum?: any
+        MyWallet: MyWallet
+    }
 }
 export const MainPage = () => {
     const [initState, setInitState] = useRecoilState(ModeState)
@@ -63,26 +63,26 @@ export const MainPage = () => {
         })
         return data
     }
-  const results = useQueries({
-    queries: [
-      {
-        queryKey: ["post", "myTokens"],
-        queryFn: getMyCoins,
-        onSuccess: (data: any) => {
-          setMyTokens([...data])
-        },
-        refetchOnWindowFocus: true,
-      },
-      {
-        queryKey: ["post", "myNFTs"],
-        queryFn: getMyNft,
-        onSuccess: (data: any) => {
-          setMyNft([...data])
-        },
-        refetchOnWindowFocus: true,
-      },
-    ],
-  })
+    const results = useQueries({
+        queries: [
+            {
+                queryKey: ["post", "myTokens"],
+                queryFn: getMyCoins,
+                onSuccess: (data: any) => {
+                    setMyTokens([...data])
+                },
+                refetchOnWindowFocus: true,
+            },
+            {
+                queryKey: ["post", "myNFTs"],
+                queryFn: getMyNft,
+                onSuccess: (data: any) => {
+                    setMyNft([...data])
+                },
+                refetchOnWindowFocus: true,
+            },
+        ],
+    })
     useEffect(() => {
         !initState.isLogin && navigater("/login")
         console.log(myAccount)

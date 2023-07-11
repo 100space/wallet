@@ -23,8 +23,9 @@ export const PopupComp = ({ address }: { address?: address }) => {
         입금받기: { text: "QRcode 또는 계정을 이용해서 입금할 수 있습니다." },
         트랜잭션: { text: "현재 선택된 계정의 거래정보를 가져옵니다." },
         "My Account": { text: "사용할 계정을 선택해주세요." },
+        "계정 불러오기": { text: "비공개 키를 이용하여 계정을 불러올 수 있습니다." },
     }
-    console.log(matchText[contents]?.text)
+
     return (
         <>
             <BottomSheetWrap mode={modeState.mode} popupstate={isOpen.toString()}>
