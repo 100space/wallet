@@ -5,12 +5,9 @@ import { Route, Routes } from "react-router"
 import { useRecoilValue } from "recoil"
 
 export const InfoRouter = () => {
-    const nftInfo = useRecoilValue(NFTByCollection)
-    console.log(nftInfo)
-
     return (
         <Routes>
-            <Route path={`nft/${nftInfo.ca}/${nftInfo.tokenId}`} element={<NFTInfoPage ca={nftInfo.ca} tokenId={nftInfo.tokenId} />}></Route>
+            <Route path={"nft/:ca/:tokenId"} element={<NFTInfoPage />}></Route>
             <Route path="coin/:id" element={<CoinInfoPage />}></Route>
         </Routes>
     )

@@ -1,81 +1,96 @@
 import styled from "styled-components"
-import myPage from "@img/myPage.jpg"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 
 export const MypageWrapper = styled.div<ISizeProps>`
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    position: relative;
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     overflow-y: scroll;
     background: ${({ theme, mode }) => mode && theme[mode].bgInfo};
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+
     &::-webkit-scrollbar {
         display: none;
     }
-    & > .btnWrap {
-        display: flex;
-    }
 `
 
-export const FileUpload = styled.input`
-    position: relative;
-    bottom: 6rem;
-    left: 4rem;
-    z-index: 1;
-`
-
-
-export const MyProfile = styled.div`
-    width: 12rem;
-    height: 12rem;
-    border-radius: 6.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 2.7rem;
-    z-index: 1;
-    background-color: #818181;
-`
-
-export const MyProfileLabel = styled.label`
-    cursor: pointer;
-    font-size: 1.7rem;
-    color: #000000;
-    position: relative;
-    bottom: 2rem;
-`
-
-export const MyNickName = styled.input`
-    width: 100%;
-    height: 13.5rem;
-    display: flex;
-    align-items: center;
+export const MyProfileHeader = styled.div<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "7.5%"};
+    color: ${({ mode, theme }) => mode && theme[mode].text};
+    font-size: 2.5rem;
     text-align: center;
-    font-size: 2rem;
-    color: #000000;
-    position: relative;
-    bottom: 12rem;
-    border: none;
-    &>span {
-        background-color: #e3e2e2;
+    font-weight: 700;
+    background-color: ${({ mode, theme }) => mode && theme[mode].basicBg};
+`
+
+export const MyProfileNickNameWrap = styled.div<ISizeProps>`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "7.5%"};
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 700;
+
+    & > button {
+        font-weight: 700;
     }
 `
 
-export const UpLoadBtn = styled.button`
-    
+export const MyProfileImageUpload = styled.form<ISizeProps>`
 `
 
-export const TotalSupplyWrap = styled.div`
-    width: 100%;
-    height: 14rem;
-    margin-bottom: 6px;
-    bottom: 3rem;
+export const MyProfileNickName = styled.div<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
+    background-color: ${({ mode, theme }) => mode && theme[mode].basicBg};
+`
+
+export const MyProfileNickNameBtn = styled.button<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
+`
+
+export const MyProfile = styled.div<ISizeProps>`
     position: relative;
-    bottom: 6rem;
+    width: ${({ width }) => width || "16rem"};
+    height: ${({ height }) => height || "16rem"};
+    border-radius: 50%;
+
+    & > svg {
+        font-size: 2.5rem;
+        position: absolute;
+        bottom: 0rem;
+        right: 1rem;
+        color: ${({ mode, theme }) => mode && theme[mode].text};
+    }
 `
 
+export const MyProfileImg = styled.img<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
+    border-radius: inherit;
+    object-fit: contain;
+    background-color: white;
+`
+
+export const TotalSupplyWrap = styled.div<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "14rem"};
+`
+
+export const ProfileBtnWrap = styled.div<ISizeProps>`
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "14rem"};
+    display: flex;
+    justify-content: space-between;
+
+    & > button {
+        font-weight: 700;
+    }
+`

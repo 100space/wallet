@@ -1,19 +1,19 @@
 import { NFTCardList } from "@common/List"
 import { ErrorPage } from "@common/error"
 import { BackBtnHeader } from "@common/header/BackBtnHeader"
+import { LoadingHeader } from "@common/header/LoadingHeader"
 import { LoadingBar } from "@components/loading"
 import requestServer from "@utils/axios/requestServer"
 import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
+import { SelectedCollection } from "@utils/localStorage"
 import axios from "axios"
 import { MouseEvent, useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { useLocation, useNavigate } from "react-router"
+import { useRecoilState } from "recoil"
 
-interface INFTCollection {
-    ca: string
-    name: string
-}
-
-export const NFTCollection = ({ ca, name }: INFTCollection) => {
+export const NFTCollection = () => {
+    const [collection, setCollection] = useRecoilState(SelectedCollection)
+    const location = useLocation()
     const navigate = useNavigate()
     const [nfts, setNfts] = useState({
         isLoading: false,
@@ -37,15 +37,25 @@ export const NFTCollection = ({ ca, name }: INFTCollection) => {
         navigate('/market')
     }
 
+    const createPath = (pathname: string) => {
+        const url = pathname.split("/")
+        return url[url.length - 1]
+    }
+
     useEffect(() => {
-        getNFTs(ca)
+        getNFTs(createPath(location.pathname))
     }, [])
 
-    if (nfts.isLoading) return <LoadingBar />
+    if (nfts.isLoading) return (
+        <>
+            <LoadingHeader />
+            <LoadingBar />
+        </>
+    )
     if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
-            <BackBtnHeader content={name} onClick={clickBackBtn} />
+            <BackBtnHeader content={collection.name} onClick={clickBackBtn} />
             <NFTCardList nftCards={nfts.data} />
         </>
     )

@@ -16,9 +16,6 @@ export const NftBoardContentRow = (props: {
 }) => {
     const [modeState, setModeState] = useGetMode()
 
-    console.log(props.text)
-    console.log(props.isImage)
-
     return (
         <NftBoardContentRowWrap mode={modeState.mode} height={"3.6rem"} open={props.open}>
             <NftBoardContentSubject>{props.text[0]}</NftBoardContentSubject>

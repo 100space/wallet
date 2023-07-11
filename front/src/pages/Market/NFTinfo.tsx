@@ -2,6 +2,8 @@ import { NftInfomation, NftStandardInformation } from "@common/Infomation"
 import { NftTxList } from "@common/List"
 import { NftStatus } from "@common/NftStatus"
 import { ErrorPage } from "@common/error"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
+import { LoadingHeader } from "@common/header/LoadingHeader"
 import { TransactionRow } from "@components/Transaction"
 import { LoadingBar } from "@components/loading"
 import { ImageForm, PlatWrap } from "@styled/index"
@@ -10,7 +12,8 @@ import { INFTInfomationByMarket, INFTStandard, INFTStauts, INftInfomation } from
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router"
 import { useRecoilValue } from "recoil"
 
 const data3: ITransaction = {
@@ -23,25 +26,22 @@ const data3: ITransaction = {
     ],
 }
 
-interface INFTInfoPage {
-    ca: string
-    tokenId: number
-}
 
-export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
+export const NFTInfoPage = () => {
     const { mode } = useRecoilValue(ModeState)
+    const location = useLocation()
+    const navigate = useNavigate()
     const [nft, setNft] = useState({
         isLoading: false,
         isError: null as null | unknown,
         data: {} as INFTInfomationByMarket | null
     })
 
-    const getNFT = async () => {
+    const getNFT = async ({ ca, tokenId }: { ca: string, tokenId: number }) => {
         setNft(prev => ({ isLoading: true, isError: null, data: null }))
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
             setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
-            console.log(response.data)
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 setNft({ isLoading: false, isError: e.response, data: {} as INFTInfomationByMarket })
@@ -49,16 +49,29 @@ export const NFTInfoPage = ({ ca, tokenId }: INFTInfoPage) => {
         }
     }
 
+    const createPath = (pathname: string) => {
+        const url = pathname.split("/")
+        return { ca: url[url.length - 2], tokenId: parseInt(url[url.length - 1]) }
+    }
+
+    const clickBackBtnHandler = (e: MouseEvent) => {
+        navigate(`/market/collection/${createPath(location.pathname).ca}`)
+    }
+
     useEffect(() => {
-        getNFT()
+        getNFT(createPath(location.pathname))
     }, [])
 
-
-
-    if (nft.isLoading || !nft.data) return <LoadingBar />
+    if (nft.isLoading || !nft.data) return (
+        <>
+            <LoadingHeader />
+            <LoadingBar />
+        </>
+    )
     if (nft.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
+            <BackBtnHeader content={nft.data.nftName} onClick={clickBackBtnHandler} />
             <PlatWrap mode={mode}>
                 <ImageForm
                     height={"75vw"}

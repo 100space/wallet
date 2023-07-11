@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 export const NftCardWrap = styled.div<ISizeProps>`
     /* ${SizePropsStyled}; */
-    width: 100%;
+    max-width: 20rem;
     width: ${(props) => props.width || "100%"};
     min-height: ${(props) => props.height || "100%"};
     padding: 0.75rem;

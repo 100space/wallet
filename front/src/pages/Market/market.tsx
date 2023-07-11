@@ -103,7 +103,6 @@ export const MarketPage = () => {
                 }}
             />
             <NFTSlide nftCards={nfts.data} setNftCa={setNftCa} />
-            {/* <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} /> */}
         </>
     )
 }
