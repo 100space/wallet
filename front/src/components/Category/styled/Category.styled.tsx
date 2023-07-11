@@ -27,6 +27,7 @@ export const CategoryWrap = styled.div<ISizeProps>`
 
 export const CategorySubject = styled.div<ISizeProps>``
 
+
 export const CategoryArrow = styled.div<ISizeProps>`
     cursor: pointer;
     padding: 1rem;

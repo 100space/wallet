@@ -1,6 +1,7 @@
 
 import { NFTRowList } from "@common/List"
 import { ErrorPage } from "@common/error"
+import { NFTSlide } from "@common/slide/NFTSlide"
 import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
 import { LoadingBar } from "@components/loading"
@@ -56,43 +57,6 @@ const data3: ITransaction = {
 //     isSell: ["판매중", "50개"],
 // }
 
-const data5: INftInfomation = {
-    owner: {
-        subject: "내 계정 닉네임",
-        value: "내 계정 주소"
-    },
-    blockchain: {
-        subject: "블록체인",
-        value: {
-            name: "Polygon",
-            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
-        }
-    },
-    ca: {
-        subject: "계약주소",
-        value: "0x0000000000000000000000000000000000000000"
-    },
-    tokenId: {
-        subject: "토큰 ID",
-        value: 50
-    },
-    tokenStandard: {
-        subject: "토큰 표준",
-        value: "ERC 1155"
-    },
-}
-
-const data6: INFTStandard = {
-    nftName: "Gdori",
-    nftId: 1234,
-    like: 1234,
-    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-    owner: "asdf1387",
-    collectionName: "asdfasdf",
-    sellPrice: { currency: "ETH", price: 0.013 },
-    chargePrice: { currency: "ETH", price: 0.0000013 },
-}
-
 export const MarketPage = () => {
     const navigator = useNavigate()
     const [nfts, setNfts] = useState({
@@ -138,13 +102,7 @@ export const MarketPage = () => {
                     navigator("/market/new")
                 }}
             />
-            {/* <NFTSlide nftCards={[data, data, data, data, data, data, data]} setNftCa={setNftCa} /> */}
-            {/* <NftRow nftInfo={data2} /> */}
-            {/* <NftCard nftInfo={data} /> */}
-            {/* <TransactionRow txInfo={data3} /> */}
-
-            {/* <NftStandardInformation nftStandardInfo={data6} /> */}
-            {/* <MyNftInformation /> */}
+            <NFTSlide nftCards={nfts.data} setNftCa={setNftCa} />
             {/* <NFTCardList nftCards={[data, data, data, data, data, data, data, data, data, data, data, data, data]} /> */}
         </>
     )

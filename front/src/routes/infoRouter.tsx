@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil"
 
 export const InfoRouter = () => {
     const nftInfo = useRecoilValue(NFTByCollection)
+    console.log(nftInfo)
 
     return (
         <Routes>

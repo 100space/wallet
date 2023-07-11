@@ -5,7 +5,12 @@ import { NFTSlideWrap } from "./styled/NFTSlide.styled"
 import { SetterOrUpdater } from "recoil"
 import { MouseEvent } from "react"
 
-export const NFTSlide = (props: { nftCards: INFTCardByMarket[], setNftCa: SetterOrUpdater<string> }) => {
+export const NFTSlide = (props: {
+    nftCards: INFTCardByMarket[], setNftCa: SetterOrUpdater<{
+        ca: string;
+        name: string;
+    }>
+}) => {
     const [modeState, setModeState] = useGetMode()
 
     const clickNftCard = (e: MouseEvent, ca: string, tokenId: number) => {

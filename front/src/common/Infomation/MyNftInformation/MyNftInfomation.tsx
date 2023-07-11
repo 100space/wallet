@@ -42,50 +42,26 @@ const data4: INFTStauts = {
     },
 }
 
-const data5: INftInfomation = {
-    owner: {
-        subject: "내 계정 닉네임",
-        value: "내 계정 주소"
-    },
-    blockchain: {
-        subject: "블록체인",
-        value: {
-            name: "Polygon",
-            image: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912"
-        }
-    },
-    ca: {
-        subject: "계약주소",
-        value: "0x0000000000000000000000000000000000000000"
-    },
-    tokenId: {
-        subject: "토큰 ID",
-        value: 50
-    },
-    tokenStandard: {
-        subject: "토큰 표준",
-        value: "ERC 1155"
-    },
-}
-
-const data6: INFTStandard = {
-    nftName: "Gdori",
-    nftId: 1234,
-    like: 1234,
-    ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-    owner: "내 계정",
-    collectionName: "asdfasdf",
-    sellPrice: { currency: "ETH", price: 0.013 },
-    chargePrice: { currency: "ETH", price: 0.0000013 }
-}
+// const data6: INFTStandard = {
+//     nftName: "Gdori",
+//     nftId: 1234,
+//     like: 1234,
+//     ownerImage: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+//     owner: "내 계정",
+//     collectionName: "asdfasdf",
+//     sellPrice: { currency: "ETH", price: 0.013 },
+//     fee: { currency: "ETH", price: 0.0000013 }
+// }
 
 export const MyNftInformation = () => {
     return (
-        <MyNftInformationWrap>
-            <NFTInfomationImg />
-            <NftStandardInformation nftStandardInfo={data6} />
-            <NftStatus nftStatus={data4} />
-            <NftInfomation nftInfo={data5} />
-        </MyNftInformationWrap>
+        <>
+        </>
+        // <MyNftInformationWrap>
+        //     <NFTInfomationImg />
+        //     <NftStandardInformation sellPrice={data6.sellPrice} fee={data6.fee} nftName={data6.nftName} nftId={data6.nftId} like={data6.like} ownerImage={data6.ownerImage} owner={data6.owner} collectionName={data6.collectionName} />
+        //     <NftStatus nftStatus={data4} />
+        //     <NftInfomation nftInfo={data5} />
+        // </MyNftInformationWrap>
     )
 }

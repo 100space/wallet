@@ -44,7 +44,6 @@ export const Mypage = () => {
                 {<MyProfile />}
                 <form>
                     <MyProfileLabel>
-                        이미지 업로드
                         <FileUpload type="file" accept="image/*" />
                     </MyProfileLabel>
                     <UpLoadBtn type="submit" />

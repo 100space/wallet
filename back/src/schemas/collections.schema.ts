@@ -28,6 +28,8 @@ export class Collection {
 
   logo: string;
 
+  favorite: string[];
+
   createdAt: Date;
 
   updatedAt: Date;

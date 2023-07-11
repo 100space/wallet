@@ -1,5 +1,5 @@
 import { Category } from "@components/Category"
-import { SettingMenuTitle, SubWrap } from "./styled"
+import { SetBtnWrap, SettingMenuTitle, SubWrap } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
 import React from "react"
@@ -37,19 +37,20 @@ export const MenuListComp = () => {
                     )}
                 </SettingMenuTitle>
             ))}
-            <Btn
-                backgroundcolor="#f71e1e"
-                color="white"
-                fontSize="1.85rem"
-                width="80%"
-                height="5rem"
-                margin="2rem"
-                mode=""
-                onClick={() => handleButtonClick}
-                profile={"true"}
-            >
-                계정 지우기
-            </Btn>
+            <SetBtnWrap>
+                <Btn
+                    backgroundcolor="#f71e1e"
+                    color="white"
+                    fontSize="1.85rem"
+                    width="80%"
+                    height="5rem"
+                    margin="2rem"
+                    mode=""
+                    onClick={() => handleButtonClick}
+                    profile={"true"}>
+                    계정 지우기
+                </Btn>
+            </SetBtnWrap>
         </>
     )
 }

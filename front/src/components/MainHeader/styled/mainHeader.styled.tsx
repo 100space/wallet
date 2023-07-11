@@ -11,9 +11,14 @@ export const HeaderWrapper = styled.div`
 export const FunctionWrap = styled.div<ISizeProps>`
     position: relative;
     ${FlexSpaceBetween}
-    width: 20%;
+    width: 60%;
     height: 100%;
     & > svg {
+        font-size: 3.3rem;
+        margin: 0.3rem;
+        color: ${({ theme, mode }) => mode && theme[mode].text};
+    }
+    & > a > svg {
         font-size: 3.3rem;
         margin: 0.3rem;
         color: ${({ theme, mode }) => mode && theme[mode].text};
