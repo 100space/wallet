@@ -10,7 +10,7 @@ let checkInterval = setInterval(() => {
         window.addEventListener("message", async (event) => {
             if (event.source !== window) return
             let { type, params, method } = event.data
-            if (type === "req") {
+            if (type === "req" && window) {
                 const currentAccount = await window.abc.getAddress()
                 const { chainId } = await window.abc.provider.getNetwork()
                 const nonce = await window.abc.provider.getTransactionCount(currentAccount)
