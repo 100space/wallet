@@ -2,6 +2,8 @@ import { NftInfomation, NftStandardInformation } from "@common/Infomation"
 import { NftTxList } from "@common/List"
 import { NftStatus } from "@common/NftStatus"
 import { ErrorPage } from "@common/error"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
+import { LoadingHeader } from "@common/header/LoadingHeader"
 import { TransactionRow } from "@components/Transaction"
 import { LoadingBar } from "@components/loading"
 import { ImageForm, PlatWrap } from "@styled/index"
@@ -10,8 +12,8 @@ import { INFTInfomationByMarket, INFTStandard, INFTStauts, INftInfomation } from
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { ModeState } from "@utils/localStorage"
 import axios from "axios"
-import { useEffect, useState } from "react"
-import { useLocation } from "react-router"
+import { MouseEvent, useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router"
 import { useRecoilValue } from "recoil"
 
 const data3: ITransaction = {
@@ -28,6 +30,7 @@ const data3: ITransaction = {
 export const NFTInfoPage = () => {
     const { mode } = useRecoilValue(ModeState)
     const location = useLocation()
+    const navigate = useNavigate()
     const [nft, setNft] = useState({
         isLoading: false,
         isError: null as null | unknown,
@@ -52,16 +55,24 @@ export const NFTInfoPage = () => {
         return { ca: url[url.length - 2], tokenId: parseInt(url[url.length - 1]) }
     }
 
+    const clickBackBtnHandler = (e: MouseEvent) => {
+        navigate(`/market/collection/${createPath(location.pathname).ca}`)
+    }
+
     useEffect(() => {
         getNFT(createPath(location.pathname))
     }, [])
 
-
-
-    if (nft.isLoading || !nft.data) return <LoadingBar />
+    if (nft.isLoading || !nft.data) return (
+        <>
+            <LoadingHeader />
+            <LoadingBar />
+        </>
+    )
     if (nft.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
+            <BackBtnHeader content={nft.data.nftName} onClick={clickBackBtnHandler} />
             <PlatWrap mode={mode}>
                 <ImageForm
                     height={"75vw"}

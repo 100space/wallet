@@ -1,5 +1,5 @@
 import { ISelectedBtn, ISizeProps } from "@utils/interFace/styled.interface"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 export const ListHeaderWrap = styled.div<ISizeProps>`
     padding: 1rem 0;
@@ -83,3 +83,29 @@ export const BackBtnHeaderContent = styled.div<ISizeProps>`
     font-weight: 700;
     color: ${({ mode, theme }) => mode && theme[mode].text};
 `
+
+// const spotlight = keyframes`
+//   0% , 20% {
+//     opacity: 1;
+//     letter-spacing: 2px;
+//    }
+//  80% , 100% {
+//     opacity: 0;
+//     letter-spacing: 32px;
+//    }
+// `
+
+
+// export const LoadingHeaderContent = styled.div<ILoadingProps>`
+//     width: ${({ width }) => width || "100%"};
+//     position: absolute;
+//     left: 0;
+//     text-align: center;
+//     font-size: 3rem;
+//     font-weight: 700;
+//     color: ${({ mode, theme }) => mode && theme[mode].text};
+//     display: inline-block;
+//     letter-spacing: 0.2rem;
+//     box-sizing: border-box;
+//     animation: ${spotlight} 2s linear infinite alternate;
+// `

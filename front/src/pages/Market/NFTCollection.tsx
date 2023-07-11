@@ -1,6 +1,7 @@
 import { NFTCardList } from "@common/List"
 import { ErrorPage } from "@common/error"
 import { BackBtnHeader } from "@common/header/BackBtnHeader"
+import { LoadingHeader } from "@common/header/LoadingHeader"
 import { LoadingBar } from "@components/loading"
 import requestServer from "@utils/axios/requestServer"
 import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
@@ -45,7 +46,12 @@ export const NFTCollection = () => {
         getNFTs(createPath(location.pathname))
     }, [])
 
-    if (nfts.isLoading) return <LoadingBar />
+    if (nfts.isLoading) return (
+        <>
+            <LoadingHeader />
+            <LoadingBar />
+        </>
+    )
     if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
