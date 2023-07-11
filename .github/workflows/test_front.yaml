@@ -28,7 +28,7 @@ jobs:
               run: |
                   echo "${ENV}" > .env
               env:
-                  ENV: ${{ secrets.FRONT_ENV }}
+                  ENV: ${{ secrets.FRONT_TEST_ENV }}
 
             - name: Install Dependencies & Test
               run: |
