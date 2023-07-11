@@ -44,7 +44,6 @@ export class MarketService {
     try {
       const response = await this.marketRepository.findAll();
       return response.map((v) => {
-        // let thumbNail
         // this.listNftByCa({ ca: v.address }).then(data => console.log(data[0].image))
         // console.log(thumbNail)
         return {
