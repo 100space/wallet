@@ -3,7 +3,7 @@ name: Deploy to Back
 on:
     push:
         branches:
-            - main10
+            - main
         paths:
             - "back/**"
 
