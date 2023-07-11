@@ -42,7 +42,6 @@ export const NFTInfoPage = () => {
         try {
             const response = await requestServer.post('/market/info', { ca, tokenId })
             setNft(prev => ({ isLoading: false, isError: null, data: response.data }))
-            console.log(response.data)
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 setNft({ isLoading: false, isError: e.response, data: {} as INFTInfomationByMarket })
