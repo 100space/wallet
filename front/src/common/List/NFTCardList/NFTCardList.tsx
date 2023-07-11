@@ -6,15 +6,14 @@ import { MouseEvent } from "react"
 import { NFTByCollection } from "@utils/localStorage"
 import { useNavigate } from "react-router"
 
-export const NFTCardList = (props: { nftCards: INFTCardByMarket[], setNftCa?: SetterOrUpdater<string> }) => {
+export const NFTCardList = (props: { nftCards: INFTCardByMarket[]; setNftCa?: SetterOrUpdater<string> }) => {
     const [nftInfo, setNftInfo] = useRecoilState(NFTByCollection)
     const navigate = useNavigate()
-
 
     const clickNftCard = (e: MouseEvent, ca: string, tokenId: number) => {
         e.preventDefault()
         setNftInfo({ ca, tokenId })
-        navigate(`../../info/nft/${ca}/${tokenId}`)
+        navigate(`/info/nft/${ca}/${tokenId}`)
     }
 
     const nftCards = (nftCards: INFTCardByMarket[]) => {
