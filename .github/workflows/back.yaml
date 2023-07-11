@@ -24,6 +24,12 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v3
 
+            - name: Make Dot ENV
+              run: |
+                  echo "${ENV}" > .env
+              env:
+                  ENV: ${{ secrets.BACK_ENV }}
+
             - name: Install node lts
               run: |
                   export NVM_DIR="$HOME/.nvm"
@@ -38,12 +44,6 @@ jobs:
             - name: Build
               run: |
                   npm run build
-
-            - name: Make Dot ENV
-              run: |
-                  echo "${ENV}" > .env
-              env:
-                  ENV: ${{ secrets.BACK_ENV }}
 
             - name: ZIP
               run: |
