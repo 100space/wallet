@@ -17,7 +17,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { AxiosError } from 'axios';
 import { ListNftTransactionDto } from './dto/transaction-market.dto';
 import { NftInfoDto } from './dto/info-market.dto';
-import { ERC721_ABI } from 'src/abi/ERC721.ABI';
+import { ERC721_ABI } from '../abi/ERC721.ABI';
 
 @Injectable()
 export class MarketService {
