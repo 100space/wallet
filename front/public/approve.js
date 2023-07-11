@@ -1,9 +1,13 @@
 /* eslint-disable no-undef */
+// document.addEventListener("DomContentLoaded", () => {
+console.log("DOM fully loaded and parsed")
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(request) // request { message, type}
-    if (request.method === "eth_sendTransaction" || request.method === "eth_sendRawTransaction") {
-        console.log(request.params)
-        document.getElementById("transactionData").innerHTML = request.params[0].data
+    if ((request.tabId, request.from === "background")) {
+        console.log(request) // request { message, type}
+        if (request.method === "eth_sendTransaction" || request.method === "eth_sendRawTransaction") {
+            console.log(request.params)
+            document.getElementById("transactionData").innerHTML = request.params[0].data
+        }
     }
 })
 
@@ -25,3 +29,4 @@ document.getElementById("rejectButton").addEventListener("click", () => {
     console.log("Transaction rejected!")
     window.close()
 })
+// })
