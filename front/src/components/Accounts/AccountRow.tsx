@@ -34,6 +34,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
                 Alert.fire({ title: "현재 선택된 계정은 삭제할 수 없습니다.", icon: "error" })
             } else {
                 const index = accountList.findIndex((v: typeof accountState) => v.address === address)
+                console.log(index)
                 if (index === -1) return
                 const updateAccountList = [...accountList]
                 updateAccountList.splice(index, 1)

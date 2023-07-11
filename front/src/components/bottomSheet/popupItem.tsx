@@ -52,14 +52,6 @@ export const PopUpItem = ({ address }: { address?: string }) => {
         return await nftin.provider.getBalance(address)
     }
     const { symbol } = myInfo[myNetWork as keyof typeof myInfo].networks
-    // const data = myAccontList.map(async (v: typeof myAccontList) => {
-    //     const balanse = await getBlance(v.address)
-    //     return {
-    //         address: v.address,
-    //         asset: { amount: balanse, currency: symbol },
-    //         alias: v.alias,
-    //     }
-    // })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,7 +70,7 @@ export const PopUpItem = ({ address }: { address?: string }) => {
             }
         }
         fetchData()
-    }, [nftin])
+    }, [nftin, myAccountList])
 
     const itemSwitch = () => {
         if (contents.indexOf("0x") !== -1 && contents.length === 42) {
