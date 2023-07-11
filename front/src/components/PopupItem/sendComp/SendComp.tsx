@@ -43,7 +43,7 @@ export interface InputList {
     address?: string
 }
 
-export const  SendComp = (props: {
+export const SendComp = (props: {
     inputArray: InputList[]
     BtnContent?: string
     className?: string
@@ -103,8 +103,10 @@ export const  SendComp = (props: {
         } else if ((e.currentTarget as HTMLElement).className === "sendTransaction") {
             try {
                 const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
-                if ((e.currentTarget[0] as HTMLFormElement).value.length === 42)
+                if ((e.currentTarget[0] as HTMLFormElement).value.length !== 42) {
+                    console.log((e.currentTarget[0] as HTMLFormElement).value.length)
                     return Alert.fire({ title: "계좌를 확인해주세요.", icon: "error" })
+                }
                 const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
                 const tx = {
                     from: myAccounts.address,
