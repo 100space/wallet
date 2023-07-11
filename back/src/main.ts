@@ -8,7 +8,13 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: true,
+    origin: [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'https://nftin.com',
+      'https://www.nftin.com',
+      'https://front.nftin.com',
+    ],
     credentials: true,
   });
 
