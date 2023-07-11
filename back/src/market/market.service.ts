@@ -42,14 +42,19 @@ export class MarketService {
   async listCollections() {
     try {
       const response = await this.marketRepository.findAll();
-      console.log(response)
       return response.map((v) => {
+        // let thumbNail
+        // this.listNftByCa({ ca: v.address }).then(data => console.log(data[0].image))
+        // console.log(thumbNail)
         return {
           ca: v.address,
           name: v.name,
           nickname: v.symbol,
           description: v.description,
+          // thumbNail,
           image: v.logo,
+          like: v.favorite.length,
+          latest: v.createdAt,
           prices: [
             {
               currency: "KRW", price: Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000
@@ -70,7 +75,6 @@ export class MarketService {
   async listNftByCa({ ca }: ListNftByCaDto) {
     try {
       const result = await this.contract.getAllTokensInCollection(ca);
-      console.log(result)
 
       return await this.listNft({ result });
     } catch (error) {
@@ -221,7 +225,7 @@ export class MarketService {
           .map(async (v: string[]) => {
             const owner = v[1];
             const price = Number(v[4]) / this.PREFIX;
-            const isTrade = v[5];
+            const isTrade = v[6];
             const { name, descrition, image } = await this.getMetadata({
               metadata: v[5],
             });

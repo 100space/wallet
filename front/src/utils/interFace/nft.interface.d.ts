@@ -34,13 +34,13 @@ export interface INFTContents extends INFTInfo {
     prices: INFTPrices
 }
 
-export interface INFTCard extends INFTImg, INFTContents {}
+export interface INFTCard extends INFTImg, INFTContents { }
 
 export interface INFTRank {
     rank?: number
 }
 
-export interface INFTRow extends INFTCard, INFTRank {}
+export interface INFTRow extends INFTCard, INFTRank { }
 
 export interface IBlockChainNetWork {
     name: string
@@ -57,10 +57,6 @@ export interface INFTStauts {
     supply: IContent
     isTrade: IContent
     isSell: IContent
-    // blockchain: (string | string[])[]
-    // supply: (string | number)[]
-    // isTrade: (string | number)[]
-    // isSell: (string | number)[]
 }
 
 export interface INftInfomation {
@@ -69,21 +65,18 @@ export interface INftInfomation {
     ca: IContent
     tokenId: IContent
     tokenStandard: IContent
-    // owner: string[]
-    // blockchain: (string | string[])[]
-    // ca: string[]
-    // tokenId: (number | string)[]
-    // tokenStandard: string[]
+    supply: IContent
+    isTrade: IContent
 }
 
 export interface INFTStandardSubject {
     nftName: string
-    nftId: number
+    tokenId: number
     like: number
 }
 
-export interface INFTStandardOwner {
-    ownerImage: string
+export interface INFTStandardCreater {
+    creator: string
     owner: string
 }
 
@@ -91,9 +84,9 @@ export interface INFTStandardCollection {
     collectionName: string
 }
 
-export interface INFTStandard extends INFTStandardSubject, INFTStandardOwner, INFTStandardCollection {
+export interface INFTStandard extends INFTStandardSubject, INFTStandardCreater, INFTStandardCollection {
     sellPrice: INFTPrice
-    chargePrice: INFTPrice
+    fee: INFTPrice
 }
 
 export interface INFTCardByMarket {
@@ -116,10 +109,10 @@ export interface INFTNetworkByMarket {
 export interface INFTInfomationByMarket {
     ca: string
     tokenId: number
-    name: string
+    nftName: string
     price: INFTPrice
     fee: INFTPrice
-    creater: string
+    creator: string
     blockchain: INFTNetworkByMarket
     supply: number
     symbol: string
