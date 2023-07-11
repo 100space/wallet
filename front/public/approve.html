@@ -12,32 +12,6 @@
         <button id="approveButton">Approve</button>
         <button id="rejectButton">Reject</button>
 
-        <script src="./event.js">
-
-
-            chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-                if (message.type === "TRANSACTION_DATA") {
-                let element = document.getElementById("transactionData")
-                element.textContent = JSON.stringify(message.data, null, 2)
-                }
-            })
-
-            const sendMsg = (type, data) => {
-                chrome.runtime.sendMessage({ type, data }, (response) => {
-                    console.log(response)
-                })
-            }
-
-            document.getElementById("approveButton").addEventListener("click", () => {
-                let transactionParams = window.transactionParams
-                sendMsg("signAndSendTransaction", transactionParams)
-                console.log("Transaction approved!")
-            })
-
-            document.getElementById("rejectButton").addEventListener("click", () => {
-                sendMsg("transactionRejected", {})
-                console.log("Transaction rejected!")
-            })
-        </script>
+        <script src="./approve.js"></script>
     </body>
 </html>

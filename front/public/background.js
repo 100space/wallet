@@ -18,6 +18,32 @@ let checkInterval = setInterval(() => {
             console.log("event에서 보내는 메시지 수신:", message)
             const { type, method, params } = message
 
+            if (type === "req" && (method === "eth_sendTransaction" || method === "eth_sendRawTransaction")) {
+                console.log("팝업 뛰울 때 !!:", type, method, params)
+                chrome.windows.create(
+                    {
+                        url: chrome.runtime.getURL("approve.html"),
+                        type: "popup",
+                        width: 400,
+                        height: 750,
+                    },
+                    (window) => {
+                        const createdTabId = window.tabs[0].id
+                        const updateListener = (tabId, changeInfo, tab) => {
+                            // 우리가 생성한 탭이 완전히 로드된 상태인 경우에만 메시지를 보냅니다.
+                            if (tabId === createdTabId && changeInfo.status === "complete") {
+                                chrome.tabs.sendMessage(tabId, { type: method, params })
+
+                                // 메시지를 보낸 후에는 리스너를 제거합니다.
+                                chrome.tabs.onUpdated.removeListener(updateListener)
+                            }
+                        }
+
+                        // 탭의 상태가 업데이트 될 때마다 updateListener 함수를 호출하도록 리스너를 등록합니다.
+                        chrome.tabs.onUpdated.addListener(updateListener)
+                    }
+                )
+            }
             window.postMessage({ type, method, params }, "*")
 
             window.addEventListener("message", (event) => {

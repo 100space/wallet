@@ -3,9 +3,6 @@ console.log("external.js has been loaded")
 let checkInterval = setInterval(() => {
     if (window.abc) {
         console.log("Ethereum object is available!")
-        chrome.action.setPopup({
-            popup: "popup.html",
-        })
         clearInterval(checkInterval) // 지갑이 준비되었으므로 체크를 멈춥니다.
         console.log(window.abc, "window.abc")
 
@@ -13,7 +10,7 @@ let checkInterval = setInterval(() => {
         window.addEventListener("message", async (event) => {
             if (event.source !== window) return
             let { type, params, method } = event.data
-            if (type === "req") {
+            if (type === "req" && window) {
                 const currentAccount = await window.abc.getAddress()
                 const { chainId } = await window.abc.provider.getNetwork()
                 const nonce = await window.abc.provider.getTransactionCount(currentAccount)
