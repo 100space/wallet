@@ -11,3 +11,11 @@ export const SubWrap = styled.div<ISizeProps>`
     font-size: 2.5rem;
     color: #fff;
 `
+
+export const SetBtnWrap = styled.div`
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`

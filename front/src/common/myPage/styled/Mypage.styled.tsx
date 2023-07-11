@@ -22,7 +22,10 @@ export const MypageWrapper = styled.div<ISizeProps>`
 `
 
 export const FileUpload = styled.input`
-    display: none;
+    position: relative;
+    bottom: 6rem;
+    left: 4rem;
+    z-index: 1;
 `
 
 
@@ -33,16 +36,18 @@ export const MyProfile = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
     position: relative;
-    /* top: 2.7rem; */
-    background-color: #fff;
+    top: 2.7rem;
+    z-index: 1;
+    background-color: #818181;
 `
 
 export const MyProfileLabel = styled.label`
     cursor: pointer;
     font-size: 1.7rem;
     color: #000000;
+    position: relative;
+    bottom: 2rem;
 `
 
 export const MyNickName = styled.input`
@@ -54,7 +59,7 @@ export const MyNickName = styled.input`
     font-size: 2rem;
     color: #000000;
     position: relative;
-    /* bottom: 5rem; */
+    bottom: 12rem;
     border: none;
     &>span {
         background-color: #e3e2e2;
@@ -71,5 +76,6 @@ export const TotalSupplyWrap = styled.div`
     margin-bottom: 6px;
     bottom: 3rem;
     position: relative;
+    bottom: 6rem;
 `
 
