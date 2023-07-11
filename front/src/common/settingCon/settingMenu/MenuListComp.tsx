@@ -26,7 +26,7 @@ export const MenuListComp = () => {
         <>
             {MenuList.map((menu, index) => (
                 <SettingMenuTitle key={index} mode={modeState.mode}>
-                    <SubWrap mode={modeState} style={{ textDecorationLine: "underline" }}>
+                    <SubWrap mode={modeState.mode} style={{ textDecorationLine: "underline" }}>
                         {menu.MenuSub}
                     </SubWrap>
                     <Category category={menu.content} onClick={(e: MouseEvent) => handleButtonClick(e)} />

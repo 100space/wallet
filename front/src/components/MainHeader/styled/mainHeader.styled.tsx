@@ -9,8 +9,9 @@ export const HeaderWrapper = styled.div`
     padding: 1rem;
 `
 export const FunctionWrap = styled.div<ISizeProps>`
-    position: relative;
+    /* position: relative; */
     ${FlexSpaceBetween}
+    max-width: 14rem;
     width: 60%;
     height: 100%;
     & > svg {

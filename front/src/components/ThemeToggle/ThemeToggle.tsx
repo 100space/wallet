@@ -32,17 +32,21 @@ return (
             fontSize: "3rem",
             position: "relative",
             top: "0.2rem",
-            }}
+            margin: "0.3rem",
+            marginRight: "0.7rem"
+        }}
         />
         ) : (
-        <Icon
+            <Icon
             onClick={toggleTheme}
             icon="ph:sun"
             style={{
-            color: "#fff",
-            fontSize: "3rem",
-            position: "relative",
-            top: "0.2rem",
+                color: "#fff",
+                fontSize: "3rem",
+                position: "relative",
+                top: "0.2rem",
+                margin: "0.3rem",
+                marginRight: "0.7rem"
             }}
         />
         )}

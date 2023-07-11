@@ -61,7 +61,8 @@ export const TextComp = styled.div<TextProps>`
         padding: 0.7rem 1.4rem;
         border-radius: 1rem;
         font-size: 1.2rem !important;
-        background-color: #ffb71d;
+        background-color: ${({ theme, mode }) => mode && theme[mode].accountBg};
+        color: ${({ color, theme, mode }) => color || (mode && theme[mode].sendText)} 
     }
 `
 

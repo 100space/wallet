@@ -13,12 +13,12 @@ export const CategoryWrap = styled.div<ISizeProps>`
     &:active,
     &:active > div {
         color: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol};
-        background-color: ${({ mode, theme }) => mode && theme[mode].point100};
+        background-color: ${({ mode, theme }) => mode && theme[mode].categoryHover};
     }
 
     & > div {
         margin: 0 2rem;
-        font-weight: 700;
+        font-weight: 400;
         font-size: ${({ height }) => height};
         line-height: ${({ height }) => height};
         color: ${({ mode, theme }) => mode && theme[mode].text};
@@ -32,9 +32,5 @@ export const CategoryArrow = styled.div<ISizeProps>`
     cursor: pointer;
     padding: 1rem;
     border-radius: 50%;
-
-    &:hover {
-        color: ${({ mode, theme }) => mode && theme[mode].buttonBg};
-        background-color: ${({ mode, theme }) => mode && theme[mode].text};
-    }
+    color: ${({ mode, theme }) => mode && theme[mode].buttonBg};
 `

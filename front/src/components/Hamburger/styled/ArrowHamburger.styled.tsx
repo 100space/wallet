@@ -32,5 +32,5 @@ export const ArrowHamburgerStick = styled.span<ISizeProps>`
     width: 3rem;
     height: 0.25rem;
     border-radius: 0.125rem;
-    background-color: white;
+    background-color: ${({ theme, mode }) => mode && theme[mode].text};
 `

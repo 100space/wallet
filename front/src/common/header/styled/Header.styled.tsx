@@ -27,8 +27,8 @@ export const ListHeaderWrap = styled.div<ISizeProps>`
 `
 export const AssetsListHeaderTab = styled.div<ISelectedBtn>`
     margin-right: 1rem;
-    color: ${({ mode, theme, selected }) => (selected && "#47a247") || (mode && theme[mode].text)} !important;
-    ${({ mode, theme, selected }) => (selected && "border-bottom: 0.2rem solid #47a247") || ""};
+    color: ${({ mode, theme, selected }) => (selected && "#ff1915") || (mode && theme[mode].text)} !important;
+    ${({ mode, theme, selected }) => (selected && "border-bottom: 0.2rem solid #ff1915") || ""};
 `
 
 export const AssetsListHeaderWrap = styled.div<ISizeProps>`

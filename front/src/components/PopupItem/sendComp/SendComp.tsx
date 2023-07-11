@@ -43,7 +43,7 @@ export interface InputList {
     address?: string
 }
 
-export const SendComp = (props: {
+export const  SendComp = (props: {
     inputArray: InputList[]
     BtnContent?: string
     className?: string
@@ -158,6 +158,8 @@ export const SendComp = (props: {
                     margin="3rem auto 0 "
                     content={props.BtnContent}
                     fontSize="1.6rem"
+                    backgroundcolor="#1d6683"
+                    color="#fff"
                 ></Button>
             )}
         </form>

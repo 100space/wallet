@@ -2,7 +2,6 @@ import { ISizeProps, ISelectedBtn } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const FilterWrap = styled.div<ISizeProps>`
-    padding: 0.5rem 3rem;
     display: flex;
     margin-bottom: 1rem;
     justify-content: space-between;

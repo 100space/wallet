@@ -47,7 +47,7 @@ export const CoinCardHeaderSymbol = styled.div<ISizeProps>`
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "1.6rem"};
     /* background-color: ${({ theme, mode }) => mode && theme[mode]}; */
-    color: ${({ theme, mode }) => mode && theme[mode].text};
+    color: ${({ theme, mode }) => mode && theme[mode].coinCardHeader};
     font-size: 1.6rem;
     font-style: italic;
     font-weight: 700;

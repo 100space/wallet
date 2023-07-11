@@ -21,6 +21,7 @@ export const TotalSupply = ({ profile }: ITotalSupply) => {
     const { mode } = useRecoilValue(ModeState)
     const { address } = useRecoilValue(MyAccounts)
     const myTokens = useRecoilValue(MyTokens)
+    const [modeState, setChange] = useGetMode()
 
     let totalBalance = 0
     const balance = myTokens.forEach((v: any) => {
@@ -29,7 +30,7 @@ export const TotalSupply = ({ profile }: ITotalSupply) => {
 
     return (
         <TotalWrap mode={mode} profile={"true"}>
-            <TextComp fontSize={profile === "true" ? "2.5rem" : "3rem"} position="between" width="100%">
+            <TextComp mode={modeState.mode} fontSize={profile === "true" ? "2.5rem" : "3rem"} position="between" width="100%">
                 총 자산
                 <CopyToClipboard
                     text={address}
@@ -38,7 +39,7 @@ export const TotalSupply = ({ profile }: ITotalSupply) => {
                     <span className="account">{address.substring(0, 8) + "..." + address.substring(36, 42)}</span>
                 </CopyToClipboard>
             </TextComp>
-            <TextComp fontSize={profile === "true" ? "2.2rem" : "2.4rem"} position="between" width="100%">
+            <TextComp mode={modeState.mode} fontSize={profile === "true" ? "2.2rem" : "2.4rem"} position="between" width="100%">
                 <span>KRW</span>
                 <span>{KRW(Number(totalBalance.toFixed(3)))}</span>
             </TextComp>

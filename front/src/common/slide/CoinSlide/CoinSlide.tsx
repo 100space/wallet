@@ -44,7 +44,7 @@ export const CoinSlide = (props: {
     return (
         <CoinSlideWrap mode={mode}>
             <CoinSlideSubject mode={mode}>추천 코인</CoinSlideSubject>
-            <CoinSlider>{coinCards(props.coinDatas)}</CoinSlider>
+            <CoinSlider mode={mode}>{coinCards(props.coinDatas)}</CoinSlider>
         </CoinSlideWrap>
     )
 }

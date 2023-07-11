@@ -1,3 +1,4 @@
+import { useGetMode } from "@hooks/useMode"
 import { BorderBottom } from "@styled/index"
 import { ICoinName } from "@utils/interFace/coin.interface"
 import { ISizeProps } from "@utils/interFace/styled.interface"
@@ -30,7 +31,7 @@ export const CoinInfoHeaderImg = styled.img<ISizeProps>`
 export const CoinInfoHeaderName = styled.div<ISizeProps>`
     min-width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
-    color: ${({ theme, mode, color }) => (mode && theme[mode].text) || "#fff"};
+    color: ${({ theme, mode, color }) => (mode && theme[mode].text)};
     font-size: 1.6rem;
     font-weight: 500;
 `
@@ -44,12 +45,13 @@ export const CoinInfoHedaerSymbol = styled.div<ISizeProps>`
 `
 
 export const CoinInforHeader = ({ image, name, symbol }: ICoinName) => {
+    const [modeState, setChange] = useGetMode()
     return (
         <CoinInfoHeaderWrap>
             <CoinInfoHeaderImgWrap>
                 <CoinInfoHeaderImg src={image} />
             </CoinInfoHeaderImgWrap>
-            <CoinInfoHeaderName width={"3.2rem"}>{name}</CoinInfoHeaderName>
+            <CoinInfoHeaderName mode={modeState.mode} width={"3.2rem"}>{name}</CoinInfoHeaderName>
             <CoinInfoHedaerSymbol width={"4.8rem"}>{symbol}</CoinInfoHedaerSymbol>
         </CoinInfoHeaderWrap>
     )
