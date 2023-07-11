@@ -18,6 +18,11 @@ export const FunctionWrap = styled.div<ISizeProps>`
         margin: 0.3rem;
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
+    & > a > svg {
+        font-size: 3.3rem;
+        margin: 0.3rem;
+        color: ${({ theme, mode }) => mode && theme[mode].text};
+    }
 `
 
 export const HeaderSubJect = styled.div<TextProps>`

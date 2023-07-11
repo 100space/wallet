@@ -1,34 +1,34 @@
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { ToggleWrapper } from "./styled"
 import { Icon } from '@iconify/react';
 import { useGetMode } from "@hooks/useMode";
 import { relative } from "path";
 import { useCallback, useState } from "react";
-import { useTheme } from "@tanstack/react-query-devtools/build/lib/theme";
-
+import styled, { ThemeProvider } from "styled-components"
+import { ModeState } from "@utils/localStorage";
+import { MouseEvent } from "react";
 
 export const ThemeToggle = () => {
-const [mode, setMode] = useGetMode();
+const [mode, setMode] = useRecoilState(ModeState);
 
-const toggleTheme = useCallback(() => {
-    if (mode === "light") {
-    setMode("dark");
+const toggleTheme = (e:MouseEvent) => {
+    if (mode.mode === "lightMode") {
+    setMode({...mode, mode:"darkMode"});
     } else {
-    setMode("light");
+    setMode({...mode, mode:"lightMode"});
     }
-}, [mode, setMode]);
+};
 
-console.log(toggleTheme())
 
 return (
     <>
     <ToggleWrapper>
-        {mode === "light" ? (
+        {mode.mode === "lightMode"? (
         <Icon
-            onClick={() => toggleTheme()}
+            onClick={toggleTheme}
             icon="ph:moon"
             style={{
-            color: "#fff",
+            color: "black",
             fontSize: "3rem",
             position: "relative",
             top: "0.2rem",
@@ -36,7 +36,7 @@ return (
         />
         ) : (
         <Icon
-            onClick={() => toggleTheme()}
+            onClick={toggleTheme}
             icon="ph:sun"
             style={{
             color: "#fff",
