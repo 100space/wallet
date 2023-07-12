@@ -1,25 +1,48 @@
 import { Filter } from "@common/Filter"
-import { NFTCardList } from "@common/List"
-import { INFTCard } from "@utils/interFace/nft.interface"
+import { NFTCollectionList } from "@common/List"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
+import requestServer from "@utils/axios/requestServer"
+import { INFTRow } from "@utils/interFace/nft.interface"
 import { SelectedCollection } from "@utils/localStorage"
+import axios from "axios"
+import { MouseEvent, useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 
-// const data: INFTCard = {
-//     name: "NONGDAMGOM",
-//     image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-//     owner: "Char1ey",
-//     prices: [
-//         { currency: "KRW", price: 4500 },
-//         { currency: "ETH", price: 0.0005 },
-//     ],
-// }
+
 export const NewPage = () => {
     const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
+    const navigate = useNavigate()
+    const [nfts, setNfts] = useState({
+        isLoading: false,
+        isError: null as null | unknown,
+        data: [] as INFTRow[],
+    })
+
+    const getNFTs = async () => {
+        setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
+        try {
+            const response = await requestServer.get("/market")
+            setNfts((prev) => ({ isLoading: false, isError: null, data: [...response.data] }))
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                setNfts({ isLoading: false, isError: e.response, data: [] })
+            }
+        }
+    }
+
+    const handleBackBtn = (e: MouseEvent) => {
+        navigate("/market")
+    }
+
+    useEffect(() => {
+        getNFTs()
+    }, [])
 
     return (
         <>
-            <Filter filterList={["최신순", "찜목록", "내 컬렉션"]} />
-            {/* <NFTCardList nftCards={[data, data, data, data, data, data, data]} setNftCa={setNftCa} /> */}
+            <BackBtnHeader content={"New Collections"} onClick={handleBackBtn} />
+            <NFTCollectionList nftCards={nfts.data} />
         </>
     )
 }

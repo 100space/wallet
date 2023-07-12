@@ -32,6 +32,7 @@ export interface INFTImg extends ISizeProps {
 
 export interface INFTContents extends INFTInfo {
     prices: INFTPrices
+    collection?: boolean
 }
 
 export interface INFTCard extends INFTImg, INFTContents { }
