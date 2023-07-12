@@ -12,10 +12,11 @@ export const NFTCollectionList = (props: { nftCards: INFTRow[] }) => {
     const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
     const clickNftCard = (e: MouseEvent, ca: string | undefined, name: string | undefined) => {
+        console.log(1)
         if (ca === undefined) return
         if (name === undefined) return
         setNftCa({ ca, name })
-        navigate(`collection/${ca}`)
+        navigate(`/market/collection/${ca}`)
     }
 
     const nftCards = (nftCards: INFTRow[]) => {

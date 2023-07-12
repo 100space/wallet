@@ -6,6 +6,7 @@ import { MouseEvent, memo } from "react"
 import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
 
 export const NftCardByCollection = memo(
     (props: { nftInfo: INFTRow, className: string, onClick: (e: MouseEvent, ca: string | undefined, name: string | undefined) => void }) => {
@@ -24,15 +25,17 @@ export const NftCardByCollection = memo(
         }
 
         return (
-            <NftCardWrap
-                color={getRandomColor()}
-                width={"100%"}
-                height={"26rem"}
-                onClick={(e) => props.onClick(e, props.nftInfo.ca, props.nftInfo.name)}
-            >
-                <NftCardImg width={"90%"} height={"60%"} image={props.nftInfo.image} className={props.className} />
-                <NftContents name={props.nftInfo.name} owner={props.nftInfo.ca} prices={props.nftInfo.prices} collection={true} />
-            </NftCardWrap>
+            <>
+                <NftCardWrap
+                    color={getRandomColor()}
+                    width={"100%"}
+                    height={"26rem"}
+                    onClick={(e) => props.onClick(e, props.nftInfo.ca, props.nftInfo.name)}
+                >
+                    <NftCardImg width={"90%"} height={"60%"} image={props.nftInfo.image} className={props.className} />
+                    <NftContents name={props.nftInfo.name} owner={props.nftInfo.ca} prices={props.nftInfo.prices} collection={true} />
+                </NftCardWrap>
+            </>
         )
     }
 )
