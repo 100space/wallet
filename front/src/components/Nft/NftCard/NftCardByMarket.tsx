@@ -3,11 +3,8 @@ import { NftCardImg } from "./NftCardImg"
 import { NftContents } from "./NftContents"
 import { NftCardWrap } from "./styled"
 import { MouseEvent, memo } from "react"
-import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
-import { LoadingHeader } from "@common/header/LoadingHeader"
-import { LoadingBar } from "@components/loading"
 
 export const NftCardByMarket = memo(
     (props: {
@@ -22,7 +19,7 @@ export const NftCardByMarket = memo(
             let letters = mode === "darkMode" ? darkLetters : lightLetters
             let color = "#"
 
-            for (var i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
                 color += letters[Math.floor(Math.random() * 10)]
             }
             return color
