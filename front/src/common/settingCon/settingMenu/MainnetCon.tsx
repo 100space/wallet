@@ -3,43 +3,56 @@ import { SendComp, mainList } from "@components/PopupItem/sendComp/index"
 import { MainnetBtnWrap, MainnetConTitleWrap, MainnetConWrap } from "./styled/MainnetCon.styled"
 import { Btn } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
+import { useLocation, useNavigate } from "react-router"
+import { useRecoilState } from "recoil"
+import { MyInfo, MyNetwork } from "@utils/localStorage"
+import { net } from "web3"
+import { Alert } from "@components/Alert/alert"
 
 export const MainnetCon = () => {
     const [modeState, setChange] = useGetMode()
-    const handleButtonClick = (e: MouseEvent) => {}
+    const [network, setNetwork] = useRecoilState(MyNetwork)
+    const [info, setInfo] = useRecoilState(MyInfo)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const path = location.pathname.split("/")
+    const currentPath = path[path.length - 1]
+
+    const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const network = (e.currentTarget[0] as HTMLInputElement).value
+        const rpc = (e.currentTarget[1] as HTMLInputElement).value
+        const chainId = (e.currentTarget[2] as HTMLInputElement).value
+        const symbol = (e.currentTarget[3] as HTMLInputElement).value
+        console.log(network, rpc, chainId, symbol)
+        if (network === null || rpc === null || chainId === null || symbol === null) {
+            Alert.fire({ text: "빈칸을 채워주세요", icon: "error" })
+        } else {
+            if (
+                typeof network !== "string" ||
+                typeof rpc !== "string" ||
+                typeof chainId !== "string" ||
+                typeof symbol !== "string"
+            ) {
+                Alert.fire({ text: "잘못된 형식입니다", icon: "error" })
+            }
+            const newInfo = {
+                [network]: {
+                    networks: { rpc, chainId, symbol },
+                },
+            }
+            if (!info.hasOwnProperty(network)) {
+                setInfo({ ...info, ...newInfo })
+            }
+            setNetwork(network)
+            navigate("/")
+        }
+    }
     return (
         <>
-            <MainnetConTitleWrap mode={modeState.mode}>Ethereum</MainnetConTitleWrap>
             <MainnetConWrap mode={modeState.mode}>
-                <SendComp inputArray={mainList} settings={true} />
-                <MainnetBtnWrap>
-                    <Btn
-                        backgroundcolor="#00d12d"
-                        color="white"
-                        fontSize="1.5rem"
-                        width="10rem"
-                        height="4rem"
-                        margin=""
-                        mode=""
-                        onClick={() => handleButtonClick}
-                        profile={"true"}
-                    >
-                        승인
-                    </Btn>
-                    <Btn
-                        backgroundcolor="white"
-                        color="#455bff"
-                        fontSize="1.5rem"
-                        width="10rem"
-                        height="4rem"
-                        margin=""
-                        mode=""
-                        onClick={() => handleButtonClick}
-                        profile={"true"}
-                    >
-                        취소
-                    </Btn>
-                </MainnetBtnWrap>
+                <MainnetConTitleWrap mode={modeState.mode}>{currentPath}</MainnetConTitleWrap>
+                <SendComp inputArray={mainList} settings={true} handler={handlerSubmit} />
             </MainnetConWrap>
         </>
     )

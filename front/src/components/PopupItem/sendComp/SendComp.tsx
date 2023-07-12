@@ -1,15 +1,16 @@
-import { Button } from "@components/Button"
+import { Btn, Button } from "@components/Button"
 import { InputComp } from "@components/input"
 import { IsPopUp, ModeState, MyAccounts, MyInfo, MyNetwork } from "@utils/localStorage"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { SendCompWrapper, SendCompWrap } from "@components/PopupItem/sendComp/styled/index"
 import { useGetMode } from "@hooks/useMode"
-import NFTin from "@core/index"
 import { ethers } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
-import { useQuery } from "@tanstack/react-query"
 import requestServer from "@utils/axios/requestServer"
 import { Alert } from "@components/Alert/alert"
+import { InputList } from "@utils/interFace/core"
+import { useLocation, useNavigate } from "react-router"
+import { MainnetBtnWrap } from "@common/settingCon/settingMenu/styled/MainnetCon.styled"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
@@ -28,20 +29,11 @@ export const nftGetList = [
 ]
 
 export const mainList = [
-    { subject: "네트워크 이름", content: "" },
-    { subject: "네트워크 URL", content: "" },
-    { subject: "체인 ID", content: "" },
-    { subject: "통화 기호", content: "" },
+    { subject: "네트워크 이름", content: "", value: "1" },
+    { subject: "네트워크 URL", content: "", value: "2" },
+    { subject: "체인 ID", content: "", value: "3" },
+    { subject: "통화 기호", content: "", value: "4" },
 ]
-
-export interface InputList {
-    subject: string
-    content: string
-    tokenTitle?: string
-    nftTitle?: string
-    className?: string
-    address?: string
-}
 
 export const SendComp = (props: {
     inputArray: InputList[]
@@ -49,6 +41,7 @@ export const SendComp = (props: {
     className?: string
     address?: string
     settings?: boolean
+    handler?: (e: React.FormEvent<HTMLFormElement>) => void
 }) => {
     const { mode } = useRecoilValue(ModeState)
     const popupReset = useResetRecoilState(IsPopUp)
@@ -58,7 +51,9 @@ export const SendComp = (props: {
     const myAccounts = useRecoilValue(MyAccounts)
     const network = useRecoilValue(MyNetwork)
     const nftin = useNFTin()
-
+    const pathname = useLocation().pathname
+    const navigator = useNavigate()
+    const path = pathname.includes("network") ? pathname.split("/")[3].toLowerCase() : null
     const handlerWeb3Fn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if ((e.currentTarget as HTMLElement).className === "getToken") {
@@ -140,6 +135,24 @@ export const SendComp = (props: {
                         fontSize={1.4}
                         className={v.className}
                     />
+                ) : v.value && path ? (
+                    <InputComp
+                        value={
+                            myInfo[path]
+                                ? v.value === "1"
+                                    ? path
+                                    : v.value === "2"
+                                    ? myInfo[path].networks.rpc
+                                    : v.value === "3"
+                                    ? myInfo[path].networks.chainId
+                                    : myInfo[path].networks.symbol
+                                : ""
+                        }
+                        height={4}
+                        type=""
+                        fontSize={1.4}
+                        className={v.className}
+                    />
                 ) : (
                     <InputComp placeholder={v.content} height={4} type="" fontSize={1.4} className={v.className} />
                 )}
@@ -148,10 +161,38 @@ export const SendComp = (props: {
     }
 
     return (
-        <form onSubmit={handlerWeb3Fn} className={props.className}>
+        <form onSubmit={props.handler ? props.handler : handlerWeb3Fn} className={props.className}>
             {inputList(props.inputArray)}
             {props.settings ? (
-                <></>
+                <>
+                    <MainnetBtnWrap>
+                        <Btn
+                            backgroundcolor="#00d12d"
+                            color="white"
+                            fontSize="1.5rem"
+                            width="10rem"
+                            height="4rem"
+                            margin=""
+                            mode=""
+                            profile={"true"}
+                        >
+                            승인
+                        </Btn>
+                        <Btn
+                            backgroundcolor="white"
+                            color="#455bff"
+                            fontSize="1.5rem"
+                            width="10rem"
+                            height="4rem"
+                            margin=""
+                            mode=""
+                            onClick={() => navigator("/setting")}
+                            profile={"true"}
+                        >
+                            취소
+                        </Btn>
+                    </MainnetBtnWrap>
+                </>
             ) : (
                 <Button
                     width={"70%"}

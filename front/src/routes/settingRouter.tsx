@@ -7,7 +7,7 @@ export const SettingRouter = () => {
         <Routes>
             <Route path="" element={<SettingPage />}></Route>
             <Route path="network" element={<NetWorkPage />}></Route>
-            <Route path="network/ethereum" element={<MainnetCon />}></Route>
+            <Route path="network/:network" element={<MainnetCon />}></Route>
         </Routes>
     )
 }
