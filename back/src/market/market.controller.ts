@@ -14,6 +14,7 @@ import { NftInfoDto } from './dto/info-market.dto';
 import { ListCollectionsResponseDto } from './dto/listCollections-response.dto';
 import { IsNFT } from '../decorator/NFT';
 import { NetworkValidationInterceptor } from '../interceptor/NetworkValid';
+import { AddNftDto } from './dto/add-market.dto';
 
 @ApiTags('Market')
 @Controller('market')
@@ -80,7 +81,14 @@ export class MarketController {
   }
 
   @Put()
-  async addNft(@IsNFT() { tokenStandard }, @Body() { eoa, ca, tokenId }) {
+  @ApiOperation({
+    summary: 'CA와 TokenId에 해당하는 NFT를 추가합니다.',
+    description: 'CA와 TokenId에 해당하는 NFT를 추가합니다.',
+  })
+  async addNft(
+    @IsNFT() { tokenStandard }: { tokenStandard: string },
+    @Body() { eoa, ca, tokenId }: AddNftDto,
+  ) {
     return await this.marketService.addNft({
       tokenStandard,
       eoa,

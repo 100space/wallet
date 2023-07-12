@@ -53,9 +53,9 @@ PUT {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "eoa": "0xE830877b03b0D102Df4638bcb5736397dFef5c83",
-    "ca": "0xF1730c7F0cBd2491a7D632c9968B39cD0C71aF4B",
-    "tokenId": 16891068270484
+    "eoa": "0x7435fc2f2782218210200188A3Cccc96Fb98A966",
+    "ca": "0x7232094AFC469C7EAd50E3dc595b0A2726FE51A6",
+    "tokenId": "721"
 }
 
 # MyNFT
@@ -81,10 +81,12 @@ PUT {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "eoa": "0x1708e4e5a029339795ebb40957773b21b1af16e9",
-    "ca": "0x81cfBE7B73b27bfe95ba2c44Ef373AAFac6dBa3a",
-    "tokenId": 11
+    "eoa": "0xfAD153d059F9dA994F1688b3333f2Fb415682a14",
+    "ca": "0x2953399124F0cBB46d2CbACD8A89cF0599974963",
+    "tokenId": "113448061644446547694365664957524378526944481393750401766106162405003189288961"
 }
+
+# https://testnets-api.opensea.io/api/v2/metadata/mumbai/0x2953399124F0cBB46d2CbACD8A89cF0599974963/0x{id}
 
 # DeMask Creator
 # 0x519d124e4F2E536f36Ce9f54ADd6CD3022C16c70

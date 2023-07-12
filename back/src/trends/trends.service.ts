@@ -127,6 +127,7 @@ export class TrendsService {
   }
 
   async getTokenData({ symbol }): Promise<ICoinInfo> {
+    if (symbol.toLowerCase() === 'agor') symbol = 'arb';
     return await this.trendRepository.findOne(symbol);
   }
 
