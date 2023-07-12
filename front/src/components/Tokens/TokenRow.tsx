@@ -12,7 +12,6 @@ import { TokenInfoWrap } from "./styled/TokenRow.styled"
 
 export const TokenRow = (props: { token: ITokenRow }) => {
     const [modeState, setModeState] = useGetMode()
-    console.log(props.token.assets[0])
     return (
         <AccountRowWrap mode={modeState.mode} width={"100%"} height={"7rem"}>
             <AccountRowImgWrap width={"15%"} height={"100%"}>
@@ -37,8 +36,13 @@ export const TokenRow = (props: { token: ITokenRow }) => {
                 </AccountAssets>
             </TokenInfoWrap>
 
-            <Icon icon={"ep:arrow-up-bold"} rotate={1} width={"5%"} height={"100%"} 
-            style={{color: modeState.mode === "darkMode" ? "#ffffff" : "#534f4f" }} />
+            <Icon
+                icon={"ep:arrow-up-bold"}
+                rotate={1}
+                width={"5%"}
+                height={"100%"}
+                style={{ color: modeState.mode === "darkMode" ? "#ffffff" : "#534f4f" }}
+            />
         </AccountRowWrap>
     )
 }

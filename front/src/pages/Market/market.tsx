@@ -1,4 +1,3 @@
-
 import { NFTRowList } from "@common/List"
 import { ErrorPage } from "@common/error"
 import { NFTSlide } from "@common/slide/NFTSlide"
@@ -14,36 +13,24 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 
-const data3: ITransaction = {
-    state: "sender",
-    opponent: "0x00000000000000000000000000000000000000000000000000000",
-    timestamp: "7월21일",
-    amounts: [
-        { currency: "KRW", amount: 4500 },
-        { currency: "ETH", amount: 0.0005 },
-    ],
-}
-
 export const MarketPage = () => {
     const navigator = useNavigate()
     const [nfts, setNfts] = useState({
         isLoading: false,
         isError: null as null | unknown,
-        data: [] as INFTCard[]
+        data: [] as INFTCard[],
     })
     const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
-
     const getNFTs = async () => {
-        setNfts(prev => ({ isLoading: true, isError: null, data: [...prev.data] }))
+        setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
-            const response = await requestServer.get('/market')
-            setNfts(prev => ({ isLoading: false, isError: null, data: [...response.data] }))
+            const response = await requestServer.get("/market")
+            setNfts((prev) => ({ isLoading: false, isError: null, data: [...response.data] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 setNfts({ isLoading: false, isError: e.response, data: [] })
             }
-
         }
     }
 
