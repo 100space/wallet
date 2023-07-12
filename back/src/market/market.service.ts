@@ -42,9 +42,9 @@ export class MarketService {
     this.changeBasicCurrency({ symbol: this.currency });
   }
 
-  async listCollections() {
+  async listCollections(page: number) {
     try {
-      const response = await this.marketRepository.findAll();
+      const response = await this.marketRepository.findAll(page);
       return response.map((v) => {
         // this.listNftByCa({ ca: v.address }).then(data => console.log(data[0].image))
         return {

@@ -12,12 +12,15 @@ export class MarketRepository {
     @InjectModel(Event.name, 'market') private eventModel: Model<Event>,
   ) { }
 
-  async findAll() {
+  async findAll(page: number) {
     return await this.collectionModel
       .find(
         {},
         { _id: 0, address: 1, name: 1, symbol: 1, description: 1, logo: 1, floorPrice: 1, favorite: 1, createdAt: 1 },
-      ).sort({ updatedAt: -1 })
+      )
+      .skip((page - 1) * 10)
+      .limit(10)
+      .sort({ updatedAt: -1 })
       .lean();
   }
 
