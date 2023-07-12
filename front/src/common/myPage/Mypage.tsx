@@ -40,7 +40,7 @@ export const Mypage = () => {
             if (!responseNickname.data || !responseUpload.data) throw new Error("내용 변경에 실패했습니다.")
             setMyAccounts({ ...myAccounts, alias: value, image: responseUpload.data.image })
             popUpReset()
-            setIsUpdate(false)
+            setIsChange(false)
         } catch (e) {
             if (e instanceof Error) alert(e.message)
         }
