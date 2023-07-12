@@ -20,14 +20,14 @@ export const ModeState = atom({
     effects_UNSTABLE: [persistAtom],
 })
 export const MyProfile = atom({
-    key: "myProfile",
-    default: { myMnemonic: "", password: "", nickName: "" },
-    effects_UNSTABLE: [persistAtom],
+  key: "myProfile",
+  default: { myMnemonic: "", password: "", nickName: "", image: "" },
+  effects_UNSTABLE: [persistAtom],
 })
 export const MyAccounts = atom({
-    key: "myAccounts",
-    default: { privateKey: "", publicKey: "", address: "", alias: "123" },
-    effects_UNSTABLE: [persistAtom],
+  key: "myAccounts",
+  default: { privateKey: "", publicKey: "", address: "", alias: "", image: "" },
+  effects_UNSTABLE: [persistAtom],
 })
 export const MyAccountsList = atom({
     key: "accountsList",

@@ -1,19 +1,55 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfileNickNameWrap, MyProfileNickName, MyProfileNickNameBtn, MyProfile, TotalSupplyWrap, MyProfileImageUpload } from "./styled"
+import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfileNickNameWrap, MyProfileNickName, MyProfileNickNameBtn, MyProfile, TotalSupplyWrap, MyProfileImageUpload, MyProfileNickNameInput } from "./styled"
 import { Btn } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
 import { useNavigate } from "react-router"
-import { useRecoilState } from "recoil"
-import { IsSideBar } from "@utils/localStorage"
-import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { useRecoilState, useResetRecoilState } from "recoil"
+import { IsPopUp, IsSideBar, MyAccounts } from "@utils/localStorage"
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react"
 import { Icon } from "@iconify/react"
+import requestServer from "@utils/axios/requestServer"
 
 export const Mypage = () => {
-    const [modeState, setChange] = useGetMode()
-    const [src, setSrc] = useState("https://i.namu.wiki/i/we0ifCj6B05QzWu-gnPyyNfmIYkYa6Kw_Glzsu1cIbrmKk6YR-Q3j_iydyFhS69ZCYLDSdMtWlZeP-TmX_ww140vrg2y98O5qlf2swCIS_ZQLUKz-HwwlB6ZAMn-Da_WEfZkD2BnZI4jw3MbKKevjw.webp")
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const navigator = useNavigate()
+    const [myAccounts, setMyAccounts] = useRecoilState(MyAccounts)
     const [isMypage, setIsMypage] = useRecoilState(IsSideBar)
+    const popUpReset = useResetRecoilState(IsSideBar)
+    const [modeState, setChange] = useGetMode()
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null | undefined>()
+    const [isChange, setIsChange] = useState(false)
+    const [isUpdate, setIsUpdate] = useState(false)
+    const [value, setValue] = useState(myAccounts.alias);
+    const [src, setSrc] = useState(myAccounts.image)
+    const navigator = useNavigate()
+
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    }
+
+    const handlePostClick = async (e: MouseEvent) => {
+        try {
+            const formData = new FormData();
+            if (selectedFile) formData.append('file', selectedFile)
+            const responseNickname = await requestServer.post("/account", { address: myAccounts.address, nickname: value })
+            const responseUpload = await requestServer.post(`/account/profile?address=${myAccounts.address}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            if (!responseNickname.data || !responseUpload.data) throw new Error("내용 변경에 실패했습니다.")
+            setMyAccounts({ ...myAccounts, alias: value, image: responseUpload.data.image })
+            popUpReset()
+            setIsChange(false)
+        } catch (e) {
+            if (e instanceof Error) alert(e.message)
+        }
+    }
+
+    const handleUpdateClick = (e: MouseEvent) => {
+        setIsUpdate(!isUpdate)
+        setIsChange(!isChange)
+    }
 
     const handleButtonClick = (e: MouseEvent) => {
         setChange({ ...modeState, isLoginState: !modeState.isLogin })
@@ -21,52 +57,51 @@ export const Mypage = () => {
         setIsMypage(false)
     }
 
-    // const ProfileUploadForm = () => {
-    //     const [imageFile, setImageFile] = useState(null)
-
-    //     const handleForSubmit = (e: FormEvent) => {
-    //         e.preventDefault()
-    //     }
-    // }
-
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0]
+        setSelectedFile(file)
+        setIsChange(true)
         if (file) {
             const fileURL = URL.createObjectURL(file);
             setSrc(fileURL)
-            console.log(fileURL)
         }
     }
 
-    const handleFileUpload = () => {
+    const handleFileUploadClick = (e: MouseEvent) => {
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
     }
+
+    useEffect(() => {
+
+    }, [myAccounts.alias])
 
     return (
         <>
             <MypageWrapper mode={modeState.mode}>
                 <MyProfile mode={modeState.mode}>
                     <MyProfileImg src={src} />
-                    <Icon icon="heroicons-solid:pencil-alt" onClick={handleFileUpload} cursor={"pointer"} />
+                    <Icon icon="heroicons-solid:pencil-alt" onClick={handleFileUploadClick} cursor={"pointer"} />
                 </MyProfile>
                 <MyProfileNickNameWrap>
-                    <MyProfileNickName width={"70%"} mode={modeState.mode}>
-                        {"자까"}
-                    </MyProfileNickName>
+                    {isChange
+                        ? <MyProfileNickNameInput value={value} height={"60%"} width={"70%"} onChange={handleInputChange} />
+                        : <MyProfileNickName width={"70%"} mode={modeState.mode} height={"60%"}>
+                            {myAccounts.alias}
+                        </MyProfileNickName>
+                    }
                     <Btn
                         width={"20%"}
                         height={"60%"}
                         backgroundcolor="#fff"
-                        margin=""
                         mode=""
-                        onClick={(e: MouseEvent) => handleButtonClick(e)}
+                        onClick={(e: MouseEvent) => handleUpdateClick(e)}
                         fontSize="1.7rem"
                         profile={"true"}
                         color="black"
                     >
-                        {"변경"}
+                        {isChange ? "취소" : "변경"}
                     </Btn>
                 </MyProfileNickNameWrap>
                 <TotalSupplyWrap>
@@ -74,15 +109,16 @@ export const Mypage = () => {
                 </TotalSupplyWrap>
                 <ProfileBtnWrap>
                     <Btn
-                        backgroundcolor="#9e8d8d"
+                        backgroundcolor={isChange ? "#5484c8" : "#fff"}
                         width="47.5%"
                         height="5rem"
                         margin=""
-                        mode=""
-                        onClick={(e: MouseEvent) => handleButtonClick(e)}
+                        mode={modeState.mode}
+                        onClick={(e: MouseEvent) => handlePostClick(e)}
                         fontSize="1.7rem"
                         profile={"true"}
-                        color="white"
+                        color={isChange ? "white" : "black"}
+                        disabled={!isChange}
                     >
                         {"저장 하기"}
                     </Btn>

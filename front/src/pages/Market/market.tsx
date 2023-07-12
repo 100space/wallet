@@ -14,29 +14,6 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 
-// const data: INFTCard = {
-//     ca: '0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1',
-//     name: "NONGDAMGOM",
-//     image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-//     owner: "Char1ey",
-//     prices: [
-//         { currency: "KRW", price: 4500 },
-//         { currency: "ETH", price: 0.0005 },
-//     ],
-// }
-
-// const data2: INFTRow = {
-//     ca: '0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1',
-//     rank: 11,
-//     name: "NONGDAMGOM",
-//     image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-//     owner: "Char1ey",
-//     prices: [
-//         { currency: "KRW", price: 4500 },
-//         { currency: "ETH", price: 0.0005 },
-//     ],
-// }
-
 const data3: ITransaction = {
     state: "sender",
     opponent: "0x00000000000000000000000000000000000000000000000000000",
@@ -46,16 +23,6 @@ const data3: ITransaction = {
         { currency: "ETH", amount: 0.0005 },
     ],
 }
-
-// const data4: INFTStauts = {
-//     blockchain: [
-//         "블록체인",
-//         ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"],
-//     ],
-//     supply: ["발행량", "100개"],
-//     isTrade: ["거래가능", "99개"],
-//     isSell: ["판매중", "50개"],
-// }
 
 export const MarketPage = () => {
     const navigator = useNavigate()

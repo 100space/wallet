@@ -48,7 +48,8 @@ export const MyProfileImageUpload = styled.form<ISizeProps>`
 export const MyProfileNickName = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
-    background-color: ${({ mode, theme }) => mode && theme[mode].basicBg};
+    color: ${({ mode, theme }) => mode && theme[mode].text};
+    /* background-color: ${({ mode, theme }) => mode && theme[mode].basicBg}; */
 `
 
 export const MyProfileNickNameBtn = styled.button<ISizeProps>`
@@ -93,4 +94,13 @@ export const ProfileBtnWrap = styled.div<ISizeProps>`
     & > button {
         font-weight: 700;
     }
+`
+
+export const MyProfileNickNameInput = styled.input<ISizeProps>`
+    padding: 1rem 2rem;
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "100%"};
+    font-weight: 500;
+    font-size: 1.6rem;
+    border: none;
 `

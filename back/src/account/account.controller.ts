@@ -7,14 +7,14 @@ import { AccountService } from "./account.service";
 @Controller('account')
 @ApiTags('Account')
 export class AccountController {
-  constructor(private readonly accountService: AccountService) {}
+  constructor(private readonly accountService: AccountService) { }
 
   @ApiOperation({
     summary: '계정에 대한 정보를 가져옵니다.',
     description: '계정의 주소를 이용하여, 주소에 대한 닉네임, 이메일을 가져옵니다.'
   })
   @Get()
-  async getAccount(@Query('address') address: IAddress): Promise<GetAccountResponseDto>{
+  async getAccount(@Query('address') address: IAddress): Promise<GetAccountResponseDto> {
     return this.accountService.getAccount(address);
   }
 
@@ -36,7 +36,7 @@ export class AccountController {
       '프로필 이미지를 추가하고, 저장된 프로필 이미지의 url을 가져옵니다.',
   })
   @Post('/profile')
-  @UseInterceptors(FileInterceptor('profileImg'))
+  @UseInterceptors(FileInterceptor('file'))
   async uploadProfileImg(
     @UploadedFile() file: Express.MulterS3.File,
     @Query('address') address: string,
