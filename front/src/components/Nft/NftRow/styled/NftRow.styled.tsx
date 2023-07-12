@@ -11,10 +11,10 @@ export const RowWrap = styled.div<ISizeProps>`
     box-sizing: border-box;
     &:nth-child(n) {
         /* background: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol}; */
-        background: ${({ mode, theme }) => mode && theme[mode].coinBg};
+        /* background: ${({ mode, theme }) => mode && theme[mode].coinBg}; */
     }
     &:nth-child(2n) {
-        background: ${({ mode, theme }) => mode && theme[mode].nftRowBg};
+        /* background: ${({ mode, theme }) => mode && theme[mode].nftRowBg}; */
     }
 `
 

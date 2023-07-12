@@ -49,7 +49,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
                 icon={"ep:arrow-up-bold"}
                 rotate={1}
                 style={{ fontSize: "4rem" }}
-                color={props.account.address === accountState.address ? "#ffc74d" : "#fff"}
+                color={props.account.address === accountState.address ? "#ffcd4d" : "#fff"}
                 onClick={accountClick}
             />
             <AccountAdWrap>

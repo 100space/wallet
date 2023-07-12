@@ -55,3 +55,12 @@ export interface ITokenRow {
 export interface IClickHandler {
     onClick: (e: MouseEvent) => void
 }
+export interface InputList {
+    subject: string
+    content: string
+    tokenTitle?: string
+    nftTitle?: string
+    className?: string
+    address?: string
+    value?: string
+}

@@ -17,7 +17,7 @@ export const NFTSearchWrap = styled.div<ISizeProps>`
         cursor: pointer;
         position: absolute;
         right: 5%;
-        color: ${({ mode, theme }) => mode && theme[mode].text};
+        color: ${({ mode, theme }) => mode && theme[mode].searchText};
         font-size: 3rem;
     }
     & > .ms-editor-squiggles-container {
@@ -27,9 +27,12 @@ export const NFTSearchWrap = styled.div<ISizeProps>`
 export const NFTSearchInput = styled.input<ISizeProps>`
     padding: 1rem 2rem;
     border: 0.1rem solid ${({ mode, theme }) => mode && theme[mode].text};
-    color: ${({ mode, theme }) => mode && theme[mode].text};
     border-radius: 2.5rem;
-    background-color: ${({ theme, mode }) => mode && theme[mode].searchBg};
     text-align: center;
     font-size: 1.4rem;
+    color: ${({ theme, mode }) => mode && theme[mode].search};
+    background-color: ${({ theme, mode }) => mode && theme[mode].searchBg};
+    &::placeholder{
+        color: ${({ theme, mode }) => mode && theme[mode].search}
+    }
 `

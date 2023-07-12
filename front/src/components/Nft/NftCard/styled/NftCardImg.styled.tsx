@@ -8,7 +8,7 @@ export const NftCardImgWrap = styled.div<ISizeProps>`
     &,
     & > img {
         margin: 0 auto;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
     }
 `
 

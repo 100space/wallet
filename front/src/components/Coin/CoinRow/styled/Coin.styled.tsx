@@ -27,5 +27,5 @@ export const CoinContent = styled.div<ITypeSize>`
     font-weight: 700;
     text-align: center;
     line-height: ${({ height }) => height || "4.8rem"};
-    color: ${({ color, theme, mode }) => mode && theme[mode].text};
+    color: ${({ color, theme, mode }) => color || (mode && theme[mode].text) };
 `

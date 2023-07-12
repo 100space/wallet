@@ -31,15 +31,18 @@ export const WalletInfoWrap = styled.form`
     align-items: center;
 `
 
-export const WalletInfo = styled.input`
+export const WalletInfo = styled.input<ISizeProps>`
     width: 90%;
     height: 5rem;
     border-radius: 1rem;
-    border: none;
-    background-color: #5e5e5e;
+    color: ${({ theme, mode }) => mode && theme[mode].search};
+    background-color: ${({ theme, mode }) => mode && theme[mode].walletBg};
     position: relative;
-    color: #fff;
     margin-top: 2rem;
     padding: 1rem 2rem;
+    border: 0.01rem solid #fff;
     font-size: 1.6rem;
+    &::placeholder{
+        color: ${({ theme, mode }) => mode && theme[mode].search}
+    }
 `
