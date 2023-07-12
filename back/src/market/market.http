@@ -53,9 +53,9 @@ PUT {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "eoa": "0xfAD153d059F9dA994F1688b3333f2Fb415682a14",
-    "ca": "0xD7bBaaB51f23Ba0C5c666a2319d49280B9E1C5f0",
-    "tokenId": 168672294540416
+    "eoa": "0xE830877b03b0D102Df4638bcb5736397dFef5c83",
+    "ca": "0xF1730c7F0cBd2491a7D632c9968B39cD0C71aF4B",
+    "tokenId": 16891068270484
 }
 
 # MyNFT
@@ -70,7 +70,7 @@ Content-Type: application/json
 # 0x2028AB9FEbB5A9bc9389FCBe10F78192eb2f462c
 # ipfs://bafyreihmlkhkc3vi5xvvm7gucj57uoklat2u3z3g6vy3gp4ylupbu6dxoe/metadata.json
 
-# ZNFTToken : 168672294540416
+# ZNFTToken : 16891068270484
 # 0xD7bBaaB51f23Ba0C5c666a2319d49280B9E1C5f0
 # https://ipfs.io/ipfs/bafkreidv5cgi4dbsscd2pelvuajraocdu56lrr2haczbii2a27r6zu6mwy
 
