@@ -1,7 +1,17 @@
 import { PopupBtn } from "@components/MainController/PopupBtn"
 import { AssetsList } from "@common/List/AssetsList"
 import { INFTCard } from "@utils/interFace/nft.interface"
-import { ModeState, MyTokens, MyInfo, MyNetwork, MyAccounts, MyNFT, MyAccountsList } from "@utils/localStorage"
+import {
+    ModeState,
+    MyTokens,
+    MyInfo,
+    MyNetwork,
+    MyAccounts,
+    MyNFT,
+    MyAccountsList,
+    IsPopUp,
+    IsSideBar,
+} from "@utils/localStorage"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
@@ -22,7 +32,7 @@ export const MainPage = () => {
     const [initState, setInitState] = useRecoilState(ModeState)
     const navigater = useNavigate()
     !initState.isLogin && navigater("/login")
-    const [myAccount, setMyAccount] = useRecoilState(MyAccounts)
+    const resetPopup = useResetRecoilState(IsPopUp)
     const [myTokens, setMyTokens] = useRecoilState(MyTokens)
     const [myInfo, setMyInfo] = useRecoilState(MyInfo)
     const [network, setNetwork] = useRecoilState(MyNetwork)
@@ -107,6 +117,9 @@ export const MainPage = () => {
         }
 
         fetchData()
+        return () => {
+            resetPopup()
+        }
     }, [nftin, myInfo, network])
     return (
         <>
