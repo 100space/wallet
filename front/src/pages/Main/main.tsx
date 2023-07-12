@@ -33,6 +33,7 @@ export const MainPage = () => {
     const getMyCoins = async () => {
         if (nftin === null) return null
         const myCoins = myInfo[network as keyof typeof myInfo].tokens
+        console.log(myCoins, 2)
         const result = await Promise.all(
             myCoins.map(async (v: any) => {
                 // const provider = new ethers.JsonRpcProvider(process.env.REACT_APP_MUMBAI_NETWORK)
@@ -43,8 +44,9 @@ export const MainPage = () => {
                     "function balanceOf(address addr) view returns (uint)",
                 ]
                 // String(v.ca), abi, provider
+
                 const contract = new Contract(String(v.ca), abi, provider)
-                const balance = await contract.balanceOf("0xfAD153d059F9dA994F1688b3333f2Fb415682a14")
+                const balance = await contract.balanceOf(myAccounts.address)
                 const amount = ethers.formatEther(balance)
                 return { symbol: v.symbol, amount: Number(amount) }
             })
@@ -58,7 +60,7 @@ export const MainPage = () => {
     const getMyNft = async () => {
         if (nftin === null) return null
         const { data } = await requestServer.post("market/user", {
-            eoa: "0x26A7456A05a3d0b24Ce5e732575FF456571d6Ec5",
+            eoa: myAccounts.address,
         })
         return data
     }
@@ -85,7 +87,6 @@ export const MainPage = () => {
 
     useEffect(() => {
         !initState.isLogin && navigater("/login")
-        console.log(myAccount)
         if (!window.abc) {
             window.abc = nftin
             window.ethers = ethers
@@ -93,10 +94,12 @@ export const MainPage = () => {
         const fetchData = async () => {
             if (nftin) {
                 const myAssetData = await getMyCoins()
+
                 const myNftData = await getMyNft()
                 if (myAssetData) {
                     setMyTokens([...myAssetData])
                 }
+                console.log(myTokens, 123123123)
                 if (myNftData) {
                     setMyNft([...myNftData])
                 }
@@ -104,14 +107,12 @@ export const MainPage = () => {
         }
 
         fetchData()
-    }, [nftin, myInfo])
+    }, [nftin, myInfo, network])
     return (
         <>
             <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
             <AssetsList tokenList={myTokens} nftList={myNft} />
-            {/* <NFTInfoPage /> */}
-            {/* <MyNftInformation /> */}
         </>
     )
 }

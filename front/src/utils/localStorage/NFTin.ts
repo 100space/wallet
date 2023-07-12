@@ -20,14 +20,14 @@ export const ModeState = atom({
     effects_UNSTABLE: [persistAtom],
 })
 export const MyProfile = atom({
-  key: "myProfile",
-  default: { myMnemonic: "", password: "", nickName: "", image: "" },
-  effects_UNSTABLE: [persistAtom],
+    key: "myProfile",
+    default: { myMnemonic: "", password: "", nickName: "", image: "" },
+    effects_UNSTABLE: [persistAtom],
 })
 export const MyAccounts = atom({
-  key: "myAccounts",
-  default: { privateKey: "", publicKey: "", address: "", alias: "", image: "" },
-  effects_UNSTABLE: [persistAtom],
+    key: "myAccounts",
+    default: { privateKey: "", publicKey: "", address: "", alias: "", image: "" },
+    effects_UNSTABLE: [persistAtom],
 })
 export const MyAccountsList = atom({
     key: "accountsList",
@@ -72,7 +72,7 @@ export const MyInfo = atom({
             networks: { rpc: "https://polygon-mainnet.infura.io", chainId: 137, symbol: "MATIC" },
             tokens: [
                 {
-                    ca: "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+                    ca: "0x0000000000000000000000000000000000001010",
                     symbol: "MATIC",
                     decimal: 18,
                 },
@@ -92,7 +92,7 @@ export const MyInfo = atom({
             networks: { rpc: "https://arbitrum-goerli.infura.io", chainId: 421613, symbol: "AGOR" },
             tokens: [
                 {
-                    ca: "0xf9ff5809c68e9882ebfa776d731d3ccfb59d7cd4",
+                    ca: "0xa70a52cDdB85e8B6f695A7363d871DFC153A0CDE",
                     symbol: "AGOR",
                     decimal: 18,
                 },

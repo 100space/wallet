@@ -3,7 +3,7 @@ import { NFTSearch } from "@components/Search"
 import { NavLink } from "react-router-dom"
 
 const NetWorkPageList = [
-    { NetWorkSub: "Ethereum" },
+    { NetWorkSub: "Mumbai" },
     { NetWorkSub: "Arbitrum" },
     { NetWorkSub: "Polygon" },
     { NetWorkSub: "BNB(Binance Smart)" },

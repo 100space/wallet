@@ -4,8 +4,8 @@ import { MainnetBtnWrap, MainnetConTitleWrap, MainnetConWrap } from "./styled/Ma
 import { Btn } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
 import { useLocation, useNavigate } from "react-router"
-import { useRecoilState } from "recoil"
-import { MyInfo, MyNetwork } from "@utils/localStorage"
+import { useRecoilState, useResetRecoilState } from "recoil"
+import { MyInfo, MyNetwork, MyTokens } from "@utils/localStorage"
 import { net } from "web3"
 import { Alert } from "@components/Alert/alert"
 
@@ -13,6 +13,7 @@ export const MainnetCon = () => {
     const [modeState, setChange] = useGetMode()
     const [network, setNetwork] = useRecoilState(MyNetwork)
     const [info, setInfo] = useRecoilState(MyInfo)
+    const myTokenReset = useResetRecoilState(MyTokens)
     const location = useLocation()
     const navigate = useNavigate()
     const path = location.pathname.split("/")
@@ -45,7 +46,7 @@ export const MainnetCon = () => {
                 setInfo({ ...info, ...newInfo })
             }
             setNetwork(network)
-            navigate("/")
+            myTokenReset()
         }
     }
     return (

@@ -16,7 +16,7 @@ export const useNFTin = () => {
             const nftinIst = new NFTin(netwokeState as string, myAccounts.privateKey)
             setNftin(nftinIst)
         }
-    }, [myAccounts, netwokeState])
+    }, [myAccounts, netwokeState, network])
     useEffect(() => {
         if (myAccounts && myAccounts.privateKey) {
             const nftinIst = new NFTin(netwokeState as string, myAccounts.privateKey)
@@ -26,5 +26,6 @@ export const useNFTin = () => {
         }
     }, [])
     // nftin === null ? (nftinIst as NFTin) :
+
     return nftin as NFTin
 }
