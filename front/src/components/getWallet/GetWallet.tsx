@@ -36,7 +36,7 @@ export const GetWallet = () => {
             <GetWalletWrapper mode={modeState.mode}>
                 <GetWalletSub>비공개키를 입력해주세요.</GetWalletSub>
                 <WalletInfoWrap onSubmit={handleGetWallet}>
-                    <WalletInfo />
+                    <WalletInfo mode={modeState.mode} />
                     <Button
                         width={"50%"}
                         height={"4rem"}

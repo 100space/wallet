@@ -6,7 +6,8 @@ export const ListHeaderWrap = styled.div<ISizeProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 1rem 1rem 0 0;
+    border-top: 1px solid #484848;
+    /* border-radius: 1rem 1rem 0 0; */
     background: ${({ mode, theme }) => mode && theme[mode].coinBg};
     border-bottom: 0.1rem solid ${({ theme, mode }) => mode && theme[mode].text};
 
@@ -27,8 +28,8 @@ export const ListHeaderWrap = styled.div<ISizeProps>`
 `
 export const AssetsListHeaderTab = styled.div<ISelectedBtn>`
     margin-right: 1rem;
-    color: ${({ mode, theme, selected }) => (selected && "#ff1915") || (mode && theme[mode].text)} !important;
-    ${({ mode, theme, selected }) => (selected && "border-bottom: 0.2rem solid #ff1915") || ""};
+    color: ${({ mode, theme, selected }) => (selected && (mode && theme[mode].setAsset)) || (mode && theme[mode].asset)} !important;
+    ${({ mode, theme, selected }) => (selected && `border-bottom: 0.2rem solid ${(mode && theme[mode].setAsset)}`) || (mode && theme[mode].asset)};
 `
 
 export const AssetsListHeaderWrap = styled.div<ISizeProps>`

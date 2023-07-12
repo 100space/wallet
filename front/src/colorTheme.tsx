@@ -10,7 +10,7 @@ export const theme = {
         profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
         popupBg: "#3f3f3f",
         settingInputBg: "#4d4d4d",
-        searchBg: "#fff",
+        searchBg: "#484848",
         coinSlideBg: "#415668",
         coinBg: "#434343",
         alarmBg: "#585858",
@@ -18,10 +18,12 @@ export const theme = {
         coinCardBg: "#05296a",
         AccountGetBtnBg: "#3a75bd",
         coinChart: "#616161d2",
+        desBg: "#464646",
+        walletBg: "#232323",
         
         // point 색상
         point200: "#FF8756",
-        point100: "#375273",
+        point100: "#375983",
         
         // //text 색상
         pointText: "#ffeeb5",
@@ -33,20 +35,26 @@ export const theme = {
         textCoinPrice: "#FFBD62",
         assetHead: "#407dd2",
         sendText: "#fff",
+        asset: "#ffffff",
+        setAsset: "#77a6df",
+        bottomBord: "#3f3f3f",
+        searchText:"#ffffff",
+        search:"#ffffff",
         
         // // 버튼관련 색상
-        tokenBg: "#5690cb",
-        buttonBg: "#7da4db",
+        tokenBg: "#257cd2",
+        buttonBg: "#6b8dfc",
+        filterBtn: "#668bbb",
         buttonHover: "#142a3a",
         popupBtnBg: "#42578e",
-        footerColor: "#5493ff",
-        categoryHover: "#142a3a",
+        footerColor: "#92baff",
+        categoryHover: "#2f5f81",
         bringBg: "#47607d",
-        accountBg: "#c14551"
+        accountBg: "#e55665"
     },
     lightMode: {
         // 배경색
-        basicBg: "#f9f0de",
+        basicBg: "#fafafa",
         basicLightBg: "#2c2c2c",
         bg200: "#505050",
         bgInfo: "#f7e8b1",
@@ -54,19 +62,21 @@ export const theme = {
         profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
         mnemonicBg: "#fad97e",
         settingInputBg: "#fff",
-        coinSlideBg: "#5f6b72",
+        coinSlideBg: "#294656",
         coinCardBg: "#ffffff",
-        coinBg: "#f8de86",
-        alarmBg: "#ffc37f",
+        coinBg: "#ffffff",
+        alarmBg: "#8299ba",
         nftRowBg: "#FEF8E4",
         AccountGetBtnBg: "#026985",
         coinChart: "#f7bd40",
         tokenBg: "#feda4a",
+        desBg: "#e6e6e6c7",
+        walletBg: "#ededed",
         
         // //point 색상
         point200: "#faa12c",
         point100: "#FFC964",
-        popupBg: "#e3d9c6",
+        popupBg: "#ffffff",
         
         // //text 색상
         pointText: "#ffeeb5",
@@ -77,15 +87,21 @@ export const theme = {
         texthide: "#aaa",
         textCoinPrice: "#ffc949",
         coinCardHeader: "#fff",
+        asset: "#424242",
+        setAsset: "#4778b3",
+        bottomBord: "#c5c3c3",
+        searchText:"#000",
+        search:"#000",
         
         // // 버튼관련 색상
-        bringBg: "#3f4a68",
-        buttonBg: "#fee47ccb",
-        buttonHover: "#f1ad37",
+        bringBg: "#224563",
+        buttonBg: "#3f95f8",
+        buttonHover: "#5637f1",
         popupBtnBg: "#b3c4f1",
-        footerColor: "#f7712d",
-        categoryHover: "#f7bc63d0",
-        accountBg: "#5c5ff1",
-        sendText: "#fff"
+        footerColor: "#2c60ba",
+        categoryHover: "#ffe679",
+        accountBg: "#166d96",
+        sendText: "#fff",
+        filterBtn: "#f3db86",
     },
 }

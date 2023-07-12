@@ -62,6 +62,7 @@ export const LoginPage = () => {
                 margin={"3rem auto 0rem"}
                 content={v}
                 key={v}
+                color="white"
             />
         ))
 

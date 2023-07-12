@@ -52,7 +52,7 @@ export const SizePropsStyled = css<ISizeProps>`
 `
 
 export const Shadow = css`
-    box-shadow: 0.1rem 0.2rem 0 0 rgba(0, 0, 0, 0.429);
+    box-shadow: 0 0.1rem 0 0 rgba(0, 0, 0, 0.429);
 `
 export const PlatWrap = styled.div<ISizeProps>`
     height: fit-content;

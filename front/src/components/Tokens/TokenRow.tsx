@@ -37,7 +37,8 @@ export const TokenRow = (props: { token: ITokenRow }) => {
                 </AccountAssets>
             </TokenInfoWrap>
 
-            <Icon icon={"ep:arrow-up-bold"} rotate={1} width={"5%"} height={"100%"} style={{color: "#e1dcdc"}}/>
+            <Icon icon={"ep:arrow-up-bold"} rotate={1} width={"5%"} height={"100%"} 
+            style={{color: modeState.mode === "darkMode" ? "#ffffff" : "#534f4f" }} />
         </AccountRowWrap>
     )
 }
