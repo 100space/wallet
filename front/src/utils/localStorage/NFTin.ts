@@ -21,12 +21,12 @@ export const ModeState = atom({
 })
 export const MyProfile = atom({
   key: "myProfile",
-  default: { myMnemonic: "", password: "", nickName: "" },
+  default: { myMnemonic: "", password: "", nickName: "", image: "" },
   effects_UNSTABLE: [persistAtom],
 })
 export const MyAccounts = atom({
   key: "myAccounts",
-  default: { privateKey: "", publicKey: "", address: "", alias: "123" },
+  default: { privateKey: "", publicKey: "", address: "", alias: "123", image: "https://i.namu.wiki/i/we0ifCj6B05QzWu-gnPyyNfmIYkYa6Kw_Glzsu1cIbrmKk6YR-Q3j_iydyFhS69ZCYLDSdMtWlZeP-TmX_ww140vrg2y98O5qlf2swCIS_ZQLUKz-HwwlB6ZAMn-Da_WEfZkD2BnZI4jw3MbKKevjw.webp" },
   effects_UNSTABLE: [persistAtom],
 })
 export const MyAccountsList = atom({

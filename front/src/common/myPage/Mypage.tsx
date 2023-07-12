@@ -3,32 +3,52 @@ import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfile
 import { Btn } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
 import { useNavigate } from "react-router"
-import { useRecoilState } from "recoil"
-import { IsSideBar, MyAccounts } from "@utils/localStorage"
+import { useRecoilState, useResetRecoilState } from "recoil"
+import { IsPopUp, IsSideBar, MyAccounts } from "@utils/localStorage"
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react"
 import { Icon } from "@iconify/react"
+import requestServer from "@utils/axios/requestServer"
 
 export const Mypage = () => {
     const [myAccounts, setMyAccounts] = useRecoilState(MyAccounts)
     const [isMypage, setIsMypage] = useRecoilState(IsSideBar)
+    const popUpReset = useResetRecoilState(IsSideBar)
     const [modeState, setChange] = useGetMode()
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null | undefined>()
+    const [isChange, setIsChange] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
     const [value, setValue] = useState(myAccounts.alias);
-    const [src, setSrc] = useState("https://i.namu.wiki/i/we0ifCj6B05QzWu-gnPyyNfmIYkYa6Kw_Glzsu1cIbrmKk6YR-Q3j_iydyFhS69ZCYLDSdMtWlZeP-TmX_ww140vrg2y98O5qlf2swCIS_ZQLUKz-HwwlB6ZAMn-Da_WEfZkD2BnZI4jw3MbKKevjw.webp")
+    const [src, setSrc] = useState(myAccounts.image)
     const navigator = useNavigate()
 
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
-    };
+    }
 
-    const handlePostClick = (e: MouseEvent) => {
-        console.log("클릭")
+    const handlePostClick = async (e: MouseEvent) => {
+        try {
+            const formData = new FormData();
+            if (selectedFile) formData.append('file', selectedFile)
+            const responseNickname = await requestServer.post("/account", { address: myAccounts.address, nickname: value })
+            const responseUpload = await requestServer.post(`/account/profile?address=${myAccounts.address}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            if (!responseNickname.data || !responseUpload.data) throw new Error("내용 변경에 실패했습니다.")
+            setMyAccounts({ ...myAccounts, alias: value, image: responseUpload.data.image })
+            popUpReset()
+            setIsUpdate(false)
+        } catch (e) {
+            if (e instanceof Error) alert(e.message)
+        }
     }
 
     const handleUpdateClick = (e: MouseEvent) => {
         setIsUpdate(!isUpdate)
+        setIsChange(true)
     }
 
     const handleButtonClick = (e: MouseEvent) => {
@@ -39,10 +59,11 @@ export const Mypage = () => {
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0]
+        setSelectedFile(file)
+        setIsChange(true)
         if (file) {
             const fileURL = URL.createObjectURL(file);
             setSrc(fileURL)
-            console.log(fileURL)
         }
     }
 
@@ -51,6 +72,10 @@ export const Mypage = () => {
             fileInputRef.current.click();
         }
     }
+
+    useEffect(() => {
+
+    }, [myAccounts.alias])
 
     return (
         <>
@@ -84,7 +109,7 @@ export const Mypage = () => {
                 </TotalSupplyWrap>
                 <ProfileBtnWrap>
                     <Btn
-                        backgroundcolor={isUpdate ? "#5484c8" : "#fff"}
+                        backgroundcolor={isChange ? "#5484c8" : "#fff"}
                         width="47.5%"
                         height="5rem"
                         margin=""
@@ -92,8 +117,8 @@ export const Mypage = () => {
                         onClick={(e: MouseEvent) => handlePostClick(e)}
                         fontSize="1.7rem"
                         profile={"true"}
-                        color={isUpdate ? "white" : "black"}
-                        disabled={!isUpdate}
+                        color={isChange ? "white" : "black"}
+                        disabled={!isChange}
                     >
                         {"저장 하기"}
                     </Btn>
