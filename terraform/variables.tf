@@ -50,3 +50,19 @@ variable "default_domain" {
 variable "my_acm" {
   description = "my_acm"
 }
+
+variable "db_user" {
+  description = "db_user"
+}
+
+variable "db_password" {
+  default = "db_password"
+}
+
+variable "test_db_user" {
+  default = "test_db_user"
+}
+
+variable "test_db_password" {
+  default = "test_db_password"
+}

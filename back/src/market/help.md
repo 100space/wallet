@@ -147,7 +147,7 @@ getAllTokensInCollection:function
 getUserTokens:function
 ```
 
-```
+```js
 export const ERC721_ABI = [
   {
     constant: true,

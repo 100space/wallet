@@ -1,12 +1,23 @@
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  UseInterceptors,
+} from '@nestjs/common';
 import { MarketService } from './market.service';
 import { ListNftByCaDto, ListNftByEoaDto } from './dto/market.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ListNftTransactionDto } from './dto/transaction-market.dto';
 import { NftInfoDto } from './dto/info-market.dto';
+import { ListCollectionsResponseDto } from './dto/listCollections-response.dto';
+import { IsNFT } from '../decorator/NFT';
+import { NetworkValidationInterceptor } from '../interceptor/NetworkValid';
 
 @ApiTags('Market')
 @Controller('market')
+@UseInterceptors(NetworkValidationInterceptor)
 export class MarketController {
   constructor(private readonly marketService: MarketService) {}
 
@@ -14,6 +25,10 @@ export class MarketController {
   @ApiOperation({
     summary: 'NFT 컬렉션들을 가져옵니다.',
     description: 'NFT 컬렉션들을 가져옵니다.',
+  })
+  @ApiResponse({
+    status: 200,
+    type: ListCollectionsResponseDto,
   })
   async listCollections() {
     return await this.marketService.listCollections();
@@ -63,8 +78,14 @@ export class MarketController {
   async listNftByCa(@Body() { ca }: ListNftByCaDto) {
     return await this.marketService.listNftByCa({ ca });
   }
+
   @Put()
-  async addNft(@Body() { ca, tokenId }) {
-    return await this.marketService.addNft({ ca, tokenId });
+  async addNft(@IsNFT() { tokenStandard }, @Body() { eoa, ca, tokenId }) {
+    return await this.marketService.addNft({
+      tokenStandard,
+      eoa,
+      ca,
+      tokenId,
+    });
   }
 }
