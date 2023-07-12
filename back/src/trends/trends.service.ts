@@ -132,7 +132,12 @@ export class TrendsService {
   }
 
   async getTokenList({ tokens }: ListTokensDto) {
-    const symbolList = tokens.map((v) => v.symbol.toLowerCase());
+    const symbolList = tokens.map((v) => {
+      if (v.symbol.toLowerCase() === 'agor') {
+        return 'arb';
+      }
+      return v.symbol.toLowerCase();
+    });
 
     const response = await Promise.all(
       symbolList.map(async (v) => {
@@ -155,7 +160,11 @@ export class TrendsService {
     return await Promise.all(
       response.map((value, index) => {
         const [result] = response.filter(
-          (_, i) => value.symbol === tokens[i].symbol.toLowerCase(),
+          (_, i) =>
+            value.symbol ===
+            (tokens[i].symbol.toLowerCase() === 'agor'
+              ? 'arb'
+              : tokens[i].symbol.toLowerCase()),
         );
         if (!Number.isInteger(tokens[index].amount)) {
           tokens[index].amount = Number(tokens[index].amount.toFixed(3));
@@ -165,7 +174,7 @@ export class TrendsService {
           assets: [
             {
               amount: tokens[index].amount,
-              currency: result.symbol.toUpperCase(),
+              currency: tokens[index].symbol.toUpperCase(),
             },
             {
               amount: Number((tokens[index].amount * result.price).toFixed(3)),
