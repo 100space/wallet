@@ -16,9 +16,11 @@ export const CoinChartHeaderWrap = styled.header<ISizeProps>`
     align-items: center;
     width: 100%;
     min-height: 4.8rem;
-    border-top-left-radius: 0.7rem;
-    border-top-right-radius: 0.7rem;
-    background-color: ${({ theme, mode }) => (mode && theme[mode].coinChart)};
+    /* border-top-left-radius: 0.7rem;
+    border-top-right-radius: 0.7rem; */
+    border-top: 1px solid #787878;
+    border-bottom: 1px solid #686868;
+    /* background-color: ${({ theme, mode }) => (mode && theme[mode].coinChart)}; */
     /* border-bottom: 0.1rem solid #00000075; */
     color: ${({ theme, mode }) => mode && theme[mode].text};
 `
