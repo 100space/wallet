@@ -47,6 +47,7 @@ export const MainnetCon = () => {
             }
             setNetwork(network)
             myTokenReset()
+            navigate("/")
         }
     }
     return (
