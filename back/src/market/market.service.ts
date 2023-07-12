@@ -18,7 +18,8 @@ import { AxiosError } from 'axios';
 import { ListNftTransactionDto } from './dto/transaction-market.dto';
 import { NftInfoDto } from './dto/info-market.dto';
 import { ERC721_ABI } from '../abi/ERC721.ABI';
-import { ERC1155_ABI } from 'src/abi/ERC1155.ABI';
+import { ERC1155_ABI } from '../abi/ERC1155.ABI';
+import { AddNftPlusDto } from './dto/add-market.dto';
 
 @Injectable()
 export class MarketService {
@@ -289,7 +290,7 @@ export class MarketService {
     return '변경되었습니다.';
   }
 
-  async addNft({ eoa, tokenStandard, ca, tokenId }) {
+  async addNft({ eoa, tokenStandard, ca, tokenId }: AddNftPlusDto) {
     if (tokenStandard === 'ERC 721') {
       const { nftName, description, image, owner } = await this.getERC721Info({
         eoa,
@@ -300,7 +301,7 @@ export class MarketService {
         name: nftName,
         description,
         image,
-        marketId: 0,
+        marketId: '0',
         owner,
         tokenId,
         prices: [
@@ -320,7 +321,7 @@ export class MarketService {
         name,
         description,
         image,
-        marketId: 0,
+        marketId: '0',
         owner: 'unknown',
         tokenId,
         prices: [
@@ -382,21 +383,29 @@ export class MarketService {
     }
   }
 
-  async getERC721Info({ eoa, ca, tokenId }) {
+  async getERC721Info({
+    eoa,
+    ca,
+    tokenId,
+  }: {
+    eoa: string;
+    ca: string;
+    tokenId: string;
+  }) {
     try {
       const abi = ERC721_ABI;
       const contract = new Contract(ca, abi, this.provider);
       const owner = await contract.ownerOf(tokenId);
 
-      if (owner !== eoa) {
-        throw new Error('This is not you own');
-      }
+      // if (owner !== eoa) {
+      //   throw new Error('This is not you own');
+      // }
 
       const supply = Number(await contract.totalSupply());
-      const symbol = await contract.symbol();
+      const symbol: string = await contract.symbol();
 
-      const collectionName = await contract.name();
-      const tokeUri = await contract.tokenURI(tokenId);
+      const collectionName: string = await contract.name();
+      const tokeUri: string = await contract.tokenURI(tokenId);
 
       if (!tokeUri.includes('ipfs')) throw new Error('This NFT is not support');
       const { name, description, image } = await this.isUseIPFS(tokeUri);
@@ -436,7 +445,7 @@ export class MarketService {
     }
   }
 
-  async getERC1155Info({ ca, tokenId }) {
+  async getERC1155Info({ ca, tokenId }: { ca: string; tokenId: string }) {
     try {
       const abi = ERC1155_ABI;
       const contract = new Contract(ca, abi, this.provider);
@@ -447,6 +456,14 @@ export class MarketService {
           cause: new Error(),
           description: 'Get ERC 1155 Metadata Error',
         });
+      }
+
+      if (uri.includes('testnets-api.opensea.io')) {
+        const { name, description, image } = await this.getOpenSeaMetadata(
+          uri,
+          tokenId,
+        );
+        return { name, description, image };
       }
 
       const ipfsRegex = /^ipfs:\/\/.*/;
@@ -485,5 +502,24 @@ export class MarketService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async getOpenSeaMetadata(tokenUri: string, tokenId: string) {
+    const openseaApi = tokenUri.split('0x{id}')[0] + tokenId;
+
+    const { data } = await firstValueFrom(
+      this.httpService.get(openseaApi).pipe(
+        catchError((error: AxiosError) => {
+          this.logger.error(error.response?.data);
+          throw new NotFoundException('Failed to get OpenSea Metadata', {
+            cause: new Error(),
+            description: 'OpenSea API Error',
+          });
+        }),
+      ),
+    );
+
+    const { name, description, image } = data;
+    return { name, description, image };
   }
 }

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import Web3 from 'web3'; // 타입 지정을 위해 사용
-import { IContractMethods } from 'src/interface/web3.interface';
+import { IContractMethods } from '../interface/web3.interface';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
