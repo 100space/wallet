@@ -1,5 +1,6 @@
 # 준비할 것
 
+- [참고](https://velog.io/@cloudcoke/AWS-Router-53-%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%93%B1%EB%A1%9D-ACM-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89)
 - aws iam 계정
 - aws cli (configure가 완료된 상태)
 - route 53에 도메인 등록
@@ -14,6 +15,12 @@
 ```bash
 default_domain = "your.domain"
 my_acm         = "your acm arn"
+db               = "your mongodb db"
+test_db          = "your test mongodb db"
+db_user          = "your db user"
+db_password      = "your db password"
+test_db_user     = "your test db user"
+test_db_password = "your test db password"
 ```
 
 # 실행

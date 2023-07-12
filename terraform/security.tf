@@ -79,14 +79,14 @@ resource "aws_security_group" "nat_gateway" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [var.private_subnet[0]]
+    cidr_blocks = [var.private_subnet[0], var.private_subnet[1]]
   }
 
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [var.private_subnet[0]]
+    cidr_blocks = [var.private_subnet[0], var.private_subnet[1]]
   }
 
   ingress {

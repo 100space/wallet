@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class NftInfoDto {
   @ApiProperty({
     description: 'NFT의 CA',
-    default: '0xCd7f3fe4f5a680cBaCbaFAc8Bd27eFB126Ab05C1',
+    default: '0xbF7B786d68b18754Ec3932aC4B0d28b19Ff35b83',
   })
   ca: string;
 

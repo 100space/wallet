@@ -13,6 +13,11 @@ const networks = {
   ethereum: { rpc: process.env.ETHEREUM_NETWORK, chainId: 1 },
   goerli: { rpc: process.env.GOERLI_NETWORK, chainId: 5 },
   mumbai: { rpc: process.env.MUMBAI_NETWORK, chainId: 80001 },
+  arbitrum: { rpc: process.env.ARBITRUM_NETWORK, chainId: 42161 },
+  arbitrum_goerli: {
+    rpc: process.env.ARBITRUM_GOERLI_NETWORK,
+    chainId: 421613,
+  },
 };
 
 const isValidNetwork = (network: string) => {

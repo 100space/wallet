@@ -116,10 +116,20 @@ resource "aws_eip" "test_back_server" {
 
 resource "aws_network_interface" "db" {
   subnet_id       = aws_subnet.private_subnet[0].id
-  private_ips     = ["10.10.10.153"]
+  private_ips     = ["10.10.10.150"]
   security_groups = [aws_security_group.mongo_db_sg.id]
 
   tags = {
     Name = "${var.project}-db-network"
+  }
+}
+
+resource "aws_network_interface" "test_db" {
+  subnet_id       = aws_subnet.private_subnet[1].id
+  private_ips     = ["10.10.10.170"]
+  security_groups = [aws_security_group.mongo_db_sg.id]
+
+  tags = {
+    Name = "${var.project}-test-db-network"
   }
 }

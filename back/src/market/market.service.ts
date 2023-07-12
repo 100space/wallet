@@ -18,6 +18,7 @@ import { AxiosError } from 'axios';
 import { ListNftTransactionDto } from './dto/transaction-market.dto';
 import { NftInfoDto } from './dto/info-market.dto';
 import { ERC721_ABI } from '../abi/ERC721.ABI';
+import { ERC1155_ABI } from 'src/abi/ERC1155.ABI';
 
 @Injectable()
 export class MarketService {
@@ -284,23 +285,201 @@ export class MarketService {
     return '변경되었습니다.';
   }
 
-  async addNft({ ca, tokenId }) {
-    const abi = ERC721_ABI;
-    const contract = new Contract(ca, abi, this.provider);
+  async addNft({ eoa, tokenStandard, ca, tokenId }) {
+    if (tokenStandard === 'ERC 721') {
+      const { nftName, description, image, owner } = await this.getERC721Info({
+        eoa,
+        ca,
+        tokenId,
+      });
+      return {
+        name: nftName,
+        description,
+        image,
+        marketId: 0,
+        owner,
+        tokenId,
+        prices: [
+          { currency: 'KRW', price: 0 },
+          { currency: 'MATIC', price: 0 },
+        ],
+        isSoldOut: false,
+      };
+    }
 
-    const totalSupply = await contract.totalSupply();
+    if (tokenStandard === 'ERC 1155') {
+      const { name, description, image } = await this.getERC1155Info({
+        ca,
+        tokenId,
+      });
+      return {
+        name,
+        description,
+        image,
+        marketId: 0,
+        owner: 'unknown',
+        tokenId,
+        prices: [
+          { currency: 'KRW', price: 0 },
+          { currency: 'MATIC', price: 0 },
+        ],
+        isSoldOut: false,
+      };
+    }
+  }
 
-    // const result = await contract.tokenURI(tokenId);
-    // console.log(result);
+  async isUseIPFS(tokenUri: string) {
+    try {
+      const ipfsUrl = 'https://ipfs.io/ipfs/';
 
-    // const ipfsUrl = 'https://ipfs.io/ipfs/';
+      const ipfsRegex = /^ipfs:\/\/.*/;
+      if (ipfsRegex.test(tokenUri)) {
+        const jsonRegex = /\.json$/;
+        if (!jsonRegex.test(tokenUri)) {
+          try {
+            const { data } = await firstValueFrom(
+              this.httpService.get(
+                `${ipfsUrl}${tokenUri.replace('ipfs://', '')}.json`,
+              ),
+            );
 
-    // const { data } = await firstValueFrom(
-    //   this.httpService.get(`${ipfsUrl}${result.replace('ipfs://', '')}.json`),
-    // );
+            return data;
+          } catch (error) {
+            const { data } = await firstValueFrom(
+              this.httpService.get(
+                `${ipfsUrl}${tokenUri.replace('ipfs://', '')}`,
+              ),
+            );
+            return data;
+          }
+        }
+        const { data } = await firstValueFrom(
+          this.httpService.get(`${ipfsUrl}${tokenUri.replace('ipfs://', '')}`),
+        );
+        return data;
+      }
+      const { data } = await firstValueFrom(
+        this.httpService.get(`${tokenUri}`),
+      );
 
-    // console.log(data);
+      return data;
+    } catch (error) {
+      try {
+        const { data } = await firstValueFrom(
+          this.httpService.get(`${tokenUri}.json`),
+        );
+        return data;
+      } catch (error) {
+        throw new NotFoundException(`Can't find metadata`, {
+          cause: new Error(),
+          description: 'Find IPFS Metadata Error',
+        });
+      }
+    }
+  }
 
-    // console.log(`${ipfsUrl}${data.image.replace('ipfs://', '')}`);
+  async getERC721Info({ eoa, ca, tokenId }) {
+    try {
+      const abi = ERC721_ABI;
+      const contract = new Contract(ca, abi, this.provider);
+      const owner = await contract.ownerOf(tokenId);
+
+      if (owner !== eoa) {
+        throw new Error('This is not you own');
+      }
+
+      const supply = Number(await contract.totalSupply());
+      const symbol = await contract.symbol();
+
+      const collectionName = await contract.name();
+      const tokeUri = await contract.tokenURI(tokenId);
+
+      if (!tokeUri.includes('ipfs')) throw new Error('This NFT is not support');
+      const { name, description, image } = await this.isUseIPFS(tokeUri);
+
+      const base = {
+        ca,
+        supply,
+        symbol,
+        tokenId,
+        collectionName,
+        description,
+        owner,
+      };
+
+      const ipfsRegex = /^ipfs:\/\/.*/;
+
+      if (ipfsRegex.test(image)) {
+        const ipfsUrl = 'https://ipfs.io/ipfs/';
+        const realImage = `${ipfsUrl}${image.replace('ipfs://', '')}`;
+        return {
+          ...base,
+          nftName: name,
+          image: realImage,
+        };
+      }
+
+      return {
+        ...base,
+        nftName: name,
+        image,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message, {
+        cause: new Error(),
+        description: 'Get ERC 721 Info Error',
+      });
+    }
+  }
+
+  async getERC1155Info({ ca, tokenId }) {
+    try {
+      const abi = ERC1155_ABI;
+      const contract = new Contract(ca, abi, this.provider);
+      const uri = await contract.uri(tokenId);
+
+      if (uri === '') {
+        throw new NotFoundException('Metadata not found', {
+          cause: new Error(),
+          description: 'Get ERC 1155 Metadata Error',
+        });
+      }
+
+      const ipfsRegex = /^ipfs:\/\/.*/;
+      if (ipfsRegex.test(uri)) {
+        const { name, description, image } = await this.isUseIPFS(uri);
+
+        if (ipfsRegex.test(image)) {
+          const ipfsUrl = 'https://ipfs.io/ipfs/';
+          const realImage = `${ipfsUrl}${image.replace('ipfs://', '')}`;
+          return { name, description, image: realImage };
+        }
+        return { name, description, image };
+      }
+
+      const { data } = await firstValueFrom(
+        this.httpService.get(uri).pipe(
+          catchError((error: AxiosError) => {
+            this.logger.error(error.response?.data);
+            throw new NotFoundException('Unable to get Metadata', {
+              cause: new Error(),
+              description: 'Get ERC 1155 Metadata Error',
+            });
+          }),
+        ),
+      );
+
+      if (!data) {
+        throw new NotFoundException('Not Found Data', {
+          cause: new Error(),
+          description: 'Get ERC 1155 Metadata Error',
+        });
+      }
+
+      const { name, image, description } = data;
+      return { name, image, description };
+    } catch (error) {
+      throw error;
+    }
   }
 }
