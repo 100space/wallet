@@ -9,7 +9,6 @@ export const CoinInfoHeaderWrap = styled.header<ISizeProps>`
     padding: 2rem 1.5rem;
     display: flex;
     align-items: center;
-    min-width: 36rem;
     width: ${({ width }) => width || "100%"};
     box-sizing: border-box;
 
@@ -29,9 +28,8 @@ export const CoinInfoHeaderImg = styled.img<ISizeProps>`
 `
 
 export const CoinInfoHeaderName = styled.div<ISizeProps>`
-    min-width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
-    color: ${({ theme, mode, color }) => (mode && theme[mode].text)};
+    color: ${({ theme, mode, color }) => mode && theme[mode].text};
     font-size: 1.6rem;
     font-weight: 500;
 `
@@ -51,7 +49,9 @@ export const CoinInforHeader = ({ image, name, symbol }: ICoinName) => {
             <CoinInfoHeaderImgWrap>
                 <CoinInfoHeaderImg src={image} />
             </CoinInfoHeaderImgWrap>
-            <CoinInfoHeaderName mode={modeState.mode} width={"3.2rem"}>{name}</CoinInfoHeaderName>
+            <CoinInfoHeaderName mode={modeState.mode} width={"3.2rem"}>
+                {name}
+            </CoinInfoHeaderName>
             <CoinInfoHedaerSymbol width={"4.8rem"}>{symbol}</CoinInfoHedaerSymbol>
         </CoinInfoHeaderWrap>
     )
