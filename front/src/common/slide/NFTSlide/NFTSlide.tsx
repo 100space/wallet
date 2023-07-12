@@ -1,25 +1,32 @@
 import { NftCard } from "@components/Nft"
 import { useGetMode } from "@hooks/useMode"
-import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
+import { INFTCard } from "@utils/interFace/nft.interface"
 import { NFTSlideWrap } from "./styled/NFTSlide.styled"
 import { SetterOrUpdater } from "recoil"
 import { MouseEvent } from "react"
+import { useNavigate } from "react-router"
+import { NftCardByMarket } from "@components/Nft/NftCard"
 
 export const NFTSlide = (props: {
-    nftCards: INFTCardByMarket[], setNftCa: SetterOrUpdater<{
+    nftCards: INFTCard[], setNftCa: SetterOrUpdater<{
         ca: string;
         name: string;
     }>
 }) => {
     const [modeState, setModeState] = useGetMode()
+    const navigate = useNavigate()
 
-    const clickNftCard = (e: MouseEvent, ca: string, tokenId: number) => {
-        console.log(ca)
-        console.log(tokenId)
+    const clickNftCardByCollection = (e: MouseEvent, ca: string | undefined, name: string | undefined) => {
+        console.log(1)
+        console.log(ca, name)
+        if (ca === undefined) return
+        if (name === undefined) return
+        props.setNftCa({ ca, name })
+        navigate(`collection/${ca}`)
     }
 
-    const nftCardList = (nftCards: INFTCardByMarket[]) => {
-        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" onClick={clickNftCard} />)
+    const nftCardList = (nftCards: INFTCard[]) => {
+        return nftCards.map((v, index) => <NftCardByMarket key={index} nftInfo={v} className="card" onClick={clickNftCardByCollection} />)
     }
 
     return <NFTSlideWrap mode={modeState.mode}>{nftCardList(props.nftCards)}</NFTSlideWrap>
