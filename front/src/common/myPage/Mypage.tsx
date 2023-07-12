@@ -48,7 +48,7 @@ export const Mypage = () => {
 
     const handleUpdateClick = (e: MouseEvent) => {
         setIsUpdate(!isUpdate)
-        setIsChange(true)
+        setIsChange(!isChange)
     }
 
     const handleButtonClick = (e: MouseEvent) => {
@@ -85,7 +85,7 @@ export const Mypage = () => {
                     <Icon icon="heroicons-solid:pencil-alt" onClick={handleFileUploadClick} cursor={"pointer"} />
                 </MyProfile>
                 <MyProfileNickNameWrap>
-                    {isUpdate
+                    {isChange
                         ? <MyProfileNickNameInput value={value} height={"60%"} width={"70%"} onChange={handleInputChange} />
                         : <MyProfileNickName width={"70%"} mode={modeState.mode} height={"60%"}>
                             {myAccounts.alias}
@@ -101,7 +101,7 @@ export const Mypage = () => {
                         profile={"true"}
                         color="black"
                     >
-                        {isUpdate ? "취소" : "변경"}
+                        {isChange ? "취소" : "변경"}
                     </Btn>
                 </MyProfileNickNameWrap>
                 <TotalSupplyWrap>
