@@ -7,7 +7,7 @@ const messagePromises = {}
 
 window.addEventListener("message", (event) => {
     const { type, id, response } = event.data
-    if (type === "res") {
+    if (type === "fromEvent") {
         console.log(event.data, "messagePromises")
         if (messagePromises[id]) {
             messagePromises[id].resolve(response)
@@ -40,14 +40,6 @@ window.abc = {
         }
     },
     enable: async () => {
-        if (!window.abc._sentWarnings) {
-            window.abc._sentWarnings = {}
-        }
-        if (!window.abc._sentWarnings.enable) {
-            console.warn("enable function is deprecated")
-            window.abc._sentWarnings.enable = true
-        }
-
         try {
             return postMessageAsync("eth_requestAccounts", [])
         } catch (error) {

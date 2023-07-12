@@ -11,10 +11,9 @@ window.addEventListener("message", (event) => {
         console.log(11111)
         chrome.runtime.sendMessage({ from: "event", type: "fromEvent", method, params }, (resp) => {
             if (resp) {
-                console.log(resp, "resp in envet.js")
-                window.postMessage({ type: "fromEvent", id, response: resp, from: "windowprovier " }, "*")
+                console.log(resp, "resp in envet.js", 11111111)
+                window.postMessage({ type: "fromEvent", id, response: resp, from: "event " }, "*")
             }
         })
-        return true
     }
 })
