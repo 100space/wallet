@@ -167,7 +167,7 @@ export const SendComp = (props: {
                 <>
                     <MainnetBtnWrap>
                         <Btn
-                            backgroundcolor="#00d12d"
+                            backgroundcolor="#feda4a"
                             color="white"
                             fontSize="1.5rem"
                             width="10rem"
@@ -179,8 +179,8 @@ export const SendComp = (props: {
                             승인
                         </Btn>
                         <Btn
-                            backgroundcolor="white"
-                            color="#455bff"
+                            backgroundcolor="#878787"
+                            color="#ffffff"
                             fontSize="1.5rem"
                             width="10rem"
                             height="4rem"

@@ -36,6 +36,9 @@ export const MyProfileNickNameWrap = styled.div<ISizeProps>`
     font-size: 2.5rem;
     text-align: center;
     font-weight: 700;
+    position: relative;
+    bottom: 6rem;
+    right: 1.5rem;
 
     & > button {
         font-weight: 700;
@@ -59,14 +62,14 @@ export const MyProfileNickNameBtn = styled.button<ISizeProps>`
 
 export const MyProfile = styled.div<ISizeProps>`
     position: relative;
-    width: ${({ width }) => width || "16rem"};
-    height: ${({ height }) => height || "16rem"};
-    border-radius: 50%;
-
+    margin-top: 1rem;
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "55rem"};
+    
     & > svg {
         font-size: 2.5rem;
         position: absolute;
-        bottom: 0rem;
+        bottom: 1rem;
         right: 1rem;
         color: ${({ mode, theme }) => mode && theme[mode].text};
     }
@@ -77,7 +80,6 @@ export const MyProfileImg = styled.img<ISizeProps>`
     height: ${({ height }) => height || "100%"};
     border-radius: inherit;
     object-fit: contain;
-    background-color: white;
 `
 
 export const TotalSupplyWrap = styled.div<ISizeProps>`
@@ -103,4 +105,11 @@ export const MyProfileNickNameInput = styled.input<ISizeProps>`
     font-weight: 500;
     font-size: 1.6rem;
     border: none;
+`
+
+export const MyBtnWrap = styled.div`
+    width: 100%;
+    height: 100%;
+    position: relative;
+    right: 2rem;
 `
