@@ -1,5 +1,7 @@
+import { styled } from "@tanstack/react-query-devtools/build/lib/utils"
 import { SetterOrUpdater, useRecoilState } from "recoil"
 import Swal from "sweetalert2"
+
 
 export const Alert = Swal.mixin({
     toast: true,
