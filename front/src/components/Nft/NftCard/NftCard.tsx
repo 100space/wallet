@@ -12,7 +12,7 @@ export const NftCard = memo(
         nftInfo: INFTCardByMarket
         className: string
         marketId?: number
-        onClick: (e: MouseEvent, ca: string, tokenId: string, marketId?: number, tokenStandard: string) => void
+        onClick: (e: MouseEvent, ca: string, tokenId: string, marketId?: number, tokenStandard?: string) => void
     }) => {
         const { pathname } = useLocation()
         const { mode } = useRecoilValue(ModeState)
@@ -35,7 +35,13 @@ export const NftCard = memo(
                 height={"26rem"}
                 onClick={(e) => {
                     if (!props.nftInfo.nftAddress || !props.nftInfo.tokenId) return
-                    return props.onClick(e, props.nftInfo.nftAddress, props.nftInfo.tokenId, props.marketId, props.nftInfo.tokenStandard)
+                    return props.onClick(
+                        e,
+                        props.nftInfo.nftAddress,
+                        props.nftInfo.tokenId,
+                        props.marketId,
+                        props.nftInfo.tokenStandard
+                    )
                 }}
             >
                 <NftCardImg width={"90%"} height={"60%"} image={props.nftInfo.image} className={props.className} />
@@ -48,10 +54,12 @@ export const NftCard = memo(
                 height={"25rem"}
                 onClick={(e) => {
                     if (!props.nftInfo.nftAddress || !props.nftInfo.tokenId) return
-                    return props.onClick(e, props.nftInfo.nftAddress, props.nftInfo.tokenId, props.marketId, "ERC 721")
+                    return props.onClick(e, props.nftInfo.nftAddress, props.nftInfo.tokenId, props.marketId, "ERC721")
                 }}
             >
                 <NftCardImg width={"90%"} height={"60%"} image={props.nftInfo.image} className={props.className} />
                 <NftContents name={props.nftInfo.name} owner={props.nftInfo.owner} prices={props.nftInfo.prices} />
             </NftCardWrap>
         )
+    }
+)

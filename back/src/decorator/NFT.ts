@@ -10,10 +10,10 @@ import { ERC1155_INTERFACE_ID, ERC721_INTERFACE_ID } from '../constant/token';
 const isNftStandard = async (contract: Contract) => {
   try {
     if (await contract.supportsInterface(ERC1155_INTERFACE_ID)) {
-      return { tokenStandard: 'ERC 1155' };
+      return { tokenStandard: 'ERC1155' };
     }
     if (await contract.supportsInterface(ERC721_INTERFACE_ID)) {
-      return { tokenStandard: 'ERC 721' };
+      return { tokenStandard: 'ERC721' };
     }
     return { tokenStandard: 'Non-standard' };
   } catch (error) {

@@ -171,7 +171,7 @@ export class MarketService {
     try {
       const response = await this.marketRepository.findTransaction({
         ca,
-        tokenId,
+        tokenId: Number(tokenId),
       });
       const result = response.map((v) => {
         const { price, krwPrice, createdAt, updatedAt, ...rest } = v;
@@ -222,11 +222,9 @@ export class MarketService {
       if (!creator || !name || !symbol)
         throw new Error('No value found for CA');
       const response = await this.contract.getAllTokensInCollection(ca);
-      console.log(response)
-
       const [tokenInfo] = await Promise.all(
         response
-          .filter((v: string[]) => Number(v[3]) === tokenId)
+          .filter((v: string[]) => Number(v[3]) === Number(tokenId))
           .map(async (v: string[]) => {
             const owner = v[1];
             const price = Number(v[4]) / this.PREFIX;
@@ -242,7 +240,9 @@ export class MarketService {
               isTrade,
               price: { currency: 'MATIC', price },
               fee: { currency: 'MATIC', price: price * 0.01 },
-              krw: (Math.floor(price * this.currencyPrice * 1000) / 1000).toString(),
+              krw: (
+                Math.floor(price * this.currencyPrice * 1000) / 1000
+              ).toString(),
             };
           }),
       );
@@ -262,7 +262,7 @@ export class MarketService {
         symbol,
         blockchain,
         tokenId,
-        tokenStandard: 'ERC 721',
+        tokenStandard: 'ERC721',
         collectionName: name,
         ...tokenInfo,
       };
@@ -291,7 +291,7 @@ export class MarketService {
   }
 
   async addNft({ eoa, tokenStandard, ca, tokenId }: AddNftPlusDto) {
-    if (tokenStandard === 'ERC 721') {
+    if (tokenStandard === 'ERC721') {
       const { nftName, description, image, owner } = await this.getERC721Info({
         eoa,
         ca,
@@ -314,7 +314,7 @@ export class MarketService {
       };
     }
 
-    if (tokenStandard === 'ERC 1155') {
+    if (tokenStandard === 'ERC1155') {
       const { name, description, image } = await this.getERC1155Info({
         ca,
         tokenId,

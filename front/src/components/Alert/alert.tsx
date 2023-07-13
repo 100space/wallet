@@ -2,7 +2,6 @@ import { styled } from "@tanstack/react-query-devtools/build/lib/utils"
 import { SetterOrUpdater, useRecoilState } from "recoil"
 import Swal from "sweetalert2"
 
-
 export const Alert = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -81,8 +80,8 @@ export const PurchaseAlert = (
         reverseButtons: true, // 버튼 순서 거꾸로
     }).then((result) => {
         if (result.value && result.isConfirmed) {
-            setOpen({ isOpen: true, contents: address })
-            setScanOpen(false)
+            // setOpen({ isOpen: true, contents: address })
+            // setScanOpen(false)
         } else if (result.isDismissed) {
             Swal.fire("취소되었습니다.", "", "warning")
         }
