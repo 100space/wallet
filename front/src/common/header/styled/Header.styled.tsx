@@ -80,7 +80,7 @@ export const BackBtnHeaderContent = styled.div<ISizeProps>`
     position: absolute;
     left: 0;
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: 700;
     color: ${({ mode, theme }) => mode && theme[mode].text};
 `

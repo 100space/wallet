@@ -8,7 +8,6 @@ export const MypageWrapper = styled.div<ISizeProps>`
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
     background: ${({ theme, mode }) => mode && theme[mode].bgInfo};
     padding: 0 1.5rem;
 
@@ -29,19 +28,17 @@ export const MyProfileHeader = styled.div<ISizeProps>`
 
 export const MyProfileNickNameWrap = styled.div<ISizeProps>`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "7.5%"};
     font-size: 2.5rem;
     text-align: center;
     font-weight: 700;
-    position: relative;
-    bottom: 6rem;
-    right: 1.5rem;
 
     & > button {
         font-weight: 700;
+        margin-left: 2rem;
     }
 `
 
@@ -49,10 +46,11 @@ export const MyProfileImageUpload = styled.form<ISizeProps>`
 `
 
 export const MyProfileNickName = styled.div<ISizeProps>`
-    width: ${({ width }) => width || "100%"};
+    /* width: ${({ width }) => width || "100%"}; */
+    width: fit-content;
     height: ${({ height }) => height || "100%"};
     color: ${({ mode, theme }) => mode && theme[mode].text};
-    /* background-color: ${({ mode, theme }) => mode && theme[mode].basicBg}; */
+    border-radius: 0.5rem;
 `
 
 export const MyProfileNickNameBtn = styled.button<ISizeProps>`
@@ -62,15 +60,15 @@ export const MyProfileNickNameBtn = styled.button<ISizeProps>`
 
 export const MyProfile = styled.div<ISizeProps>`
     position: relative;
-    margin-top: 1rem;
-    width: ${({ width }) => width || "100%"};
-    height: ${({ height }) => height || "55rem"};
-    
+    width: ${({ width }) => width || "16rem"};
+    height: ${({ height }) => height || "16rem"};
+    border-radius: 50%;
+
     & > svg {
         font-size: 2.5rem;
         position: absolute;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 0.02rem;
+        right: 0.03rem;
         color: ${({ mode, theme }) => mode && theme[mode].text};
     }
 `
@@ -80,6 +78,7 @@ export const MyProfileImg = styled.img<ISizeProps>`
     height: ${({ height }) => height || "100%"};
     border-radius: inherit;
     object-fit: contain;
+    background-color: #d9d9d9;
 `
 
 export const TotalSupplyWrap = styled.div<ISizeProps>`
@@ -102,14 +101,9 @@ export const MyProfileNickNameInput = styled.input<ISizeProps>`
     padding: 1rem 2rem;
     width: ${({ width }) => width || "100%"};
     height: ${({ height }) => height || "100%"};
+    background: transparent;
     font-weight: 500;
     font-size: 1.6rem;
-    border: none;
-`
-
-export const MyBtnWrap = styled.div`
-    width: 100%;
-    height: 100%;
-    position: relative;
-    right: 2rem;
+    border-radius: 2rem;
+    color: ${({ mode, theme }) => mode && theme[mode].text};
 `
