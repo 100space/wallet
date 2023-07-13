@@ -6,20 +6,31 @@ import { Contract, ethers } from "ethers"
 import { MARKET_ABI } from "@abi/MARKET.ABI"
 import { useNFTin } from "@hooks/useNFTin"
 import requestServer from "@utils/axios/requestServer"
+import axios from "axios"
+import { Alert, PurchaseAlert } from "@components/Alert/alert"
+import { IsPopUp, ScanOpen } from "@utils/localStorage"
+import { useRecoilState } from "recoil"
 
 interface ITxBtn {
     marketId: number
     myAddress: string
     price: number
+    to: string
+    ca: string
+    krw: string
+    tokenId: number
+    name: string
 }
 
-export const TxBtn = ({ marketId, myAddress, price }: ITxBtn) => {
+export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }: ITxBtn) => {
     const nftIn = useNFTin()
+    const [scanOpen, setScanOpen] = useRecoilState(ScanOpen)
+    const [isOpen, setOpen] = useRecoilState(IsPopUp)
     const [modeState, setModeState] = useGetMode()
     const [market, setMarket] = useState<Contract>()
-    const [isLoading, setIsLoading] = useState(false)
     const [nftInfomation, setNftInfomation] = useState({ ca: "", tokenId: "" })
     const [parsedPrice, setParsedPrice] = useState('0')
+    const [signer, setSigner] = useState<ethers.Wallet>()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -38,37 +49,46 @@ export const TxBtn = ({ marketId, myAddress, price }: ITxBtn) => {
     }
 
     const handleBuy = async () => {
-        setIsLoading(true);
         try {
             if (!market) return
+            if (myAddress === to) return Alert.fire("이미 소유하고 있습니다.", "", "warning")
+            PurchaseAlert(name, setScanOpen, setOpen)
             const buyNFT = await market.buyNft(marketId, {
                 from: myAddress,
                 value: parsedPrice,
                 gasLimit: 800000,
             });
-            // const receipt = await buyNFT.wait();
-            // console.log(receipt)
-            // if (receipt.logs) {
-            //     const decodedData = decodeTransfer(receipt, token);
-            // const response = await requestServer.post("event/transfer", {
-            //     ...decodedData,
-            // });
-            // if (response.statusText === "Created") {
-            // setIsOpenModal(false);
-            // setIsBuyLoading(false);
-            // toast.success("NFT transaction was successful!");
-            // updateCollection(token.NFTaddress);
-            // }
-            // }
+
+            const receipt = await buyNFT.wait();
+
+            if (!receipt) return Alert.fire("구매에 실패했습니다.", "", "warning")
+
+            await axios.post("/https://nest-deploy-c764d61cc1b8.herokuapp.com/event/transfer", {
+                id: marketId,
+                from: myAddress,
+                to,
+                NFTaddress: ca,
+                tokenId,
+                price,
+                krwPrice: krw,
+                event: "transfer"
+            })
         } catch (e) {
             alert(e);
         }
     };
 
+    const createSigner = async () => {
+        const sign = nftIn.wallet.connect(nftIn.provider)
+        setSigner(sign)
+    }
+
     useEffect(() => {
         if (nftIn === null) return
         if (process.env.REACT_APP_MARKET_CA) {
-            const contract = new Contract(process.env.REACT_APP_MARKET_CA, MARKET_ABI, nftIn.provider);
+            createSigner()
+            console.log(signer)
+            const contract = new Contract(process.env.REACT_APP_MARKET_CA, MARKET_ABI, signer);
             setMarket(contract)
         }
     }, [nftIn])

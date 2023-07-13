@@ -41,3 +41,28 @@ export const ConfirmAlert = (
         }
     })
 }
+
+export const PurchaseAlert = (
+    address: string,
+    setScanOpen: { (valOrUpdater: boolean | ((currVal: boolean) => boolean)): void; (arg0: boolean): void },
+    setOpen: SetterOrUpdater<{ isOpen: boolean; contents: string }>
+) => {
+    Swal.fire({
+        title: `${address} `,
+        text: "NFT를 구매하시겠습니까?",
+        icon: "question",
+        showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+        confirmButtonColor: "#3085d6", // confrim 버튼 색깔 지정
+        cancelButtonColor: "#d33", // cancel 버튼 색깔 지정
+        confirmButtonText: "승인", // confirm 버튼 텍스트 지정
+        cancelButtonText: "취소", // cancel 버튼 텍스트 지정
+        reverseButtons: true, // 버튼 순서 거꾸로
+    }).then((result) => {
+        if (result.value && result.isConfirmed) {
+            setOpen({ isOpen: true, contents: address })
+            setScanOpen(false)
+        } else if (result.isDismissed) {
+            Swal.fire("취소되었습니다.", "", "warning")
+        }
+    })
+}

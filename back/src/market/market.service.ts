@@ -242,6 +242,7 @@ export class MarketService {
               isTrade,
               price: { currency: 'MATIC', price },
               fee: { currency: 'MATIC', price: price * 0.01 },
+              krw: (Math.floor(price * this.currencyPrice * 1000) / 1000).toString(),
             };
           }),
       );

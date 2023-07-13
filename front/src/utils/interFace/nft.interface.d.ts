@@ -123,4 +123,5 @@ export interface INFTInfomationByMarket {
     image: string
     owner: string
     isTrade: string
+    krw: string
 }

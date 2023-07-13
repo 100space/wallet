@@ -11,7 +11,7 @@ POST {{server}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0x30dCDd4B7Fc87A31cC74F95f7f852C946dEe80A7"
+    "ca": "0xfDEAA448E37fFB0fc7aFB0C8FFD39b301926B325"
 }
 
 ### EOA를 기준으로 NFT들을 가져옵니다.
@@ -27,7 +27,7 @@ POST {{server}}/transaction HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0x690fa615930e0f077cf57726CD0D3dDF85fecc72",
+    "ca": "0xfDEAA448E37fFB0fc7aFB0C8FFD39b301926B325",
     "tokenId": 1
 }
 
@@ -36,7 +36,7 @@ POST {{server}}/info HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0x30dCDd4B7Fc87A31cC74F95f7f852C946dEe80A7",
+    "ca": "0x690fa615930e0f077cf57726CD0D3dDF85fecc72",
     "tokenId": 1
 }
 
