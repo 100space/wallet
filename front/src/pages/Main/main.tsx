@@ -39,33 +39,33 @@ export const MainPage = () => {
   const [myNft, setMyNft] = useRecoilState(MyNFT)
   const myAccounts = useRecoilValue(MyAccounts)
   const nftin = useNFTin()
-
-  const getMyCoins = async () => {
-    if (nftin === null) return null
-    const myCoins = myInfo[network as keyof typeof myInfo].tokens
-    console.log(myCoins, 2)
-    const result = await Promise.all(
-      myCoins.map(async (v: any) => {
-        // const provider = new ethers.JsonRpcProvider(process.env.REACT_APP_MUMBAI_NETWORK)
-        const provider = nftin.provider
-        const abi = [
-          "function decimals() view returns (string)",
-          "function symbol() view returns (string)",
-          "function balanceOf(address addr) view returns (uint)",
-        ]
-        // String(v.ca), abi, provider
-
-        const contract = new Contract(String(v.ca), abi, provider)
-        const balance = await contract.balanceOf(myAccounts.address)
-        const amount = ethers.formatEther(balance)
-        return { symbol: v.symbol, amount: Number(amount) }
-      })
-    )
-    const { data } = await requestServer.post("trends/tokens", {
-      tokens: result,
-    })
-    return data
-  }
+    const getMyCoins = async () => {
+        if (nftin === null) return null
+        const myCoins = myInfo[network as keyof typeof myInfo].tokens
+        const result = await Promise.all(
+            myCoins.map(async (v: typeof myInfo, i: number) => {
+                const provider = nftin.provider
+                if (i === 0) {
+                    const balance = await provider.getBalance(myAccounts.address)
+                    const amount = ethers.formatEther(balance)
+                    return { symbol: v.symbol, amount: Number(amount) }
+                }
+                const abi = [
+                    "function decimals() view returns (string)",
+                    "function symbol() view returns (string)",
+                    "function balanceOf(address addr) view returns (uint)",
+                ]
+                const contract = new Contract(String(v.ca), abi, provider)
+                const balance = await contract.balanceOf(myAccounts.address)
+                const amount = ethers.formatEther(balance)
+                return { symbol: v.symbol, amount: Number(amount) }
+            })
+        )
+        const { data } = await requestServer.post("trends/tokens", {
+            tokens: result,
+        })
+        return data
+    }
 
   const getMyNft = async () => {
     if (nftin === null) return null
@@ -116,7 +116,6 @@ export const MainPage = () => {
         }
       }
     }
-
     fetchData()
     return () => {
       resetPopup()
@@ -129,4 +128,5 @@ export const MainPage = () => {
       <AssetsList tokenList={myTokens} nftList={myNft} />
     </>
   )
+
 }

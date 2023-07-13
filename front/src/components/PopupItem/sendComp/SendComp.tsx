@@ -70,25 +70,57 @@ export const SendComp = (props: {
           symbol,
           decimal,
         })
-
-        if (myInfo[network as keyof typeof myInfo].tokens.filter((v: any) => v.ca === response.data.ca).length === 0) {
-          console.log("add")
-          const updatedMyInfo = {
-            ...myInfo,
-            [network]: {
-              ...myInfo[network as keyof typeof myInfo],
-              tokens: [
-                ...myInfo[network as keyof typeof myInfo].tokens,
-                {
-                  ca: response.data.ca,
-                  symbol: response.data.symbol,
-                  decimal: response.data.decimal,
-                },
-              ],
-            },
-          }
-          setMyInfo({ ...updatedMyInfo })
-          return popupReset()
+                if (
+                    myInfo[network as keyof typeof myInfo].tokens.filter((v: any) => v.ca === response.data.ca)
+                        .length === 0
+                ) {
+                    console.log("add")
+                    const updatedMyInfo = {
+                        ...myInfo,
+                        [network]: {
+                            ...myInfo[network as keyof typeof myInfo],
+                            tokens: [
+                                ...myInfo[network as keyof typeof myInfo].tokens,
+                                {
+                                    ca: response.data.ca,
+                                    symbol: response.data.symbol,
+                                    decimal: response.data.decimal,
+                                },
+                            ],
+                        },
+                    }
+                    console.log(updatedMyInfo)
+                    setMyInfo({ ...updatedMyInfo })
+                    return popupReset()
+                }
+                return Alert.fire({ icon: "warning", title: "이미 추가된 토큰입니다." })
+            } catch (err) {
+                return Alert.fire({ icon: "warning", title: "올바른 값으로 다시 입력해주세요." })
+            }
+        } else if ((e.currentTarget as HTMLElement).className === "sendTransaction") {
+            try {
+                const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
+                if ((e.currentTarget[0] as HTMLFormElement).value.length !== 42) {
+                    console.log((e.currentTarget[0] as HTMLFormElement).value.length)
+                    return Alert.fire({ title: "계좌를 확인해주세요.", icon: "error" })
+                }
+                const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
+                const tx = {
+                    from: myAccounts.address,
+                    to: (e.currentTarget[0] as HTMLFormElement).value,
+                    value: valueInWei,
+                }
+                // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
+                console.log(tx)
+                const result = await nftin.sendTransaction(tx)
+                console.log(result)
+                setIsPopup({ ...isPopup, isOpen: false, contents: "" })
+            } catch (error: any) {
+                if (error.message.includes("insufficient funds")) {
+                    Alert.fire({ title: "잔액이 부족합니다.", icon: "error" })
+                }
+                console.log(error)
+            }
         }
         return Alert.fire({ icon: "warning", title: "이미 추가된 토큰입니다." })
       } catch (err) {
@@ -175,51 +207,50 @@ export const SendComp = (props: {
       </SendCompWrapper>
     ))
   }
-
-  return (
-    <form onSubmit={props.handler ? props.handler : handlerWeb3Fn} className={props.className}>
-      {inputList(props.inputArray)}
-      {props.settings ? (
-        <>
-          <MainnetBtnWrap>
-            <Btn
-              backgroundcolor="#feda4a"
-              color="white"
-              fontSize="1.5rem"
-              width="10rem"
-              height="4rem"
-              margin=""
-              mode=""
-              profile={"true"}
-            >
-              승인
-            </Btn>
-            <Btn
-              backgroundcolor="#878787"
-              color="#ffffff"
-              fontSize="1.5rem"
-              width="10rem"
-              height="4rem"
-              margin=""
-              mode=""
-              onClick={() => navigator("/setting")}
-              profile={"true"}
-            >
-              취소
-            </Btn>
-          </MainnetBtnWrap>
-        </>
-      ) : (
-        <Button
-          width={"70%"}
-          height={"5rem"}
-          mode={mode}
-          margin="3rem auto 0 "
-          content={props.BtnContent}
-          fontSize="1.6rem"
-          color="#ffffff"
-        ></Button>
-      )}
-    </form>
-  )
+    return (
+        <form onSubmit={props.handler ? props.handler : handlerWeb3Fn} className={props.className}>
+            {inputList(props.inputArray)}
+            {props.settings ? (
+                <>
+                    <MainnetBtnWrap>
+                        <Btn
+                            backgroundcolor="#feda4a"
+                            color="#2d2d2d"
+                            fontSize="1.5rem"
+                            width="10rem"
+                            height="4rem"
+                            margin=""
+                            mode=""
+                            profile={"true"}
+                        >
+                            승인
+                        </Btn>
+                        <Btn
+                            backgroundcolor="#878787"
+                            color="#ffffff"
+                            fontSize="1.5rem"
+                            width="10rem"
+                            height="4rem"
+                            margin=""
+                            mode=""
+                            onClick={() => navigator("/setting")}
+                            profile={"true"}
+                        >
+                            취소
+                        </Btn>
+                    </MainnetBtnWrap>
+                </>
+            ) : (
+                <Button
+                    width={"70%"}
+                    height={"5rem"}
+                    mode={mode}
+                    margin="3rem auto 0 "
+                    content={props.BtnContent}
+                    fontSize="1.6rem"
+                    color="#ffffff"
+                ></Button>
+            )}
+        </form>
+    )
 }

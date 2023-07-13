@@ -3,6 +3,7 @@ import { ErrorPage } from "@common/error"
 import { BackBtnHeader } from "@common/header/BackBtnHeader"
 import { LoadingHeader } from "@common/header/LoadingHeader"
 import { LoadingBar } from "@components/loading"
+import StepLoader from "@components/loading/stepLoading"
 import requestServer from "@utils/axios/requestServer"
 import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
 import { SelectedCollection } from "@utils/localStorage"
@@ -18,13 +19,13 @@ export const NFTCollection = () => {
     const [nfts, setNfts] = useState({
         isLoading: false,
         isError: null as null | unknown,
-        data: [] as INFTCardByMarket[]
+        data: [] as INFTCardByMarket[],
     })
 
     const getNFTs = async (contractAddress: string) => {
-        setNfts(prev => ({ isLoading: true, isError: null, data: [...prev.data] }))
+        setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
-            const response = await requestServer.post('/market', { ca: contractAddress })
+            const response = await requestServer.post("/market", { ca: contractAddress })
             setNfts({ isLoading: false, isError: null, data: [...response.data] })
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -34,7 +35,7 @@ export const NFTCollection = () => {
     }
 
     const clickBackBtn = (e: MouseEvent) => {
-        navigate('/market')
+        navigate("/market")
     }
 
     const createPath = (pathname: string) => {
@@ -46,12 +47,13 @@ export const NFTCollection = () => {
         getNFTs(createPath(location.pathname))
     }, [])
 
-    if (nfts.isLoading) return (
-        <>
-            <LoadingHeader />
-            <LoadingBar />
-        </>
-    )
+    if (nfts.isLoading)
+        return (
+            <>
+                <LoadingHeader />
+                <StepLoader />
+            </>
+        )
     if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>

@@ -66,35 +66,37 @@ export const MyTokens = atom({
 })
 
 export const MyInfo = atom({
-  key: "myInfo",
-  default: {
-    polygon: {
-      networks: { rpc: "https://polygon-mainnet.infura.io", chainId: 137, symbol: "MATIC" },
-      tokens: [
-        {
-          ca: "0x0000000000000000000000000000000000001010",
-          symbol: "MATIC",
-          decimal: 18,
+    key: "myInfo",
+    default: {
+        polygon: {
+            networks: { rpc: "https://polygon-mainnet.infura.io", chainId: 137, symbol: "MATIC" },
+            tokens: [
+                {
+                    ca: "",
+                    symbol: "MATIC",
+                    decimal: 18,
+                },
+            ],
         },
-      ],
-    },
-    mumbai: {
-      networks: { rpc: "https://polygon-mumbai.infura.io", chainId: 80001, symbol: "MATIC" },
-      tokens: [
-        {
-          ca: "0x0000000000000000000000000000000000001010",
-          symbol: "MATIC",
-          decimal: 18,
+        mumbai: {
+            networks: { rpc: "https://polygon-mumbai.infura.io", chainId: 80001, symbol: "MATIC" },
+            tokens: [
+                {
+                    ca: "",
+                    symbol: "MATIC",
+                    decimal: 18,
+                },
+            ],
         },
-      ],
-    },
-    arbitrum: {
-      networks: { rpc: "https://arbitrum-goerli.infura.io", chainId: 421613, symbol: "AGOR" },
-      tokens: [
-        {
-          ca: "0xa70a52cDdB85e8B6f695A7363d871DFC153A0CDE",
-          symbol: "AGOR",
-          decimal: 18,
+        arbitrum: {
+            networks: { rpc: "https://arbitrum-goerli.infura.io", chainId: 421613, symbol: "AGOR" },
+            tokens: [
+                {
+                    ca: "",
+                    symbol: "AGOR",
+                    decimal: 18,
+                },
+            ],
         },
       ],
     },
@@ -103,8 +105,10 @@ export const MyInfo = atom({
 })
 
 export const MyNetwork = atom({
-  key: "myNetwork",
-  default: "mumbai",
+    key: "myNetwork",
+    default: "mumbai",
+    effects_UNSTABLE: [persistAtom],
+
 })
 
 export const MyNFT = atom({

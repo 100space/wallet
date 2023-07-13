@@ -12,9 +12,6 @@ export const AccountRowWrap = styled.div<ISizeProps>`
     background-color: ${({ mode, theme }) => mode && theme[mode].bgBasic};
     box-sizing: border-box;
     margin: 0 auto;
-    & + & {
-        margin-top: 2rem;
-    }
     & > div,
     svg {
         font-size: 1.4rem;
