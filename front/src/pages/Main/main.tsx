@@ -43,7 +43,6 @@ export const MainPage = () => {
     const getMyCoins = async () => {
         if (nftin === null) return null
         const myCoins = myInfo[network as keyof typeof myInfo].tokens
-        console.log(myCoins, 2)
         const result = await Promise.all(
             myCoins.map(async (v: typeof myInfo, i: number) => {
                 const provider = nftin.provider
@@ -123,6 +122,7 @@ export const MainPage = () => {
             resetPopup()
         }
     }, [nftin, myInfo, network])
+
     return (
         <>
             <TotalSupply></TotalSupply>
