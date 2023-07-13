@@ -7,18 +7,18 @@ import { NFTByCollection } from "@utils/localStorage"
 import { useNavigate } from "react-router"
 
 export const NFTCardList = (props: { nftCards: INFTCardByMarket[]; setNftCa?: SetterOrUpdater<string> }) => {
-    const [nftInfo, setNftInfo] = useRecoilState(NFTByCollection)
-    const navigate = useNavigate()
+  const [nftInfo, setNftInfo] = useRecoilState(NFTByCollection)
+  const navigate = useNavigate()
 
-    const clickNftCard = (e: MouseEvent, ca: string, tokenId: number) => {
-        e.preventDefault()
-        setNftInfo({ ca, tokenId })
-        navigate(`/info/nft/${ca}/${tokenId}`)
-    }
+  const clickNftCard = (e: MouseEvent, ca: string, tokenId: string) => {
+    e.preventDefault()
+    setNftInfo({ ca, tokenId })
+    navigate(`/info/nft/${ca}/${tokenId}/ERC 721`)
+  }
 
-    const nftCards = (nftCards: INFTCardByMarket[]) => {
-        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" onClick={clickNftCard} />)
-    }
+  const nftCards = (nftCards: INFTCardByMarket[]) => {
+    return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" onClick={clickNftCard} />)
+  }
 
-    return <NFTCardListWrap>{nftCards(props.nftCards)}</NFTCardListWrap>
+  return <NFTCardListWrap>{nftCards(props.nftCards)}</NFTCardListWrap>
 }

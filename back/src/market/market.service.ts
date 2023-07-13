@@ -303,12 +303,14 @@ export class MarketService {
         image,
         marketId: 0,
         owner,
+        nftAddress: ca,
         tokenId,
         prices: [
           { currency: 'KRW', price: 0 },
           { currency: 'MATIC', price: 0 },
         ],
         isSoldOut: false,
+        tokenStandard,
       };
     }
 
@@ -323,12 +325,14 @@ export class MarketService {
         image,
         marketId: 0,
         owner: 'unknown',
+        nftAddress: ca,
         tokenId,
         prices: [
           { currency: 'KRW', price: 0 },
           { currency: 'MATIC', price: 0 },
         ],
         isSoldOut: false,
+        tokenStandard,
       };
     }
   }

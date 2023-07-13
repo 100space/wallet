@@ -11,6 +11,7 @@ import { usePopup } from "@hooks/usePopup"
 import { NavLink, useNavigate } from "react-router-dom"
 
 export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCardByMarket[] }) => {
+  const navigate = useNavigate()
   const [selected, setSelected] = useState([true, false])
   const [{ isOpen, contents }, setPopUp] = usePopup()
   const [modeState, setModeState] = useGetMode()
@@ -18,17 +19,14 @@ export const AssetsList = (props: { tokenList?: ITokenRow[]; nftList?: INFTCardB
     return tokens.map((v, index) => <TokenRow key={index} token={v} />)
   }
 
+  const nftClick = (e: MouseEvent, ca: string, tokenId: string, tokenStandard: string) => {
+    navigate(`/info/nft/${ca}/${tokenId}/${tokenStandard}`)
+  }
+
   const nftCardsList = (nftCards: INFTCardByMarket[]) => {
-    return nftCards.map((v, index) => (
-      <NftCard
-        key={index}
-        nftInfo={v}
-        className="card"
-        onClick={function (e: MouseEvent<Element, globalThis.MouseEvent>, ca: string, tokenId: number): void {
-          throw new Error("Function not implemented.")
-        }}
-      />
-    ))
+    return nftCards.map((v, index) => {
+      return <NftCard key={index} nftInfo={v} className="card" onClick={nftClick} />
+    })
   }
 
   const handleClick = (e: MouseEvent, index: number) => {
