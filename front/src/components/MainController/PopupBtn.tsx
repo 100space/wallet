@@ -14,6 +14,7 @@ export const checkTransactonList = [{ content: "송금하기" }, { content: "입
 export const PopupBtn = () => {
     const [{ isOpen, contents }, setPopup] = usePopup()
     const [modeState, setModeState] = useGetMode()
+
     const renderMainPopupBtn = (popArray: IPopList[]) => {
         return popArray.map((v, index, array) => {
             return (

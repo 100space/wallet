@@ -46,10 +46,20 @@ describe('AccountService', () => {
   describe('createAccount', () => {
     it('니모닉으로 계정이 잘 생성되는가?', () => {
       const mnemonic = [
-        'join', 'cradle', 'frog', 'loan', 'loop', 'disease', 'involve', 'galaxy', 'case', 'panel', 'moon', 'hip'
+        'buddy',
+        'syrup',
+        'enrich',
+        'speed',
+        'more',
+        'laptop',
+        'winter',
+        'potato',
+        'cabbage',
+        'report',
+        'history',
+        'right',
       ];
       const wallet = service.createWalletByMnemonic({ mnemonic });
-      console.log(wallet)
       expect(wallet).toBeTruthy();
     });
 

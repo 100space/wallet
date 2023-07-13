@@ -63,7 +63,7 @@ export class MarketService {
             {
               currency: this.currency,
               price:
-                Math.floor(v.floorPrice * this.currencyPrice * 1000) / 1000,
+                Math.floor(v.floorPrice * 1000) / 1000,
             },
           ],
         };
