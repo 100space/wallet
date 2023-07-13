@@ -50,7 +50,8 @@ export const theme = {
         footerColor: "#92baff",
         categoryHover: "#2f5f81",
         bringBg: "#47607d",
-        accountBg: "#e55665"
+        accountBg: "#e55665",
+        accountHover: "#8d2b35",
     },
     lightMode: {
         // 배경색
@@ -96,12 +97,13 @@ export const theme = {
         // // 버튼관련 색상
         bringBg: "#224563",
         buttonBg: "#3f95f8",
-        buttonHover: "#5637f1",
+        buttonHover: "#8296fb",
         popupBtnBg: "#b3c4f1",
         footerColor: "#2c60ba",
         categoryHover: "#ffe679",
         accountBg: "#166d96",
         sendText: "#fff",
         filterBtn: "#f3db86",
+        accountHover: "#0e435c"
     },
 }
