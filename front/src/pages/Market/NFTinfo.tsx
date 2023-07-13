@@ -1,9 +1,9 @@
 import { NftInfomation, NftStandardInformation } from "@common/Infomation"
 import { NftTxList } from "@common/List"
-import { NftStatus } from "@common/NftStatus"
 import { ErrorPage } from "@common/error"
 import { BackBtnHeader } from "@common/header/BackBtnHeader"
 import { LoadingHeader } from "@common/header/LoadingHeader"
+import { TxBtn } from "@components/Button"
 import { LoadingBar } from "@components/loading"
 import { ImageForm, PlatWrap } from "@styled/index"
 import requestServer from "@utils/axios/requestServer"
@@ -95,6 +95,7 @@ export const NFTInfoPage = () => {
             <PlatWrap mode={mode}>
                 <NftTxList txList={transaction.data} />
             </PlatWrap>
+            <TxBtn />
         </>
     )
 }

@@ -30,3 +30,9 @@ export const NftBoardButton = styled.button<IonClickProps>`
     border-radius: 0.4rem;
     background-color: ${({ theme, mode }) => mode && theme[mode].bg200};
 `
+
+export const NftBoardButtonWrap = styled.div<ISizeProps>`
+    & > button {
+        margin-left: 1rem;
+    }
+`

@@ -6,9 +6,6 @@ import { useOpenHandler } from "@hooks/useOpen"
 export const NftTxList = (props: { txList: ITransaction[] }) => {
     const [isOpen, handleClose] = useOpenHandler()
 
-    console.log(props.txList)
-
-
     const txList = (transactionList: ITransaction[]) => {
         return transactionList.map((v, i) => {
             return <TransactionRow
@@ -30,11 +27,8 @@ export const NftTxList = (props: { txList: ITransaction[] }) => {
     return (
         <>
             <Board>
-                <NftBoardHeader text={["거래내역", "접기"]} onClick={handleClose} />
+                <NftBoardHeader text={["거래내역", "자세히 보기", "접기"]} onClick={handleClose} />
                 {txList(props.txList)}
-                {/* <NftTxListButton>
-                    <NftBoardButton mode={modeState.mode}>거래내역 더보기</NftBoardButton>
-                </NftTxListButton> */}
             </Board>
         </>
     )
