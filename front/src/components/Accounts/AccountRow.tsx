@@ -63,7 +63,9 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
                 </AccountRowAddress>
             </AccountAdWrap>
             <AccountAssets width={"30%"}>
-                <TextComp fontSize="1.6rem">{props.account.asset.amount + " " + props.account.asset.currency}</TextComp>
+                <TextComp fontSize="1.6rem">
+                    {Math.floor(props.account.asset.amount * 100000) / 100000 + " " + props.account.asset.currency}
+                </TextComp>
             </AccountAssets>
             <Icon
                 icon={"mi:delete"}
