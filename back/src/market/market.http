@@ -35,7 +35,7 @@ POST {{server}}/info HTTP/1.1
 Content-Type: application/json
 
 {
-    "ca": "0x4823Fd6809c4219e1c17Cd846a1FdD51Fe2f3D18",
+    "ca": "0xaDfda964738570BC12E975919eD36eDF3136Bb4C",
     "tokenId": 1
 }
 

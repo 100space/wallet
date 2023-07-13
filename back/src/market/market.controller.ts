@@ -82,8 +82,8 @@ export class MarketController {
 
   @Put()
   @ApiOperation({
-    summary: 'CA와 TokenId에 해당하는 NFT를 추가합니다.',
-    description: 'CA와 TokenId에 해당하는 NFT를 추가합니다.',
+    summary: 'CA와 TokenId에 해당하는 NFT 정보를 가져옵니다.',
+    description: 'CA와 TokenId에 해당하는 NFT 정보를 가져옵니다.',
   })
   async addNft(
     @IsNFT() { tokenStandard }: { tokenStandard: string },

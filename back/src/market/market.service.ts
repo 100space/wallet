@@ -301,7 +301,7 @@ export class MarketService {
         name: nftName,
         description,
         image,
-        marketId: '0',
+        marketId: 0,
         owner,
         tokenId,
         prices: [
@@ -321,7 +321,7 @@ export class MarketService {
         name,
         description,
         image,
-        marketId: '0',
+        marketId: 0,
         owner: 'unknown',
         tokenId,
         prices: [
