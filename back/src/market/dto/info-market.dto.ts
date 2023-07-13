@@ -9,7 +9,7 @@ export class NftInfoDto {
 
   @ApiProperty({
     description: 'NFT의 ID',
-    default: 1,
+    default: '1',
   })
-  tokenId: number;
+  tokenId: string;
 }

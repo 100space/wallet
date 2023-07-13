@@ -6,7 +6,7 @@ import { NFTSearch } from "@components/Search"
 import { LoadingBar } from "@components/loading"
 import StepLoader from "@components/loading/stepLoading"
 import requestServer from "@utils/axios/requestServer"
-import { INFTCard, INFTStandard, INftInfomation } from "@utils/interFace/nft.interface"
+import { INFTCard, INFTCardByMarket, INFTStandard, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { SelectedCollection } from "@utils/localStorage"
 import axios from "axios"
@@ -21,7 +21,7 @@ export const MarketPage = () => {
     const [nfts, setNfts] = useState({
         isLoading: false,
         isError: null as null | unknown,
-        data: [] as INFTCard[],
+        data: [] as INFTCardByMarket[],
     })
     const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
@@ -55,31 +55,28 @@ export const MarketPage = () => {
     return (
         <>
             <NFTSearch search={search} setSearch={setSearch} />
-            {
-                !search
-                    ?
-                    <>
-                        <Category
-                            category={"인기 컬렉션"}
-                            onClick={() => {
-                                navigator("/market/hot")
-                            }}
-                        />
-                        <NFTRowList nftRows={nfts.data} setNftCa={setNftCa} />
-                        <Category
-                            category={"최근 등록된 컬렉션"}
-                            onClick={() => {
-                                navigator("/market/new")
-                            }}
-                        />
-                        <NFTSlide nftCards={nfts.data} setNftCa={setNftCa} />
-                    </>
-                    :
-                    <>
-                        <NFTCardList nftCards={nfts.data} />
-                    </>
-            }
-
+            {!search ? (
+                <>
+                    <Category
+                        category={"인기 컬렉션"}
+                        onClick={() => {
+                            navigator("/market/hot")
+                        }}
+                    />
+                    <NFTRowList nftRows={nfts.data} setNftCa={setNftCa} />
+                    <Category
+                        category={"최근 등록된 컬렉션"}
+                        onClick={() => {
+                            navigator("/market/new")
+                        }}
+                    />
+                    <NFTSlide nftCards={nfts.data} setNftCa={setNftCa} />
+                </>
+            ) : (
+                <>
+                    <NFTCardList nftCards={nfts.data} />
+                </>
+            )}
         </>
     )
 }
