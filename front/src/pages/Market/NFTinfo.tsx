@@ -9,13 +9,15 @@ import { ImageForm, PlatWrap } from "@styled/index"
 import requestServer from "@utils/axios/requestServer"
 import { INFTInfomationByMarket } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
-import { ModeState } from "@utils/localStorage"
+import { ModeState, MyAccounts, NFTMarketId } from "@utils/localStorage"
 import axios from "axios"
 import { MouseEvent, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 
 export const NFTInfoPage = () => {
+    const { marketId } = useRecoilValue(NFTMarketId)
+    const { address } = useRecoilValue(MyAccounts)
     const { mode } = useRecoilValue(ModeState)
     const location = useLocation()
     const navigate = useNavigate()
@@ -46,7 +48,6 @@ export const NFTInfoPage = () => {
         setTransaction(prev => ({ isLoading: true, isError: null, data: [] }))
         try {
             const response = await requestServer.post('/market/transaction', { ca, tokenId })
-            console.log(response.data)
             setTransaction(prev => ({ isLoading: false, isError: null, data: response.data as ITransaction[] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -69,7 +70,6 @@ export const NFTInfoPage = () => {
         getTranscation(createPath(location.pathname))
     }, [])
 
-    console.log(transaction.data)
     if (nft.isLoading || !nft.data || transaction.isLoading || transaction.data.length === 0) return (
         <>
             <LoadingHeader />
@@ -95,7 +95,7 @@ export const NFTInfoPage = () => {
             <PlatWrap mode={mode}>
                 <NftTxList txList={transaction.data} />
             </PlatWrap>
-            <TxBtn />
+            <TxBtn marketId={marketId} myAddress={address} price={nft.data.price.price} />
         </>
     )
 }

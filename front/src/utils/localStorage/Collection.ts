@@ -16,3 +16,10 @@ export const NFTByCollection = atom({
         tokenId: 0,
     }
 })
+
+export const NFTMarketId = atom({
+    key: "marketId",
+    default: {
+        marketId: 0
+    }
+})

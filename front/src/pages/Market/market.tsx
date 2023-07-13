@@ -28,6 +28,7 @@ export const MarketPage = () => {
         setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
             const response = await requestServer.get("/market")
+            console.log(response.data)
             setNfts((prev) => ({ isLoading: false, isError: null, data: [...response.data] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {

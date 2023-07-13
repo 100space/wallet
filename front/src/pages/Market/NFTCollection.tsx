@@ -38,8 +38,8 @@ export const NFTCollection = () => {
     }
 
     const createPath = (pathname: string) => {
-        const url = pathname.split("/")
-        return url[url.length - 1]
+        const pathArr = pathname.split("/")
+        return pathArr[pathArr.length - 1]
     }
 
     useEffect(() => {
