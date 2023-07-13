@@ -1,5 +1,5 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfileNickNameWrap, MyProfileNickName, MyProfileNickNameBtn, MyProfile, TotalSupplyWrap, MyProfileImageUpload, MyProfileNickNameInput, MyBtnWrap } from "./styled"
+import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfileNickNameWrap, MyProfileNickName, MyProfileNickNameBtn, MyProfile, TotalSupplyWrap, MyProfileImageUpload, MyProfileNickNameInput} from "./styled"
 import { Btn } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
 import { useNavigate } from "react-router"
@@ -82,36 +82,33 @@ export const Mypage = () => {
             <MypageWrapper mode={modeState.mode}>
                 <MyProfile mode={modeState.mode}>
                     <MyProfileImg src={src} />
-                    <Icon icon="heroicons-solid:pencil-alt" onClick={handleFileUploadClick} cursor={"pointer"} />
+                    <Icon icon="iconoir:add-media-image" onClick={handleFileUploadClick} cursor={"pointer"} />
                 </MyProfile>
-                    <MyProfileNickNameWrap>
+                    <MyProfileNickNameWrap onClick={(e: MouseEvent) => handleUpdateClick(e)}>
                         {isChange
-                            ? <MyProfileNickNameInput value={value} height={"60%"} width={"70%"} onChange={handleInputChange} />
+                            ? <MyProfileNickNameInput mode={modeState.mode} value={value} height={"60%"} width={"70%"} onChange={handleInputChange} />
                             : <MyProfileNickName width={"70%"} mode={modeState.mode} height={"60%"}>
                                 {myAccounts.alias}
                             </MyProfileNickName>
                         }
-                        <MyBtnWrap>
-                            <Btn
-                            width={"20%"}
-                            height={"60%"}
-                            backgroundcolor="#fff"
-                            mode=""
-                            onClick={(e: MouseEvent) => handleUpdateClick(e)}
-                            fontSize="1.7rem"
-                            profile={"true"}
-                            color="black"
-                            >
-                            {isChange ? "취소" : "변경"}
+                        <Btn
+                        width={"20%"}
+                        height={"60%"}
+                        backgroundcolor="#707070c3"
+                        mode=""
+                        fontSize="1.7rem"
+                        profile={"true"}
+                        color="white"
+                        >
+                        {isChange ? "취소" : "변경"}
                         </Btn>
-                    </MyBtnWrap>
                     </MyProfileNickNameWrap>
                     <TotalSupplyWrap>
                         <TotalSupply />
                     </TotalSupplyWrap>
                     <ProfileBtnWrap>
                         <Btn
-                            backgroundcolor={isChange ? "#5484c8" : "#fff"}
+                            backgroundcolor={isChange ? "#3a6fcb" : "#484848"}
                             width="47.5%"
                             height="5rem"
                             margin=""
@@ -119,13 +116,13 @@ export const Mypage = () => {
                             onClick={(e: MouseEvent) => handlePostClick(e)}
                             fontSize="1.7rem"
                             profile={"true"}
-                            color={isChange ? "white" : "black"}
+                            color="white"
                             disabled={!isChange}
                             >
                             {"저장 하기"}
                         </Btn>
                         <Btn
-                            backgroundcolor="#fff"
+                            backgroundcolor="#959595"
                             width="47.5%"
                             height="5rem"
                             margin=""
@@ -133,7 +130,8 @@ export const Mypage = () => {
                             onClick={(e: MouseEvent) => handleButtonClick(e)}
                             fontSize="1.7rem"
                             profile={"true"}
-                            color="black"
+                            color="white"
+
                             >
                             {"계정 잠금"}
                         </Btn>

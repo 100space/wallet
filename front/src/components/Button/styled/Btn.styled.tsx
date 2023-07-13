@@ -18,7 +18,11 @@ export const Btn = styled.button<IProfileBtn>`
     }
     transition: all 0.2s ease-out;
     &:disabled {
-        background: ${({ theme, mode }) => mode && theme[mode].basicBg};
+        color: ${({ theme, mode }) => mode && theme[mode].text};
+        background: ${({ backgroundcolor, theme, mode }) =>  backgroundcolor || (mode && theme[mode].buttonBg)};
+    }
+    &:disabled:active{
+        background: ${({ mode, theme }) => mode && theme[mode].buttonHover};
     }
 `
 
@@ -31,6 +35,9 @@ export const TokenListBtnWrap = styled.div<ISizeProps>`
     height: ${({ height }) => height || "100%"};
     background: ${({ mode, theme }) => mode && theme[mode].tokenBg};
     border-radius: 1rem;
+    &:active{
+        background: ${({ mode, theme }) => mode && theme[mode].buttonHover};
+    }
 `
 
 export const TokenListButton = styled.button<IonClickProps>`
@@ -45,6 +52,6 @@ export const TokenListButton = styled.button<IonClickProps>`
     color: ${({ mode, theme }) => mode && theme[mode].text};
     background: ${({ mode, theme }) => mode && theme[mode].tokenBg};
     &:active {
-        background: ${({ mode, theme }) => mode && theme[mode].tokenBg};
+        background: ${({ mode, theme }) => mode && theme[mode].buttonHover};
     }
 `

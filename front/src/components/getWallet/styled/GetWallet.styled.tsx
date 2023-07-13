@@ -21,7 +21,7 @@ export const GetWalletSub = styled.div<ISizeProps>`
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    color: #fff;
+    color: ${({ mode, theme }) => mode && theme[mode].text};
 `
 
 export const WalletInfoWrap = styled.form`

@@ -62,7 +62,10 @@ export const TextComp = styled.div<TextProps>`
         border-radius: 1rem;
         font-size: 1.2rem !important;
         background-color: ${({ theme, mode }) => mode && theme[mode].accountBg};
-        color: ${({ color, theme, mode }) => color || (mode && theme[mode].sendText)} 
+        color: ${({ color, theme, mode }) => color || (mode && theme[mode].sendText)} ;
+        &:active{
+        background: ${({ mode, theme }) => mode && theme[mode].accountHover};
+        }
     }
 `
 

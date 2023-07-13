@@ -25,4 +25,7 @@ export const PopupWrap = styled.div<ISizeProps>`
     align-items: center;
     font-size: 1.3rem;
     font-weight: 600;
+    &:active{
+        background: ${({ mode, theme }) => mode && theme[mode].buttonHover};
+    }
 `
