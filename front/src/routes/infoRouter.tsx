@@ -5,10 +5,10 @@ import { Route, Routes } from "react-router"
 import { useRecoilValue } from "recoil"
 
 export const InfoRouter = () => {
-    return (
-        <Routes>
-            <Route path={"nft/:ca/:tokenId"} element={<NFTInfoPage />}></Route>
-            <Route path="coin/:id" element={<CoinInfoPage />}></Route>
-        </Routes>
-    )
+  return (
+    <Routes>
+      <Route path={"nft/:ca/:tokenId/:tokenStandard"} element={<NFTInfoPage />}></Route>
+      <Route path="coin/:id" element={<CoinInfoPage />}></Route>
+    </Routes>
+  )
 }

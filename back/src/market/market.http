@@ -99,3 +99,22 @@ Content-Type: application/json
 # VitiDiary Utility NFT 
 # 0x29Ba2441Cc4a5Da648f9abb284bc99FDF94dc446
 # https://metdata.vitidiary.com/utility/1.json
+
+### ERC 721 Info
+POST {{server}}/erc721
+Content-Type: application/json
+
+{
+    "eoa": "0x7435fc2f2782218210200188A3Cccc96Fb98A966",
+    "ca": "0x7232094AFC469C7EAd50E3dc595b0A2726FE51A6",
+    "tokenId": "721"
+}
+
+### ERC 1155 Info
+POST {{server}}/erc1155
+Content-Type: application/json
+
+{
+    "ca": "0x2953399124F0cBB46d2CbACD8A89cF0599974963",
+    "tokenId": "113448061644446547694365664957524378526944481393750401766106162405003189288961"
+}

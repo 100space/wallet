@@ -4,6 +4,7 @@ import { NFTSlide } from "@common/slide/NFTSlide"
 import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
 import { LoadingBar } from "@components/loading"
+import StepLoader from "@components/loading/stepLoading"
 import requestServer from "@utils/axios/requestServer"
 import { INFTCard, INFTStandard, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
@@ -49,7 +50,7 @@ export const MarketPage = () => {
         getNFTs()
     }, [])
 
-    if (nfts.isLoading) return <LoadingBar />
+    if (nfts.isLoading) return <StepLoader />
     if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>

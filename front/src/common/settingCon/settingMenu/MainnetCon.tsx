@@ -18,7 +18,7 @@ export const MainnetCon = () => {
     const navigate = useNavigate()
     const path = location.pathname.split("/")
     const currentPath = path[path.length - 1]
-
+    const apiKey = process.env.REACT_APP_INFURA_KEY
     const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const network = (e.currentTarget[0] as HTMLInputElement).value
@@ -45,6 +45,8 @@ export const MainnetCon = () => {
             if (!info.hasOwnProperty(network)) {
                 setInfo({ ...info, ...newInfo })
             }
+            const cookie = network === "arbitrum" ? "arbitrum_goerli" : network
+            document.cookie = `network=${cookie}`
             setNetwork(network)
             myTokenReset()
             navigate("/")

@@ -233,3 +233,9 @@ NAME=hello
 # polygon mumbai testnet ca
 
 - 0xfAD153d059F9dA994F1688b3333f2Fb415682a14
+
+# mongodb 외부 파일 import
+
+```bash
+mongoimport -d dbName -c collectionName --file fileName.json --jsonArray --port 27017 -u user -p passwd --authenticationDatabase admin
+```

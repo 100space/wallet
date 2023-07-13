@@ -2,13 +2,7 @@ import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
 import { NavLink } from "react-router-dom"
 
-const NetWorkPageList = [
-    { NetWorkSub: "Mumbai" },
-    { NetWorkSub: "Arbitrum" },
-    { NetWorkSub: "Polygon" },
-    { NetWorkSub: "BNB(Binance Smart)" },
-    { NetWorkSub: "Pantom Opera" },
-]
+const NetWorkPageList = [{ NetWorkSub: "Mumbai" }, { NetWorkSub: "Arbitrum" }, { NetWorkSub: "Polygon" }]
 
 export const NetWorkPage = () => {
     return (
