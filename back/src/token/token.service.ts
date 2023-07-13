@@ -1,23 +1,75 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  BadGatewayException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
+import { TokenRepository } from './token.repository';
+import { AddTokenDto } from './dto';
 
 @Injectable()
 export class TokenService {
   private readonly logger = new Logger(TokenService.name);
-  constructor(private readonly httpService: HttpService) {}
+  private readonly baseUrl = 'https://api.coingecko.com/api/v3';
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly tokenRepository: TokenRepository,
+  ) {}
 
-  async getToken({ contractAddress }) {
-    const { data } = await firstValueFrom(
-      this.httpService.get(`coins/ethereum/contract/${contractAddress}`).pipe(
-        catchError((error: AxiosError) => {
-          this.logger.error(error.response.data);
-          throw 'Coin Gecko Error';
-        }),
-      ),
+  async addToken({ networkInfo, ca, symbol, decimal }: AddTokenDto) {
+    try {
+      const response = await this.tokenRepository.findOne({ ca });
+      if (response === null) {
+        if (networkInfo.chainId === 1) {
+          const { image } = await this.findImageFromCoingecko({ ca });
+          const response = this.tokenRepository.create({
+            ca,
+            symbol,
+            decimal,
+            image,
+          });
+          return response;
+        }
+
+        const response = this.tokenRepository.create({
+          ca,
+          symbol,
+          decimal,
+          image: `image` + Math.floor(Math.random() * 10),
+        });
+        return response;
+      }
+
+      return response;
+    } catch (error) {
+      throw new InternalServerErrorException('Unable to add token', {
+        cause: new Error(),
+        description: 'Add Token Error',
+      });
+    }
+  }
+
+  async findImageFromCoingecko({ ca }) {
+    const {
+      data: {
+        image: { large: image },
+      },
+    } = await firstValueFrom(
+      this.httpService
+        .get(`${this.baseUrl}/coins/ethereum/contract/${ca}`)
+        .pipe(
+          catchError((error: AxiosError) => {
+            this.logger.error(error.response.data);
+            throw new BadGatewayException('Unable to get token image', {
+              cause: new Error(),
+              description: 'Coingecko Error',
+            });
+          }),
+        ),
     );
-
-    return { image: data.image };
+    return { image };
   }
 }

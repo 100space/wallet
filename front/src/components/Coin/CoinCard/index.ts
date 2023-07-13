@@ -1,1 +1,2 @@
-export * from "./CoinCard" 
+export * from "./CoinCard"
+export * from "./styled"

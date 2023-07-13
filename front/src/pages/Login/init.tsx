@@ -2,7 +2,7 @@ import { InitStepPage } from "@common/initStep"
 import { Alert } from "@components/Alert/alert"
 import { Button } from "@components/Button/Btn"
 import { useGetMode } from "@hooks/useMode"
-import { InitMode, IsCheck, MyAccount } from "@utils/localStorage"
+import { InitMode, IsCheck, MyProfile } from "@utils/localStorage"
 import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
@@ -12,7 +12,8 @@ export const InitPage = () => {
     const [manageMode, setManageMode] = useRecoilState(InitMode)
     const isCheck = useRecoilValue(IsCheck)
     const resetIsCheck = useResetRecoilState(IsCheck)
-    const resetMyAccount = useResetRecoilState(MyAccount)
+    const resetMyAccount = useResetRecoilState(MyProfile)
+    const resetMyProfile = useResetRecoilState(MyProfile)
     const [modeState, setChange] = useGetMode()
     const currentRef = useRef(null)
     const navigate = useNavigate()
@@ -20,11 +21,11 @@ export const InitPage = () => {
     const reset = () => {
         resetIsCheck()
         resetMyAccount()
+        resetMyProfile()
     }
     const handleClick = (step: string) => {
         switch (step) {
             case "step1":
-                console.log(isCheck)
                 if (!isCheck.step1) return Alert.fire({ icon: "error", title: "주의사항을 확인해주세요" })
                 return setManageMode({
                     ...manageMode,
@@ -57,7 +58,7 @@ export const InitPage = () => {
     }
     useEffect(() => {
         if (manageMode.initMode === "") navigate("/login")
-        reset()
+        // reset()
         setManageMode({
             ...manageMode,
             initStep: manageMode.initMode === "create" ? "step1" : manageMode.initMode === "manage" ? "step2" : "step1",
@@ -74,9 +75,11 @@ export const InitPage = () => {
                     margin={"0 auto"}
                     fontSize={"1.4rem"}
                     content={"홈으로"}
-                    backgroundColor={"#e3e3e3"}
+                    backgroundcolor={"#fdfdfd"}
                     mode={modeState.mode}
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/login")}
+                    color={"#4690ff"}
+
                 />
                 <Button
                     width={"65%"}

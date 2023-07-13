@@ -1,3 +1,4 @@
+import { useGetMode } from "@hooks/useMode"
 import { ICoinName } from "@utils/interFace/coin.interface"
 import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
@@ -45,7 +46,8 @@ export const CoinCardHeaderSymbol = styled.div<ISizeProps>`
     margin-bottom: 0.25rem;
     width: ${(props) => props.width || "100%"};
     height: ${(props) => props.height || "1.6rem"};
-    color: ${(props) => props.theme[mode].textCoinSymbol};
+    /* background-color: ${({ theme, mode }) => mode && theme[mode]}; */
+    color: ${({ theme, mode }) => mode && theme[mode].coinCardHeader};
     font-size: 1.6rem;
     font-style: italic;
     font-weight: 700;
@@ -61,7 +63,9 @@ export const CoinCardHeaderName = styled.div<ISizeProps>`
 
 
 
-export const CoinCardHeader = ({image, symbol, name}: ICoinName) => {
+export const CoinCardHeader = ({ image, symbol, name }: ICoinName) => {
+    const [modeState, setModeState] = useGetMode()
+
     return (
         <CoinCardHeaderWrap width={"12rem"} height="35%">
             <CoinCardHead width="85%" height="60%">
@@ -69,8 +73,8 @@ export const CoinCardHeader = ({image, symbol, name}: ICoinName) => {
                     <CoinCardHeaderImg src={image} />
                 </CoinCardHeaderImgWrap>
                 <CoinCardHeaderContentWrap>
-                    <CoinCardHeaderSymbol>
-                        {symbol}
+                    <CoinCardHeaderSymbol mode={modeState.mode}>
+                        {symbol.toUpperCase()}
                     </CoinCardHeaderSymbol>
                     <CoinCardHeaderName>
                         {name}

@@ -1,61 +1,82 @@
-import { NftInfo } from "@common/NftInfo"
-import { NftStatus } from "@common/NftStatus"
-import { NftCard, NftRow } from "@components/Nft"
-import { TransactionRow } from "@components/Transaction"
-import { INFTRow, INFTStauts, INftInfomation } from "@utils/interFace/nft.interface"
+import { NFTCardList, NFTRowList } from "@common/List"
+import { ErrorPage } from "@common/error"
+import { NFTSlide } from "@common/slide/NFTSlide"
+import { Category } from "@components/Category"
+import { NFTSearch } from "@components/Search"
+import { LoadingBar } from "@components/loading"
+import StepLoader from "@components/loading/stepLoading"
+import requestServer from "@utils/axios/requestServer"
+import { INFTCard, INFTCardByMarket, INFTStandard, INftInfomation } from "@utils/interFace/nft.interface"
 import { ITransaction } from "@utils/interFace/transaction.interface"
-
-const data = {
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
-
-const data2: INFTRow = {
-    rank: 11,
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
-
-const data3: ITransaction = {
-    state: "sender",
-    opponent: "0x00000000000000000000000000000000000000000000000000000",
-    timestamp: "7월21일",
-    amounts: [{currency: "KRW", amount: 4500}, {currency: "ETH", amount: 0.0005}]
-}
-
-const data4: INFTStauts = {
-    blockchain :["블록체인", ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"]],
-    supply :["발행량", "100개"],
-    isTrade :["거래가능", "99개"],
-    isSell :["판매중", "50개"],
-}
-
-const data5: INftInfomation = {
-    owner: ["소유자", "0xasdgasdgasdgasdgasdgasdgasdgasdg"],
-    blockchain :["블록체인", ["https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912", "Polygon"]],
-    ca: ["계약주소", "0xagdsdgasdgasdgasdgasdgasdg"],
-    tokenId: ["토큰 ID", 50],
-    tokenStandard: ["토큰 표준", "ERC 1155"]
-}
+import { SelectedCollection } from "@utils/localStorage"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router"
+import { useRecoilState } from "recoil"
 
 export const MarketPage = () => {
+    const navigator = useNavigate()
+    const location = useLocation()
+    const [search, setSearch] = useState("")
+    const [nfts, setNfts] = useState({
+        isLoading: false,
+        isError: null as null | unknown,
+        data: [] as INFTCardByMarket[],
+    })
+    const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
+
+    const getNFTs = async () => {
+        setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
+        try {
+            const response = await requestServer.get("/market")
+            console.log(response.data)
+            setNfts((prev) => ({ isLoading: false, isError: null, data: [...response.data] }))
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                setNfts({ isLoading: false, isError: e.response, data: [] })
+            }
+        }
+    }
+
+    const getSearchValue = (pathName: string) => {
+        return pathName.split("=")[1]
+    }
+
+    useEffect(() => {
+        getSearchValue(location.search)
+    }, [search])
+
+    useEffect(() => {
+        getNFTs()
+    }, [])
+
+    if (nfts.isLoading) return <StepLoader />
+    if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
-            {/* <NftCard nftInfo={data}/>
-            <NftRow nftInfo={data2}/>
-            <TransactionRow txInfo={data3} /> */}
-            {/* <NftStatus nftStatus={data4}/> */}
-            <NftInfo nftInfo={data5} />
+            <NFTSearch search={search} setSearch={setSearch} />
+            {!search ? (
+                <>
+                    <Category
+                        category={"인기 컬렉션"}
+                        onClick={() => {
+                            navigator("/market/hot")
+                        }}
+                    />
+                    <NFTRowList nftRows={nfts.data} setNftCa={setNftCa} />
+                    <Category
+                        category={"최근 등록된 컬렉션"}
+                        onClick={() => {
+                            navigator("/market/new")
+                        }}
+                    />
+                    <NFTSlide nftCards={nfts.data} setNftCa={setNftCa} />
+                </>
+            ) : (
+                <>
+                    <NFTCardList nftCards={nfts.data} />
+                </>
+            )}
         </>
     )
 }

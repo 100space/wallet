@@ -41,7 +41,10 @@ resource "aws_instance" "db" {
     Name = "${var.project}-db-server"
   }
 
-  user_data = templatefile("${path.module}/scripts/mongodb.tftpl", { user_name = "cloudcoke", passwd = "1" })
+  user_data = templatefile("${path.module}/scripts/mongodb.tftpl", {
+    user_name = var.db_user
+    passwd    = var.db_password
+  })
 }
 
 # test 서버
@@ -73,4 +76,25 @@ resource "aws_instance" "test_back" {
   }
 
   user_data = file("${path.module}/scripts/back.sh")
+}
+
+# test db 서버
+resource "aws_instance" "test_db" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.my_ec2_type
+  key_name      = var.my_key_pair
+
+  network_interface {
+    network_interface_id = aws_network_interface.test_db.id
+    device_index         = 0
+  }
+
+  tags = {
+    Name = "${var.project}-test-db-server"
+  }
+
+  user_data = templatefile("${path.module}/scripts/mongodb.tftpl", {
+    user_name = var.test_db_user
+    passwd    = var.test_db_password
+  })
 }

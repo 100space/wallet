@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@babel/preset-env": "^7.22.6",
         "@craco/craco": "^7.1.0",
         "@tanstack/react-query": "^4.29.13",
         "@tanstack/react-query-devtools": "^4.29.13",
@@ -15,14 +16,27 @@
         "@types/node": "^16.18.36",
         "@types/react": "^18.2.12",
         "@types/react-dom": "^18.2.5",
+        "@walletconnect/web3-provider": "^1.8.0",
+        "@yudiel/react-qr-scanner": "^1.1.9",
+        "@zxing/library": "^0.20.0",
+        "assert": "^2.0.0",
         "axios": "^1.4.0",
+        "buffer": "^6.0.3",
         "cors": "^2.8.5",
-        "craco": "^0.0.3",
         "crypto-js": "^4.1.1",
+        "dotenv": "^16.3.1",
+        "ethers": "^6.6.2",
         "framer-motion": "^10.12.16",
+        "html-webpack-plugin": "^5.5.3",
+        "http": "^0.0.1-security",
+        "https-browserify": "^1.0.0",
+        "i": "^0.3.7",
         "js-confetti": "^0.11.0",
+        "npm": "^9.7.2",
+        "os-browserify": "^0.3.0",
         "qrcode.react": "^3.1.0",
         "react": "^18.2.0",
+        "react-app-rewired": "^2.2.1",
         "react-copy-to-clipboard": "^5.1.0",
         "react-dom": "^18.2.0",
         "react-router": "^6.13.0",
@@ -30,11 +44,16 @@
         "react-scripts": "5.0.1",
         "recoil": "^0.7.7",
         "recoil-persist": "^4.2.0",
+        "stream-browserify": "^3.0.0",
+        "stream-http": "^3.2.0",
         "styled-components": "^6.0.0-rc.3",
         "sweetalert2": "^11.7.12",
+        "ts-jest": "^29.1.1",
         "tsconfig-paths-webpack-plugin": "^4.0.1",
         "typescript": "^4.9.5",
-        "web-vitals": "^2.1.4"
+        "url": "^0.11.1",
+        "web-vitals": "^2.1.4",
+        "web3": "^4.0.2"
     },
     "scripts": {
         "start": "craco start",
@@ -50,19 +69,21 @@
     },
     "browserslist": {
         "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
+            "chrome >= 67",
+            "edge >= 79",
+            "firefox >= 68",
+            "opera >= 54",
+            "safari >= 14"
         ],
         "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
+            "last 2 chrome version",
+            "last 2 firefox version",
+            "last 2 safari version"
         ]
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-        "@iconify/react": "^4.1.0",
+        "@iconify/react": "^4.1.1",
         "@types/react-copy-to-clipboard": "^5.0.4"
     }
 }

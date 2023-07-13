@@ -1,45 +1,51 @@
 name: Deploy to Front Test Server
 
 on:
-  push:
-    branches:
-      - dev
-    paths:
-      - "front/**"
+    push:
+        branches:
+            - dev
+        paths:
+            - "front/**"
 
 jobs:
-  front_deploy:
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: front
+    front_deploy:
+        runs-on: ubuntu-20.04
+        defaults:
+            run:
+                working-directory: front
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
 
-      - name: Install node lts
-        run: |
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm install --lts
+            - name: Install node lts
+              run: |
+                  export NVM_DIR="$HOME/.nvm"
+                  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                  nvm install --lts
 
-      - name: Install Dependencies & Test
-        run: |
-          npm install
-          npm run test
+            - name: Make Dot ENV
+              run: |
+                  echo "${ENV}" > .env
+              env:
+                  ENV: ${{ secrets.FRONT_TEST_ENV }}
 
-      - name: Build
-        run: |
-          npm run build
-          echo $(ls)
+            - name: Install Dependencies & Test
+              run: |
+                  npm install
+                  npm run test
 
-      - name: SCP
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{secrets.FRONT_TEST_SERVER}}
-          username: ${{secrets.USERNAME}}
-          key: ${{secrets.FRONT_TEST_SERVER_PRIVATE_KEY}}
-          source: "front/build"
-          target: "www"
-          strip_components: 1
+            - name: Build
+              run: |
+                  npm run build
+                  echo $(ls)
+
+            - name: SCP
+              uses: appleboy/scp-action@master
+              with:
+                  host: ${{secrets.FRONT_TEST_SERVER}}
+                  username: ${{secrets.USERNAME}}
+                  key: ${{secrets.FRONT_TEST_SERVER_PRIVATE_KEY}}
+                  source: "front/build"
+                  target: "www"
+                  strip_components: 1

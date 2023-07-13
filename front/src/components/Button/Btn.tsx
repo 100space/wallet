@@ -9,17 +9,19 @@ export const Button: React.FC<IBtn> = ({
     mode,
     fontSize,
     onClick,
-    backgroundColor,
+    backgroundcolor,
+    color
 }) => {
     return (
         <Btn
-            backgroundColor={backgroundColor}
+            backgroundcolor={backgroundcolor}
             width={width}
             height={height}
             margin={margin}
             mode={mode}
             onClick={onClick}
             fontSize={fontSize}
+            color={color}
         >
             {content}
         </Btn>

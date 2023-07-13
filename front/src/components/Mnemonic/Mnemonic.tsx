@@ -17,16 +17,17 @@ export const Mnemonic = ({ mnemonic }: IMnemonic) => {
     }
 
     useEffect(() => {
-        setMnemonicString(mnemonic.join(" "))
-    }, [])
+        if (!mnemonic) return
+        mnemonic && setMnemonicString(mnemonic.join(" "))
+    }, [mnemonic])
 
     return (
-        <MnemonicBoxWrap height="100%">
-            <MnemonicBox width="100%" height="80%">
-                <MnemonicContent blur={blur}>{mnemonicString}</MnemonicContent>
-                <MnemonicVisible width="2.5rem" onClick={handleVisible}>
+        <MnemonicBoxWrap height="100%" mode={modeState.mode}>
+            <MnemonicBox width="100%" height="80%" mode={modeState.mode}>
+                <MnemonicContent blur={blur} mode={modeState.mode}>{mnemonicString}</MnemonicContent>
+                <MnemonicVisible width="2.5rem" onClick={handleVisible} mode={modeState.mode}>
                     {<Icon icon={isVisible ? "mdi:eye-off" : "heroicons:eye-solid"} hFlip={true} />}
-                </MnemonicVisible>
+                </MnemonicVisible >
             </MnemonicBox>
             <CopyButton copyContent={mnemonicString} />
         </MnemonicBoxWrap>

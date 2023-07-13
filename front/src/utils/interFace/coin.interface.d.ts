@@ -23,9 +23,11 @@ export interface ICoinPrice extends ISizeProps {
     price: price
 }
 
+/**
+ *  @type [0] = krw
+ *  @type [1] = usd
+ */
 
-// [0] = krw
-// [1] = usd
 export type TCoinPrice = ICoinPrice[]
 
 export interface ICoinRate extends ISizeProps {
@@ -51,6 +53,8 @@ export type TCoinInfoRow = (string | number)[]
 
 export interface ICoinInfoRow extends ITypeSize {
     content: TCoinInfoRow
+    price?:boolean
+    percent?:boolean
 }
 
 // 코인 정보 페이지
@@ -61,4 +65,3 @@ export interface ICoinInfo extends ICoinName, ICoinRank, ICoinRate, ICoinPrice {
     circulatingSupply: number
     description: string
 }
-

@@ -20,7 +20,9 @@ export const CopyButton = ({ copyContent }: ICopyButton) => {
                 <CopyFunctionIcon width="7.5%">
                     <Icon icon="mingcute:copy-fill"></Icon>
                 </CopyFunctionIcon>
-                <CopyFunctionContent width="92.5%">클립보드에 복사하기</CopyFunctionContent>
+                <CopyFunctionContent width="92.5%" mode={modeState.mode}>
+                    클립보드에 복사하기
+                </CopyFunctionContent>
             </CopyFunctionWrap>
         </CopyToClipboard>
     )

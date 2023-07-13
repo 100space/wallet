@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { sendTransactionDto } from './dto/transaction.dto';
@@ -23,15 +23,22 @@ export class TransactionController {
   }
 
   @ApiOperation({
-    summary: 'Address로 트랜잭션을 발동 시킵니다.',
-    description: 'Address로 트랜잭션을 발동 시킵니다.',
+    summary: 'Address로 트랜잭션을 발생 시킵니다.',
+    description: 'Address로 트랜잭션을 발생 시킵니다.',
   })
   @Post()
-  sendTransaction(@Body() { sender, receiver, amount }: sendTransactionDto) {
+  sendTransaction(
+    @Body() { privateKey, receiver, amount }: sendTransactionDto,
+  ) {
     return this.transactionService.sendTransaction({
-      sender,
+      privateKey,
       receiver,
       amount,
     });
+  }
+
+  @Put()
+  changeProvider(@Body() { providerName }) {
+    return this.transactionService.changeProvider({ providerName });
   }
 }

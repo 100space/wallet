@@ -1,20 +1,19 @@
-import { SizePropsStyled } from "@styled/index";
-import { ISizeProps } from "@utils/interFace/styled.interface";
-import { styled } from "styled-components";
+import { SizePropsStyled } from "@styled/index"
+import { ISizeProps, IonClickProps } from "@utils/interFace/styled.interface"
+import { styled } from "styled-components"
 
 export const BoardForm = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
-    background-color: ${({ mode, theme}) => mode && theme[mode].basicDeepBg};
     border-radius: 1rem;
     box-sizing: border-box;
 `
 
-export const NftBoardContentRowWrap = styled.div<ISizeProps>`
+export const NftBoardContentRowWrap = styled.div<IonClickProps>`
     ${SizePropsStyled};
-    display: flex;
+    ${({ open }) => (open === "on" ? "display: flex;" : "display: none;")}
     justify-content: space-between;
     align-items: center;
-    color: ${({theme, mode}) => mode && theme[mode].text};
+    color: ${({ theme, mode }) => mode && theme[mode].text};
 `
 
 export const NftBoardContentSubject = styled.div<ISizeProps>``
@@ -28,4 +27,5 @@ export const NftBoardContentForm = styled.div<ISizeProps>`
     }
 `
 
-export const NftBoardContent = styled.div<ISizeProps>``
+export const NftBoardContent = styled.div<ISizeProps>`
+`

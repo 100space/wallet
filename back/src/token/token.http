@@ -1,0 +1,24 @@
+@server = {{$dotenv PROTOCOL}}://{{$dotenv HOST}}:{{$dotenv PORT}}
+
+### 토큰 추가하기
+POST {{server}}/token HTTP/1.1
+Cookie: network={"rpc":"{{$dotenv ETHEREUM_NETWORK}}", "chainId": 1}
+Content-Type: application/json
+
+{
+    "ca": "0xb8c77482e45f1f44de1745f52c74426c631bdd52",
+    "symbol": "bnb",
+    "decimal": 18
+}
+
+### 테스트넷 토큰 추가하기
+POST  {{server}}/token HTTP/1.1
+Cookie: network={"rpc":"{{$dotenv MUMBAI_NETWORK}}", "chainId": 80001}
+Content-Type: application/json
+
+{
+    "ca": "0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1",
+    "symbol": "DERC20",
+    "decimal": 18
+}
+

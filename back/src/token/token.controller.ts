@@ -1,19 +1,23 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Controller, Post, UseInterceptors } from '@nestjs/common';
 import { TokenService } from './token.service';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { getTokenDTO } from './dto/token.dto';
+import { IsERC20 } from '../decorator/ERC20';
+import { NetworkValidationInterceptor } from '../interceptor/NetworkValid';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AddTokenDto } from './dto';
 
-@Controller('token')
 @ApiTags('Token')
+@Controller('token')
+@UseInterceptors(NetworkValidationInterceptor)
 export class TokenController {
   constructor(private readonly tokenService: TokenService) {}
 
-  @ApiOperation({
-    summary: 'CA에 해당하는 토큰 정보를 가져옵니다.',
-    description: 'CA에 해당하는 토큰 정보를 가져옵니다.',
-  })
   @Post()
-  getToken(@Body() { contractAddress }: getTokenDTO) {
-    return this.tokenService.getToken({ contractAddress });
+  @ApiOperation({
+    summary: '토큰을 추가합니다.',
+    description: '토큰을 추가합니다.',
+  })
+  @ApiBody({ type: AddTokenDto })
+  addToken(@IsERC20() { networkInfo, ca, symbol, decimal }: AddTokenDto) {
+    return this.tokenService.addToken({ networkInfo, ca, symbol, decimal });
   }
 }

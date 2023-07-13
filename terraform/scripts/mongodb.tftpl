@@ -16,7 +16,7 @@ sudo sed -i 's/#security:/security:\n  authorization: enabled/' /etc/mongod.conf
 # 시작 및 부팅 시 실행 적용
 sudo systemctl start mongod && sudo systemctl enable mongod
 
-# admin user 생성
+# user 생성
 cat > /home/ubuntu/create_user.js <<USERS
 use admin
 db.createUser({
@@ -30,3 +30,7 @@ sleep 10
 
 # admin user 적용
 mongosh < /home/ubuntu/create_user.js
+
+
+
+

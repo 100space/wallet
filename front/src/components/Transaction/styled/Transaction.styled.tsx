@@ -1,21 +1,21 @@
-import { SizePropsStyled } from "@styled/index";
-import { ISizeProps } from "@utils/interFace/styled.interface";
-import styled from "styled-components";
+import { SizePropsStyled } from "@styled/index"
+import { ISizeProps, IonClickProps } from "@utils/interFace/styled.interface"
+import styled from "styled-components"
 
 export const TransactionRowContent = styled.div<ISizeProps>`
     ${SizePropsStyled};
 `
 
-export const RowContentsWraps = styled.div<ISizeProps>`
-    ${SizePropsStyled}; 
-    display: flex;
+export const RowContentsWraps = styled.div<IonClickProps>`
+    ${SizePropsStyled};
+    ${({ open }) => (open === "on" ? "display: flex;" : "display: none;")}
+    margin-top: 1rem;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
     box-sizing: border-box;
-
     & > div:nth-child(2) > div {
-        line-height: ${({ height }) => (height && typeof height === "string") && parseFloat(height) / 2 + 'rem'};
+        line-height: ${({ height }) => height && typeof height === "string" && parseFloat(height) / 2 + "rem"};
     }
 `
 export const TransactionImgWrap = styled.div<ISizeProps>`
@@ -28,8 +28,9 @@ export const TransactionImgWrap = styled.div<ISizeProps>`
         font-size: 3rem;
     }
 
-    & > svg, & > div {
-        color: ${({ color }) => color };
+    & > svg,
+    & > div {
+        color: ${({ color }) => color};
     }
 
     & > div {

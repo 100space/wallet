@@ -14,12 +14,14 @@ html {
     font-family: "Ubuntu", sans-serif;
     font-weight: 400;
     font-size: 62.5%;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
 }
 #root {
-    width: 36rem;
     width: 100vw;
-    height: 74rem;
+    width: 36rem;
     height: 100vh;
+    height: 74rem;
 }
 ul,
 li {

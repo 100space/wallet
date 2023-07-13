@@ -18,19 +18,20 @@ export const LoginWrap = styled.div<ISizeProps>`
         flex-direction: column;
         justify-content: space-between;
     }
-    &:nth-child(2) {
+    /* & > div:nth-child(2) {
         width: 90%;
         height: 5.6rem;
         border: none;
         border-radius: 5rem;
-        margin: 3rem auto 0rem;
+        margin: 0 auto 0rem;
         display: inline-block;
         background: ${({ theme, mode }) => mode && theme[mode].bg200};
         transition: all 0.2s ease-out;
-    }
+    } */
     & > a {
         width: 90%;
         height: 5.6rem;
+        background: pink;
     }
 
     & > .modeChange {

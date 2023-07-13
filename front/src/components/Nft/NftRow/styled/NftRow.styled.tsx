@@ -9,16 +9,21 @@ export const RowWrap = styled.div<ISizeProps>`
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    background-color: ${({theme, mode}) => mode && theme[mode].bg200};
+    &:nth-child(n) {
+        /* background: ${({ mode, theme }) => mode && theme[mode].textCoinSymbol}; */
+        /* background: ${({ mode, theme }) => mode && theme[mode].coinBg}; */
+    }
+    &:nth-child(2n) {
+        /* background: ${({ mode, theme }) => mode && theme[mode].nftRowBg}; */
+    }
 `
 
 export const RowContentsWrap = styled.div<ISizeProps>`
-    ${SizePropsStyled}; 
-    padding: 0.5rem;
+    ${SizePropsStyled};
+    padding: 0.5rem 2rem;
     box-sizing: border-box;
-
     & > div:nth-child(2) > div {
-        line-height: ${({ height }) => (height && typeof height === "string") && parseFloat(height) / 2 + 'rem'};
+        line-height: ${({ height }) => height && typeof height === "string" && parseFloat(height) / 2 + "rem"};
     }
 `
 
@@ -39,4 +44,8 @@ export const RowContentWrap = styled.div<ISizeProps>`
 
 export const RowContent = styled.div<ISizeProps>`
     ${SizePropsStyled};
+    & > span {
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
 `

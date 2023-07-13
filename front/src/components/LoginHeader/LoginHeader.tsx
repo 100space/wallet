@@ -35,14 +35,12 @@ export const LoginHeader = () => {
     const renderWalletHeader = (walletArray: { content: string }[]) => {
         return walletArray.map((v, i, array) => {
             const check = walletArray.length === 4 ? StepObj[step] === i : StepObj[step] - 1 === i
-            console.log(StepObj[step], 11111)
-
             return (
                 <div className="headerItem" key={i}>
-                    <TextComp fontSize="2rem" color={check ? "#74cffc" : ""}>
+                    <TextComp fontSize="2rem" color={check ? "#85acfb" : ""}>
                         <Icon icon={`iconamoon:number-${i + 1}-circle-light`} className={step} />
                     </TextComp>
-                    <TextComp fontSize="1.2rem" color={check ? "#74cffc" : ""}>
+                    <TextComp fontSize="1.2rem" color={check ? "#85acfb" : ""}>
                         {v.content}
                     </TextComp>
                 </div>

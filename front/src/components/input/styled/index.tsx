@@ -1,5 +1,5 @@
 import { FlexCenter } from "@styled/index"
-import { IFocusTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
+import { IFocusTypeSize, IPlaceTypeSize, ISizeProps } from "@utils/interFace/styled.interface"
 
 import styled from "styled-components"
 
@@ -17,18 +17,24 @@ export const InputWrap = styled.div<IFocusTypeSize>`
         width: 3rem;
         height: 3rem;
     }
-    background-color: #333;
+    background-color: ${({theme, mode}) => (mode&&theme[mode].settingInputBg )};
 `
 
-export const InputElement = styled.input<ISizeProps>`
+export const InputElement = styled.input<IPlaceTypeSize>`
     width: 85%;
-    ${(props) => props.height && `font-size:  ${(props.height as number) * 0.6}rem;`}
+    ${(props) =>
+        props.fontSize && props.height
+            ? `font-size:  ${props.fontSize}rem;`
+            : `font-size:  ${(props.height as number) * 0.6}rem;`}
     border: none;
     &:focus {
         outline: none;
     }
-    background-color: #333;
-    color: #fff;
+    background-color: ${({ theme, mode }) => (mode&&theme[mode].settingInputBg)};
+    color: ${({ theme, mode }) => (mode&&theme[mode].text)};
+    &::placeholder {
+        color: ${({ theme, mode }) => (mode&&theme[mode].text)};
+    }
 `
 export const HideIcon = styled.div<ISizeProps>`
     ${FlexCenter}

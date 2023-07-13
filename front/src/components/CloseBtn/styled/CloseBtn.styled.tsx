@@ -1,21 +1,19 @@
+import { ISizeProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
-const mode = "darkMode"
-
-export const BtnWrap = styled.div`
-    width: 5.6rem;
+export const BtnWrap = styled.div<ISizeProps>`
+    width: 2.4rem;
     height: 2.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: ${(props) => props.theme[mode].text};  
-    border-radius: 8px;
-    border: 2px solid #ffffff;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
+    border-radius: 0.8rem;
+    border: 0.2rem solid ${({ theme, mode }) => mode && theme[mode].text};
     font-size: 1.4rem;
-
-    &>svg {
-        color: ${(props) => props.theme[mode].text};  
+    cursor: pointer;
+    & > svg {
+        color: ${({ theme, mode }) => mode && theme[mode].text};
         font-size: 1.7rem;
     }
 `
