@@ -72,7 +72,7 @@ export const MyInfo = atom({
             networks: { rpc: "https://polygon-mainnet.infura.io", chainId: 137, symbol: "MATIC" },
             tokens: [
                 {
-                    ca: "0x0000000000000000000000000000000000001010",
+                    ca: "",
                     symbol: "MATIC",
                     decimal: 18,
                 },
@@ -82,7 +82,7 @@ export const MyInfo = atom({
             networks: { rpc: "https://polygon-mumbai.infura.io", chainId: 80001, symbol: "MATIC" },
             tokens: [
                 {
-                    ca: "0x0000000000000000000000000000000000001010",
+                    ca: "",
                     symbol: "MATIC",
                     decimal: 18,
                 },
@@ -92,7 +92,7 @@ export const MyInfo = atom({
             networks: { rpc: "https://arbitrum-goerli.infura.io", chainId: 421613, symbol: "AGOR" },
             tokens: [
                 {
-                    ca: "0xa70a52cDdB85e8B6f695A7363d871DFC153A0CDE",
+                    ca: "",
                     symbol: "AGOR",
                     decimal: 18,
                 },
@@ -105,6 +105,7 @@ export const MyInfo = atom({
 export const MyNetwork = atom({
     key: "myNetwork",
     default: "mumbai",
+    effects_UNSTABLE: [persistAtom],
 })
 
 export const MyNFT = atom({

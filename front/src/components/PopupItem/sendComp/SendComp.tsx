@@ -88,6 +88,7 @@ export const SendComp = (props: {
                             ],
                         },
                     }
+                    console.log(updatedMyInfo)
                     setMyInfo({ ...updatedMyInfo })
                     return popupReset()
                 }
@@ -168,7 +169,7 @@ export const SendComp = (props: {
                     <MainnetBtnWrap>
                         <Btn
                             backgroundcolor="#feda4a"
-                            color="white"
+                            color="#2d2d2d"
                             fontSize="1.5rem"
                             width="10rem"
                             height="4rem"
