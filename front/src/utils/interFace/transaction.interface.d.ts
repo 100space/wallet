@@ -1,19 +1,21 @@
 export type address = string
-export type receiver = string
-export type sender = string
 
-export interface IAmount {
+export interface IPrice {
     currency: string
-    amount: number
+    price: number
 }
 
 export interface ITransactionState {
-    state: receiver | sender
+    event: string
 }
 
 export interface ITransaction extends ITransactionState {
-    opponent: address
-    timestamp: string
-    network?: string
-    amounts: IAmount[]
+    id: number
+    from: address
+    to: address
+    ca: address
+    tokenId?: number
+    createdAt: string
+    updatedAt: string
+    price: IPrice[]
 }

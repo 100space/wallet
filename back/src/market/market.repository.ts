@@ -27,6 +27,7 @@ export class MarketRepository {
   async findTransaction({ ca, tokenId }) {
     return await this.eventModel
       .find({ NFTaddress: ca, tokenId }, { _id: 0, __v: 0 })
+      .sort({ updatedAt: -1 })
       .lean();
   }
 
