@@ -55,3 +55,29 @@ export const TokenListButton = styled.button<IonClickProps>`
         background: ${({ mode, theme }) => mode && theme[mode].buttonHover};
     }
 `
+
+export const TxBtnWrap = styled.div<ISizeProps>`
+    display: flex;
+    justify-content: space-evenly;
+    width: ${({ width }) => width || "100%"};
+`
+
+export const TxBtnContent = styled.button<ISizeProps>`
+    cursor: pointer;
+    display: inline-block;
+    margin: 1rem;
+    width: 12rem;
+    height: 4rem;
+    border: none;
+    color: ${({ mode, theme }) => mode && theme[mode].text};
+    font-size: 1.6rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    background-color: ${({ mode, theme }) => mode && theme[mode].txBg};
+    transition: 0.2s all;
+
+    &:hover, &:active {
+        color: ${({ mode, theme }) => mode && theme[mode].txBg};
+        background-color: ${({ mode, theme }) => mode && theme[mode].text};
+    }
+`

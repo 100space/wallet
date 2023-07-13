@@ -20,11 +20,11 @@ export const theme = {
         coinChart: "#616161d2",
         desBg: "#464646",
         walletBg: "#232323",
-        
+
         // point 색상
         point200: "#FF8756",
         point100: "#375983",
-        
+
         // //text 색상
         pointText: "#ffeeb5",
         text: "#ffffff",
@@ -38,9 +38,9 @@ export const theme = {
         asset: "#ffffff",
         setAsset: "#77a6df",
         bottomBord: "#3f3f3f",
-        searchText:"#ffffff",
-        search:"#ffffff",
-        
+        searchText: "#ffffff",
+        search: "#ffffff",
+
         // // 버튼관련 색상
         tokenBg: "#257cd2",
         buttonBg: "#6b8dfc",
@@ -51,6 +51,7 @@ export const theme = {
         categoryHover: "#2f5f81",
         bringBg: "#47607d",
         accountBg: "#e55665",
+        txBg: "#000000",
         accountHover: "#8d2b35",
     },
     lightMode: {
@@ -73,12 +74,12 @@ export const theme = {
         tokenBg: "#feda4a",
         desBg: "#e6e6e6c7",
         walletBg: "#ededed",
-        
+
         // //point 색상
         point200: "#faa12c",
         point100: "#FFC964",
         popupBg: "#ffffff",
-        
+
         // //text 색상
         pointText: "#ffeeb5",
         assetHead: "#407dd2",
@@ -91,9 +92,9 @@ export const theme = {
         asset: "#424242",
         setAsset: "#4778b3",
         bottomBord: "#c5c3c3",
-        searchText:"#000",
-        search:"#000",
-        
+        searchText: "#000",
+        search: "#000",
+
         // // 버튼관련 색상
         bringBg: "#224563",
         buttonBg: "#3f95f8",
@@ -104,6 +105,7 @@ export const theme = {
         accountBg: "#166d96",
         sendText: "#fff",
         filterBtn: "#f3db86",
+        txBg: "#ffffff",
         accountHover: "#0e435c"
     },
 }

@@ -2,6 +2,7 @@ import { ISizeProps } from "@utils/interFace/styled.interface"
 import { styled } from "styled-components"
 
 export const NFTSearchWrap = styled.div<ISizeProps>`
+    margin-bottom: 2rem;
     position: relative;
     display: flex;
     justify-content: center;

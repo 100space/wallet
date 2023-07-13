@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Put,
+  Query,
   UseInterceptors,
 } from '@nestjs/common';
 import { MarketService } from './market.service';
@@ -20,7 +21,7 @@ import { AddNftDto } from './dto/add-market.dto';
 @Controller('market')
 @UseInterceptors(NetworkValidationInterceptor)
 export class MarketController {
-  constructor(private readonly marketService: MarketService) {}
+  constructor(private readonly marketService: MarketService) { }
 
   @Get()
   @ApiOperation({
@@ -31,8 +32,9 @@ export class MarketController {
     status: 200,
     type: ListCollectionsResponseDto,
   })
-  async listCollections() {
-    return await this.marketService.listCollections();
+  async listCollections(@Query('page') page: number = 1) {
+    console.log(page)
+    return await this.marketService.listCollections(page);
   }
 
   @Post('user')

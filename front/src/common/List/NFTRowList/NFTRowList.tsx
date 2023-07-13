@@ -21,7 +21,7 @@ export const NFTRowList = (props: {
         if (ca === undefined) return
         if (name === undefined) return
         setNftCa({ ca, name })
-        navigate(`collection/${ca}`)
+        navigate(`/market/collection/${ca}`)
     }
 
     const nftRows = (nftRows: INFTRow[]) => {

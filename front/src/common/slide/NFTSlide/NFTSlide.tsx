@@ -22,7 +22,7 @@ export const NFTSlide = (props: {
         if (ca === undefined) return
         if (name === undefined) return
         props.setNftCa({ ca, name })
-        navigate(`collection/${ca}`)
+        navigate(`/market/collection/${ca}`)
     }
 
     const nftCardList = (nftCards: INFTCard[]) => {

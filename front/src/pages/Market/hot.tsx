@@ -1,67 +1,79 @@
 import { Filter } from "@common/Filter"
-import { NFTRowList } from "@common/List"
+import { NFTCollectionList, NFTRowList } from "@common/List"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
+import requestServer from "@utils/axios/requestServer"
 import { INFTRow } from "@utils/interFace/nft.interface"
 import { SelectedCollection } from "@utils/localStorage"
+import axios from "axios"
+import { useState, useRef, useEffect, MouseEvent } from "react"
+import { useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
-
-const data1: INFTRow = {
-    rank: 1,
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
-const data5: INFTRow = {
-    rank: 5,
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
-const data2: INFTRow = {
-    rank: 2,
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
-const data3: INFTRow = {
-    rank: 3,
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
-const data4: INFTRow = {
-    rank: 4,
-    name: "NONGDAMGOM",
-    image: "https://assets.coingecko.com/nft_contracts/images/1609/small/renga.gif?1663648984",
-    owner: "Char1ey",
-    prices: [
-        { currency: "KRW", price: 4500 },
-        { currency: "ETH", price: 0.0005 },
-    ],
-}
 
 export const HotPage = () => {
     const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
+    const navigate = useNavigate()
+    const [observer, setObserver] = useState<IntersectionObserver | null>(null);
+    const sentinelRef = useRef<HTMLDivElement>(null);
+    const [nfts, setNfts] = useState({
+        isLoading: false,
+        isError: null as null | unknown,
+        page: 1,
+        data: [] as INFTRow[],
+    })
+
+    const getNFTs = async (page: number) => {
+        setNfts((prev) => ({ ...prev, isLoading: true, isError: null, data: [...prev.data] }))
+        try {
+            console.log(page, "paging")
+            const response = await requestServer.get(`/market?page=${page}`)
+            setNfts((prev) => ({ ...prev, isLoading: false, isError: null, page: page + 1, data: [...prev.data, ...response.data] }))
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                setNfts({ isLoading: false, isError: e.response, page, data: [] })
+            }
+        }
+    }
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+        if (entries[0].isIntersecting) {
+            getNFTs(nfts.page + 1);
+        }
+    };
+
+    const handleBackBtn = (e: MouseEvent) => {
+        navigate("/market")
+    }
+
+    useEffect(() => {
+
+    }, [nfts.page])
+
+    useEffect(() => {
+        getNFTs(nfts.page)
+        const options: IntersectionObserverInit = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0,
+        };
+        const observer = new IntersectionObserver(handleIntersection, options);
+        if (sentinelRef.current) {
+            observer.observe(sentinelRef.current);
+        }
+        setObserver(observer);
+
+        return () => {
+            if (observer) {
+                observer.disconnect();
+            }
+        };
+    }, [])
+
 
     return (
         <>
-            <Filter filterList={["인기순", "인기 컬렉션", "베스트 컬렉터", "가격순"]} />
-            <NFTRowList nftRows={[data1, data2, data3, data4, data5, data2]} setNftCa={setNftCa} />
+            <BackBtnHeader content={"Hot Collections"} onClick={handleBackBtn} />
+            <NFTRowList nftRows={nfts.data} setNftCa={setNftCa} />
+            <div ref={sentinelRef}></div>
         </>
     )
 }

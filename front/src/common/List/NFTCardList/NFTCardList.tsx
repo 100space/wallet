@@ -3,22 +3,25 @@ import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
 import { NFTCardListWrap } from "./styled/NFTCardList.styled"
 import { SetterOrUpdater, useRecoilState } from "recoil"
 import { MouseEvent } from "react"
-import { NFTByCollection } from "@utils/localStorage"
+import { NFTByCollection, NFTMarketId } from "@utils/localStorage"
 import { useNavigate } from "react-router"
 
 export const NFTCardList = (props: { nftCards: INFTCardByMarket[]; setNftCa?: SetterOrUpdater<string> }) => {
-  const [nftInfo, setNftInfo] = useRecoilState(NFTByCollection)
-  const navigate = useNavigate()
 
-  const clickNftCard = (e: MouseEvent, ca: string, tokenId: string) => {
-    e.preventDefault()
-    setNftInfo({ ca, tokenId })
-    navigate(`/info/nft/${ca}/${tokenId}/ERC 721`)
-  }
+    const [nftInfo, setNftInfo] = useRecoilState(NFTByCollection)
+    const [marketId, setMarketId] = useRecoilState(NFTMarketId)
+    const navigate = useNavigate()
 
-  const nftCards = (nftCards: INFTCardByMarket[]) => {
-    return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" onClick={clickNftCard} />)
-  }
+    const clickNftCard = (e: MouseEvent, ca: string, tokenId: number, marketId?: number) => {
+        e.preventDefault()
+        if (marketId) setMarketId({ marketId })
+        setNftInfo({ ca, tokenId })
+        navigate(`/info/nft/${ca}/${tokenId}/ERC 721`)
+    }
 
+    const nftCards = (nftCards: INFTCardByMarket[]) => {
+        return nftCards.map((v, index) => <NftCard key={index} nftInfo={v} className="card" onClick={clickNftCard} marketId={v.marketId} />)
+    }
+    
   return <NFTCardListWrap>{nftCards(props.nftCards)}</NFTCardListWrap>
 }

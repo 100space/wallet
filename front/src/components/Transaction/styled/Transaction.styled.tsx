@@ -9,9 +9,7 @@ export const TransactionRowContent = styled.div<ISizeProps>`
 export const RowContentsWraps = styled.div<IonClickProps>`
     ${SizePropsStyled};
     ${({ open }) => (open === "on" ? "display: flex;" : "display: none;")}
-    & + & {
-        margin-top: 1rem;
-    }
+    margin-top: 1rem;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;

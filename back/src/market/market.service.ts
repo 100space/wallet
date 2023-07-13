@@ -42,17 +42,15 @@ export class MarketService {
     this.changeBasicCurrency({ symbol: this.currency });
   }
 
-  async listCollections() {
+  async listCollections(page: number) {
     try {
-      const response = await this.marketRepository.findAll();
+      const response = await this.marketRepository.findAll(page);
       return response.map((v) => {
-        // this.listNftByCa({ ca: v.address }).then(data => console.log(data[0].image))
         return {
           ca: v.address,
           name: v.name,
           nickname: v.symbol,
           description: v.description,
-          // thumbNail,
           image: v.logo,
           like: v.favorite.length,
           latest: v.createdAt,
@@ -224,6 +222,7 @@ export class MarketService {
       if (!creator || !name || !symbol)
         throw new Error('No value found for CA');
       const response = await this.contract.getAllTokensInCollection(ca);
+      console.log(response)
 
       const [tokenInfo] = await Promise.all(
         response
@@ -243,6 +242,7 @@ export class MarketService {
               isTrade,
               price: { currency: 'MATIC', price },
               fee: { currency: 'MATIC', price: price * 0.01 },
+              krw: (Math.floor(price * this.currencyPrice * 1000) / 1000).toString(),
             };
           }),
       );

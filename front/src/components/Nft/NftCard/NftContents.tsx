@@ -5,7 +5,7 @@ import { INFTContents } from "@utils/interFace/nft.interface"
 export const KRW = (value: number) => {
     return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
 }
-export const NftContents = ({ name, owner, prices }: INFTContents) => {
+export const NftContents = ({ name, owner, prices, collection }: INFTContents) => {
     const [modeState, setChange] = useGetMode()
 
     return (
@@ -14,9 +14,18 @@ export const NftContents = ({ name, owner, prices }: INFTContents) => {
                 <NftCardContent mode={modeState.mode} height={"1.6rem"} types={"name"}>
                     {name}
                 </NftCardContent>
-                <NftCardContent mode={modeState.mode} height={"1.1rem"} types={"owner"}>
-                    by {owner?.substring(0, 6) + '...'}
-                </NftCardContent>
+                {
+                    !collection
+                        ?
+                        <NftCardContent mode={modeState.mode} height={"1.1rem"} types={"owner"}>
+                            by {owner?.substring(0, 6) + '...'}
+                        </NftCardContent>
+                        :
+                        <NftCardContent mode={modeState.mode} height={"1.1rem"} types={"owner"}>
+
+                        </NftCardContent>
+                }
+
             </NftCardContentWrap>
             <NftCardContentWrap>
                 <NftCardContent mode={modeState.mode} height={"1.4rem"} types={"name"}>

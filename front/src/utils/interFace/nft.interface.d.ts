@@ -31,7 +31,8 @@ export interface INFTImg extends ISizeProps {
 // }
 
 export interface INFTContents extends INFTInfo {
-  prices: INFTPrices
+    prices: INFTPrices
+    collection?: boolean
 }
 
 export interface INFTCard extends INFTImg, INFTContents {}
@@ -108,19 +109,20 @@ export interface INFTNetworkByMarket {
 }
 
 export interface INFTInfomationByMarket {
-  ca: string
-  tokenId: string
-  nftName: string
-  price: INFTPrice
-  fee: INFTPrice
-  creator: string
-  blockchain: INFTNetworkByMarket
-  supply: number
-  symbol: string
-  collectionName: string
-  tokenStandard: string
-  description: string
-  image: string
-  owner: string
-  isTrade: string
+    ca: string
+    tokenId: number
+    nftName: string
+    price: INFTPrice
+    fee: INFTPrice
+    creator: string
+    blockchain: INFTNetworkByMarket
+    supply: number
+    symbol: string
+    collectionName: string
+    tokenStandard: string
+    description: string
+    image: string
+    owner: string
+    isTrade: string
+    krw: string
 }
