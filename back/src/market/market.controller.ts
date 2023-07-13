@@ -71,6 +71,16 @@ export class MarketController {
     return await this.marketService.changeBasicCurrency({ symbol });
   }
 
+  @Post('erc721')
+  async getERC20Info(@Body() { eoa, ca, tokenId }) {
+    return await this.marketService.getERC721Info({ eoa, ca, tokenId });
+  }
+
+  @Post('erc1155')
+  async getERC1155Info(@Body() { ca, tokenId }) {
+    return await this.marketService.getERC1155Info({ ca, tokenId });
+  }
+
   @Post()
   @ApiOperation({
     summary: 'CA를 기준으로 NFT들을 가져옵니다.',
@@ -82,8 +92,8 @@ export class MarketController {
 
   @Put()
   @ApiOperation({
-    summary: 'CA와 TokenId에 해당하는 NFT를 추가합니다.',
-    description: 'CA와 TokenId에 해당하는 NFT를 추가합니다.',
+    summary: 'CA와 TokenId에 해당하는 NFT 정보를 가져옵니다.',
+    description: 'CA와 TokenId에 해당하는 NFT 정보를 가져옵니다.',
   })
   async addNft(
     @IsNFT() { tokenStandard }: { tokenStandard: string },
