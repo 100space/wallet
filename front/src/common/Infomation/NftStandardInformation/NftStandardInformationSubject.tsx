@@ -5,17 +5,25 @@ import { INFTStandardSubject } from "@utils/interFace/nft.interface"
 import { Alert } from "@components/Alert/alert"
 
 export const NftStandardInformationSubject = ({ nftName, tokenId, like }: INFTStandardSubject) => {
-  const [modeState, setModeState] = useGetMode()
+    const [modeState, setModeState] = useGetMode()
 
-  return (
-    <CollectionSubjectWrap mode={modeState.mode}>
-      <CollectionSubject>
-        {nftName} {`#${tokenId}`}
-      </CollectionSubject>
-      <CollectionSubject>
-        {true ? <Icon icon={"mdi:heart"} color="#ff0000"></Icon> : <Icon icon={"ph:heart"} color="#ff0000"></Icon>}
-        {like}
-      </CollectionSubject>
-    </CollectionSubjectWrap>
-  )
+    const makeShort = (tokenId: string) => {
+        return tokenId.substring(0, 10) + "..." + tokenId.substring(tokenId.length - 10, tokenId.length)
+    }
+
+    return (
+        <CollectionSubjectWrap mode={modeState.mode}>
+            <CollectionSubject>
+                {nftName} {`#${tokenId.length >= 30 ? makeShort(tokenId) : tokenId}`}
+            </CollectionSubject>
+            <CollectionSubject>
+                {true ? (
+                    <Icon icon={"mdi:heart"} color="#ff0000"></Icon>
+                ) : (
+                    <Icon icon={"ph:heart"} color="#ff0000"></Icon>
+                )}
+                {like}
+            </CollectionSubject>
+        </CollectionSubjectWrap>
+    )
 }

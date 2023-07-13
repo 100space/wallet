@@ -7,6 +7,10 @@ export interface ISizeProps {
     mode?: string
 }
 
+export interface INftBoardContent extends ISizeProps {
+    onClick?: MouseEventHandler<HTMLButtonElement>
+}
+
 export interface IIndexProps extends ISizeProps {
     index: number
     percent?: boolean
@@ -56,7 +60,7 @@ export interface IBtn extends IonClickProps {
     fontSize?: string
     mode: string
     children?: string | ReactNode
-    color?:string
+    color?: string
 }
 
 export interface IProfileBtn extends IBtn {
