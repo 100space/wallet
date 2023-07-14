@@ -1,17 +1,16 @@
 import { IsPopUp, ModeState, MyAccounts, MyInfo, MyNFT, MyNetwork } from "@utils/localStorage"
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
-import { useGetMode } from "@hooks/useMode"
-import { ethers, isError } from "ethers"
+import { useRecoilState, useRecoilTransactionObserver_UNSTABLE, useRecoilValue, useResetRecoilState } from "recoil"
+import { ethers } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
 import requestServer from "@utils/axios/requestServer"
 import { Alert } from "@components/Alert/alert"
 import { InputList } from "@utils/interFace/core"
 import { useLocation, useNavigate } from "react-router"
-import axios from "axios"
 import { MainnetBtnWrap } from "@common/settingCon/settingMenu/styled/MainnetCon.styled"
 import { Btn, Button } from "@components/Button"
 import { InputComp } from "@components/input"
 import { SendCompWrapper, SendCompWrap } from "./styled"
+import { useQuery } from "@tanstack/react-query"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
@@ -128,8 +127,12 @@ export const SendComp = (props: {
                 const { data } = await requestServer.put("market", { eoa, ca, tokenId })
                 setMyNft([...myNft, data])
                 return popupReset()
-            } catch (error) {
-                throw new Error()
+            } catch (error: any) {
+                if (error.response.data.message) {
+                    Alert.fire({ title: `${error.response.data.message}`, icon: "warning" })
+                } else {
+                    Alert.fire({ title: "올바른 CA를 입력하거나 Token ID를 입력하세요.", icon: "question" })
+                }
             }
         } else if ((e.currentTarget as HTMLElement).className === "sendTransaction") {
             try {
