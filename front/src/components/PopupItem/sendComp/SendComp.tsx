@@ -10,7 +10,6 @@ import { MainnetBtnWrap } from "@common/settingCon/settingMenu/styled/MainnetCon
 import { Btn, Button } from "@components/Button"
 import { InputComp } from "@components/input"
 import { SendCompWrapper, SendCompWrap } from "./styled"
-import { useQuery } from "@tanstack/react-query"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
