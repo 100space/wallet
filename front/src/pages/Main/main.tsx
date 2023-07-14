@@ -39,6 +39,7 @@ export const MainPage = () => {
     const [myNft, setMyNft] = useRecoilState(MyNFT)
     const myAccounts = useRecoilValue(MyAccounts)
     const nftin = useNFTin()
+
     const getMyCoins = async () => {
         if (nftin === null) return null
         const myCoins = myInfo[network as keyof typeof myInfo].tokens

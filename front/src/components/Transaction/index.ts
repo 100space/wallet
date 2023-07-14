@@ -1,4 +1,3 @@
-export * from "./TransactionRow"
-export * from "./TransactionImage"
-export * from "./TranscationContents"
+export * from "./MarketTx"
+export * from "./Tx"
 export * from "./styled"

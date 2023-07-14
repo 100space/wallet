@@ -1,12 +1,12 @@
 import { BlockListHeader } from "@common/header/BlockListHeader"
 import { BlockListWrap } from "./styled"
 import { BlockRow } from "@components/Block"
-import { IBlockRow } from "@utils/interFace/block.interface"
+import { IBlockRow, ITx } from "@utils/interFace/block.interface"
 import { useNFTin } from "@hooks/useNFTin"
 import { useRecoilValue } from "recoil"
 import { MyAccounts } from "@utils/localStorage"
 
-export const BlockList = (props: { blocks: IBlockRow[] }) => {
+export const BlockList = (props: { blocks: ITx[] }) => {
     const { address } = useRecoilValue(MyAccounts)
     console.log(address)
     const nftin = useNFTin()
@@ -24,7 +24,7 @@ export const BlockList = (props: { blocks: IBlockRow[] }) => {
     }
     history()
     const BlockListRows = (blocks: IBlockRow[]) => {
-        return blocks.map((v, index) => <BlockRow key={index} blockNumber={v.blockNumber} blockHash={v.blockHash} />)
+        return blocks.map((v, index) => <BlockRow key={index} blockNumber={v.blockNumber} blockHash={v.blockHash} hash={v.hash} />)
     }
 
     return <BlockListWrap>{BlockListRows(props.blocks)}</BlockListWrap>

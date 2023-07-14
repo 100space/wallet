@@ -1,6 +1,6 @@
 import { ITransactionState } from "@utils/interFace/transaction.interface"
-import { TransactionImgWrap, TransactionStatus } from "./styled/Transaction.styled"
 import { Icon } from "@iconify/react"
+import { TransactionImgWrap, TransactionStatus } from "../styled"
 
 export const TransactionImage = ({ event }: ITransactionState) => {
 
