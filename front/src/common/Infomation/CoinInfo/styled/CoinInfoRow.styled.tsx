@@ -29,7 +29,10 @@ export const CoinInfoRowWrap = styled.div<ISizeProps>`
 `
 
 export const CoinInfoRowContent = styled.div<IIndexProps>`
-    color: ${({ theme, mode, index, color, percent, price }) => (percent && index === 1 && color) || ((index === 1) && (mode && theme[mode].textCoinPrice)) || (mode && theme[mode].text)};
+    color: ${({ theme, mode, index, color, percent, price }) =>
+        (percent && index === 1 && color) ||
+        (index === 1 && mode && theme[mode].textCoinPrice) ||
+        (mode && theme[mode].text)};
 `
 
 export const CoinInfoRow = (props: ICoinInfoRow) => {
@@ -37,12 +40,20 @@ export const CoinInfoRow = (props: ICoinInfoRow) => {
 
     const coinInfoRowList = (coindata: TCoinInfoRow) => {
         return coindata.map((v, idx, array) => {
-
-            const color = (typeof (v) === 'number' && v >= 0) ? "#00d17f" : "#e84562"
+            const color = typeof v === "number" && v >= 0 ? "#00d17f" : "#e84562"
 
             return (
-                <CoinInfoRowContent mode={modeState.mode} color={color} percent={props.percent} price={props.price} key={idx} index={idx}>
-                    {(props.price && idx === 1 ? "$ " : "") + v.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + (props.percent && idx === 1 ? " %" : "")}
+                <CoinInfoRowContent
+                    mode={modeState.mode}
+                    color={color}
+                    percent={props.percent}
+                    price={props.price}
+                    key={idx}
+                    index={idx}
+                >
+                    {(props.price && idx === 1 ? "$ " : "") +
+                        v.toString().replace(/\d(?=(\d{3})+\b)/g, "$&,") +
+                        (props.percent && idx === 1 ? " %" : "")}
                 </CoinInfoRowContent>
             )
         })

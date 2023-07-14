@@ -22,7 +22,7 @@ export const TokenRow = (props: { token: ITokenRow }) => {
                 <AccountRowAddress>
                     {(Math.floor(props.token.assets[0].amount * 1000) / 1000)
                         .toString()
-                        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +
+                        .replace(/\d(?=(\d{3})+\b)/g, "$&,") +
                         " " +
                         props.token.assets[0].currency}
                 </AccountRowAddress>
@@ -32,7 +32,7 @@ export const TokenRow = (props: { token: ITokenRow }) => {
                         " " +
                         (Math.floor(props.token.assets[1].amount * 1000) / 1000)
                             .toString()
-                            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                            .replace(/\d(?=(\d{3})+\b)/g, "$&,")}
                 </AccountAssets>
             </TokenInfoWrap>
 
