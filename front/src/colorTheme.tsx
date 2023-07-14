@@ -20,6 +20,7 @@ export const theme = {
         coinChart: "#616161d2",
         desBg: "#464646",
         walletBg: "#232323",
+        teamBg: "#3e3e3e",
 
         // point 색상
         point200: "#FF8756",
@@ -74,6 +75,7 @@ export const theme = {
         tokenBg: "#feda4a",
         desBg: "#e6e6e6c7",
         walletBg: "#ededed",
+        teamBg: "#526377a6",
 
         // //point 색상
         point200: "#faa12c",
