@@ -70,7 +70,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
             <Icon
                 icon={"mi:delete"}
                 style={{ fontSize: "3rem", marginLeft: "2rem" }}
-                color={"#fff"}
+                color={modeState.mode === "darkMode" ? "#fff" : "#000"}
                 onClick={deleteAccount}
             />
         </AccountRowWrap>
