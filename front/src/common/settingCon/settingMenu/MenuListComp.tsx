@@ -1,5 +1,5 @@
 import { Category } from "@components/Category"
-import { SetBtnWrap, SettingMenuTitle, SubWrap } from "./styled"
+import { SetBtnWrap, SettingMenuTitle, SubWrap, TeamInfoWrap } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
 import React from "react"
@@ -70,7 +70,7 @@ export const MenuListComp = () => {
                 </Btn>
             </SetBtnWrap>
             <NavLink to="teamInfo">
-                <h1 style={{ color: "white" }}>Team member Info</h1>
+                <TeamInfoWrap mode={modeState.mode}>Team member Info</TeamInfoWrap>
             </NavLink>
         </>
     )
