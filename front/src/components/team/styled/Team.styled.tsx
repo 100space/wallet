@@ -7,7 +7,7 @@ export const TeamWrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 `
 
 export const TeamWrap = styled.div<ISizeProps>`
@@ -15,7 +15,8 @@ export const TeamWrap = styled.div<ISizeProps>`
     height: 22%;
     background: ${({ theme, mode }) => mode && theme[mode].teamBg};
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: space-around;
 `
 
 export const MemberWrapper = styled.div<ISizeProps>`
@@ -28,6 +29,15 @@ export const MemberWrap = styled.div<ISizeProps>`
     font-size: 2rem;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
+`
+
+export const IconWrap = styled.div<ISizeProps>`
+    width: 7rem;
+    height: 4rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 `
 
 export const NameWrap = styled.div<ISizeProps>`
