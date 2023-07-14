@@ -7,7 +7,6 @@ import { useGetMode } from "@hooks/useMode"
 import { ConfirmAlert, ConfirmComp } from "@components/Alert/alert"
 import { Team } from "@components/team"
 
-
 const MenuList = [
     { MenuSub: "Wallet", content: "Network" },
     { MenuSub: "Market", content: "NFT market" },
@@ -30,7 +29,6 @@ export const MenuListComp = () => {
         }
         if (innerHTML.indexOf("계정 지우기") > -1) {
             ConfirmComp()
-            console.log("계정 지우기")
         }
     }
     return (
@@ -72,7 +70,7 @@ export const MenuListComp = () => {
                 </Btn>
             </SetBtnWrap>
             <NavLink to="teamInfo">
-                <h1 style={{color:"white"}}>Team member Info</h1>
+                <h1 style={{ color: "white" }}>Team member Info</h1>
             </NavLink>
         </>
     )
