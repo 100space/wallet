@@ -115,7 +115,8 @@ export const NFTInfoPage = () => {
     }
 
     const clickBackBtnHandler = (e: MouseEvent) => {
-        navigate(`/market/collection/${createPath(location.pathname).ca}`)
+        // navigate(`/market/collection/${createPath(location.pathname).ca}`)
+        navigate(-1)
     }
 
     useEffect(() => {

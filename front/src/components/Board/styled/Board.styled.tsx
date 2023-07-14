@@ -1,5 +1,5 @@
 import { SizePropsStyled } from "@styled/index"
-import { ISizeProps, IonClickProps } from "@utils/interFace/styled.interface"
+import { INftBoardContent, ISizeProps, IonClickProps } from "@utils/interFace/styled.interface"
 import { styled } from "styled-components"
 
 export const BoardForm = styled.div<ISizeProps>`
@@ -27,5 +27,4 @@ export const NftBoardContentForm = styled.div<ISizeProps>`
     }
 `
 
-export const NftBoardContent = styled.div<ISizeProps>`
-`
+export const NftBoardContent = styled.div<INftBoardContent>``

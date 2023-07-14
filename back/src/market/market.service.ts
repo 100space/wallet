@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   Logger,
   NotFoundException,
+  NotImplementedException,
 } from '@nestjs/common';
 import { Contract, Provider } from 'ethers';
 import { MARKET_ABI } from '../abi/MARKET.ABI';
@@ -387,6 +388,40 @@ export class MarketService {
     }
   }
 
+  async notUseIPFS(tokenUri: string) {
+    try {
+      if (tokenUri.length === 0)
+        throw new NotImplementedException('Token URI is empty', {
+          cause: new Error(),
+          description: 'Not Use IPFS Error',
+        });
+      const { data } = await firstValueFrom(
+        this.httpService.get(tokenUri).pipe(
+          catchError((error: AxiosError) => {
+            this.logger.error(error.response?.data);
+            throw new NotFoundException(`Can't get data from tokenUri`, {
+              cause: new Error(),
+              description: 'Not Use IPFS Error',
+            });
+          }),
+        ),
+      );
+
+      if (!data.name || !data.description || !data.image)
+        throw new NotFoundException('No Data From URI', {
+          cause: new Error(),
+          description: 'Not Use IPFS Error',
+        });
+      return {
+        name: data.name,
+        description: data.description,
+        image: data.image,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getERC721Info({
     eoa,
     ca,
@@ -399,53 +434,87 @@ export class MarketService {
     try {
       const abi = ERC721_ABI;
       const contract = new Contract(ca, abi, this.provider);
-      const owner = await contract.ownerOf(tokenId);
+      const sample = {
+        ca,
+        tokenId,
+        owner: 'unknown',
+        supply: 0,
+        symbol: 'unknown',
+        collectionName: 'unknown',
+        tokenUri: 'unkown',
+      };
 
-      // if (owner !== eoa) {
+      try {
+        sample.owner = await contract.ownerOf(tokenId);
+      } catch (error) {
+        this.logger.error(`${ca} is not have  ownerOf Func`);
+      }
+
+      // if (sample.owner !== eoa) {
       //   throw new Error('This is not you own');
       // }
 
-      const supply = Number(await contract.totalSupply());
-      const symbol: string = await contract.symbol();
+      try {
+        sample.supply = Number(await contract.totalSupply());
+      } catch (error) {
+        this.logger.error(`${ca} is not have totalSupply Func`);
+      }
 
-      const collectionName: string = await contract.name();
-      const tokeUri: string = await contract.tokenURI(tokenId);
+      try {
+        sample.symbol = await contract.symbol();
+      } catch (error) {
+        this.logger.error(`${ca} is not have symbol Func`);
+      }
 
-      if (!tokeUri.includes('ipfs')) throw new Error('This NFT is not support');
-      const { name, description, image } = await this.isUseIPFS(tokeUri);
+      try {
+        sample.collectionName = await contract.name();
+      } catch (error) {
+        this.logger.error(`${ca} is not have name Func`);
+      }
 
-      const base = {
-        ca,
-        supply,
-        symbol,
-        tokenId,
-        collectionName,
-        description,
-        owner,
-      };
+      try {
+        sample.tokenUri = await contract.tokenURI(tokenId);
+      } catch (error) {
+        this.logger.error(`${ca} is not have tokenURI Fun`);
+      }
 
-      const ipfsRegex = /^ipfs:\/\/.*/;
+      if (sample.tokenUri.includes('ipfs')) {
+        const { name, description, image } = await this.isUseIPFS(
+          sample.tokenUri,
+        );
 
-      if (ipfsRegex.test(image)) {
-        const ipfsUrl = 'https://ipfs.io/ipfs/';
-        const realImage = `${ipfsUrl}${image.replace('ipfs://', '')}`;
+        const ipfsRegex = /^ipfs:\/\/.*/;
+
+        if (ipfsRegex.test(image)) {
+          const ipfsUrl = 'https://ipfs.io/ipfs/';
+          const realImage = `${ipfsUrl}${image.replace('ipfs://', '')}`;
+          return {
+            ...sample,
+            nftName: name,
+            image: realImage,
+            description,
+          };
+        }
+
         return {
-          ...base,
+          ...sample,
           nftName: name,
-          image: realImage,
+          image,
+          description,
         };
       }
 
+      const { name, description, image } = await this.notUseIPFS(
+        sample.tokenUri,
+      );
       return {
-        ...base,
+        ...sample,
         nftName: name,
         image,
+        description,
       };
     } catch (error) {
-      throw new InternalServerErrorException(error.message, {
-        cause: new Error(),
-        description: 'Get ERC 721 Info Error',
-      });
+      throw error;
     }
   }
 
