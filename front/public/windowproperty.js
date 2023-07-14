@@ -8,7 +8,6 @@ const messagePromises = {}
 window.addEventListener("message", (event) => {
     const { type, id, response } = event.data
     if (type === "fromEvent") {
-        console.log(event.data, "messagePromises")
         if (messagePromises[id]) {
             messagePromises[id].resolve(response)
             delete messagePromises[id] // Remove this promise
@@ -22,8 +21,6 @@ function postMessageAsync(method, params) {
     return new Promise((resolve, reject) => {
         messagePromises[id] = { resolve, reject }
         window.postMessage(message, "*")
-        console.log(message)
-        console.log(messagePromises)
     })
 }
 

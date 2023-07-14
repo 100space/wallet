@@ -7,15 +7,15 @@ export const CoinPriceContentWrap = styled.div<ITypeSize>`
     display: flex;
     justify-content: right;
     align-items: center;
-    width: ${({width}) => width || "100%"};
-    height: ${({height}) => height || "4.8rem"};
+    width: ${({ width }) => width || "100%"};
+    height: ${({ height }) => height || "4.8rem"};
     box-sizing: border-box;
 `
 
 export const CoinPriceCurrency = styled.div<ITypeSize>`
     font-size: 1.2rem;
     font-weight: 700;
-    color: ${({color, theme}) => color || theme.textCoinPrice};
+    color: ${({ color, theme }) => color || theme.textCoinPrice};
 `
 
 export const CoinPriceContent = styled.div<ITypeSize>`
@@ -23,22 +23,17 @@ export const CoinPriceContent = styled.div<ITypeSize>`
     font-size: 1.2rem;
     font-weight: 700;
     text-align: right;
-    line-height: ${({height}) => height || "4.8rem"};
-    color: ${({color, theme}) => color || theme.textCoinPrice};
+    line-height: ${({ height }) => height || "4.8rem"};
+    color: ${({ color, theme }) => color || theme.textCoinPrice};
 `
 
-export const CoinPrice = ({width, price, currency}: ICoinPrice) => {
-    return(
+export const CoinPrice = ({ width, price, currency }: ICoinPrice) => {
+    return (
         <>
             <CoinPriceContentWrap width={width}>
-                <CoinPriceContent>
-                    {price ? price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") : 0}
-                </CoinPriceContent>
-                <CoinPriceCurrency>
-                    {currency}
-                </CoinPriceCurrency>
+                <CoinPriceContent>{price ? price.toString().replace(/\d(?=(\d{3})+\b)/g, "$&,") : 0}</CoinPriceContent>
+                <CoinPriceCurrency>{currency}</CoinPriceCurrency>
             </CoinPriceContentWrap>
-            
         </>
     )
 }

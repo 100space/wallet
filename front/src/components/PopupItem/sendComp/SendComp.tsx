@@ -1,13 +1,11 @@
 import { IsPopUp, ModeState, MyAccounts, MyInfo, MyNFT, MyNetwork } from "@utils/localStorage"
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
-import { useGetMode } from "@hooks/useMode"
+import { useRecoilState, useRecoilTransactionObserver_UNSTABLE, useRecoilValue, useResetRecoilState } from "recoil"
 import { ethers } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
 import requestServer from "@utils/axios/requestServer"
 import { Alert } from "@components/Alert/alert"
 import { InputList } from "@utils/interFace/core"
 import { useLocation, useNavigate } from "react-router"
-import axios from "axios"
 import { MainnetBtnWrap } from "@common/settingCon/settingMenu/styled/MainnetCon.styled"
 import { Btn, Button } from "@components/Button"
 import { InputComp } from "@components/input"
@@ -126,35 +124,14 @@ export const SendComp = (props: {
 
             try {
                 const { data } = await requestServer.put("market", { eoa, ca, tokenId })
-
                 setMyNft([...myNft, data])
                 return popupReset()
-            } catch (error) {
-                throw new Error()
-            }
-        } else if ((e.currentTarget as HTMLElement).className === "sendTransaction") {
-            try {
-                const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
-                if ((e.currentTarget[0] as HTMLFormElement).value.length !== 42) {
-                    console.log((e.currentTarget[0] as HTMLFormElement).value.length)
-                    return Alert.fire({ title: "계좌를 확인해주세요.", icon: "error" })
-                }
-                const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
-                const tx = {
-                    from: myAccounts.address,
-                    to: (e.currentTarget[0] as HTMLFormElement).value,
-                    value: valueInWei,
-                }
-                // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
-                console.log(tx)
-                const result = await nftin.sendTransaction(tx)
-                console.log(result)
-                setIsPopup({ ...isPopup, isOpen: false, contents: "" })
             } catch (error: any) {
-                if (error.message.includes("insufficient funds")) {
-                    Alert.fire({ title: "잔액이 부족합니다.", icon: "error" })
+                if (error.response.data.message) {
+                    Alert.fire({ title: `${error.response.data.message}`, icon: "warning" })
+                } else {
+                    Alert.fire({ title: "올바른 CA를 입력하거나 Token ID를 입력하세요.", icon: "question" })
                 }
-                console.log(error)
             }
         }
     }
