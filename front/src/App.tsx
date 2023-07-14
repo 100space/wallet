@@ -43,6 +43,8 @@ const App = () => {
 
     const getTx = async () => {
         const { data } = await axios.get(`https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=${myAccount.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env.REACT_APP_POLYGON_SCAN}`);
+        console.log(data)
+        if (data.result.length === 0) return setTx([{ hash: "" } as ITx])
         const txDatas = data.result.map((v: ITx) => {
             v.timeStamp = dateChange(Number(v.timeStamp))
             return v

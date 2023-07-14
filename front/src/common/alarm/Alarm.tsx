@@ -7,7 +7,7 @@ import { LoadingBar } from "@components/loading"
 import { AlarmData, IsAlarm } from "@utils/localStorage/Alarm"
 import { TransactionRowByAddress } from "@components/Transaction"
 import { TxBtnContent, TxBtnWrap } from "@components/Button"
-import { MyAccounts } from "@utils/localStorage"
+import { ModeState, MyAccounts } from "@utils/localStorage"
 
 interface IParsingData {
     from: string
@@ -21,6 +21,7 @@ interface IGroupData {
 }
 
 export const Alarm = () => {
+    const mode = useRecoilValue(ModeState)
     const tx = useRecoilValue(AlarmData)
     const { address } = useRecoilValue(MyAccounts)
     const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
@@ -54,6 +55,7 @@ export const Alarm = () => {
 
     useEffect(() => {
         if (tx.length === 0) return
+        if (tx[0].hash === "") return setAlarmDatas([])
         const parsingData = tx.map((v: ITx) => ({ from: v.from, to: v.to, timestamp: v.timeStamp, value: v.value }))
         const groupedData = parsingData.reduce((acc: IGroupData, v) => {
             if (!acc.hasOwnProperty(v.timestamp)) {
@@ -67,9 +69,13 @@ export const Alarm = () => {
     }, [])
 
     if (!alarmDatas) return <LoadingBar />
+    console.log(modeState.state)
     return (
         <AlarmWrapper mode={modeState.mode}>
             {alarm(alarmDatas)}
+            <div style={{ fontSize: "2rem", fontWeight: "700", color: (mode !== "darkMode") ? "#FFF" : "#000" }}>
+                {alarmDatas.length === 0 ? "트랜잭션 데이터가 없습니다." : ""}
+            </div>
             <TxBtnWrap mode={modeState.mode}>
                 <TxBtnContent mode={modeState.mode} onClick={handleClick}>
                     자세히 보기
