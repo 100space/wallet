@@ -29,6 +29,7 @@ export const CoinInfoRowWrap = styled.div<ISizeProps>`
 `
 
 export const CoinInfoRowContent = styled.div<IIndexProps>`
+//     color: ${({ theme, mode, index, color, percent }) => (percent && index === 1 && color) || ((index === 1) && (mode && theme[mode].textCoinPrice)) || (mode && theme[mode].text)};
     color: ${({ theme, mode, index, color, percent, price }) =>
         (percent && index === 1 && color) ||
         (index === 1 && mode && theme[mode].textCoinPrice) ||

@@ -8,7 +8,7 @@ import { ListTokensDto } from './dto/list-tokens-trends.dto';
 @ApiTags('Trends')
 @Controller('trends')
 export class TrendsController {
-  constructor(private readonly trendsService: TrendsService) {}
+  constructor(private readonly trendsService: TrendsService) { }
 
   @Get('exchange')
   @ApiOperation({
@@ -58,5 +58,10 @@ export class TrendsController {
   })
   getTokenData(@Body() { symbol }: TokenSymbolDto) {
     return this.trendsService.getTokenData({ symbol });
+  }
+
+  @Post('current')
+  getCurrencyPrice(@Body() { symbol }: TokenSymbolDto) {
+    return this.trendsService.getTokenCurrency({ symbol });
   }
 }

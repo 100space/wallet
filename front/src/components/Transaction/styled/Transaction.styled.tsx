@@ -9,15 +9,17 @@ export const TransactionRowContent = styled.div<ISizeProps>`
 export const RowContentsWraps = styled.div<IonClickProps>`
     ${SizePropsStyled};
     ${({ open }) => (open === "on" ? "display: flex;" : "display: none;")}
-    margin-top: 1rem;
-    justify-content: space-between;
+    height:fit-content;
+    /* justify-content: space-between; */
     align-items: center;
-    padding: 0.5rem;
-    box-sizing: border-box;
+    padding: 1rem 0.5rem;
+    /* box-sizing: border-box; */
+    box-sizing: content-box;
     & > div:nth-child(2) > div {
         line-height: ${({ height }) => height && typeof height === "string" && parseFloat(height) / 2 + "rem"};
     }
 `
+
 export const TransactionImgWrap = styled.div<ISizeProps>`
     ${SizePropsStyled};
     display: flex;

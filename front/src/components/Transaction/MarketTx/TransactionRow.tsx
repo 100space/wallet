@@ -2,7 +2,7 @@ import { useGetMode } from "@hooks/useMode"
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { TransactionImage } from "./TransactionImage"
 import { TransactionRowContents } from "./TranscationContents"
-import { RowContentsWraps } from "./styled"
+import { RowContentsWraps } from "../styled"
 
 interface ITransactionRow extends ITransaction {
     open?: string
