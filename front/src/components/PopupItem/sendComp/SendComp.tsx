@@ -10,6 +10,8 @@ import { MainnetBtnWrap } from "@common/settingCon/settingMenu/styled/MainnetCon
 import { Btn, Button } from "@components/Button"
 import { InputComp } from "@components/input"
 import { SendCompWrapper, SendCompWrap } from "./styled"
+import { useState } from "react"
+import { LoadingBar } from "@components/loading"
 
 export const sendList = [
     { subject: "보낼 계좌", content: "보낼 계좌를 입력해주세요", className: "contractAddress" },
@@ -43,6 +45,7 @@ export const SendComp = (props: {
     handler?: (e: React.FormEvent<HTMLFormElement>) => void
 }) => {
     const { mode } = useRecoilValue(ModeState)
+    const [isLoading, setIsLoading] = useState(false)
     const popupReset = useResetRecoilState(IsPopUp)
     const [isPopup, setIsPopup] = useRecoilState(IsPopUp)
     const [myInfo, setMyInfo] = useRecoilState(MyInfo)
@@ -123,13 +126,17 @@ export const SendComp = (props: {
             const tokenId = (e.currentTarget[1] as HTMLFormElement).value
 
             try {
+                setIsLoading(true)
                 const { data } = await requestServer.put("market", { eoa, ca, tokenId })
                 setMyNft([...myNft, data])
+                setIsLoading(false)
                 return popupReset()
             } catch (error: any) {
                 if (error.response.data.message) {
+                    setIsLoading(false)
                     Alert.fire({ title: `${error.response.data.message}`, icon: "warning" })
                 } else {
+                    setIsLoading(false)
                     Alert.fire({ title: "올바른 CA를 입력하거나 Token ID를 입력하세요.", icon: "question" })
                 }
             }
@@ -174,6 +181,7 @@ export const SendComp = (props: {
         ))
     }
 
+    if (isLoading) return <LoadingBar />
     return (
         <form onSubmit={props.handler ? props.handler : handlerWeb3Fn} className={props.className}>
             {inputList(props.inputArray)}

@@ -13,6 +13,7 @@ export const NftCardContentsWrap = styled.div<ISizeProps>`
 
 export const NftCardContentWrap = styled.div<ISizeProps>`
     width: ${({ width }) => width || "100%"};
+    min-width: 16rem;
     & + & {
         margin-top: 1rem;
     }
