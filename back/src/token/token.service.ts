@@ -38,7 +38,10 @@ export class TokenService {
           ca,
           symbol,
           decimal,
-          image: `image` + Math.floor(Math.random() * 10),
+          image:
+            `${process.env.DEFAULT_TOKEN_URL}` +
+            `${Math.floor(Math.random() * 5) + 1}` +
+            `.png`,
         });
         return response;
       }
