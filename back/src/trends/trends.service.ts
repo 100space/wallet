@@ -131,6 +131,12 @@ export class TrendsService {
     return await this.trendRepository.findOne(symbol);
   }
 
+  async getTokenCurrency({ symbol }) {
+    symbol = symbol.toLowerCase()
+    const { price } = await this.getTokenData({ symbol })
+    return price
+  }
+
   async getTokenList({ tokens }: ListTokensDto) {
     const symbolList = tokens.map((v) => {
       if (v.symbol.toLowerCase() === 'agor') {

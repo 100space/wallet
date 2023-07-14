@@ -42,7 +42,6 @@ export const PopUpItem = ({ address }: { address?: string }) => {
         setTx({ isLoading: false, isError: e.response, data: [] })
       }
     }
-
   }
 
   const itemSwitch = () => {

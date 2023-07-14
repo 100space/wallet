@@ -3,16 +3,19 @@ import styled from "styled-components"
 
 export const AlarmWrapper = styled.div<ISizeProps>`
     width: 100%;
-    height: 80%;
+    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: auto;
+
+    & > div {
+        margin: 1rem 0;
+    }
 `
 
 export const AlarmWrap = styled.div<ISizeProps>`
     width: 90%;
-    height: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +26,7 @@ export const AlarmWrap = styled.div<ISizeProps>`
 `
 
 export const AlarmDateWrap = styled.div<ISizeProps>`
+    margin: 2rem 0;
     width: 10rem;
     height: 3rem;
     display: flex;
@@ -36,10 +40,13 @@ export const AlarmDateWrap = styled.div<ISizeProps>`
 
 export const AlarmListWrap = styled.div<ISizeProps>`
     width: 100%;
-    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${({ theme, mode }) => mode && theme[mode].alarmBg};
     color: ${({ theme, mode }) => mode && theme[mode].text};
+
+    &:nth-child(2n) {
+        background-color: ${({ theme, mode }) => mode && theme[mode].basicBg};
+    }
 `

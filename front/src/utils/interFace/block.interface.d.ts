@@ -4,13 +4,16 @@ export interface IBlockRow {
     hash: string
 }
 
-export interface ITx extends IBlockRow {
-    timeStamp: string
-    nonce: string
-    transactionIndex: string
+export interface ITxByUser {
     from: string
     to: string
+    timeStamp: string
     value: string
+}
+
+export interface ITx extends IBlockRow, ITxByUser {
+    nonce: string
+    transactionIndex: string
     gas: string
     gasPrice: string
     isError: string
