@@ -134,30 +134,6 @@ export const SendComp = (props: {
                     Alert.fire({ title: "올바른 CA를 입력하거나 Token ID를 입력하세요.", icon: "question" })
                 }
             }
-        } else if ((e.currentTarget as HTMLElement).className === "sendTransaction") {
-            try {
-                const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
-                if ((e.currentTarget[0] as HTMLFormElement).value.length !== 42) {
-                    console.log((e.currentTarget[0] as HTMLFormElement).value.length)
-                    return Alert.fire({ title: "계좌를 확인해주세요.", icon: "error" })
-                }
-                const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
-                const tx = {
-                    from: myAccounts.address,
-                    to: (e.currentTarget[0] as HTMLFormElement).value,
-                    value: valueInWei,
-                }
-                // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
-                console.log(tx)
-                const result = await nftin.sendTransaction(tx)
-                console.log(result)
-                setIsPopup({ ...isPopup, isOpen: false, contents: "" })
-            } catch (error: any) {
-                if (error.message.includes("insufficient funds")) {
-                    Alert.fire({ title: "잔액이 부족합니다.", icon: "error" })
-                }
-                console.log(error)
-            }
         }
     }
 
