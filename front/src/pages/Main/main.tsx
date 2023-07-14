@@ -69,7 +69,6 @@ export const MainPage = () => {
 
     const getMyNft = async () => {
         if (nftin === null) return null
-        console.log(myNft)
         const { data } = await requestServer.post("market/user", {
             eoa: myAccounts.address,
         })
@@ -83,7 +82,8 @@ export const MainPage = () => {
                 onSuccess: (data: any) => {
                     setMyTokens([...data])
                 },
-                refetchOnWindowFocus: true,
+                refetchOnWindowFocus: false,
+                staleTime: Infinity,
             },
             {
                 queryKey: ["post", "myNFTs"],
@@ -91,7 +91,8 @@ export const MainPage = () => {
                 onSuccess: (data: any) => {
                     setMyNft([...data])
                 },
-                refetchOnWindowFocus: true,
+                refetchOnWindowFocus: false,
+                staleTime: Infinity,
             },
         ],
     })
@@ -110,7 +111,6 @@ export const MainPage = () => {
                 if (myAssetData) {
                     setMyTokens([...myAssetData])
                 }
-                console.log(myTokens, 123123123)
                 if (myNftData) {
                     setMyNft([...myNftData])
                 }
