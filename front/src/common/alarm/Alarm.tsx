@@ -7,7 +7,7 @@ import { LoadingBar } from "@components/loading"
 import { AlarmData, IsAlarm } from "@utils/localStorage/Alarm"
 import { TransactionRowByAddress } from "@components/Transaction"
 import { TxBtnContent, TxBtnWrap } from "@components/Button"
-import { ModeState, MyAccounts } from "@utils/localStorage"
+import { ModeState, MyAccounts, MyInfo, MyNetwork } from "@utils/localStorage"
 
 interface IParsingData {
     from: string
@@ -23,13 +23,15 @@ interface IGroupData {
 export const Alarm = () => {
     const mode = useRecoilValue(ModeState)
     const tx = useRecoilValue(AlarmData)
+    const network = useRecoilValue(MyNetwork)
+    const current = useRecoilValue(MyInfo)
     const { address } = useRecoilValue(MyAccounts)
     const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
     const [modeState, setChange] = useGetMode()
     const [alarmDatas, setAlarmDatas] = useState<[string, IParsingData[]][]>()
 
     const handleClick = (e: MouseEvent) => {
-        window.open(`https://mumbai.polygonscan.com/address/${address}`)
+        window.open(`${current[network].explorer}/address/${address}`)
     }
 
     const alarm = (alarm: [string, IParsingData[]][]) => {

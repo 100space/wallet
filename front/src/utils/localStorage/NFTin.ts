@@ -69,6 +69,9 @@ export const MyInfo = atom({
     key: "myInfo",
     default: {
         polygon: {
+            explorer: "https://polygonscan.com",
+            api: 'REACT_APP_POLYGON_SCAN',
+            apiURL: "https://api.polygonscan.com/api",
             networks: { rpc: "https://polygon-mainnet.infura.io", chainId: 137, symbol: "MATIC" },
             tokens: [
                 {
@@ -79,6 +82,9 @@ export const MyInfo = atom({
             ],
         },
         mumbai: {
+            explorer: "https://mumbai.polygonscan.com",
+            api: 'REACT_APP_POLYGON_SCAN',
+            apiURL: "https://api-testnet.polygonscan.com/api",
             networks: { rpc: "https://polygon-mumbai.infura.io", chainId: 80001, symbol: "MATIC" },
             tokens: [
                 {
@@ -89,6 +95,9 @@ export const MyInfo = atom({
             ],
         },
         arbitrum: {
+            explorer: "https://goerli.arbiscan.io",
+            api: 'REACT_APP_ARBITRUM_SCAN',
+            apiURL: "https://api-goerli.arbiscan.io/api",
             networks: { rpc: "https://arbitrum-goerli.infura.io", chainId: 421613, symbol: "AGOR" },
             tokens: [
                 {
