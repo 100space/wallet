@@ -10,3 +10,8 @@ export const ExchangePrice = atom({
     key: "exchange",
     default: 0,
 })
+
+export const IsAlarm = atom({
+    key: "isAlarm",
+    default: false,
+})

@@ -14,7 +14,7 @@ import { ethers } from "ethers"
 import axios from "axios"
 import { ITx } from "@utils/interFace/block.interface"
 import { useQuery } from "@tanstack/react-query"
-import { AlarmData, ExchangePrice } from "@utils/localStorage/Alarm"
+import { AlarmData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
 import requestServer from "@utils/axios/requestServer"
 
 declare global {
@@ -30,6 +30,7 @@ const App = () => {
     const scanOpen = useRecoilValue(ScanOpen)
     const myAccount = useRecoilValue(MyAccounts)
     const [tx, setTx] = useRecoilState(AlarmData)
+    const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
     const [exchange, setExchange] = useRecoilState(ExchangePrice)
     const network = useRecoilValue(MyNetwork)
     const current = useRecoilValue(MyInfo)
@@ -47,6 +48,9 @@ const App = () => {
             return v
         })
         setTx(txDatas)
+        if (txDatas[0].hash !== tx[0].hash) {
+            setIsAlarm(true)
+        }
         const currentTime = new Date()
         console.log(`${currentTime.getHours()}시 ${currentTime.getMinutes()}분 ${currentTime.getSeconds()}초에 트랜잭션 데이터가 갱신되었습니다.`)
         return data.result as ITx[];

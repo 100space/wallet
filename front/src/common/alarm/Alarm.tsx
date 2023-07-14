@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { MouseEvent, useEffect, useState } from "react"
 import { ITx } from "@utils/interFace/block.interface"
 import { LoadingBar } from "@components/loading"
-import { AlarmData } from "@utils/localStorage/Alarm"
+import { AlarmData, IsAlarm } from "@utils/localStorage/Alarm"
 import { TransactionRowByAddress } from "@components/Transaction"
 import { TxBtnContent, TxBtnWrap } from "@components/Button"
 import { MyAccounts } from "@utils/localStorage"
@@ -22,8 +22,9 @@ interface IGroupData {
 
 export const Alarm = () => {
     const tx = useRecoilValue(AlarmData)
-    const [modeState, setChange] = useGetMode()
     const { address } = useRecoilValue(MyAccounts)
+    const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
+    const [modeState, setChange] = useGetMode()
     const [alarmDatas, setAlarmDatas] = useState<[string, IParsingData[]][]>()
 
     const handleClick = (e: MouseEvent) => {
@@ -62,6 +63,7 @@ export const Alarm = () => {
             return acc;
         }, {});
         setAlarmDatas(Object.entries(groupedData))
+        setIsAlarm(false)
     }, [])
 
     if (!alarmDatas) return <LoadingBar />
