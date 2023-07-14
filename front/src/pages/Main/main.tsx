@@ -107,7 +107,6 @@ export const MainPage = () => {
         const fetchData = async () => {
             if (nftin) {
                 const myAssetData = await getMyCoins()
-
                 const myNftData = await getMyNft()
                 if (myAssetData) {
                     setMyTokens([...myAssetData])
