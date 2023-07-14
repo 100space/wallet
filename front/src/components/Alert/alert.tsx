@@ -56,7 +56,7 @@ export const ConfirmComp = () => {
         reverseButtons: true, // 버튼 순서 거꾸로
     }).then((result) => {
         if (result.value && result.isConfirmed) {
-            console.log("삭제 함수")
+            localStorage.clear()
         } else if (result.isDismissed) {
             Swal.fire("취소되었습니다.", "", "warning")
         }
