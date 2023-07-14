@@ -52,7 +52,6 @@ export const Step2 = () => {
             for (let i = 0; i < length; i++) {
                 mnemonicArray.push((e.currentTarget[i] as HTMLInputElement).value)
             }
-            console.log(typeof myProfile.myMnemonic)
             if (typeof myProfile.myMnemonic === "string")
                 return Alert.fire({ icon: "info", title: "다음 단계를 진행하세요" })
             const result = myProfile.myMnemonic.filter((v: string, i: number) => v === mnemonicArray[i])
