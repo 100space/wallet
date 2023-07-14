@@ -27,7 +27,7 @@ export const BottomSheetWrap = styled.div<IStateProps>`
     left: 0;
     width: 100%;
     bottom: ${({ popupstate }) => (popupstate === "true" ? "6rem" : "-100%")};
-    height: ${({ popupstate }) => (popupstate === "true" ? "fit-content" : "0rem")};
+    height: ${({ popupstate }) => (popupstate === "true" ? "auto" : "0rem")};
     transition: all 0.5s cubic-bezier(0.15, 0.22, 0.12, 0.44);
     overflow: hidden;
     background-color: ${({ theme, mode }) => mode && theme[mode].popupBg};
