@@ -10,7 +10,7 @@ export const NftContents = ({ name, owner, prices, collection }: INFTContents) =
 
     return (
         <NftCardContentsWrap height={"7.5rem"}>
-            <NftCardContentWrap width={"13rem"}>
+            <NftCardContentWrap width={"90%"}>
                 <NftCardContent mode={modeState.mode} height={"1.6rem"} types={"name"}>
                     {name}
                 </NftCardContent>
