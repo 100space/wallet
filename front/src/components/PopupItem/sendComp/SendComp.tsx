@@ -1,7 +1,7 @@
 import { IsPopUp, ModeState, MyAccounts, MyInfo, MyNFT, MyNetwork } from "@utils/localStorage"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { useGetMode } from "@hooks/useMode"
-import { ethers } from "ethers"
+import { ethers, isError } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
 import requestServer from "@utils/axios/requestServer"
 import { Alert } from "@components/Alert/alert"
@@ -126,7 +126,6 @@ export const SendComp = (props: {
 
             try {
                 const { data } = await requestServer.put("market", { eoa, ca, tokenId })
-
                 setMyNft([...myNft, data])
                 return popupReset()
             } catch (error) {
