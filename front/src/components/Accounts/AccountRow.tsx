@@ -48,7 +48,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
                 icon={"ep:arrow-up-bold"}
                 rotate={1}
                 style={{ fontSize: "4rem" }}
-                color={props.account.address === accountState.address ? "#ffcd4d" : "#fff"}
+                color={props.account.address === accountState.address ? "#ffcd4d" : "#858585"}
                 onClick={accountClick}
             />
             <AccountAdWrap>
@@ -69,7 +69,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
             <Icon
                 icon={"mi:delete"}
                 style={{ fontSize: "3rem", marginLeft: "2rem" }}
-                color={"#fff"}
+                color={modeState.mode === "darkMode" ? "#fff" : "#000"}
                 onClick={deleteAccount}
             />
         </AccountRowWrap>
