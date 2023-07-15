@@ -17,7 +17,6 @@ export const Mypage = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [selectedFile, setSelectedFile] = useState<File | null | undefined>()
     const [isChange, setIsChange] = useState(false)
-    const [isUpdate, setIsUpdate] = useState(false)
     const [value, setValue] = useState(myAccounts.alias)
     const [src, setSrc] = useState(myAccounts.image)
     const navigator = useNavigate()
@@ -29,6 +28,7 @@ export const Mypage = () => {
 
     const handlePostClick = async (e: MouseEvent) => {
         try {
+            console.log(!isChange)
             const formData = new FormData();
             if (selectedFile) formData.append('file', selectedFile)
             const responseNickname = await requestServer.post("/account", { address: myAccounts.address, nickname: value })
@@ -59,7 +59,7 @@ export const Mypage = () => {
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0]
         setSelectedFile(file)
-        setIsUpdate(!isUpdate)
+        setIsChange(true)
         if (file) {
             const fileURL = URL.createObjectURL(file);
             setSrc(fileURL)
@@ -108,7 +108,7 @@ export const Mypage = () => {
                 </TotalSupplyWrap>
                 <ProfileBtnWrap>
                     <Btn
-                        backgroundcolor={isChange || isUpdate ? "#3a6fcb" : "#484848"}
+                        backgroundcolor={isChange ? "#3a6fcb" : "#484848"}
                         width="47.5%"
                         height="5rem"
                         margin=""
@@ -117,7 +117,7 @@ export const Mypage = () => {
                         fontSize="1.7rem"
                         profile={"true"}
                         color="white"
-                        disabled={!isChange || !isUpdate}
+                        disabled={!isChange}
                     >
                         {"저장 하기"}
                     </Btn>
