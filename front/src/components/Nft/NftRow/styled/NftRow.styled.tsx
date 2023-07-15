@@ -36,7 +36,7 @@ export const RowContentWrap = styled.div<ISizeProps>`
     box-sizing: border-box;
     color: ${({ mode, theme }) => mode && theme[mode].text};
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 400;
     & > div + div {
         text-align: right;
     }

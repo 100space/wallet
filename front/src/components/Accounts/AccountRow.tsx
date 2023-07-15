@@ -12,18 +12,24 @@ import { TextComp, AccountAdWrap } from "@common/initStep/styled"
 import { MouseEventHandler, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { useRecoilState } from "recoil"
-import { MyAccounts, MyAccountsList } from "@utils/localStorage"
+import { MyAccounts, MyAccountsList, AlarmData, MyNFT } from "@utils/localStorage"
 import { Alert } from "@components/Alert/alert"
+import { ITx } from "@utils/interFace/block.interface"
 
 export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
     const [modeState, setModeState] = useGetMode()
     const [accountState, setAccountState] = useRecoilState(MyAccounts)
     const [accountList, setAccountList] = useRecoilState(MyAccountsList)
+    const [myNFT, setMyNFT] = useRecoilState(MyNFT)
+    const [alarmData, setAlarmData] = useRecoilState(AlarmData)
     const accountRef = useRef(null)
+
     const accountClick = () => {
         if (accountRef.current) {
             const address = (accountRef.current as HTMLSpanElement).dataset.address
             const selectAddress = accountList.filter((v: typeof accountState) => v.address === address)
+            setMyNFT([])
+            setAlarmData([{ hash: "" } as ITx])
             setAccountState(selectAddress[0])
         }
     }

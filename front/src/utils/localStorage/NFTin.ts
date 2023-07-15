@@ -133,3 +133,9 @@ export const MyNFT = atom({
     default: [],
     effects_UNSTABLE: [persistAtom],
 })
+
+
+export const DefaultProfile = atom({
+    key: "defaultProfileImage",
+    default: "https://nftin-wallet-bucket.s3.ap-northeast-2.amazonaws.com/uploads/default.png"
+})

@@ -8,7 +8,6 @@ import { MyAccounts } from "@utils/localStorage"
 
 export const BlockList = (props: { blocks: ITx[] }) => {
     const { address } = useRecoilValue(MyAccounts)
-    console.log(address)
     const nftin = useNFTin()
     const history = async () => {
         const internalTxFilter = {
@@ -27,5 +26,8 @@ export const BlockList = (props: { blocks: ITx[] }) => {
         return blocks.map((v, index) => <BlockRow key={index} blockNumber={v.blockNumber} blockHash={v.blockHash} hash={v.hash} />)
     }
 
-    return <BlockListWrap>{BlockListRows(props.blocks)}</BlockListWrap>
+    return (
+        <BlockListWrap>
+            {props.blocks.length === 0 ? <div style={{ fontSize: "2rem", color: "#ff4f4f", fontWeight: 500, textAlign: "center" }}>거래 정보가 존재하지 않습니다.</div> : BlockListRows(props.blocks)}
+        </BlockListWrap>)
 }

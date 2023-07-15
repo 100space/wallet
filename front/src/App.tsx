@@ -14,7 +14,7 @@ import { ethers } from "ethers"
 import axios from "axios"
 import { ITx } from "@utils/interFace/block.interface"
 import { useQuery } from "@tanstack/react-query"
-import { AlarmData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
+import { AlarmData, CurrentAddress, CurrentTxData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
 import requestServer from "@utils/axios/requestServer"
 
 declare global {
@@ -30,8 +30,10 @@ const App = () => {
     const scanOpen = useRecoilValue(ScanOpen)
     const myAccount = useRecoilValue(MyAccounts)
     const [tx, setTx] = useRecoilState(AlarmData)
+    const [txList, setTxList] = useRecoilState(CurrentTxData)
     const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
     const [exchange, setExchange] = useRecoilState(ExchangePrice)
+    const [currentAddress, setCurrentAddress] = useRecoilState(CurrentAddress)
     const network = useRecoilValue(MyNetwork)
     const current = useRecoilValue(MyInfo)
     const navigator = useNavigate()
@@ -46,20 +48,24 @@ const App = () => {
     const getTx = async () => {
         const { data } = await axios.get(
             `${current[network].apiURL}?module=account&action=txlist&address=${
-                myAccount.address
-            }&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`
-        )
-        console.log(data)
-        if (data.message === "No transactions found") {
+              myAccount.address
+            }&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`  
+        );
+        if (data.message === 'No transactions found') {
+            setTxList([])
             setTx([{ hash: "" } as ITx])
+            data.result = []
             return []
         }
+
         const txDatas = data.result.map((v: ITx) => {
             v.timeStamp = dateChange(Number(v.timeStamp))
             return v
         })
+        setTxList(txDatas)
         setTx(txDatas)
-        if (txDatas[0].hash !== tx[0].hash) {
+        if ((tx[0].hash !== "") && txDatas[0].hash !== tx[0].hash) {
+            setCurrentAddress(myAccount.address)
             setIsAlarm(true)
         }
         const currentTime = new Date()
@@ -76,13 +82,13 @@ const App = () => {
         const day = date.getDate()
         return `${year}.${month}.${day}`
     }
-
-    useQuery(["transactions"], getTx, { refetchInterval: 30000, refetchIntervalInBackground: true, enabled: condition })
+    useQuery(['transactions'], getTx, { refetchInterval: 10000, refetchIntervalInBackground: true, enabled: condition });
 
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
         ;(location.pathname === "/popup.html" || location.pathname === "/") && !modeState.isLogin && navigator("/login")
         getExChange()
+        setCurrentAddress(myAccount.address)
     }, [])
 
     return (
