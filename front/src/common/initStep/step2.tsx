@@ -19,11 +19,13 @@ export const Step2 = () => {
     const [inputValues, setInputValues] = useState<string[]>(Array(12).fill(""))
 
     const createAccountApi = async (mnemonic: string[]) => {
-        console.log(mnemonic)
-        if (typeof mnemonic === "string") return
-        const { data } = await requestServer.post("/account/mnemonic", { mnemonic })
-        setMyAccounts({ ...myAccounts, ...data })
-        return data
+        try {
+            if (typeof mnemonic === "string") return
+            const { data } = await requestServer.post("/account/mnemonic", { mnemonic })
+            setMyAccounts({ ...myAccounts, ...data })
+        } catch (error) {
+            Alert.fire({ icon: "error", title: "니모닉이 올바르지 않습니다." })
+        }
     }
 
     const inputMnemonic: () => ReactNode = () => {
@@ -66,9 +68,15 @@ export const Step2 = () => {
         } else if (initMode.initMode === "manage") {
             for (let i = 0; i < length; i++) {
                 mnemonicArray.push((e.currentTarget[i] as HTMLInputElement).value)
+            }
+            if (mnemonicArray.length === 12) {
+                createAccountApi(mnemonicArray)
+                Alert.fire({ icon: "success", title: "니모닉이 확인되었습니다" })
                 const crypto = CryptoMnemonic(mnemonicArray)
                 setIsCheck({ ...isCheck, step2: true })
                 setMyProfile({ ...myProfile, myMnemonic: crypto })
+            } else {
+                Alert.fire({ icon: "error", title: "니모닉을 확인해주세요" })
             }
             if (myProfile.myMnemonic && typeof myProfile.myMnemonic === "string")
                 return Alert.fire({ icon: "info", title: "다음 단계를 진행하세요" })
