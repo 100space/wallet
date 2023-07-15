@@ -6,6 +6,7 @@ import React from "react"
 import { useGetMode } from "@hooks/useMode"
 import { ConfirmAlert, ConfirmComp } from "@components/Alert/alert"
 import { Team } from "@components/team"
+import { relative } from "path"
 
 const MenuList = [
     { MenuSub: "Wallet", content: "Network" },
@@ -54,6 +55,7 @@ export const MenuListComp = () => {
                     )}
                 </SettingMenuTitle>
             ))}
+
             <SetBtnWrap>
                 <Btn
                     backgroundcolor="#f71e1e"
@@ -69,9 +71,11 @@ export const MenuListComp = () => {
                     계정 지우기
                 </Btn>
             </SetBtnWrap>
-            <NavLink to="teamInfo">
-                <TeamInfoWrap mode={modeState.mode}>Team member Info</TeamInfoWrap>
-            </NavLink>
+            <SubWrap mode={modeState.mode} style={{ textDecorationLine: "underline" }}>
+                <NavLink to="teamInfo">
+                    <TeamInfoWrap mode={modeState.mode}>Team member Info</TeamInfoWrap>
+                </NavLink>
+            </SubWrap>
         </>
     )
 }

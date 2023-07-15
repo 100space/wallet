@@ -17,7 +17,7 @@ export const InputWrap = styled.div<IFocusTypeSize>`
         width: 3rem;
         height: 3rem;
     }
-    background-color: ${({theme, mode}) => (mode&&theme[mode].settingInputBg )};
+    background-color: ${({ theme, mode }) => mode && theme[mode].settingInputBg};
 `
 
 export const InputElement = styled.input<IPlaceTypeSize>`
@@ -30,10 +30,10 @@ export const InputElement = styled.input<IPlaceTypeSize>`
     &:focus {
         outline: none;
     }
-    background-color: ${({ theme, mode }) => (mode&&theme[mode].settingInputBg)};
-    color: ${({ theme, mode }) => (mode&&theme[mode].text)};
+    background-color: ${({ theme, mode }) => mode && theme[mode].settingInputBg};
+    color: ${({ theme, mode }) => mode && theme[mode].text};
     &::placeholder {
-        color: ${({ theme, mode }) => (mode&&theme[mode].text)};
+        color: ${({ theme, mode }) => mode && theme[mode].placeholder};
     }
 `
 export const HideIcon = styled.div<ISizeProps>`

@@ -1,6 +1,5 @@
 import { FlexCenter } from "@styled/index"
-import { queryByPlaceholderText } from "@testing-library/react"
-import { ISizeProps, IStateProps, IonClickProps } from "@utils/interFace/styled.interface"
+import { ISizeProps, IStateProps } from "@utils/interFace/styled.interface"
 import styled from "styled-components"
 
 export const Wrap = styled.div`
