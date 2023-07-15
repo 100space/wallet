@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 import { ethers, Contract } from 'ethers';
 import { ERC20_ABI } from '../abi/ERC20.ABI';
@@ -64,6 +65,8 @@ export const IsERC20 = createParamDecorator(
 
       return { networkInfo, ca, symbol: validSymbol, decimal: validDecimal };
     } catch (error) {
+      const logger = new Logger();
+      logger.error(error.message);
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   },

@@ -5,6 +5,7 @@ import { BackBtnHeader } from "@common/header/BackBtnHeader"
 import { LoadingHeader } from "@common/header/LoadingHeader"
 import { TxBtn } from "@components/Button"
 import { LoadingBar } from "@components/loading"
+import StepLoader from "@components/loading/stepLoading"
 import { ImageForm, PlatWrap } from "@styled/index"
 import requestServer from "@utils/axios/requestServer"
 import { INFTInfomationByMarket } from "@utils/interFace/nft.interface"
@@ -129,7 +130,7 @@ export const NFTInfoPage = () => {
         return (
             <>
                 <LoadingHeader />
-                <LoadingBar />
+                <StepLoader />
             </>
         )
     if (nft.isError || transaction.isError) return <ErrorPage code={404} message={""} />

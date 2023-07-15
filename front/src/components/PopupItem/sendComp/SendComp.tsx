@@ -65,6 +65,7 @@ export const SendComp = (props: {
             const decimal = (e.currentTarget[2] as HTMLFormElement).value
 
             try {
+                setIsLoading(true)
                 const response = await requestServer.post("token", {
                     ca,
                     symbol,
@@ -91,17 +92,22 @@ export const SendComp = (props: {
                         },
                     }
                     setMyInfo({ ...updatedMyInfo })
+                    setIsLoading(false)
                     return popupReset()
                 }
+                setIsLoading(false)
                 return Alert.fire({ icon: "warning", title: "이미 추가된 토큰입니다." })
             } catch (err) {
+                setIsLoading(false)
                 return Alert.fire({ icon: "warning", title: "올바른 값으로 다시 입력해주세요." })
             }
         } else if ((e.currentTarget as HTMLElement).className === "sendTransaction") {
             try {
+                setIsLoading(true)
                 const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
                 if ((e.currentTarget[0] as HTMLFormElement).value.length !== 42) {
                     console.log((e.currentTarget[0] as HTMLFormElement).value.length)
+                    setIsLoading(false)
                     return Alert.fire({ title: "계좌를 확인해주세요.", icon: "error" })
                 }
                 const valueInWei = ethers.parseUnits(valueInEther, "ether").toString()
@@ -114,9 +120,11 @@ export const SendComp = (props: {
                 console.log(tx)
                 const result = await nftin.sendTransaction(tx)
                 console.log(result)
+                setIsLoading(false)
                 setIsPopup({ ...isPopup, isOpen: false, contents: "" })
             } catch (error: any) {
                 if (error.message.includes("insufficient funds")) {
+                    setIsLoading(false)
                     Alert.fire({ title: "잔액이 부족합니다.", icon: "error" })
                 }
             }
