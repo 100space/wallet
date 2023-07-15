@@ -24,7 +24,7 @@ import { Model } from 'mongoose';
 export class AccountService {
   constructor(
     @InjectModel(Account.name, 'local') private accountModel: Model<Account>,
-  ) {}
+  ) { }
 
   async getAccount(address: IAddress): Promise<GetAccountResponseDto> {
     try {
@@ -153,7 +153,9 @@ export class AccountService {
   async create(createAccountDto: CreateAccountDto) {
     try {
       return (await this.accountModel.create(createAccountDto)).save();
-    } catch (error) {}
+    } catch (error) {
+      throw error
+    }
   }
 
   async update(updateAccountDto: UpdateAccountDto) {
