@@ -47,7 +47,6 @@ const App = () => {
 
     const getTx = async () => {
         const { data } = await axios.get(`${current[network].apiURL}?module=account&action=txlist&address=${myAccount.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`);
-
         if (data.message === 'No transactions found') {
             setTxList([])
             setTx([{ hash: "" } as ITx])
@@ -61,9 +60,7 @@ const App = () => {
         })
         setTxList(txDatas)
         setTx(txDatas)
-        if (currentAddress === myAccount.address && txDatas[0].hash !== tx[0].hash) {
-            console.log(currentAddress)
-            console.log(myAccount.address)
+        if ((tx[0].hash !== "") && txDatas[0].hash !== tx[0].hash) {
             setCurrentAddress(myAccount.address)
             setIsAlarm(true)
         }
@@ -86,6 +83,7 @@ const App = () => {
         // eslint-disable-next-line no-restricted-globals
         ; (location.pathname === "/popup.html" || location.pathname === "/") && !modeState.isLogin && navigator("/login")
         getExChange()
+        setCurrentAddress(myAccount.address)
     }, [])
 
     return (
