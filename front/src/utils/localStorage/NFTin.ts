@@ -21,12 +21,12 @@ export const ModeState = atom({
 })
 export const MyProfile = atom({
     key: "myProfile",
-    default: { myMnemonic: "", password: "", nickName: "", image: "" },
+    default: { myMnemonic: "", password: "", nickName: "", image: "https://nftin-wallet-bucket.s3.ap-northeast-2.amazonaws.com/uploads/default.png" },
     effects_UNSTABLE: [persistAtom],
 })
 export const MyAccounts = atom({
     key: "myAccounts",
-    default: { privateKey: "", publicKey: "", address: "", alias: "", image: "" },
+    default: { privateKey: "", publicKey: "", address: "", alias: "", image: "https://nftin-wallet-bucket.s3.ap-northeast-2.amazonaws.com/uploads/default.png" },
     effects_UNSTABLE: [persistAtom],
 })
 export const MyAccountsList = atom({
