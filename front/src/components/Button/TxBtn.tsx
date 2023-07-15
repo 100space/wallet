@@ -76,11 +76,11 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
                 gasLimit: 800000,
             })
 
-            Alert.fire("구매를 진행중입니다.", "", "warning")
+            await Alert.fire("구매를 진행중입니다.", "", "warning")
 
             const receipt = await buyNFT.wait()
 
-            Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
+            await Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
 
             if (!receipt) {
                 setIsClick(false)
@@ -130,7 +130,7 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
         <TxBtnWrap mode={modeState.mode}>
             {isMine ? <TxBtnContent mode={modeState.mode} disabled={true}> 소유중 </TxBtnContent> : isClick ?
                 <TxBtnContent mode={modeState.mode} disabled={true}>
-                    구매중
+                    구매접수 중
                 </TxBtnContent>
                 :
                 <TxBtnContent mode={modeState.mode} onClick={handleBuy}>
