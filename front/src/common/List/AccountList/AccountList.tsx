@@ -3,13 +3,14 @@ import { IAccountRow } from "@utils/interFace/core"
 import { AccountRow } from "@components/Accounts"
 import { Button } from "@components/Button"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { ModeState, MyAccountsList } from "@utils/localStorage"
+import { DefaultProfile, ModeState, MyAccountsList } from "@utils/localStorage"
 import NFTin from "@core/index"
 import { useNFTin } from "@hooks/useNFTin"
 import { usePopup } from "@hooks/usePopup"
 
 export const AccountList = (props: { accounts: IAccountRow[] }) => {
     const { mode } = useRecoilValue(ModeState)
+    const defaultImage = useRecoilValue(DefaultProfile)
     const [{ isOpen, contents }, setPopup] = usePopup()
     const [accountList, setAccountList] = useRecoilState(MyAccountsList)
     const nftin = useNFTin()
@@ -20,7 +21,7 @@ export const AccountList = (props: { accounts: IAccountRow[] }) => {
         const target = e.target as HTMLButtonElement
         if (target.innerHTML === "계정 추가") {
             const newAccount = await nftin.wallet.createAccount()
-            const createWallet = { ...newAccount, alias: `Account ${accountList.length - 1}` }
+            const createWallet = { ...newAccount, alias: `Account ${accountList.length - 1}`, image: defaultImage }
             setAccountList([...accountList, createWallet])
         } else {
             const target = e.target as HTMLButtonElement

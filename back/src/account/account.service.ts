@@ -24,7 +24,7 @@ import { Model } from 'mongoose';
 export class AccountService {
   constructor(
     @InjectModel(Account.name, 'local') private accountModel: Model<Account>,
-  ) {}
+  ) { }
 
   async getAccount(address: IAddress): Promise<GetAccountResponseDto> {
     try {
@@ -71,11 +71,6 @@ export class AccountService {
 
   async uploadProfileImg({ file, address }: UploadProfileImgDto) {
     try {
-      if (!file)
-        throw new BadRequestException('파일이 존재하지 않습니다.', {
-          cause: new Error(),
-          description: 'Nickname is not valid',
-        });
 
       const isAddress = await this.findOne({ address });
       if (isAddress === null)
@@ -87,15 +82,16 @@ export class AccountService {
       const result = await this.update({
         address: isAddress.address,
         nickname: isAddress.nickname,
-        image: file.location,
+        image: file ? file.location : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5kyNQIKoyUGJL5ZKSoA5EuHz7rz55ADZ3njzd5VcVTAudAA8Yw9iUyzXsAbOOpUfsk_M&usqp=CAU",
       });
+
       if (!result.acknowledged)
         throw new BadRequestException('Failed to update Address', {
           cause: new Error(),
           description: 'Address is not found',
         });
 
-      return { image: file.location };
+      return { image: file ? file.location : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5kyNQIKoyUGJL5ZKSoA5EuHz7rz55ADZ3njzd5VcVTAudAA8Yw9iUyzXsAbOOpUfsk_M&usqp=CAU" };
     } catch (error) {
       throw error;
     }
@@ -153,7 +149,7 @@ export class AccountService {
   async create(createAccountDto: CreateAccountDto) {
     try {
       return (await this.accountModel.create(createAccountDto)).save();
-    } catch (error) {}
+    } catch (error) { }
   }
 
   async update(updateAccountDto: UpdateAccountDto) {

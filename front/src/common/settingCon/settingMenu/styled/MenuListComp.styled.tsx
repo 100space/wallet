@@ -20,3 +20,8 @@ export const SetBtnWrap = styled.div`
     justify-content: center;
     align-items: center;
 `
+
+export const TeamInfoWrap = styled.div<ISizeProps>`
+    font-size: 2.2rem;
+    color: ${({ theme, mode }) => mode && theme[mode].text};
+`

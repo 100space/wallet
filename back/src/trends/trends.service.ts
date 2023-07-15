@@ -197,7 +197,10 @@ export class TrendsService {
       return {
         name: '',
         symbol: '',
-        image: `sample` + Math.floor(Math.random() * 10) + '.jpg',
+        image:
+          `${process.env.DEFAULT_TOKEN_URL}` +
+          `${Math.floor(Math.random() * 5) + 1}` +
+          `.png`,
         currency: 'KRW',
         price: 0,
       };

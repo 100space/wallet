@@ -1,5 +1,5 @@
 import { TotalSupply } from "@components/TotalSupply"
-import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfileNickNameWrap, MyProfileNickName, MyProfileNickNameBtn, MyProfile, TotalSupplyWrap, MyProfileImageUpload, MyProfileNickNameInput} from "./styled"
+import { MypageWrapper, MyProfileImg, MyProfileHeader, ProfileBtnWrap, MyProfileNickNameWrap, MyProfileNickName, MyProfileNickNameBtn, MyProfile, TotalSupplyWrap, MyProfileImageUpload, MyProfileNickNameInput } from "./styled"
 import { Btn } from "@components/Button"
 import { useGetMode } from "@hooks/useMode"
 import { useNavigate } from "react-router"
@@ -18,7 +18,7 @@ export const Mypage = () => {
     const [selectedFile, setSelectedFile] = useState<File | null | undefined>()
     const [isChange, setIsChange] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
-    const [value, setValue] = useState(myAccounts.alias);
+    const [value, setValue] = useState(myAccounts.alias)
     const [src, setSrc] = useState(myAccounts.image)
     const navigator = useNavigate()
 
@@ -47,7 +47,6 @@ export const Mypage = () => {
     }
 
     const handleUpdateClick = (e: MouseEvent) => {
-        setIsUpdate(!isUpdate)
         setIsChange(!isChange)
     }
 
@@ -60,7 +59,7 @@ export const Mypage = () => {
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0]
         setSelectedFile(file)
-        setIsChange(true)
+        setIsUpdate(!isUpdate)
         if (file) {
             const fileURL = URL.createObjectURL(file);
             setSrc(fileURL)
@@ -84,14 +83,14 @@ export const Mypage = () => {
                     <MyProfileImg src={src} />
                     <Icon icon="iconoir:add-media-image" onClick={handleFileUploadClick} cursor={"pointer"} />
                 </MyProfile>
-                    <MyProfileNickNameWrap onClick={(e: MouseEvent) => handleUpdateClick(e)}>
-                        {isChange
-                            ? <MyProfileNickNameInput mode={modeState.mode} value={value} height={"60%"} width={"70%"} onChange={handleInputChange} />
-                            : <MyProfileNickName width={"70%"} mode={modeState.mode} height={"60%"}>
-                                {myAccounts.alias}
-                            </MyProfileNickName>
-                        }
-                        <Btn
+                <MyProfileNickNameWrap>
+                    {isChange
+                        ? <MyProfileNickNameInput mode={modeState.mode} value={value} height={"60%"} width={"70%"} onChange={handleInputChange} />
+                        : <MyProfileNickName width={"70%"} mode={modeState.mode} height={"60%"}>
+                            {myAccounts.alias}
+                        </MyProfileNickName>
+                    }
+                    <Btn
                         width={"20%"}
                         height={"60%"}
                         backgroundcolor="#707070c3"
@@ -99,46 +98,47 @@ export const Mypage = () => {
                         fontSize="1.7rem"
                         profile={"true"}
                         color="white"
-                        >
+                        onClick={(e: MouseEvent) => handleUpdateClick(e)}
+                    >
                         {isChange ? "취소" : "변경"}
-                        </Btn>
-                    </MyProfileNickNameWrap>
-                    <TotalSupplyWrap>
-                        <TotalSupply />
-                    </TotalSupplyWrap>
-                    <ProfileBtnWrap>
-                        <Btn
-                            backgroundcolor={isChange ? "#3a6fcb" : "#484848"}
-                            width="47.5%"
-                            height="5rem"
-                            margin=""
-                            mode={modeState.mode}
-                            onClick={(e: MouseEvent) => handlePostClick(e)}
-                            fontSize="1.7rem"
-                            profile={"true"}
-                            color="white"
-                            disabled={!isChange}
-                            >
-                            {"저장 하기"}
-                        </Btn>
-                        <Btn
-                            backgroundcolor="#959595"
-                            width="47.5%"
-                            height="5rem"
-                            margin=""
-                            mode=""
-                            onClick={(e: MouseEvent) => handleButtonClick(e)}
-                            fontSize="1.7rem"
-                            profile={"true"}
-                            color="white"
+                    </Btn>
+                </MyProfileNickNameWrap>
+                <TotalSupplyWrap>
+                    <TotalSupply />
+                </TotalSupplyWrap>
+                <ProfileBtnWrap>
+                    <Btn
+                        backgroundcolor={isChange || isUpdate ? "#3a6fcb" : "#484848"}
+                        width="47.5%"
+                        height="5rem"
+                        margin=""
+                        mode={modeState.mode}
+                        onClick={(e: MouseEvent) => handlePostClick(e)}
+                        fontSize="1.7rem"
+                        profile={"true"}
+                        color="white"
+                        disabled={!isChange || !isUpdate}
+                    >
+                        {"저장 하기"}
+                    </Btn>
+                    <Btn
+                        backgroundcolor="#959595"
+                        width="47.5%"
+                        height="5rem"
+                        margin=""
+                        mode=""
+                        onClick={(e: MouseEvent) => handleButtonClick(e)}
+                        fontSize="1.7rem"
+                        profile={"true"}
+                        color="white"
 
-                            >
-                            {"계정 잠금"}
-                        </Btn>
-                    </ProfileBtnWrap>
-                    <form encType="multipart/form-data">
-                        <input name="file" type="file" style={{ display: "none" }} ref={fileInputRef} onChange={handleFileChange} />
-                    </form>
+                    >
+                        {"계정 잠금"}
+                    </Btn>
+                </ProfileBtnWrap>
+                <form encType="multipart/form-data">
+                    <input name="file" type="file" style={{ display: "none" }} ref={fileInputRef} onChange={handleFileChange} />
+                </form>
             </MypageWrapper>
         </>
     )

@@ -7,18 +7,24 @@ import { MyAccounts } from "@utils/localStorage"
 interface ITxImgByUser {
     from: string
     to: string
+    isError: string
 }
 
-export const TransactionImageByAddress = ({ from, to }: ITxImgByUser) => {
+export const TransactionImageByAddress = ({ from, to, isError }: ITxImgByUser) => {
     const { address } = useRecoilValue(MyAccounts)
 
     return (
-        <TransactionImgWrap width={"4.8rem"} height={"100%"} color={Number(from) === Number(address) ? "#257cd2" : "#b42533"}>
+        <TransactionImgWrap width={"4.8rem"} height={"100%"} color={isError === "1" ? "#ff0b23" : Number(from) === Number(address) ? "#79a2f8" : "#ff0b23"}>
             {
-                Number(from) === Number(address) ? <Icon icon={"iconoir:arrow-tr-circle"} /> : <Icon icon={"iconoir:arrow-tr-circle"} rotate={2} />
+                isError === "1" ?
+                    <Icon icon={"iconoir:delete-circle"} />
+                    :
+                    Number(from) === Number(address)
+                        ? <Icon icon={"iconoir:arrow-tr-circle"} />
+                        : <Icon icon={"iconoir:arrow-tr-circle"} rotate={2} />
             }
             <TransactionStatus>
-                {Number(from) === Number(address) ? "sender" : "receiver"}
+                {isError === "1" ? "failed" : Number(from) === Number(address) ? "sender" : "receiver"}
             </TransactionStatus>
         </TransactionImgWrap>
     )

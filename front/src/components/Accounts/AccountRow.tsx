@@ -12,18 +12,24 @@ import { TextComp, AccountAdWrap } from "@common/initStep/styled"
 import { MouseEventHandler, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { useRecoilState } from "recoil"
-import { MyAccounts, MyAccountsList } from "@utils/localStorage"
+import { MyAccounts, MyAccountsList, AlarmData, MyNFT } from "@utils/localStorage"
 import { Alert } from "@components/Alert/alert"
+import { ITx } from "@utils/interFace/block.interface"
 
 export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
     const [modeState, setModeState] = useGetMode()
     const [accountState, setAccountState] = useRecoilState(MyAccounts)
     const [accountList, setAccountList] = useRecoilState(MyAccountsList)
+    const [myNFT, setMyNFT] = useRecoilState(MyNFT)
+    const [alarmData, setAlarmData] = useRecoilState(AlarmData)
     const accountRef = useRef(null)
+
     const accountClick = () => {
         if (accountRef.current) {
             const address = (accountRef.current as HTMLSpanElement).dataset.address
             const selectAddress = accountList.filter((v: typeof accountState) => v.address === address)
+            setMyNFT([])
+            setAlarmData([{ hash: "" } as ITx])
             setAccountState(selectAddress[0])
         }
     }
@@ -34,7 +40,6 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
                 Alert.fire({ title: "현재 선택된 계정은 삭제할 수 없습니다.", icon: "error" })
             } else {
                 const index = accountList.findIndex((v: typeof accountState) => v.address === address)
-                console.log(index)
                 if (index === -1) return
                 const updateAccountList = [...accountList]
                 updateAccountList.splice(index, 1)
@@ -49,7 +54,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
                 icon={"ep:arrow-up-bold"}
                 rotate={1}
                 style={{ fontSize: "4rem" }}
-                color={props.account.address === accountState.address ? "#ffcd4d" : "#fff"}
+                color={props.account.address === accountState.address ? "#ffcd4d" : "#858585"}
                 onClick={accountClick}
             />
             <AccountAdWrap>
@@ -70,7 +75,7 @@ export const AccountRow = (props: { account: IAccountRow; index?: number }) => {
             <Icon
                 icon={"mi:delete"}
                 style={{ fontSize: "3rem", marginLeft: "2rem" }}
-                color={"#fff"}
+                color={modeState.mode === "darkMode" ? "#fff" : "#000"}
                 onClick={deleteAccount}
             />
         </AccountRowWrap>

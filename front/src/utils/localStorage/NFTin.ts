@@ -21,12 +21,23 @@ export const ModeState = atom({
 })
 export const MyProfile = atom({
     key: "myProfile",
-    default: { myMnemonic: "", password: "", nickName: "", image: "" },
+    default: {
+        myMnemonic: "",
+        password: "",
+        nickName: "",
+        image: "https://nftin-wallet-bucket.s3.ap-northeast-2.amazonaws.com/uploads/default.png",
+    },
     effects_UNSTABLE: [persistAtom],
 })
 export const MyAccounts = atom({
     key: "myAccounts",
-    default: { privateKey: "", publicKey: "", address: "", alias: "", image: "" },
+    default: {
+        privateKey: "",
+        publicKey: "",
+        address: "",
+        alias: "",
+        image: "https://nftin-wallet-bucket.s3.ap-northeast-2.amazonaws.com/uploads/default.png",
+    },
     effects_UNSTABLE: [persistAtom],
 })
 export const MyAccountsList = atom({
@@ -69,6 +80,9 @@ export const MyInfo = atom({
     key: "myInfo",
     default: {
         polygon: {
+            explorer: "https://polygonscan.com",
+            api: "REACT_APP_POLYGON_SCAN",
+            apiURL: "https://api.polygonscan.com/api",
             networks: { rpc: "https://polygon-mainnet.infura.io", chainId: 137, symbol: "MATIC" },
             tokens: [
                 {
@@ -79,6 +93,9 @@ export const MyInfo = atom({
             ],
         },
         mumbai: {
+            explorer: "https://mumbai.polygonscan.com",
+            api: "REACT_APP_POLYGON_SCAN",
+            apiURL: "https://api-testnet.polygonscan.com/api",
             networks: { rpc: "https://polygon-mumbai.infura.io", chainId: 80001, symbol: "MATIC" },
             tokens: [
                 {
@@ -89,6 +106,9 @@ export const MyInfo = atom({
             ],
         },
         arbitrum: {
+            explorer: "https://goerli.arbiscan.io",
+            api: "REACT_APP_ARBITRUM_SCAN",
+            apiURL: "https://api-goerli.arbiscan.io/api",
             networks: { rpc: "https://arbitrum-goerli.infura.io", chainId: 421613, symbol: "AGOR" },
             tokens: [
                 {
@@ -110,6 +130,12 @@ export const MyNetwork = atom({
 
 export const MyNFT = atom({
     key: "myNFT",
-    default: [] as any,
+    default: [],
     effects_UNSTABLE: [persistAtom],
+})
+
+
+export const DefaultProfile = atom({
+    key: "defaultProfileImage",
+    default: "https://nftin-wallet-bucket.s3.ap-northeast-2.amazonaws.com/uploads/default.png"
 })

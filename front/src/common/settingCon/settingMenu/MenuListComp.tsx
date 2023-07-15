@@ -1,12 +1,12 @@
 import { Category } from "@components/Category"
-import { SetBtnWrap, SettingMenuTitle, SubWrap } from "./styled"
+import { SetBtnWrap, SettingMenuTitle, SubWrap, TeamInfoWrap } from "./styled"
 import { Btn } from "@components/Button"
 import { NavLink, Router } from "react-router-dom"
 import React from "react"
 import { useGetMode } from "@hooks/useMode"
 import { ConfirmAlert, ConfirmComp } from "@components/Alert/alert"
 import { Team } from "@components/team"
-
+import { relative } from "path"
 
 const MenuList = [
     { MenuSub: "Wallet", content: "Network" },
@@ -30,7 +30,6 @@ export const MenuListComp = () => {
         }
         if (innerHTML.indexOf("계정 지우기") > -1) {
             ConfirmComp()
-            console.log("계정 지우기")
         }
     }
     return (
@@ -56,6 +55,7 @@ export const MenuListComp = () => {
                     )}
                 </SettingMenuTitle>
             ))}
+
             <SetBtnWrap>
                 <Btn
                     backgroundcolor="#f71e1e"
@@ -71,9 +71,11 @@ export const MenuListComp = () => {
                     계정 지우기
                 </Btn>
             </SetBtnWrap>
-            <NavLink to="teamInfo">
-                <h1 style={{color:"white"}}>Team member Info</h1>
-            </NavLink>
+            <SubWrap mode={modeState.mode} style={{ textDecorationLine: "underline" }}>
+                <NavLink to="teamInfo">
+                    <TeamInfoWrap mode={modeState.mode}>Team member Info</TeamInfoWrap>
+                </NavLink>
+            </SubWrap>
         </>
     )
 }

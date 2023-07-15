@@ -19,7 +19,7 @@ export const Btn = styled.button<IProfileBtn>`
     transition: all 0.2s ease-out;
     &:disabled {
         color: ${({ theme, mode }) => mode && theme[mode].text};
-        background: ${({ backgroundcolor, theme, mode }) =>  backgroundcolor || (mode && theme[mode].buttonBg)};
+        background: ${({ backgroundcolor, theme, mode }) => backgroundcolor || (mode && theme[mode].buttonBg)};
     }
     &:disabled:active{
         background: ${({ mode, theme }) => mode && theme[mode].buttonHover};
@@ -73,7 +73,7 @@ export const TxBtnContent = styled.button<ISizeProps>`
     font-size: 1.6rem;
     font-weight: 700;
     border-radius: 0.5rem;
-    background-color: ${({ mode, theme }) => mode && theme[mode].txBg};
+    background-color: ${({ mode, theme, disabled }) => (disabled && mode && theme[mode].AccountGetBtnBg) || (mode && theme[mode].txBg)};
     transition: 0.2s all;
 
     &:hover, &:active {

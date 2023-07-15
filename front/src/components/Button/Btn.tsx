@@ -10,7 +10,7 @@ export const Button: React.FC<IBtn> = ({
     fontSize,
     onClick,
     backgroundcolor,
-    color
+    color,
 }) => {
     return (
         <Btn

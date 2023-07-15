@@ -1,12 +1,9 @@
-import { sendBringList } from "@components/MainController"
 import { SendComp, mainList } from "@components/PopupItem/sendComp/index"
-import { MainnetBtnWrap, MainnetConTitleWrap, MainnetConWrap } from "./styled/MainnetCon.styled"
-import { Btn } from "@components/Button"
+import { MainnetConTitleWrap, MainnetConWrap } from "./styled/MainnetCon.styled"
 import { useGetMode } from "@hooks/useMode"
 import { useLocation, useNavigate } from "react-router"
 import { useRecoilState, useResetRecoilState } from "recoil"
 import { MyInfo, MyNetwork, MyTokens } from "@utils/localStorage"
-import { net } from "web3"
 import { Alert } from "@components/Alert/alert"
 
 export const MainnetCon = () => {

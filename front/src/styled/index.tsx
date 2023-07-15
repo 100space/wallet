@@ -33,7 +33,7 @@ export const RootWrap = styled.div<ISizeProps>`
     overflow: hidden;
     width: 100vw;
     height: 100vh;
-    padding: 2rem auto;
+    padding: 2rem 0;
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 

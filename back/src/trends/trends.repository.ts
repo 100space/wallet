@@ -58,7 +58,9 @@ export class TrendRepository {
 
   async find(sort: string, count: number) {
     const sortOption = {};
-    sortOption[sort] = 1;
+    sort === 'changePercent' || sort === 'price'
+      ? (sortOption[sort] = -1)
+      : (sortOption[sort] = 1);
     return await this.trendModel
       .find()
       .sort(sortOption)

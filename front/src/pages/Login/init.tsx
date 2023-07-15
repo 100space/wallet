@@ -13,7 +13,7 @@ export const InitPage = () => {
     const isCheck = useRecoilValue(IsCheck)
     const resetIsCheck = useResetRecoilState(IsCheck)
     const resetMyAccount = useResetRecoilState(MyProfile)
-    const resetMyProfile = useResetRecoilState(MyProfile)
+    const resetLoginMode = useResetRecoilState(InitMode)
     const [modeState, setChange] = useGetMode()
     const currentRef = useRef(null)
     const navigate = useNavigate()
@@ -21,7 +21,7 @@ export const InitPage = () => {
     const reset = () => {
         resetIsCheck()
         resetMyAccount()
-        resetMyProfile()
+        resetLoginMode()
     }
     const handleClick = (step: string) => {
         switch (step) {
@@ -58,7 +58,6 @@ export const InitPage = () => {
     }
     useEffect(() => {
         if (manageMode.initMode === "") navigate("/login")
-        // reset()
         setManageMode({
             ...manageMode,
             initStep: manageMode.initMode === "create" ? "step1" : manageMode.initMode === "manage" ? "step2" : "step1",
@@ -77,9 +76,11 @@ export const InitPage = () => {
                     content={"홈으로"}
                     backgroundcolor={"#fdfdfd"}
                     mode={modeState.mode}
-                    onClick={() => navigate("/login")}
+                    onClick={() => {
+                        reset()
+                        return navigate("/login")
+                    }}
                     color={"#4690ff"}
-
                 />
                 <Button
                     width={"65%"}

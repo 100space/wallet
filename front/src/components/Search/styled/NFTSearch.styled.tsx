@@ -33,7 +33,7 @@ export const NFTSearchInput = styled.input<ISizeProps>`
     font-size: 1.4rem;
     color: ${({ theme, mode }) => mode && theme[mode].search};
     background-color: ${({ theme, mode }) => mode && theme[mode].searchBg};
-    &::placeholder{
-        color: ${({ theme, mode }) => mode && theme[mode].search}
+    &::placeholder {
+        color: ${({ theme, mode }) => mode && theme[mode].placeholder};
     }
 `

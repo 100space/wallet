@@ -19,7 +19,13 @@ export const GetWallet = () => {
     const handleGetWallet = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const privateKey = (e.currentTarget[0] as HTMLInputElement).value
-        const getWallet = new ethers.Wallet(privateKey)
+        if (privateKey.length !== 64) return Alert.fire({ icon: "error", title: "비공개키를 확인해주세요." })
+        let getWallet
+        try {
+            getWallet = new ethers.Wallet(privateKey)
+        } catch (error) {
+            return Alert.fire({ icon: "error", title: "비공개키를 확인해주세요." })
+        }
         const publicKey = getWallet.signingKey.publicKey
         const address = getWallet.address
         const getMyWallet = { publicKey, address, privateKey, alias: `Account ${accountList.length - 1}` }
@@ -36,7 +42,7 @@ export const GetWallet = () => {
             <GetWalletWrapper mode={modeState.mode}>
                 <GetWalletSub mode={modeState.mode}>비공개키를 입력해주세요.</GetWalletSub>
                 <WalletInfoWrap onSubmit={handleGetWallet}>
-                    <WalletInfo mode={modeState.mode} />
+                    <WalletInfo mode={modeState.mode} placeholder="0x를 제외하고 적어주세요." />
                     <Button
                         width={"50%"}
                         height={"4rem"}
