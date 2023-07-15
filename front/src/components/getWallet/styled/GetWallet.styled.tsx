@@ -42,7 +42,7 @@ export const WalletInfo = styled.input<ISizeProps>`
     padding: 1rem 2rem;
     border: 0.01rem solid #fff;
     font-size: 1.6rem;
-    &::placeholder{
-        color: ${({ theme, mode }) => mode && theme[mode].search}
+    &::placeholder {
+        color: ${({ theme, mode }) => mode && theme[mode].placeholder};
     }
 `
