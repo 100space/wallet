@@ -33,7 +33,6 @@ export const RootWrap = styled.div<ISizeProps>`
     overflow: hidden;
     width: 100vw;
     height: 100vh;
-    padding: 2rem 0;
     background: ${({ theme, mode }) => mode && theme[mode].basicBg};
 `
 
@@ -57,7 +56,7 @@ export const Shadow = css`
 `
 export const PlatWrap = styled.div<ISizeProps>`
     height: fit-content;
-    background: ${({ theme, mode }) => mode && theme[mode].bgDescription};
+    background: ${({ theme, mode }) => mode && (mode === "lightMode" ? theme[mode].txBg : theme[mode].bgDescription)};
     ${Shadow}
     ${FlexCenter}
     padding: 1rem;
