@@ -28,9 +28,7 @@ export const TrendsPage = () => {
     const getCoins = async (sort: string) => {
         setCoins((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
-            console.log(sort, "111")
             const result = await requestServer.get(`/trends?sort=${sort}`)
-            console.log(result)
             setCoins((prev) => ({ isLoading: false, isError: null, data: [...result.data] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {
