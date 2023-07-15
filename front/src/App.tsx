@@ -14,7 +14,7 @@ import { ethers } from "ethers"
 import axios from "axios"
 import { ITx } from "@utils/interFace/block.interface"
 import { useQuery } from "@tanstack/react-query"
-import { AlarmData, CurrentTxData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
+import { AlarmData, CurrentAddress, CurrentTxData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
 import requestServer from "@utils/axios/requestServer"
 
 declare global {
@@ -33,6 +33,7 @@ const App = () => {
     const [txList, setTxList] = useRecoilState(CurrentTxData)
     const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
     const [exchange, setExchange] = useRecoilState(ExchangePrice)
+    const [currentAddress, setCurrentAddress] = useRecoilState(CurrentAddress)
     const network = useRecoilValue(MyNetwork)
     const current = useRecoilValue(MyInfo)
     const navigator = useNavigate()
@@ -46,7 +47,7 @@ const App = () => {
 
     const getTx = async () => {
         const { data } = await axios.get(`${current[network].apiURL}?module=account&action=txlist&address=${myAccount.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`);
-        console.log(data)
+
         if (data.message === 'No transactions found') {
             setTxList([])
             setTx([{ hash: "" } as ITx])
@@ -60,7 +61,10 @@ const App = () => {
         })
         setTxList(txDatas)
         setTx(txDatas)
-        if (txDatas[0].hash !== tx[0].hash) {
+        if (currentAddress === myAccount.address && txDatas[0].hash !== tx[0].hash) {
+            console.log(currentAddress)
+            console.log(myAccount.address)
+            setCurrentAddress(myAccount.address)
             setIsAlarm(true)
         }
         const currentTime = new Date()
@@ -76,7 +80,7 @@ const App = () => {
         return `${year}.${month}.${day}`;
     }
 
-    useQuery(['transactions'], getTx, { refetchInterval: 30000, refetchIntervalInBackground: true, enabled: condition });
+    useQuery(['transactions'], getTx, { refetchInterval: 3000, refetchIntervalInBackground: true, enabled: condition });
 
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals

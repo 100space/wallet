@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { MouseEvent, useEffect, useState } from "react"
 import { ITx } from "@utils/interFace/block.interface"
 import { LoadingBar } from "@components/loading"
-import { AlarmData, IsAlarm } from "@utils/localStorage/Alarm"
+import { AlarmData, GlobalTxData, IsAlarm } from "@utils/localStorage/Alarm"
 import { TransactionRowByAddress } from "@components/Transaction"
 import { TxBtnContent, TxBtnWrap } from "@components/Button"
 import { ModeState, MyAccounts, MyInfo, MyNetwork } from "@utils/localStorage"
@@ -28,6 +28,7 @@ export const Alarm = () => {
     const current = useRecoilValue(MyInfo)
     const { address } = useRecoilValue(MyAccounts)
     const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
+    const [globalTxData, setGlobalTxData] = useRecoilState(GlobalTxData)
     const [modeState, setChange] = useGetMode()
     const [alarmDatas, setAlarmDatas] = useState<[string, IParsingData[]][]>()
 
@@ -57,7 +58,7 @@ export const Alarm = () => {
     }
 
     useEffect(() => {
-        if (tx.length === 0) return
+        if (tx.length === 0) return setAlarmDatas(globalTxData)
         if (tx[0].hash === "") return setAlarmDatas([])
         const parsingData = tx.map((v: ITx) => ({ from: v.from, to: v.to, timestamp: v.timeStamp, value: v.value, isError: v.isError }))
         const groupedData = parsingData.reduce((acc: IGroupData, v) => {
@@ -68,6 +69,7 @@ export const Alarm = () => {
             return acc;
         }, {});
         setAlarmDatas(Object.entries(groupedData))
+        setGlobalTxData(Object.entries(groupedData))
         setIsAlarm(false)
     }, [])
 

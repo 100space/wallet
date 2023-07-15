@@ -25,3 +25,19 @@ export const IsAlarm = atom({
     key: "isAlarm",
     default: false,
 })
+
+export const CurrentAddress = atom({
+    key: "currentAddress",
+    default: "",
+})
+
+export const GlobalTxData = atom({
+    key: "globalTxData",
+    default: [] as [string, {
+        from: string
+        to: string
+        timestamp: string
+        value: string
+        isError: string
+    }[]][]
+})
