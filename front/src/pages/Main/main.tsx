@@ -12,7 +12,7 @@ import {
     IsPopUp,
     IsSideBar,
 } from "@utils/localStorage"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { TotalSupply } from "@components/TotalSupply"
@@ -21,6 +21,7 @@ import requestServer from "@utils/axios/requestServer"
 import { useQueries, useQuery } from "@tanstack/react-query"
 import { Contract, ethers } from "ethers"
 import { useNFTin } from "@hooks/useNFTin"
+import StepLoader from "@components/loading/stepLoading"
 
 declare global {
     interface Window {
@@ -39,9 +40,11 @@ export const MainPage = () => {
     const [myNft, setMyNft] = useRecoilState(MyNFT)
     const myAccounts = useRecoilValue(MyAccounts)
     const nftin = useNFTin()
+    const [isLoading, setIsLoading] = useState(false)
 
     const getMyCoins = async () => {
         if (nftin === null) return null
+        setIsLoading(true)
         const myCoins = myInfo[network as keyof typeof myInfo].tokens
         const result = await Promise.all(
             myCoins.map(async (v: typeof myInfo, i: number) => {
@@ -65,11 +68,13 @@ export const MainPage = () => {
         const { data } = await requestServer.post("trends/tokens", {
             tokens: result,
         })
+        setIsLoading(false)
         return data
     }
 
     const getMyNft = async () => {
         if (nftin === null) return null
+        setIsLoading(true)
         const { data } = await requestServer.post("market/user", {
             eoa: myAccounts.address,
         })
@@ -78,7 +83,7 @@ export const MainPage = () => {
             (obj, index, self) =>
                 index === self.findIndex((o) => o.nftAddress === obj.nftAddress && o.name === obj.name)
         )
-
+        setIsLoading(false)
         return [...uniqueArr]
     }
     const results = useQueries({
@@ -123,11 +128,15 @@ export const MainPage = () => {
             }
         }
         fetchData()
+        const cookie = network === "arbitrum" ? "arbitrum_goerli" : network
+        document.cookie = `network=${cookie}`
         return () => {
             resetPopup()
         }
     }, [nftin, myInfo, network])
-    return (
+    return isLoading ? (
+        <StepLoader />
+    ) : (
         <>
             <TotalSupply></TotalSupply>
             <PopupBtn></PopupBtn>
