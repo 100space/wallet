@@ -48,8 +48,10 @@ const App = () => {
         console.log(data)
         if (data.message === 'No transactions found') {
             setTx([{ hash: "" } as ITx])
+            data.result = []
             return []
         }
+
         const txDatas = data.result.map((v: ITx) => {
             v.timeStamp = dateChange(Number(v.timeStamp))
             return v

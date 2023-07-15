@@ -9,14 +9,14 @@ export interface ITxByUser {
     to: string
     timeStamp: string
     value: string
+    isError: string
 }
 
 export interface ITx extends IBlockRow, ITxByUser {
-    nonce: string
     transactionIndex: string
     gas: string
     gasPrice: string
-    isError: string
+    nonce: string
     txreceipt_status: string
     input: string
     contractAddress: string

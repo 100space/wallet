@@ -6,6 +6,11 @@ export const AlarmData = atom({
     default: [] as ITx[],
 })
 
+export const AlarmDataByAddress = atom({
+    key: "alarmTxData",
+    default: [] as ITx[],
+})
+
 export const ExchangePrice = atom({
     key: "exchange",
     default: 0,

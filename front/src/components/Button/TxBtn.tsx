@@ -53,6 +53,7 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
 
     const handleBuy = async () => {
         try {
+            console.log(1)
             if (!market) return
             if (!signer) return
             if (disable) return Alert.fire("잔액이 부족합니다.", "", "warning")
@@ -65,8 +66,12 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
                 gasLimit: 800000,
             })
 
+            Alert.fire("구매를 진행중입니다.", "", "warning")
+
             const receipt = await buyNFT.wait()
+
             Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
+
             if (!receipt) return Alert.fire("구매에 실패했습니다.", "", "warning")
             await axios.post("https://nest-deploy-c764d61cc1b8.herokuapp.com/event/transfer", {
                 id: marketId,

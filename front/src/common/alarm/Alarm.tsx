@@ -14,6 +14,7 @@ interface IParsingData {
     to: string
     timestamp: string
     value: string
+    isError: string
 }
 
 interface IGroupData {
@@ -44,7 +45,7 @@ export const Alarm = () => {
                             return v.map((v2, index) => {
                                 return (
                                     <AlarmListWrap key={index} mode={modeState.mode}>
-                                        <TransactionRowByAddress from={v2.from} to={v2.to} timeStamp={v2.timestamp} value={v2.value} />
+                                        <TransactionRowByAddress from={v2.from} to={v2.to} timeStamp={v2.timestamp} value={v2.value} isError={v2.isError} />
                                     </AlarmListWrap>
                                 )
                             })
@@ -58,7 +59,7 @@ export const Alarm = () => {
     useEffect(() => {
         if (tx.length === 0) return
         if (tx[0].hash === "") return setAlarmDatas([])
-        const parsingData = tx.map((v: ITx) => ({ from: v.from, to: v.to, timestamp: v.timeStamp, value: v.value }))
+        const parsingData = tx.map((v: ITx) => ({ from: v.from, to: v.to, timestamp: v.timeStamp, value: v.value, isError: v.isError }))
         const groupedData = parsingData.reduce((acc: IGroupData, v) => {
             if (!acc.hasOwnProperty(v.timestamp)) {
                 acc[v.timestamp] = [];
@@ -71,7 +72,6 @@ export const Alarm = () => {
     }, [])
 
     if (!alarmDatas) return <LoadingBar />
-    console.log(modeState.state)
     return (
         <AlarmWrapper mode={modeState.mode}>
             {alarm(alarmDatas)}
