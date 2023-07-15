@@ -1,6 +1,6 @@
 import { Trend } from '../schemas/trend.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateTrendDto } from './dto/create-trend.dto';
 import { UpdateTrendDto } from './dto/update-trend.dto';
@@ -34,7 +34,8 @@ export class TrendRepository {
       await this.trendModel.create(createTrendDto);
       return true;
     } catch (error) {
-      console.log('Create Error', error.message);
+      const logger = new Logger();
+      logger.error('Create Error', error.message);
       return false;
     }
   }
@@ -47,7 +48,8 @@ export class TrendRepository {
       );
       return true;
     } catch (error) {
-      console.log('Update Error', error.message);
+      const logger = new Logger();
+      logger.error('Update Error', error.message);
       return false;
     }
   }
