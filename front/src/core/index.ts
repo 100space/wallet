@@ -7,7 +7,6 @@ export default class NFTin {
     public wallet: MyWallet
 
     constructor(network: string, privateKey: string) {
-        console.log(network, privateKey)
         this.provider = new MyProvider(network)
         this.wallet = new MyWallet(privateKey, this.provider)
     }
@@ -16,7 +15,6 @@ export default class NFTin {
         switch (method) {
             case "eth_sendTransaction":
                 const [tx] = params
-                console.log(tx)
                 const txResponse = await this.provider.send("eth_sendRawTransaction", [tx])
                 return txResponse
 
@@ -28,7 +26,6 @@ export default class NFTin {
     }
     public async sendTransaction(tx: any): Promise<any> {
         const a = await this.provider.getBalance(tx.from)
-        console.log(ethers.formatEther(a))
         const txResponse = await this.wallet.sendTransaction(tx)
         return txResponse
     }

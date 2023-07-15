@@ -48,10 +48,10 @@ const App = () => {
     const getTx = async () => {
         const { data } = await axios.get(
             `${current[network].apiURL}?module=account&action=txlist&address=${
-              myAccount.address
-            }&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`  
-        );
-        if (data.message === 'No transactions found') {
+                myAccount.address
+            }&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`
+        )
+        if (data.message === "No transactions found") {
             setTxList([])
             setTx([{ hash: "" } as ITx])
             data.result = []
@@ -64,14 +64,11 @@ const App = () => {
         })
         setTxList(txDatas)
         setTx(txDatas)
-        if ((tx[0].hash !== "") && txDatas[0].hash !== tx[0].hash) {
+        if (tx[0].hash !== "" && txDatas[0].hash !== tx[0].hash) {
             setCurrentAddress(myAccount.address)
             setIsAlarm(true)
         }
         const currentTime = new Date()
-        console.log(
-            `${currentTime.getHours()}시 ${currentTime.getMinutes()}분 ${currentTime.getSeconds()}초에 트랜잭션 데이터가 갱신되었습니다.`
-        )
         return data.result as ITx[]
     }
 
@@ -82,7 +79,7 @@ const App = () => {
         const day = date.getDate()
         return `${year}.${month}.${day}`
     }
-    useQuery(['transactions'], getTx, { refetchInterval: 10000, refetchIntervalInBackground: true, enabled: condition });
+    useQuery(["transactions"], getTx, { refetchInterval: 10000, refetchIntervalInBackground: true, enabled: condition })
 
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals

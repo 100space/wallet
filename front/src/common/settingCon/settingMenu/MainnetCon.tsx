@@ -22,7 +22,6 @@ export const MainnetCon = () => {
         const rpc = (e.currentTarget[1] as HTMLInputElement).value
         const chainId = (e.currentTarget[2] as HTMLInputElement).value
         const symbol = (e.currentTarget[3] as HTMLInputElement).value
-        console.log(network, rpc, chainId, symbol)
         if (network === null || rpc === null || chainId === null || symbol === null) {
             Alert.fire({ text: "빈칸을 채워주세요", icon: "error" })
         } else {

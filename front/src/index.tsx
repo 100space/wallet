@@ -14,7 +14,6 @@ const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
-console.log(screenHeight, screenWidth)
 root.render(
     <RecoilRoot>
         <BrowserRouter>

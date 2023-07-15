@@ -22,7 +22,6 @@ export const Scanner = () => {
                         constraints={{ facingMode: "user" }}
                         onDecode={(result) => {
                             try {
-                                console.log(result)
                                 const [address, chainId] = result.split("ethereum:")[1].split("@")
                                 const QrChainId =
                                     chainId === "137"

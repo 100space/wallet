@@ -14,7 +14,6 @@ export const InputListComp = (inputArray: InputList[]) => {
     const myAccounts = useRecoilValue(MyAccounts)
     const network = useRecoilValue(MyNetwork)
     const path = useLocation().pathname.split("/")[3].toLowerCase()
-    console.log(inputArray)
     return inputArray.map((v, index) => (
         <SendCompWrapper key={index} mode={modeState.mode}>
             <SendCompWrap>{v.subject}</SendCompWrap>

@@ -125,18 +125,22 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
         setParsedPrice(convertToWei(price * 10 ** 18, 0))
     }, [])
 
-    console.log(111, isMine)
     return (
         <TxBtnWrap mode={modeState.mode}>
-            {isMine ? <TxBtnContent mode={modeState.mode} disabled={true}> 소유중 </TxBtnContent> : isClick ?
+            {isMine ? (
+                <TxBtnContent mode={modeState.mode} disabled={true}>
+                    {" "}
+                    소유중{" "}
+                </TxBtnContent>
+            ) : isClick ? (
                 <TxBtnContent mode={modeState.mode} disabled={true}>
                     구매접수 중
                 </TxBtnContent>
-                :
+            ) : (
                 <TxBtnContent mode={modeState.mode} onClick={handleBuy}>
                     구매하기
                 </TxBtnContent>
-            }
+            )}
             <TxBtnContent mode={modeState.mode} onClick={handleClickToBack}>
                 뒤로가기
             </TxBtnContent>

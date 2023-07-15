@@ -8,7 +8,7 @@ if (isChrome) {
             console.log("Ethereum object is available!")
             clearInterval(checkInterval) // 지갑이 준비되었으므로 체크를 멈춥니다.
             chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-                const { from, type, method, params } = request
+                const { from, method } = request
                 if (from && from === "background") {
                     if ((method === "eth_requestAccounts") | (method === "eth_accounts")) {
                         window.abc.wallet.getAddress().then((address) => {
