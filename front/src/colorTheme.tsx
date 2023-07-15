@@ -41,6 +41,7 @@ export const theme = {
         bottomBord: "#3f3f3f",
         searchText: "#ffffff",
         search: "#ffffff",
+        placeholder: "#c0c0c0c0",
 
         // // 버튼관련 색상
         tokenBg: "#257cd2",
@@ -96,6 +97,7 @@ export const theme = {
         bottomBord: "#c5c3c3",
         searchText: "#000",
         search: "#000",
+        placeholder: "#c0c0c0c0",
 
         // // 버튼관련 색상
         bringBg: "#224563",
@@ -108,6 +110,6 @@ export const theme = {
         sendText: "#fff",
         filterBtn: "#f3db86",
         txBg: "#ffffff",
-        accountHover: "#0e435c"
+        accountHover: "#0e435c",
     },
 }

@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const FilterWrap = styled.div<ISizeProps>`
     display: flex;
     margin-bottom: 1rem;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 `
 
@@ -20,6 +20,7 @@ export const FilterBtn = styled.button<ISelectedBtn>`
         (selected && mode && theme[mode].point100) || (mode && theme[mode].filterBtn)};
     font-weight: 600;
     font-size: 1.2rem;
-    color: ${({ mode, theme, selected }) => (selected && mode && theme[mode].textCoinSymbol) || (mode && theme[mode].text)};
+    color: ${({ mode, theme, selected }) =>
+        (selected && mode && theme[mode].textCoinSymbol) || (mode && theme[mode].text)};
     box-sizing: border-box;
 `

@@ -35,14 +35,6 @@ export const TokenRow = (props: { token: ITokenRow }) => {
                             .replace(/\d(?=(\d{3})+\b)/g, "$&,")}
                 </AccountAssets>
             </TokenInfoWrap>
-
-            <Icon
-                icon={"ep:arrow-up-bold"}
-                rotate={1}
-                width={"5%"}
-                height={"100%"}
-                style={{ color: modeState.mode === "darkMode" ? "#ffffff" : "#534f4f" }}
-            />
         </AccountRowWrap>
     )
 }

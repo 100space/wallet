@@ -86,7 +86,7 @@ export const MainPage = () => {
             {
                 queryKey: ["post", "myTokens"],
                 queryFn: getMyCoins,
-                onSuccess: (data: any) => {
+                onSuccess: (data: typeof myTokens) => {
                     setMyTokens([...data])
                 },
                 refetchOnWindowFocus: false,
@@ -95,7 +95,7 @@ export const MainPage = () => {
             {
                 queryKey: ["post", "myNFTs"],
                 queryFn: getMyNft,
-                onSuccess: (data: any) => {
+                onSuccess: (data: typeof myNft) => {
                     setMyNft([...data])
                 },
                 refetchOnWindowFocus: false,
