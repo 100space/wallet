@@ -1,4 +1,5 @@
 import { FlexCenter } from "@styled/index"
+import { ISizeProps } from "@utils/interFace/styled.interface"
 import { keyframes, styled } from "styled-components"
 
 export const LoaderWrapper = styled.div`
@@ -25,12 +26,13 @@ const rotate = keyframes`
   }
 `
 
-export const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div<ISizeProps>`
     width: 6.4rem;
     height: 6.4rem;
     position: relative;
-    background-image: linear-gradient(#fff 1.6rem, transparent 0), linear-gradient(#ff3d00 1.6rem, transparent 0),
-        linear-gradient(#ff3d00 1.6rem, transparent 0), linear-gradient(#fff 1.6rem, transparent 0);
+    background-image: linear-gradient(${({ theme, mode }) => mode && theme[mode].text} 1.6rem, transparent 0),
+        linear-gradient(#ff3d00 1.6rem, transparent 0), linear-gradient(#ff3d00 1.6rem, transparent 0),
+        linear-gradient(${({ theme, mode }) => mode && theme[mode].text} 1.6rem, transparent 0);
     background-repeat: no-repeat;
     background-size: 1.6rem 1.6rem;
     background-position: left top, left bottom, right top, right bottom;

@@ -17,6 +17,7 @@ export const TeamWrap = styled.div<ISizeProps>`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border-radius: 1rem;
 `
 
 export const MemberWrapper = styled.div<ISizeProps>`
@@ -57,5 +58,5 @@ export const ProfileImg = styled.img<ISizeProps>`
     height: 10rem;
     margin-top: 1rem;
     border-radius: 10rem;
-    background-color: #2d2d2d;
+    background-color: #fafafa;
 `

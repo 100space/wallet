@@ -60,7 +60,7 @@ export const theme = {
         // 배경색
         basicBg: "#fafafa",
         basicLightBg: "#2c2c2c",
-        bg200: "#505050",
+        bg200: "#f0f0f0",
         bgInfo: "#fdfdfd",
         bgDescription: "#222222",
         profileBg: "linear-gradient(15deg, #0a0718, #2626269f, #012350, #02000a)",
@@ -109,7 +109,7 @@ export const theme = {
         accountBg: "#166d96",
         sendText: "#fff",
         filterBtn: "#f3db86",
-        txBg: "#ffffff",
+        txBg: "#dfdfdf",
         accountHover: "#0e435c",
     },
 }

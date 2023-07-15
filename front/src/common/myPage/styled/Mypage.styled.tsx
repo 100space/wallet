@@ -42,12 +42,14 @@ export const MyProfileNickNameWrap = styled.div<ISizeProps>`
     }
 `
 
-export const MyProfileImageUpload = styled.form<ISizeProps>`
-`
+export const MyProfileImageUpload = styled.form<ISizeProps>``
 
 export const MyProfileNickName = styled.div<ISizeProps>`
     /* width: ${({ width }) => width || "100%"}; */
     width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: ${({ height }) => height || "100%"};
     color: ${({ mode, theme }) => mode && theme[mode].text};
     border-radius: 0.5rem;

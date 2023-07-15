@@ -8,7 +8,7 @@ export const NftStandardInformationCollection = ({ collectionName }: INFTStandar
 
     return (
         <NftBoardWrap height={"3.6rem"} mode={modeState.mode} header={"false"}>
-            <CollectionBtn>{collectionName}</CollectionBtn>
+            <CollectionBtn mode={modeState.mode}>{collectionName}</CollectionBtn>
         </NftBoardWrap>
     )
 }
