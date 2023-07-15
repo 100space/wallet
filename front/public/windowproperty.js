@@ -28,7 +28,6 @@ if (isChrome) {
 
     window.abc = {
         request: async ({ method, params }) => {
-            console.log("request", method, params)
             return postMessageAsync(method, params)
         },
         chainId: async () => {
