@@ -73,7 +73,13 @@ export const MainPage = () => {
         const { data } = await requestServer.post("market/user", {
             eoa: myAccounts.address,
         })
-        return [...myNft, ...data]
+        const newArr = [...myNft, ...data]
+        const uniqueArr = newArr.filter(
+            (obj, index, self) =>
+                index === self.findIndex((o) => o.nftAddress === obj.nftAddress && o.name === obj.name)
+        )
+
+        return [...uniqueArr]
     }
     const results = useQueries({
         queries: [

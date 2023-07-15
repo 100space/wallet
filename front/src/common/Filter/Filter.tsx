@@ -4,14 +4,8 @@ import { useGetMode } from "@hooks/useMode"
 import { ModeState } from "@utils/localStorage"
 import { useRecoilValue } from "recoil"
 
-export const Filter = (props: { filterList: string[] }) => {
+export const Filter = ({ selected, setSelected }: { selected: boolean[]; setSelected: any }) => {
     const { mode } = useRecoilValue(ModeState)
-    const [selected, setSelected] = useState<boolean[]>(
-        props.filterList.map((v, index) => {
-            if (index === 0) return true
-            return false
-        })
-    )
 
     const handleSelectedBtn = (e: MouseEvent, index: number) => {
         e.preventDefault()
@@ -19,8 +13,8 @@ export const Filter = (props: { filterList: string[] }) => {
         setSelected(updatedSelected)
     }
 
-    const filterBtnList = (filterList: string[]) => {
-        return filterList.map((v, index) => {
+    const filterBtnList = (selected: boolean[]) => {
+        return selected.map((v, index) => {
             return (
                 <FilterBtnWrap key={index}>
                     <FilterBtn
@@ -28,12 +22,12 @@ export const Filter = (props: { filterList: string[] }) => {
                         mode={mode}
                         onClick={(e: MouseEvent) => handleSelectedBtn(e, index)}
                     >
-                        {v}
+                        {index === 0 ? "랭킹순" : index === 1 ? "가격순" : "이름순"}
                     </FilterBtn>
                 </FilterBtnWrap>
             )
         })
     }
 
-    return <FilterWrap>{filterBtnList(props.filterList)}</FilterWrap>
+    return <FilterWrap>{filterBtnList(selected)}</FilterWrap>
 }

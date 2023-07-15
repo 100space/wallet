@@ -23,11 +23,13 @@ export const TrendsPage = () => {
         data: [] as ICoin[],
     })
 
-    const getCoins = async (sort: string = "rank") => {
+    const [selected, setSelected] = useState<boolean[]>([true, false, false])
+
+    const getCoins = async (sort: string) => {
         setCoins((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
             const result = await requestServer.get(`/trends?sort=${sort}`)
-            setCoins((prev) => ({ isLoading: false, isError: null, data: [...prev.data, ...result.data] }))
+            setCoins((prev) => ({ isLoading: false, isError: null, data: [...result.data] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 setCoins({ isLoading: false, isError: e.response, data: [] })
@@ -36,8 +38,9 @@ export const TrendsPage = () => {
     }
 
     useEffect(() => {
-        getCoins()
-    }, [])
+        const sort = selected[0] === true ? "rank" : selected[1] === true ? "price" : "name"
+        getCoins(sort)
+    }, [selected])
 
     if (coins.isLoading) return <StepLoader />
     if (coins.isError && typeof coins.isError.status === "number")
@@ -49,7 +52,7 @@ export const TrendsPage = () => {
             ) : (
                 <>
                     <CoinSlide coinDatas={coins.data} setCoin={setCoin} setIsOpen={setIsOpen} isOpen={isOpen} />
-                    <Filter filterList={["랭킹순", "이름순", "가격순"]} />
+                    <Filter selected={selected} setSelected={setSelected} />
                     <CoinChart coinDatas={coins.data} setCoin={setCoin} setIsOpen={setIsOpen} isOpen={isOpen} />
                 </>
             )}

@@ -40,7 +40,8 @@ export const NftBoardContentRow = (props: {
                 </NftBoardContentForm>
             ) : (
                 <NftBoardContentForm>
-                    {typeof props.text[1] === "string" && props.text[0] === "토큰 ID" ? (
+                    {typeof props.text[1] === "string" &&
+                    (props.text[0] === "토큰 ID" || props.text[0] === "소유자" || props.text[0] === "계약주소") ? (
                         <NftBoardContent title={props.text[1]} onClick={copyHandler}>
                             {props.text[1].length > 30 ? shorten(10, "...", props.text[1]) : props.text[1]}
                         </NftBoardContent>
