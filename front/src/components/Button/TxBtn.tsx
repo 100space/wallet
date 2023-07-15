@@ -33,6 +33,8 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
     const [disable, setDisable] = useState(false)
     const [nftInfomation, setNftInfomation] = useState({ ca: "", tokenId: "" })
     const [parsedPrice, setParsedPrice] = useState("0")
+    const [isClick, setIsClick] = useState(false)
+    const [isMine, setIsMine] = useState(myAddress === to)
     const [signer, setSigner] = useState<ethers.Wallet>()
     const navigate = useNavigate()
     const location = useLocation()
@@ -43,7 +45,7 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
     }
 
     const handleClickToBack = (e: MouseEvent) => {
-        navigate(`/market/collection/${getBackIndex(location.pathname).ca}`)
+        navigate(-1)
     }
 
     const convertToWei = (number: number, decimals: number) => {
@@ -53,11 +55,17 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
 
     const handleBuy = async () => {
         try {
-            console.log(1)
             if (!market) return
             if (!signer) return
-            if (disable) return Alert.fire("잔액이 부족합니다.", "", "warning")
-            if (myAddress === to) return Alert.fire("이미 소유하고 있습니다.", "", "warning")
+            setIsClick(true)
+            if (disable) {
+                setIsClick(false)
+                return Alert.fire("잔액이 부족합니다.", "", "warning")
+            }
+            if (myAddress === to) {
+                setIsClick(false)
+                return Alert.fire("이미 소유하고 있습니다.", "", "warning")
+            }
             PurchaseAlert(name, setScanOpen, setOpen)
 
             const buyNFT = await market.buyNft(marketId, {
@@ -72,7 +80,10 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
 
             Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
 
-            if (!receipt) return Alert.fire("구매에 실패했습니다.", "", "warning")
+            if (!receipt) {
+                setIsClick(false)
+                return Alert.fire("구매에 실패했습니다.", "", "warning")
+            }
             await axios.post("https://nest-deploy-c764d61cc1b8.herokuapp.com/event/transfer", {
                 id: marketId,
                 from: myAddress,
@@ -112,11 +123,18 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
         setParsedPrice(convertToWei(price * 10 ** 18, 0))
     }, [])
 
+    console.log(111, isMine)
     return (
         <TxBtnWrap mode={modeState.mode}>
-            <TxBtnContent mode={modeState.mode} onClick={handleBuy}>
-                구매하기
-            </TxBtnContent>
+            {isMine ? <TxBtnContent mode={modeState.mode} disabled={true}> 소유중 </TxBtnContent> : isClick ?
+                <TxBtnContent mode={modeState.mode} disabled={true}>
+                    구매중
+                </TxBtnContent>
+                :
+                <TxBtnContent mode={modeState.mode} onClick={handleBuy}>
+                    구매하기
+                </TxBtnContent>
+            }
             <TxBtnContent mode={modeState.mode} onClick={handleClickToBack}>
                 뒤로가기
             </TxBtnContent>
