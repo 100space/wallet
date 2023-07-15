@@ -21,7 +21,6 @@ export const NewPage = () => {
     })
 
     const getNFTs = async (page: number) => {
-        console.log(page)
         setNfts((prev) => ({
             ...prev,
             isLoading: true, // 요청 시작
@@ -30,7 +29,6 @@ export const NewPage = () => {
 
         try {
             const response = await requestServer.get(`/market?page=${page}`)
-            console.log(response.data)
             if (response.data.length === 0)
                 return setNfts((prev) => ({
                     isLoading: false, // 요청 완료
