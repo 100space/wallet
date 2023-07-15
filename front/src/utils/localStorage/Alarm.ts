@@ -7,13 +7,18 @@ export const AlarmData = atom({
 })
 
 export const AlarmDataByAddress = atom({
-    key: "alarmTxData",
+    key: "alarmTxDataByAddress",
     default: [] as ITx[],
 })
 
 export const ExchangePrice = atom({
     key: "exchange",
     default: 0,
+})
+
+export const CurrentTxData = atom({
+    key: "currentTxData",
+    default: [],
 })
 
 export const IsAlarm = atom({

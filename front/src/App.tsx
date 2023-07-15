@@ -14,7 +14,7 @@ import { ethers } from "ethers"
 import axios from "axios"
 import { ITx } from "@utils/interFace/block.interface"
 import { useQuery } from "@tanstack/react-query"
-import { AlarmData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
+import { AlarmData, CurrentTxData, ExchangePrice, IsAlarm } from "@utils/localStorage/Alarm"
 import requestServer from "@utils/axios/requestServer"
 
 declare global {
@@ -30,6 +30,7 @@ const App = () => {
     const scanOpen = useRecoilValue(ScanOpen)
     const myAccount = useRecoilValue(MyAccounts)
     const [tx, setTx] = useRecoilState(AlarmData)
+    const [txList, setTxList] = useRecoilState(CurrentTxData)
     const [isAlarm, setIsAlarm] = useRecoilState(IsAlarm)
     const [exchange, setExchange] = useRecoilState(ExchangePrice)
     const network = useRecoilValue(MyNetwork)
@@ -47,6 +48,7 @@ const App = () => {
         const { data } = await axios.get(`${current[network].apiURL}?module=account&action=txlist&address=${myAccount.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`);
         console.log(data)
         if (data.message === 'No transactions found') {
+            setTxList([])
             setTx([{ hash: "" } as ITx])
             data.result = []
             return []
@@ -56,6 +58,7 @@ const App = () => {
             v.timeStamp = dateChange(Number(v.timeStamp))
             return v
         })
+        setTxList(txDatas)
         setTx(txDatas)
         if (txDatas[0].hash !== tx[0].hash) {
             setIsAlarm(true)
