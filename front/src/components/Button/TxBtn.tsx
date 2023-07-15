@@ -8,8 +8,8 @@ import { useNFTin } from "@hooks/useNFTin"
 import requestServer from "@utils/axios/requestServer"
 import axios from "axios"
 import { Alert, PurchaseAlert } from "@components/Alert/alert"
-import { IsPopUp, ScanOpen } from "@utils/localStorage"
-import { useRecoilState } from "recoil"
+import { IsPopUp, MyTokens, ScanOpen } from "@utils/localStorage"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { sign } from "crypto"
 
 interface ITxBtn {
@@ -27,8 +27,10 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
     const nftIn = useNFTin()
     const [scanOpen, setScanOpen] = useRecoilState(ScanOpen)
     const [isOpen, setOpen] = useRecoilState(IsPopUp)
+    const assets = useRecoilValue(MyTokens)
     const [modeState, setModeState] = useGetMode()
     const [market, setMarket] = useState<Contract>()
+    const [disable, setDisable] = useState(false)
     const [nftInfomation, setNftInfomation] = useState({ ca: "", tokenId: "" })
     const [parsedPrice, setParsedPrice] = useState("0")
     const [signer, setSigner] = useState<ethers.Wallet>()
@@ -50,11 +52,10 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
     }
 
     const handleBuy = async () => {
-        console.log(signer)
-        console.log(market)
         try {
             if (!market) return
             if (!signer) return
+            if (disable) return Alert.fire("잔액이 부족합니다.", "", "warning")
             if (myAddress === to) return Alert.fire("이미 소유하고 있습니다.", "", "warning")
             PurchaseAlert(name, setScanOpen, setOpen)
 
@@ -65,7 +66,7 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
             })
 
             const receipt = await buyNFT.wait()
-
+            Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
             if (!receipt) return Alert.fire("구매에 실패했습니다.", "", "warning")
             await axios.post("https://nest-deploy-c764d61cc1b8.herokuapp.com/event/transfer", {
                 id: marketId,
@@ -90,6 +91,9 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
     useEffect(() => {
         if (market) return
         if (nftIn === null) return
+        if (assets[0].assets[0].amount <= price) {
+            setDisable(true)
+        }
         createSigner()
         if (process.env.REACT_APP_MARKET_CA && signer) {
             const contract = new Contract(process.env.REACT_APP_MARKET_CA, MARKET_ABI, signer)

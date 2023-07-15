@@ -38,8 +38,8 @@ export class AccountController {
   @Post('/profile')
   @UseInterceptors(FileInterceptor('file'))
   async uploadProfileImg(
-    @UploadedFile() file: Express.MulterS3.File,
     @Query('address') address: string,
+    @UploadedFile() file?: Express.MulterS3.File,
   ): Promise<UploadProfileImgResponseDto> {
     return this.accountService.uploadProfileImg({ file, address });
   }

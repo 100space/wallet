@@ -4,7 +4,7 @@ import { Body } from "@common/body"
 import { Header } from "@common/header"
 import { Controller } from "@common/Footer"
 import { PopupComp } from "@components/bottomSheet"
-import { useNavigate } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import { useEffect } from "react"
 import { Scanner } from "@components/PopupItem/QR/scanner"
 import { useRecoilState, useRecoilValue } from "recoil"
@@ -35,6 +35,8 @@ const App = () => {
     const network = useRecoilValue(MyNetwork)
     const current = useRecoilValue(MyInfo)
     const navigator = useNavigate()
+    const location = useLocation()
+    const condition = !(location.pathname.indexOf('/login') >= 0)
 
     const getExChange = async () => {
         const response = await requestServer.post('/trends/current', { symbol: current[network].networks.symbol })
@@ -42,7 +44,12 @@ const App = () => {
     }
 
     const getTx = async () => {
-        const { data } = await axios.get(`https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=${myAccount.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env.REACT_APP_POLYGON_SCAN}`);
+        const { data } = await axios.get(`${current[network].apiURL}?module=account&action=txlist&address=${myAccount.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env[current[network].api]}`);
+        console.log(data)
+        if (data.message === 'No transactions found') {
+            setTx([{ hash: "" } as ITx])
+            return []
+        }
         const txDatas = data.result.map((v: ITx) => {
             v.timeStamp = dateChange(Number(v.timeStamp))
             return v
@@ -64,7 +71,7 @@ const App = () => {
         return `${year}.${month}.${day}`;
     }
 
-    useQuery(['transactions'], getTx, { refetchInterval: 30000, refetchIntervalInBackground: true });
+    useQuery(['transactions'], getTx, { refetchInterval: 30000, refetchIntervalInBackground: true, enabled: condition });
 
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
