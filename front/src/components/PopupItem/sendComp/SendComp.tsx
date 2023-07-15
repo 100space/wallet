@@ -76,7 +76,6 @@ export const SendComp = (props: {
                     myInfo[network as keyof typeof myInfo].tokens.filter((v: any) => v.ca === response.data.ca)
                         .length === 0
                 ) {
-                    console.log("add")
                     const updatedMyInfo = {
                         ...myInfo,
                         [network]: {
@@ -106,7 +105,6 @@ export const SendComp = (props: {
                 setIsLoading(true)
                 const valueInEther = (e.currentTarget[1] as HTMLFormElement).value
                 if ((e.currentTarget[0] as HTMLFormElement).value.length !== 42) {
-                    console.log((e.currentTarget[0] as HTMLFormElement).value.length)
                     setIsLoading(false)
                     return Alert.fire({ title: "계좌를 확인해주세요.", icon: "error" })
                 }
@@ -117,9 +115,7 @@ export const SendComp = (props: {
                     value: valueInWei,
                 }
                 // 0xB5D30137972494dC3EC4Ae9C6955D760B70A01c9
-                console.log(tx)
                 const result = await nftin.sendTransaction(tx)
-                console.log(result)
                 setIsLoading(false)
                 setIsPopup({ ...isPopup, isOpen: false, contents: "" })
             } catch (error: any) {

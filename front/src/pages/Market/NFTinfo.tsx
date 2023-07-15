@@ -100,7 +100,6 @@ export const NFTInfoPage = () => {
         setTransaction((prev) => ({ isLoading: false, isError: null, data: [] }))
         try {
             const response = await requestServer.post("/market/transaction", { ca, tokenId })
-            console.log(response.data)
             setTransaction((prev) => ({ isLoading: false, isError: null, data: response.data as ITransaction[] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -110,7 +109,6 @@ export const NFTInfoPage = () => {
     }
 
     const createPath = (pathname: string) => {
-        console.log(pathname)
         const url = pathname.split("/")
         return { ca: url[url.length - 3], tokenId: url[url.length - 2], tokenStandard: url[url.length - 1] }
     }

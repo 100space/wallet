@@ -1,4 +1,3 @@
-
 import { INFTRow } from "@utils/interFace/nft.interface"
 import { NFTCardListWrap } from "./styled/NFTCardList.styled"
 import { SetterOrUpdater, useRecoilState } from "recoil"
@@ -12,7 +11,6 @@ export const NFTCollectionList = (props: { nftCards: INFTRow[] }) => {
     const [nftCa, setNftCa] = useRecoilState(SelectedCollection)
 
     const clickNftCard = (e: MouseEvent, ca: string | undefined, name: string | undefined) => {
-        console.log(1)
         if (ca === undefined) return
         if (name === undefined) return
         setNftCa({ ca, name })
@@ -20,12 +18,10 @@ export const NFTCollectionList = (props: { nftCards: INFTRow[] }) => {
     }
 
     const nftCards = (nftCards: INFTRow[]) => {
-        return nftCards.map((v, index) => <NftCardByCollection key={index} nftInfo={v} className="card" onClick={clickNftCard} />)
+        return nftCards.map((v, index) => (
+            <NftCardByCollection key={index} nftInfo={v} className="card" onClick={clickNftCard} />
+        ))
     }
 
-    return (
-        <NFTCardListWrap>
-            {nftCards(props.nftCards)}
-        </NFTCardListWrap>
-    )
+    return <NFTCardListWrap>{nftCards(props.nftCards)}</NFTCardListWrap>
 }

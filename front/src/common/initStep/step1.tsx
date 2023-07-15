@@ -28,8 +28,6 @@ export const Step1 = () => {
         enabled: myProfile.myMnemonic === "",
     })
 
-    console.log(data, myProfile.myMnemonic)
-
     useEffect(() => {
         resetMyAccounts()
         resetMyProfile()

@@ -16,11 +16,7 @@ import { PathHeader } from "@components/MainHeader"
 import { Scanner } from "@components/PopupItem/QR/scanner"
 
 export const MainRouter = () => {
-    const { myMnemonic, password, nickName } = useRecoilValue(MyProfile)
     const { isLogin } = useRecoilValue(ModeState)
-    const pathName = useLocation()
-    const navigator = useNavigate()
-    console.log(isLogin)
 
     return (
         <>
@@ -35,7 +31,7 @@ export const MainRouter = () => {
                     <>
                         <Route path="/" element={<MainPage />}></Route>
                         <Route path="/*" element={<MainPage />}></Route>
-                        <Route path="/alarm" element={<Alarm />}></Route> 
+                        <Route path="/alarm" element={<Alarm />}></Route>
                         <Route path="/setting/*" element={<SettingRouter />}></Route>
                         <Route path="/market/*" element={<MarketRouter />}></Route>
                         <Route path="/trends/*" element={<TrandsRouter />}></Route>
@@ -46,4 +42,3 @@ export const MainRouter = () => {
         </>
     )
 }
-

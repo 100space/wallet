@@ -8,17 +8,16 @@ import { useNavigate } from "react-router"
 import { NftCardByMarket } from "@components/Nft/NftCard"
 
 export const NFTSlide = (props: {
-    nftCards: INFTCard[], setNftCa: SetterOrUpdater<{
-        ca: string;
-        name: string;
+    nftCards: INFTCard[]
+    setNftCa: SetterOrUpdater<{
+        ca: string
+        name: string
     }>
 }) => {
     const [modeState, setModeState] = useGetMode()
     const navigate = useNavigate()
 
     const clickNftCardByCollection = (e: MouseEvent, ca: string | undefined, name: string | undefined) => {
-        console.log(1)
-        console.log(ca, name)
         if (ca === undefined) return
         if (name === undefined) return
         props.setNftCa({ ca, name })
@@ -26,7 +25,9 @@ export const NFTSlide = (props: {
     }
 
     const nftCardList = (nftCards: INFTCard[]) => {
-        return nftCards.map((v, index) => <NftCardByMarket key={index} nftInfo={v} className="card" onClick={clickNftCardByCollection} />)
+        return nftCards.map((v, index) => (
+            <NftCardByMarket key={index} nftInfo={v} className="card" onClick={clickNftCardByCollection} />
+        ))
     }
 
     return <NFTSlideWrap mode={modeState.mode}>{nftCardList(props.nftCards)}</NFTSlideWrap>

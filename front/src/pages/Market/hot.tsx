@@ -24,7 +24,6 @@ export const HotPage = () => {
     const getNFTs = async (page: number) => {
         setNfts((prev) => ({ ...prev, isLoading: true, isError: null, data: [...prev.data] }))
         try {
-            console.log(page, "paging")
             const response = await requestServer.get(`/market?page=${page}`)
             setNfts((prev) => ({
                 ...prev,
