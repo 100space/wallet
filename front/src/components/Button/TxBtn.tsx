@@ -57,7 +57,6 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
         try {
             if (!market) return
             if (!signer) return
-            setIsClick(true)
             if (disable) {
                 setIsClick(false)
                 return Alert.fire("잔액이 부족합니다.", "", "warning")
@@ -66,7 +65,10 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
                 setIsClick(false)
                 return Alert.fire("이미 소유하고 있습니다.", "", "warning")
             }
-            PurchaseAlert(name, setScanOpen, setOpen)
+
+            await PurchaseAlert(name)
+
+            setIsClick(true)
 
             const buyNFT = await market.buyNft(marketId, {
                 from: myAddress,
