@@ -1,4 +1,5 @@
 import { styled } from "@tanstack/react-query-devtools/build/lib/utils"
+import { useNavigate } from "react-router"
 import { SetterOrUpdater, useRecoilState } from "recoil"
 import Swal from "sweetalert2"
 
@@ -57,6 +58,7 @@ export const ConfirmComp = () => {
     }).then((result) => {
         if (result.value && result.isConfirmed) {
             localStorage.clear()
+            window.location.reload()
         } else if (result.isDismissed) {
             Swal.fire("취소되었습니다.", "", "warning")
         }
@@ -76,7 +78,7 @@ export const PurchaseAlert = async (name: string) => {
             cancelButtonText: "취소", // cancel 버튼 텍스트 지정
             reverseButtons: false, // 버튼 순서 거꾸로
         })
-        if (isConfirmed) return Swal.fire("구매를 진행합니다.", "", 'success')
+        if (isConfirmed) return Swal.fire("구매를 진행합니다.", "", "success")
         else throw Error
     } catch (error) {
         Swal.fire("취소되었습니다.", "", "warning")
