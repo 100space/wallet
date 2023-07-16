@@ -21,7 +21,7 @@ import { AddNftDto } from './dto/add-market.dto';
 @Controller('market')
 @UseInterceptors(NetworkValidationInterceptor)
 export class MarketController {
-  constructor(private readonly marketService: MarketService) { }
+  constructor(private readonly marketService: MarketService) {}
 
   @Get()
   @ApiOperation({
