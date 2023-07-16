@@ -32,8 +32,8 @@ export class MarketController {
     status: 200,
     type: ListCollectionsResponseDto,
   })
-  async listCollections(@Query('page') page = 1) {
-    return await this.marketService.listCollections(page);
+  async listCollections(@Query('page') page = 1, @Query('search') search?: string) {
+    return await this.marketService.listCollections(page, search);
   }
 
   @Post('user')
