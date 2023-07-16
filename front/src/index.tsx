@@ -7,24 +7,16 @@ import { ThemeProvider } from "styled-components"
 import { theme } from "./colorTheme"
 import { RecoilRoot } from "recoil"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { BrowserRouter } from "react-router-dom"
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
-const screenWidth = window.innerWidth
-const screenHeight = window.innerHeight
 root.render(
     <RecoilRoot>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider theme={theme}>
                     <App />
-                    {screenHeight > 600 && screenWidth > 800 && screenWidth > screenHeight ? (
-                        <ReactQueryDevtools initialIsOpen={true} />
-                    ) : (
-                        <></>
-                    )}
                 </ThemeProvider>
             </QueryClientProvider>
         </BrowserRouter>
