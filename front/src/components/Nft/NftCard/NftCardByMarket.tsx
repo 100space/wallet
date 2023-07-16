@@ -2,7 +2,7 @@ import { INFTCard } from "@utils/interFace/nft.interface"
 import { NftCardImg } from "./NftCardImg"
 import { NftContents } from "./NftContents"
 import { NftCardWrap } from "./styled"
-import { MouseEvent, memo } from "react"
+import { MouseEvent, memo, useState } from "react"
 import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
 
@@ -24,10 +24,10 @@ export const NftCardByMarket = memo(
             }
             return color
         }
-
+        const [color, setColor] = useState(getRandomColor())
         return (
             <NftCardWrap
-                color={getRandomColor()}
+                color={color}
                 width={"100%"}
                 height={"26rem"}
                 onClick={(e: MouseEvent) => props.onClick(e, props.nftInfo.ca, props.nftInfo.name)}

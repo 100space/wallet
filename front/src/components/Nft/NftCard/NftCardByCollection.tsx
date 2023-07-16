@@ -2,15 +2,18 @@ import { INFTRow, INFTCardByMarket } from "@utils/interFace/nft.interface"
 import { NftCardImg } from "./NftCardImg"
 import { NftContents } from "./NftContents"
 import { NftCardWrap } from "./styled"
-import { MouseEvent, memo } from "react"
+import { MouseEvent, memo, useState } from "react"
 import { useLocation } from "react-router"
 import { useRecoilValue } from "recoil"
 import { ModeState } from "@utils/localStorage"
 import { BackBtnHeader } from "@common/header/BackBtnHeader"
 
 export const NftCardByCollection = memo(
-    (props: { nftInfo: INFTRow, className: string, onClick: (e: MouseEvent, ca: string | undefined, name: string | undefined) => void }) => {
-        const { pathname } = useLocation()
+    (props: {
+        nftInfo: INFTRow
+        className: string
+        onClick: (e: MouseEvent, ca: string | undefined, name: string | undefined) => void
+    }) => {
         const { mode } = useRecoilValue(ModeState)
 
         const getRandomColor = () => {
@@ -23,17 +26,22 @@ export const NftCardByCollection = memo(
             }
             return color
         }
-
+        const [color, setColor] = useState(getRandomColor())
         return (
             <>
                 <NftCardWrap
-                    color={getRandomColor()}
+                    color={color}
                     width={"100%"}
                     height={"26rem"}
                     onClick={(e) => props.onClick(e, props.nftInfo.ca, props.nftInfo.name)}
                 >
                     <NftCardImg width={"90%"} height={"60%"} image={props.nftInfo.image} className={props.className} />
-                    <NftContents name={props.nftInfo.name} owner={props.nftInfo.ca} prices={props.nftInfo.prices} collection={true} />
+                    <NftContents
+                        name={props.nftInfo.name}
+                        owner={props.nftInfo.ca}
+                        prices={props.nftInfo.prices}
+                        collection={true}
+                    />
                 </NftCardWrap>
             </>
         )

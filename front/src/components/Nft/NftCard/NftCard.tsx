@@ -2,7 +2,7 @@ import { INFTCard, INFTCardByMarket } from "@utils/interFace/nft.interface"
 import { NftCardImg } from "./NftCardImg"
 import { NftContents } from "./NftContents"
 import { NftCardWrap } from "./styled"
-import { MouseEvent, memo } from "react"
+import { MouseEvent, memo, useState } from "react"
 import { useLocation } from "react-router"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { ModeState, NFTMarketId } from "@utils/localStorage"
@@ -27,10 +27,10 @@ export const NftCard = memo(
             }
             return color
         }
-
+        const [color, setColor] = useState(getRandomColor())
         return pathname.indexOf("/market/new") >= 0 || pathname.indexOf("/market") <= 0 ? (
             <NftCardWrap
-                color={getRandomColor()}
+                color={color}
                 width={"100%"}
                 height={"26rem"}
                 onClick={(e) => {
@@ -49,7 +49,7 @@ export const NftCard = memo(
             </NftCardWrap>
         ) : (
             <NftCardWrap
-                color={getRandomColor()}
+                color={color}
                 width={"50rem"}
                 height={"25rem"}
                 onClick={(e) => {
