@@ -25,6 +25,7 @@ export const NFTSearch = ({ search, setSearch }: INFTSearch) => {
     const handleClickCancel = (e: MouseEvent) => {
         setCancel(!cancel)
         setSearch("")
+        if (inputRef.current) inputRef.current.value = ""
         navigate("/market")
     }
 

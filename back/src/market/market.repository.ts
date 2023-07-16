@@ -12,10 +12,10 @@ export class MarketRepository {
     @InjectModel(Event.name, 'market') private eventModel: Model<Event>,
   ) { }
 
-  async findAll(page: number) {
+  async findAll(page: number, search?: string) {
     return await this.collectionModel
       .find(
-        {},
+        { name: new RegExp(search, 'i') },
         { _id: 0, address: 1, name: 1, symbol: 1, description: 1, logo: 1, floorPrice: 1, favorite: 1, createdAt: 1 },
       )
       .skip((page - 1) * 10)

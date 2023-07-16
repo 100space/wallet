@@ -1,7 +1,7 @@
 @server = {{$dotenv PROTOCOL}}://{{$dotenv HOST}}:{{$dotenv PORT}}/market
 
 ### NFT 컬렉션들을 가져옵니다.
-GET {{server}} HTTP/1.1
+GET {{server}}?page=1&search=dog HTTP/1.1
 
 // metadata: ipfs://QmVXbeGajzbAAVk5rw9CQmysAbBUz6SHBiT2RLj4HbmsBt
 
