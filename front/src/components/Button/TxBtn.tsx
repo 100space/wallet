@@ -57,7 +57,6 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
         try {
             if (!market) return
             if (!signer) return
-            setIsClick(true)
             if (disable) {
                 setIsClick(false)
                 return Alert.fire("잔액이 부족합니다.", "", "warning")
@@ -66,7 +65,10 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
                 setIsClick(false)
                 return Alert.fire("이미 소유하고 있습니다.", "", "warning")
             }
-            PurchaseAlert(name, setScanOpen, setOpen)
+
+            await PurchaseAlert(name)
+
+            setIsClick(true)
 
             const buyNFT = await market.buyNft(marketId, {
                 from: myAddress,
@@ -74,11 +76,11 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
                 gasLimit: 800000,
             })
 
-            Alert.fire("구매를 진행중입니다.", "", "warning")
+            await Alert.fire("구매를 진행중입니다.", "", "warning")
 
             const receipt = await buyNFT.wait()
 
-            Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
+            await Alert.fire("구매 접수가 완료되었습니다.", "", "warning")
 
             if (!receipt) {
                 setIsClick(false)
@@ -123,18 +125,22 @@ export const TxBtn = ({ marketId, myAddress, price, to, ca, krw, tokenId, name }
         setParsedPrice(convertToWei(price * 10 ** 18, 0))
     }, [])
 
-    console.log(111, isMine)
     return (
         <TxBtnWrap mode={modeState.mode}>
-            {isMine ? <TxBtnContent mode={modeState.mode} disabled={true}> 소유중 </TxBtnContent> : isClick ?
+            {isMine ? (
                 <TxBtnContent mode={modeState.mode} disabled={true}>
-                    구매중
+                    {" "}
+                    소유중{" "}
                 </TxBtnContent>
-                :
+            ) : isClick ? (
+                <TxBtnContent mode={modeState.mode} disabled={true}>
+                    구매접수 중
+                </TxBtnContent>
+            ) : (
                 <TxBtnContent mode={modeState.mode} onClick={handleBuy}>
                     구매하기
                 </TxBtnContent>
-            }
+            )}
             <TxBtnContent mode={modeState.mode} onClick={handleClickToBack}>
                 뒤로가기
             </TxBtnContent>

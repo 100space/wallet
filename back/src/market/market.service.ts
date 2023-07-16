@@ -43,9 +43,9 @@ export class MarketService {
     this.changeBasicCurrency({ symbol: this.currency });
   }
 
-  async listCollections(page: number) {
+  async listCollections(page: number, search?: string) {
     try {
-      const response = await this.marketRepository.findAll(page);
+      const response = await this.marketRepository.findAll(page, search);
       return response.map((v) => {
         return {
           ca: v.address,

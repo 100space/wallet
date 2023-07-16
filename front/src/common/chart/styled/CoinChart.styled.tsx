@@ -5,23 +5,16 @@ import { styled } from "styled-components"
 export const CoinChartWrap = styled.div<ISizeProps>`
     padding: 0.25rem 0;
     width: 100%;
-    /* background-color: ${({ theme, mode }) => (mode && theme[mode].coinChart)}; */
     border-radius: 1rem;
-    /* border: 0.05rem solid #51515175; */
-    /* ${Shadow}; */
-    `
+`
 
 export const CoinChartHeaderWrap = styled.header<ISizeProps>`
     display: flex;
     align-items: center;
     width: 100%;
     min-height: 4.8rem;
-    /* border-top-left-radius: 0.7rem;
-    border-top-right-radius: 0.7rem; */
     border-top: 1px solid #787878;
     border-bottom: 1px solid #686868;
-    /* background-color: ${({ theme, mode }) => (mode && theme[mode].coinChart)}; */
-    /* border-bottom: 0.1rem solid #00000075; */
     color: ${({ theme, mode }) => mode && theme[mode].text};
 `
 

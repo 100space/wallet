@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import Web3 from 'web3'; // 타입 지정을 위해 사용
 import { IContractMethods } from '../interface/web3.interface';
 import { ConfigService } from '@nestjs/config';
@@ -101,7 +101,10 @@ export class Web3Service {
 
     const receipt = await this.web3.eth
       .sendTransaction(tx)
-      .on('error', (error) => console.log('error : ', error));
+      .on('error', (error) => {
+        const logger = new Logger();
+        logger.error('Web3 Transaction Error', error.message);
+      });
 
     return {
       message: 'success to send transaction',

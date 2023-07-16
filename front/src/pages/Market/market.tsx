@@ -1,5 +1,6 @@
 import { NFTCardList, NFTRowList } from "@common/List"
 import { ErrorPage } from "@common/error"
+import { BackBtnHeader } from "@common/header/BackBtnHeader"
 import { NFTSlide } from "@common/slide/NFTSlide"
 import { Category } from "@components/Category"
 import { NFTSearch } from "@components/Search"
@@ -10,7 +11,7 @@ import { INFTCard, INFTCardByMarket, INFTStandard, INftInfomation } from "@utils
 import { ITransaction } from "@utils/interFace/transaction.interface"
 import { SelectedCollection } from "@utils/localStorage"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import { useRecoilState } from "recoil"
 
@@ -29,7 +30,18 @@ export const MarketPage = () => {
         setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
         try {
             const response = await requestServer.get("/market")
-            console.log(response.data)
+            setNfts((prev) => ({ isLoading: false, isError: null, data: [...response.data] }))
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                setNfts({ isLoading: false, isError: e.response, data: [] })
+            }
+        }
+    }
+
+    const getNFTsBySerach = async (search: string) => {
+        setNfts((prev) => ({ isLoading: true, isError: null, data: [...prev.data] }))
+        try {
+            const response = await requestServer.get(`/market?search=${search}`)
             setNfts((prev) => ({ isLoading: false, isError: null, data: [...response.data] }))
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -44,7 +56,18 @@ export const MarketPage = () => {
 
     useEffect(() => {
         getSearchValue(location.search)
+        getNFTsBySerach(search)
     }, [search])
+
+    useEffect(() => {
+
+    }, [location.search])
+
+    const handleBackBtn = (e: MouseEvent) => {
+        getNFTs()
+        setSearch("")
+        navigator('/market')
+    }
 
     useEffect(() => {
         getNFTs()
@@ -54,6 +77,7 @@ export const MarketPage = () => {
     if (nfts.isError) return <ErrorPage code={404} message={""} />
     return (
         <>
+            {search ? <BackBtnHeader content={"검색결과"} onClick={handleBackBtn} /> : <></>}
             <NFTSearch search={search} setSearch={setSearch} />
             {!search ? (
                 <>

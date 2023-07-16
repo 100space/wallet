@@ -21,7 +21,7 @@ import { AddNftDto } from './dto/add-market.dto';
 @Controller('market')
 @UseInterceptors(NetworkValidationInterceptor)
 export class MarketController {
-  constructor(private readonly marketService: MarketService) { }
+  constructor(private readonly marketService: MarketService) {}
 
   @Get()
   @ApiOperation({
@@ -32,8 +32,8 @@ export class MarketController {
     status: 200,
     type: ListCollectionsResponseDto,
   })
-  async listCollections(@Query('page') page = 1) {
-    return await this.marketService.listCollections(page);
+  async listCollections(@Query('page') page = 1, @Query('search') search?: string) {
+    return await this.marketService.listCollections(page, search);
   }
 
   @Post('user')

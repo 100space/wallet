@@ -55,7 +55,6 @@ export class TrendsService {
     try {
       const [response] = await this.getExchange({});
       this.krw = response;
-      console.log(this.krw);
     } catch (error) {
       throw new NotFoundException('Cron Exchange Error', {
         cause: new Error(),
@@ -66,10 +65,6 @@ export class TrendsService {
 
   @Interval(180000)
   async getCoinList(): Promise<boolean> {
-    console.log(
-      `현재시각 ${new Date().getHours()}시 ${new Date().getMinutes()}분 갱신되었습니다.`,
-    );
-
     const { data } = await firstValueFrom(
       this.httpService.get(`coins/markets?vs_currency=KRW&per_page=100`).pipe(
         catchError((error: AxiosError) => {
@@ -132,9 +127,9 @@ export class TrendsService {
   }
 
   async getTokenCurrency({ symbol }) {
-    symbol = symbol.toLowerCase()
-    const { price } = await this.getTokenData({ symbol })
-    return price
+    symbol = symbol.toLowerCase();
+    const { price } = await this.getTokenData({ symbol });
+    return price;
   }
 
   async getTokenList({ tokens }: ListTokensDto) {
