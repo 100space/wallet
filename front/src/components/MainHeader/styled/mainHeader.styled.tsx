@@ -19,10 +19,27 @@ export const FunctionWrap = styled.div<ISizeProps>`
         margin: 0.3rem;
         color: ${({ theme, mode }) => mode && theme[mode].text};
     }
+
+    & > a {
+        position: relative;
+    }
+
     & > a > svg {
         font-size: 3.3rem;
         margin: 0.3rem;
         color: ${({ theme, mode }) => mode && theme[mode].text};
+    }
+
+    & > a > span {
+        display: block;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 0.7rem;
+        background-color: red;
+
     }
 `
 

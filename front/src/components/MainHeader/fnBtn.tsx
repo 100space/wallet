@@ -27,7 +27,13 @@ export const FunctionBtn = () => {
                 <ThemeToggle />
                 <Icon icon="gg:qr" onClick={() => setScanOpen(!scanOpen)} />
                 <NavLink style={{ fontSize: "3rem", display: "flex", justifyContent: "center", alignItems: "center" }} to="/alarm">
-                    {!isAlarm ? <Icon icon="ph:bell" onClick={bellClick} /> : <Icon icon="ph:bell-fill" onClick={bellClick} color="#d8492c" />}
+                    {!isAlarm ? <Icon icon="ph:bell" onClick={bellClick} /> :
+                        <>
+                            <Icon icon="ph:bell" onClick={bellClick} className="after"
+                            ></Icon><span></span>
+                        </>
+
+                    }
                 </NavLink>
                 {/* {modeState ? <Icon icon="ph:bell-fill" /> : <Icon icon="ph:bell" />} */}
             </FunctionWrap>
