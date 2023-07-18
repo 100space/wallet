@@ -129,7 +129,7 @@ export const MainPage = () => {
         }
         fetchData()
         const cookie = network === "arbitrum" ? "arbitrum_goerli" : network
-        document.cookie = `network=${cookie}`
+        document.cookie = `network=${cookie}; domain=.nftin.site; path=/; secure"`
         return () => {
             resetPopup()
         }
