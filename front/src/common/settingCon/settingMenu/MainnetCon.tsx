@@ -42,7 +42,7 @@ export const MainnetCon = () => {
                 setInfo({ ...info, ...newInfo })
             }
             const cookie = network === "arbitrum" ? "arbitrum_goerli" : network
-            document.cookie = `network=${cookie}`
+            document.cookie = `network=${cookie}; domain=.nftin.site; path=/; secure"`
             setNetwork(network)
             myTokenReset()
             navigate("/")

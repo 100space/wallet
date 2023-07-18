@@ -22,3 +22,13 @@ Content-Type: application/json
     "decimal": 18
 }
 
+###
+POST  {{server}}/token HTTP/1.1
+Cookie: network=arbitrum_goerli
+Content-Type: application/json
+
+{
+    "ca": "0xC8C4e621A60748FF5b0088D57dbfDCc2F5ef4794",
+    "symbol": "ASD",
+    "decimal": 18
+}
