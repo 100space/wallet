@@ -49,8 +49,17 @@ NFTin은 암호화폐를 이용할 수 있는 블록체인 지갑입니다.
 
 # 📹 프로젝트 영상
 
+<br />
 
-프로젝트 영상
+## 1. 로그인 - 프로필 변경 - 잠금 및 재로그인 - 입금받기
+
+![NFT 1번](https://github.com/100space/wallet/assets/118948028/cb9b0b35-15f6-4e25-85c5-c8238e2766da)
+
+<br />
+
+## 2. 송금하기 - NFT 구매 - NFT 검색 - 코인 정보 페이지
+
+![nft 2번](https://github.com/100space/wallet/assets/118948028/4ad28c35-54bc-45b2-ba54-8d552d30739e)
 
 ---
 
